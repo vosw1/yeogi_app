@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/components/data/tab.dart';
 import 'package:yogi_project/pages/home_page.dart';
 
 void main() {
@@ -18,5 +19,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class GoogleFonts {
-}

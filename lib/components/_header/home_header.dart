@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/components/_header/home_header_logo.dart';
 
 import '../../size.dart';
 import 'home_header_appbar.dart';
@@ -8,8 +9,13 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        child: HomeHeaderAppBar(),
+    return Container(
+        child: Column(
+          children: [
+            HomeHeaderLogo(),
+            HomeHeaderAppBar(),
+          ],
+        ),
     );
   }
 }

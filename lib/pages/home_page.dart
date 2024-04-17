@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 
 import '../components/_header/home_header.dart';
 import '../components/body/home_body.dart';
-import '../components/body/home_bottom_navigationbar.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,27 +14,55 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          _buildAppBarLogo(),
           HomeHeader(),
           HomeBody(),
-          HomeBottomNavigationBar(),
         ],
       ),
+      bottomNavigationBar: HomeBottomNavigationBar(),
     );
   }
 
-  Widget _buildAppBarLogo() {
-    return Row(
-      children: [
-        Padding(
-            padding: EdgeInsets.all(gap_xm)),
-        Image.asset("assets/images/logo.png",
-            width: 200,
-            height: 100),
-        SizedBox(width: gap_l),
-        Icon(
-          Icons.notifications,
-          color: Colors.grey,
+}
+
+class HomeBottomNavigationBar extends StatefulWidget {
+  @override
+  State<HomeBottomNavigationBar> createState() => _HomeBottomNavigationBarState();
+}
+
+class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _selectedIndex,
+      onTap: (index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      items: [
+        const BottomNavigationBarItem(
+          label: '홈',
+          icon: Icon(CupertinoIcons.house_fill),
+        ),
+        const BottomNavigationBarItem(
+          label: '검색',
+          icon: Icon(CupertinoIcons.search),
+        ),
+        const BottomNavigationBarItem(
+          label: '주변',
+          icon: Icon(CupertinoIcons.placemark_fill),
+        ),
+        const BottomNavigationBarItem(
+          label: '찜',
+          icon: Icon(CupertinoIcons.heart_fill),
+        ),
+        const BottomNavigationBarItem(
+          label: '내 정보',
+          icon: Icon(CupertinoIcons.smiley_fill),
         ),
       ],
     );
