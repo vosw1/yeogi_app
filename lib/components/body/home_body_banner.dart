@@ -1,80 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/components/body/set_banner_data.dart';
 import '../../size.dart';
 import '../../style.dart';
 
 class HomeBodyBanner extends StatelessWidget {
-  const HomeBodyBanner({Key? key}) : super(key: key);
+  final BannerData bannerData; // 배너 데이터를 저장할 변수를 추가합니다.
+
+  HomeBodyBanner(this.bannerData); // 생성자를 수정하여 배너 데이터를 받도록 합니다.
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: gap_m),
-      child: Stack(
-        children: [
-          _buildBannerImage(),
-          _buildBannerCaption(),
-        ],
-      ),
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(gap_m),
+          child: _buildBanner(context),
+        ),
+      ],
     );
   }
 
-  Widget _buildBannerImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image.asset(
-        "assets/images/body_banner.png",
-        fit: BoxFit.contain,
-        width: double.infinity,
-        height: 500,
-      ),
+  Widget _buildBanner(BuildContext context) {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            bannerData.imagePath, // 받은 배너 데이터의 이미지 경로를 사용
+            fit: BoxFit.fill,
+            width: double.infinity,
+            height: 180,
+          ),
+        ),
+        Positioned(
+          top: gap_xs,
+          left: gap_m,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: gap_s),
+              _buildCaptionText(bannerData.bannerTitle, h4(mColor: Colors.redAccent)), // 받은 배너 데이터의 제목을 사용합니다.
+              SizedBox(height: gap_xs),
+              _buildCaptionText(
+                bannerData.bannerText, // 받은 배너 데이터의 설명을 사용
+                subtitle1(mColor: Colors.black),
+              ),
+              SizedBox(height: gap_xs),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildBannerCaption() {
-    return Positioned(
-      top: gap_s,
-      left: gap_m,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            constraints: BoxConstraints(
-              maxWidth: 300,
-            ),
-            child: Text(
-              "여행은 여기어때?",
-              style: h4(),
-            ),
-          ),
-          SizedBox(height: gap_m),
-          Container(
-            constraints: BoxConstraints(
-              maxWidth: double.infinity,
-            ),
-            child: Text(
-              "새로운 공간에 머물러 보세요. 살아보기, 출장, 여행 등 다양한 목적에 맞는 숙소를 찾아보세요.",
-              style: subtitle1(),
-            ),
-          ),
-          SizedBox(height: gap_m),
-          SizedBox(
-            height: 30,
-            width: 120,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
-                "가까운 여행지 둘러보기",
-                style: subtitle2(),
-              ),
-            ),
-          ),
-        ],
+  Widget _buildCaptionText(String text, TextStyle style) {
+    return Container(
+      constraints: BoxConstraints(maxWidth: 250),
+      child: Text(
+        text,
+        style: style,
       ),
     );
   }
