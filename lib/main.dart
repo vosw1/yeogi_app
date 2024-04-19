@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/pages/home_page.dart';
+import 'package:yogi_project/pages/main_holder.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Jua-Regular.ttf'),
-      home: HomePage(),
+      home: MainHolder(),
     );
   }
 }
