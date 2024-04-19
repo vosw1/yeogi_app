@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../size.dart';
+import '../../../size.dart';
 import 'header_appbar_item.dart';
 
 class HomeHeaderAppBar extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 
-import '../components/_header/home_header.dart';
-import '../components/body/home_body.dart';
+import '../home_page/_header/home_header.dart';
+import '../home_page/body/home_body.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

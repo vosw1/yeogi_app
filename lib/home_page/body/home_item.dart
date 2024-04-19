@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../../constants.dart';
+import '../../../size.dart';
+import '../../../style.dart';
+import '../../components/common/set_item_data.dart';
 
-import '../../constants.dart';
-import '../../size.dart';
-import '../../style.dart';
-import '../common/set_item_data.dart';
+class HomeItem extends StatelessWidget {
+  final ItemData itemData;
 
-class HomePopularItem extends StatelessWidget {
-  final ItemData popularItemsData;
-
-  HomePopularItem({Key? key, required this.popularItemsData}) : super(key: key);
+  HomeItem({Key? key, required this.itemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,37 +20,36 @@ class HomePopularItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: gap_m, right: gap_m),
         child: Column(
-
           children: [
             SizedBox(height: gap_s),
-            _buildPopularItemImage(),
+            _buildItemImage(itemData.imagePath),
             SizedBox(height: gap_s),
-            _buildPopularItemStar(popularItemsData.starCount),
+            _buildItemStar(itemData.starCount),
             SizedBox(height: gap_s),
-            _buildPopularItemComment(),
+            _buildItemComment(itemData.comment),
             SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(popularItemsData.imgTitle),
+            _buildItemUserInfo(itemData.userName, itemData.location, itemData.imgTitle),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPopularItemImage() {
+  Widget _buildItemImage(String imagePath) {
     return SizedBox(
       height: 210,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          popularItemsData.imagePath,
+          imagePath,
           fit: BoxFit.fitWidth,
         ),
       ),
     );
   }
 
-  Widget _buildPopularItemStar(double starCount) {
+  Widget _buildItemStar(double starCount) {
     int fullStars = starCount.floor();
     double halfStar = starCount - fullStars;
 
@@ -71,11 +69,12 @@ class HomePopularItem extends StatelessWidget {
   }
 
 
-  Widget _buildPopularItemComment() {
+
+  Widget _buildItemComment(String comment) {
     return Container(
       constraints: BoxConstraints(minHeight: 50),
       child: Text(
-        popularItemsData.comment,
+        comment,
         style: body1(),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -83,7 +82,7 @@ class HomePopularItem extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularItemUserInfo(String imgTitle) {
+  Widget _buildItemUserInfo(String userName, String location, String imgTitle) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -95,10 +94,10 @@ class HomePopularItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              popularItemsData.userName,
+              userName,
               style: subtitle1(),
             ),
-            Text(popularItemsData.location),
+            Text(location),
           ],
         )
       ],

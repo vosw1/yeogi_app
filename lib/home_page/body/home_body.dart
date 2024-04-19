@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/components/body/home_body_banner.dart';
-import 'package:yogi_project/components/body/home_item.dart';
-import 'package:yogi_project/components/body/home_popular_item.dart';
-import 'package:yogi_project/components/body/set_banner_data.dart';
-import '../../size.dart';
-import '../../style.dart';
-import '../common/set_item_data.dart';
+import 'package:yogi_project/home_page/body/set_banner_data.dart';
+import '../../../size.dart';
+import '../../../style.dart';
+import '../../components/common/set_item_data.dart';
+import 'home_body_banner.dart';
+import 'home_item.dart';
+import 'home_popular_item.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({Key? key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/components/body/set_banner_data.dart';
-import '../../size.dart';
-import '../../style.dart';
+import 'package:yogi_project/home_page/body/set_banner_data.dart';
+import '../../../size.dart';
+import '../../../style.dart';
 
 class HomeBodyBanner extends StatelessWidget {
   final BannerData bannerData; // 배너 데이터를 저장할 변수를 추가합니다.

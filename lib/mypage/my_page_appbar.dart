@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/components/data/tab.dart';
+import 'data/tab.dart';
 
 class MyPageAppBar extends StatelessWidget {
 
