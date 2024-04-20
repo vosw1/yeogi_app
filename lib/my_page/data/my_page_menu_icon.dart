@@ -8,7 +8,7 @@ class MyPageMenu{
   MyPageMenu({required this.title, required this.iconData});
 }
 
-final List<MyPageMenu> myPageMenu1 = [
+final List<MyPageMenu> myPageMenu = [
   MyPageMenu(title: '자주 묻는 질문', iconData:FontAwesomeIcons.info),
   MyPageMenu(title: '1:1 카카오 문의', iconData:FontAwesomeIcons.comment),
   MyPageMenu(title: '고객 센터', iconData:FontAwesomeIcons.phone),
