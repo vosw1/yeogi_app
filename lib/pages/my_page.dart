@@ -15,8 +15,13 @@ class MyPage extends StatelessWidget {
           MyPageHeaderBanner(),
           SizedBox(height: 12),
           MyPageLoginButton(),
-          SizedBox(height: 5),
-          // MyPageAppBar(),
+          SizedBox(height: 12),
+          MyPageAppBar(),
+          SizedBox(height: 12),
+          Divider(
+            color: Colors.grey[100],
+            thickness: 10.0,
+          )
         ],
       ),
     );
