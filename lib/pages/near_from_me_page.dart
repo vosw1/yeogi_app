@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+
+import '../size.dart'; // 사용자 정의 파일 경로를 여기에 입력하세요.
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -7,103 +8,119 @@ class NearFromMePage extends StatefulWidget {
 }
 
 class _NearFromMePageState extends State<NearFromMePage> {
-  Position? _currentPosition;
-
-  @override
-  void initState() {
-    super.initState();
-    _getCurrentLocation();
-  }
-
-  // 현재 위치 가져오기
-  void _getCurrentLocation() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      setState(() {
-        _currentPosition = position;
-      });
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+  String? _selectedPersonCount = '1명';
+  String? _selectedUseType = '숙박';
+  String? _selectedUsePrice = '0원 ~ 5만원이하';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('주변 정보 검색'),
-      ),
-      body: Center(
-        child: _currentPosition != null
-            ? Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '현재 위치:',
-              style: TextStyle(fontSize: 20),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: gap_l, left: gap_m, right: gap_m),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: '지역, 숙소를 검색하세요',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(gap_s),
+              ),
+              prefixIcon: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  // 검색 기능 추가
+                },
+              ),
             ),
-            SizedBox(height: 10),
-            Text(
-              '위도: ${_currentPosition!.latitude}',
-              style: TextStyle(fontSize: 16),
-            ),
-            Text(
-              '경도: ${_currentPosition!.longitude}',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // 여기에 주변 정보 검색 및 결과 표시 기능 추가
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NearbyResultsPage(
-                      latitude: _currentPosition!.latitude,
-                      longitude: _currentPosition!.longitude,
-                    ),
-                  ),
-                );
+          ),
+        ),
+        SizedBox(height: gap_xs),
+        Row(
+          children: [
+            SizedBox(width: gap_m),
+            CustomPopupMenuButton(
+              initialValue: _selectedPersonCount,
+              items: ['1명', '2명', '3명', '4명+'],
+              onSelected: (String value) {
+                setState(() {
+                  _selectedPersonCount = value;
+                });
               },
-              child: Text('주변 정보 검색'),
+              buttonText: '$_selectedPersonCount',
+              selectedColor: Colors.redAccent, // 배경색을 레드 악센트로 설정
+            ),
+            CustomPopupMenuButton(
+              initialValue: _selectedUseType,
+              items: ['숙박', '대실'],
+              onSelected: (String value) {
+                setState(() {
+                  _selectedUseType = value;
+                });
+              },
+              buttonText: '$_selectedUseType',
+              selectedColor: Colors.redAccent, // 배경색을 레드 악센트로 설정
+            ),
+            CustomPopupMenuButton(
+              initialValue: _selectedUsePrice,
+              items: ['0원 ~ 5만원이하', '5만원 ~ 10만원', '10만원 ~ 20만원', '20만원 이상'],
+              onSelected: (String value) {
+                setState(() {
+                  _selectedUsePrice = value;
+                });
+              },
+              buttonText: '$_selectedUsePrice',
+              selectedColor: Colors.redAccent, // 배경색을 레드 악센트로 설정
             ),
           ],
-        )
-            : CircularProgressIndicator(),
-      ),
+        ),
+      ],
     );
   }
 }
 
-class NearbyResultsPage extends StatelessWidget {
-  final double latitude;
-  final double longitude;
+class CustomPopupMenuButton extends StatelessWidget {
+  final String? initialValue;
+  final List<String> items;
+  final ValueChanged<String> onSelected;
+  final String buttonText;
+  final Color selectedColor;
 
-  const NearbyResultsPage({Key? key, required this.latitude, required this.longitude}) : super(key: key);
+  const CustomPopupMenuButton({
+    Key? key,
+    required this.initialValue,
+    required this.items,
+    required this.onSelected,
+    required this.buttonText,
+    required this.selectedColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // 여기에 주변 정보 검색 및 결과 표시 기능 추가
-    // 검색 결과를 표시하는 UI를 구현하여 반환합니다.
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('주변 정보'),
-      ),
-      body: Center(
-        child: Text(
-          '현재 위치: 위도 $latitude, 경도 $longitude\n'
-              '주변 정보를 여기에 표시합니다.',
-          style: TextStyle(fontSize: 20),
-          textAlign: TextAlign.center,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: gap_s),
+      child: PopupMenuButton<String>(
+        onSelected: onSelected,
+        itemBuilder: (BuildContext context) {
+          return items.map((String item) {
+            return PopupMenuItem<String>(
+              value: item,
+              child: Center(child: Text(item)),
+            );
+          }).toList();
+        },
+        child: ElevatedButton(
+          onPressed: null,
+          child: Text(
+            buttonText,
+            style: TextStyle(
+                color: buttonText == initialValue ? Colors.white : null),
+          ),
+          style: ButtonStyle(
+            backgroundColor: buttonText == initialValue ? MaterialStateProperty
+                .all<Color>(selectedColor) : null,
+          ),
         ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: NearFromMePage(),
-  ));
 }
