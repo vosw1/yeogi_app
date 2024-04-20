@@ -10,7 +10,7 @@ class MyPageHeaderBanner extends StatelessWidget {
       padding: const EdgeInsets.only(top: gap_m),
       child: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.15,
+        height: MediaQuery.of(context).size.height * 0.12,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
