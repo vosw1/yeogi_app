@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/pages/near_from_me_page.dart';
+import 'package:yogi_project/pages/scarp_page.dart';
 import 'package:yogi_project/pages/search_page.dart';
 
 import 'home_page.dart';
@@ -14,38 +15,40 @@ class MainHolder extends StatefulWidget {
 class _MainScreensState extends State<MainHolder> {
   int _selectedIndex = 0;
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: [HomePage(), SearchPage(), SearchPage(), NearFromMePage(), MyPage()],
+        children: [HomePage(), SearchPage(), NearFromMePage(), ScrapPage(), MyPage()],
       ),
-      bottomNavigationBar: HomeBottomNavigationBar(),
+      bottomNavigationBar: HomeBottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
 }
 
-class HomeBottomNavigationBar extends StatefulWidget {
-  @override
-  State<HomeBottomNavigationBar> createState() =>
-      _HomeBottomNavigationBarState();
-}
+class HomeBottomNavigationBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onItemTapped;
 
-class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
-  int _selectedIndex = 0;
+  HomeBottomNavigationBar({required this.currentIndex, required this.onItemTapped});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
-      currentIndex: _selectedIndex,
-      onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
+      currentIndex: currentIndex,
+      onTap: onItemTapped,
       items: [
         const BottomNavigationBarItem(
           label: '홈',

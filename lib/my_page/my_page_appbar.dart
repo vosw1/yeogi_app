@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-import 'data/tab.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'data/my_page_body_icon.dart';
 
 class MyPageAppBar extends StatelessWidget {
-
   const MyPageAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text("마이페이지"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 30),
-        child: GridView.count(
-          crossAxisCount: 4, // ➊
-          children: List.generate(
-            tabs.length,
-                (index) => Column(
-              children: [
-                Icon(tabs[index].icon),
-                const SizedBox(height: 5),
-                Text(tabs[index].text),
-              ],
-            ),
-          ),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, top: 30),
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        spacing: 15,
+        runSpacing: 30,
+        children: [
+          const MyPageBodyIcon(
+              iconData: FontAwesomeIcons.clock, title: "최근 본 상품"),
+          const MyPageBodyIcon(
+              iconData: FontAwesomeIcons.gift, title: "할인 * 혜택"),
+          const MyPageBodyIcon(
+              iconData: FontAwesomeIcons.commentDots, title: "내 리뷰"),
+          const MyPageBodyIcon(
+              iconData: FontAwesomeIcons.bell, title: "알림함"),
+        ],
       ),
     );
   }
