@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/my_page/my_page_appbar.dart';
+import 'package:yogi_project/my_page/my_page_body_banner.dart';
 import 'package:yogi_project/my_page/my_page_faq_menu_holder.dart';
 import 'package:yogi_project/my_page/my_page_header_banner.dart';
 import 'package:yogi_project/my_page/my_page_login_button.dart';
@@ -30,6 +31,11 @@ class MyPage extends StatelessWidget {
             thickness: 10.0,
           ),
           MyPageFaqMenuHolder(),
+          Divider(
+            color: Colors.grey[100],
+            thickness: 10.0,
+          ),
+          MyPageBodyBanner(),
         ],
       ),
     );
