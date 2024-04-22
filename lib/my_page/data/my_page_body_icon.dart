@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 회원가입, 로그인 아래에 아이콘들
 class MyPageBodyIcon extends StatelessWidget {
   final IconData iconData;
   final String title;

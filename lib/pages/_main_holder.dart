@@ -7,6 +7,7 @@ import 'package:yogi_project/pages/search_page.dart';
 import 'home_page.dart';
 import 'my_page.dart';
 
+// 전체 화면 틀
 class MainHolder extends StatefulWidget {
   @override
   _MainScreensState createState() => _MainScreensState();

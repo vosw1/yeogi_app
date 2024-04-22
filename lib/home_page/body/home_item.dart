@@ -4,6 +4,7 @@ import '../../../size.dart';
 import '../../../style.dart';
 import '../../components/common/set_item_data.dart';
 
+// 숙소 추천시 기본 틀
 class HomeItem extends StatelessWidget {
   final ItemData itemData;
 

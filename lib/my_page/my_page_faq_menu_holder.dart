@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/my_page/data/my_page_menu_icon.dart';
 
+// 마이페이지 고객센터 화면
 class MyPageFaqMenuHolder extends StatelessWidget {
   const MyPageFaqMenuHolder({super.key});
 

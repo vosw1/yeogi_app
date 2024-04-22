@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
-
 import '../home_page/_header/home_header.dart';
 import '../home_page/body/home_body.dart';
-import 'main_holder.dart';
+import '_main_holder.dart';
 
+// 홈페이지 기본 틀
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -23,13 +22,17 @@ class _HomePageState extends State<HomePage> {
         controller: _scrollController,
         child: Column(
           children: [
+            // 여백
             SizedBox(height: gap_m),
+            //상단 로고, 벨 아이콘
             HomeHeader(),
+            // 배너 + 추천 숙소 리스트
             HomeBody(),
             SizedBox(height: 20), // 스크롤 가능한 공간을 추가하여 버튼과 컨텐츠를 분리합니다.
           ],
         ),
       ),
+      // 맨위, 맨 아래 이동 버튼
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,

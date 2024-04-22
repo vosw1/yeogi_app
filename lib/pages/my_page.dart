@@ -8,6 +8,7 @@ import 'package:yogi_project/my_page/my_page_login_button.dart';
 import 'package:yogi_project/my_page/my_page_book_menu_holder.dart';
 import 'package:yogi_project/my_page/my_page_notice_menu_holder.dart';
 
+// 마이페이지 기본 틀
 class MyPage extends StatelessWidget {
   const MyPage({super.key});
 

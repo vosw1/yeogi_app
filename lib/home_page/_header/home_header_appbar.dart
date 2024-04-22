@@ -14,7 +14,7 @@ class HomeHeaderAppBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(right: gap_m, left: gap_m),
+        padding: EdgeInsets.only(right: gap_l, left: gap_l),
         child: HeaderAppbarItemList(),
       ),
     );
@@ -45,7 +45,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 _navigateToUrl('이벤트 아이콘 클릭 시 이동할 URL');
               },
-              child: HeadAppBarItem(iconData: FontAwesomeIcons.tags, text: '이벤트'),
+              child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(

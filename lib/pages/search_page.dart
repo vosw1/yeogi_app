@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../serch_page/search_result)list.dart';
 import '../size.dart';
 
+// 검색 페이지 기본 틀
 class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();

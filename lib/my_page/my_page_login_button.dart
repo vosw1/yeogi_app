@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 
+// 마이페이지 회원가입/로그인 버튼
 class MyPageLoginButton extends StatelessWidget {
   const MyPageLoginButton({super.key});
 

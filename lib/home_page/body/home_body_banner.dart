@@ -3,6 +3,7 @@ import 'package:yogi_project/home_page/body/set_banner_data.dart';
 import '../../../size.dart';
 import '../../../style.dart';
 
+// 이벤트 배너 기본 틀
 class HomeBodyBanner extends StatelessWidget {
   final BannerData bannerData; // 배너 데이터를 저장할 변수를 추가합니다.
 

@@ -21,7 +21,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
           },
         ),
         ListTile(
-          title: Text('공간대여'),
+          title: Text('해외숙소'),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
 

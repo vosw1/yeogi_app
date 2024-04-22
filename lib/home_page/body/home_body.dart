@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/home_page/body/home_abroard_item.dart';
 import 'package:yogi_project/home_page/body/set_banner_data.dart';
 import '../../../size.dart';
 import '../../../style.dart';
@@ -47,6 +48,25 @@ class HomeBody extends StatelessWidget {
         imgTitle: "avarta",
         userName: "메타트립",
         location: "경주",
+      ),
+    ];
+
+    List<ItemData> homeAbroadItemData = [
+      ItemData(
+        imagePath: "assets/images/LosAngeles.png",
+        starCount: 5,
+        comment: "할리우드 처음가봤는데 진짜 안가봤으면 후회해요! 다들 꼭 가보세요",
+        imgTitle: "avarta",
+        userName: "메타트립",
+        location: "미국 LosAngeles",
+      ),
+      ItemData(
+        imagePath: "assets/images/Guam.png",
+        starCount: 5,
+        comment: "괌..역시 신혼여행의 성지...너무 좋아요ㅜㅠ",
+        imgTitle: "avarta",
+        userName: "해외여행중독",
+        location: "괌 Guam",
       ),
     ];
 
@@ -129,6 +149,25 @@ class HomeBody extends StatelessWidget {
                 children: [
                   for (var itemData in popularItemsData)
                     HomePopularItem(popularItemsData: itemData),
+                ],
+              ),
+            ),
+            SizedBox(height: gap_xs),
+            SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: gap_m),
+                  Text("인기 해외 추천", style: h5()),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 400,
+              child: PageView(
+                children: [
+                  for (var itemData in homeAbroadItemData)
+                    HomeAbroadItem(homeAbroadItemData: itemData),
                 ],
               ),
             ),

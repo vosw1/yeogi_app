@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 마이페이지 공지사항
 class MyPageNoticeMenuHolder extends StatelessWidget {
   const MyPageNoticeMenuHolder({super.key});
 

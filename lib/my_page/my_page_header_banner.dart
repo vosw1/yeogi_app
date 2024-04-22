@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 
+// 마이페이지 상단 배너
 class MyPageHeaderBanner extends StatelessWidget {
   const MyPageHeaderBanner({super.key});
 

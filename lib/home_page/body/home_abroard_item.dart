@@ -4,11 +4,11 @@ import '../../../size.dart';
 import '../../../style.dart';
 import '../../components/common/set_item_data.dart';
 
-// 국내 인기 숙소 기본 ㅌ르
-class HomePopularItem extends StatelessWidget {
-  final ItemData popularItemsData;
+// 해외 숙소 기본 틀
+class HomeAbroadItem extends StatelessWidget {
+  final ItemData homeAbroadItemData;
 
-  HomePopularItem({Key? key, required this.popularItemsData}) : super(key: key);
+  HomeAbroadItem({Key? key, required this.homeAbroadItemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,11 @@ class HomePopularItem extends StatelessWidget {
             SizedBox(height: gap_s),
             _buildPopularItemImage(),
             SizedBox(height: gap_s),
-            _buildPopularItemStar(popularItemsData.starCount),
+            _buildPopularItemStar(homeAbroadItemData.starCount),
             SizedBox(height: gap_s),
             _buildPopularItemComment(),
             SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(popularItemsData.imgTitle),
+            _buildPopularItemUserInfo(homeAbroadItemData.imgTitle),
           ],
         ),
       ),
@@ -44,7 +44,7 @@ class HomePopularItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          popularItemsData.imagePath,
+          homeAbroadItemData.imagePath,
           fit: BoxFit.fitWidth,
         ),
       ),
@@ -75,7 +75,7 @@ class HomePopularItem extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(minHeight: 50),
       child: Text(
-        popularItemsData.comment,
+        homeAbroadItemData.comment,
         style: body1(),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -95,10 +95,10 @@ class HomePopularItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              popularItemsData.userName,
+              homeAbroadItemData.userName,
               style: subtitle1(),
             ),
-            Text(popularItemsData.location),
+            Text(homeAbroadItemData.location),
           ],
         )
       ],

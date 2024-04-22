@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/pages/home_page.dart';
-import 'package:yogi_project/pages/main_holder.dart';
+import 'package:yogi_project/pages/_main_holder.dart';
 
 void main() {
   runApp(const MyApp());

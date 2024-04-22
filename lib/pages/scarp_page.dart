@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 찜 페이지 기본 틀
 class ScrapPage extends StatefulWidget {
   @override
   State<ScrapPage> createState() => _ScrapPageState();
@@ -32,7 +33,7 @@ class _ScrapPageState extends State<ScrapPage>
         controller: _tabController,
         tabs: [
           Tab(text: "국내숙소"),
-          Tab(text: "공간대여"),
+          Tab(text: "해외숙소"),
         ],
       ),
     );
