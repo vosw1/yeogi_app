@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/pages/home_page.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:yogi_project/pages/_main_holder.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NaverMapSdk.instance.initialize(
+    clientId: '8fqjbfi1qb',
+    onAuthFailed: (e) => print("오류 내용 : ${e.message}"),
+  );
   runApp(const MyApp());
 }
 
