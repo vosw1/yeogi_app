@@ -14,7 +14,7 @@ class HomeHeaderAppBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(right: gap_l, left: gap_l),
+        padding: EdgeInsets.only(right: gap_xm, left: gap_xm),
         child: HeaderAppbarItemList(),
       ),
     );

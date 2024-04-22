@@ -9,6 +9,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: myPageMenu.length + 1,
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) {
