@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/pages/login_page.dart';
 import 'package:yogi_project/size.dart';
 
 // 마이페이지 회원가입/로그인 버튼
@@ -16,7 +17,7 @@ class MyPageLoginButton extends StatelessWidget {
               padding: const EdgeInsets.only(top: gap_s, left: gap_s, right: gap_s),
               child: InkWell(
                 onTap: () {
-                  print("버튼 클릭됨");
+                  Navigator.pushNamed(context, "/login");
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.07,
