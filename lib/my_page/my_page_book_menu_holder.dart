@@ -75,6 +75,9 @@ class MyPageBookMenuHolder extends StatelessWidget {
       children: <Widget>[
         ListTile(
           title: Text('예약내역', style: TextStyle(fontWeight: FontWeight.bold)),
+          onTap: () {
+
+          },
         ),
         ListTile(
           title: Text('국내숙소'),
