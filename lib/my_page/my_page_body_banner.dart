@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 
+// 고객센터 밑에 이미지
 class MyPageBodyBanner extends StatelessWidget {
   const MyPageBodyBanner({super.key});
 

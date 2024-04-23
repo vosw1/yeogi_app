@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/login_page/components/login_text_form_field.dart';
 import 'package:yogi_project/size.dart';
 
+// 로그인 기본 틀
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -20,7 +21,7 @@ class _LoginFormState extends State<LoginForm> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
+          Padding( // 로고
             padding: const EdgeInsets.only(top: gap_xx, bottom: gap_m),
             child: Text(
               "여어떻노.",
@@ -33,7 +34,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          Padding(
+          Padding( // 이메일 작성 칸
             padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
             child: LoginTextFormField(
               controller: _emailController,
@@ -47,7 +48,7 @@ class _LoginFormState extends State<LoginForm> {
               },
             ),
           ),
-          Padding(
+          Padding( // 비밀번호 작성칸
             padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_xx),
             child: LoginTextFormField(
               controller: _passwordController,
@@ -65,7 +66,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           SizedBox(height: gap_xx),
-          Padding(
+          Padding( // 로그인 버튼
             padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
             child: ElevatedButton(
               onPressed: () {
@@ -87,7 +88,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           SizedBox(height: gap_xx),
-          Padding(
+          Padding( // todo: 카카오 로그인 버튼 -> 추후 API로 전환
             padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_xx),
             child: ElevatedButton(
               onPressed: () {
@@ -121,6 +122,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
+// 유효성 검사
 String? validatePassword(String? value) {
   // 비밀번호 유효성 검사 로직 구현
   if (value == null || value.isEmpty) {

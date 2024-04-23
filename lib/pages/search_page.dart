@@ -9,7 +9,8 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+// todo : 검색 기능 구현하기
+class _SearchPageState extends State<SearchPage> { // 검색 필터
   String? _selectedPersonCount = '인원';
   String? _selectedUseType = '유형';
   String? _selectedReservationType = '예약여부';

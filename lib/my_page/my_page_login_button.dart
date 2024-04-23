@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/pages/login_page.dart';
 import 'package:yogi_project/size.dart';
 
 // 마이페이지 회원가입/로그인 버튼

@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../components/common/book_item_data.dart';
+import '../../components/data/book_item_data.dart';
 import '../../size.dart';
 import '../../style.dart';
 
@@ -12,14 +11,14 @@ class BookInAbroadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( // 상단 앱바(페이지 제목)
         title: Text('해외 예약내역'),
       ),
-      body: Padding(
+      body: Padding( // 이용 내역
         padding: const EdgeInsets.all(gap_m),
         child: ListView( // Wrap the Column with a ListView
           children: [
-            Column(
+            Column( // 예약 내역
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("이용 ${bookInAbroardList.length}건", style: h6()),
@@ -40,15 +39,15 @@ class BookInAbroadPage extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12.0),
-                              child: Image.asset(
-                                bookItemData.imagePath,
+                              child: Image.asset( // 예약 이미지
+                                "assets/images/${bookItemData.stayImgTitle}",
                                 width: 150,
                                 height: 150,
                                 fit: BoxFit.cover,
                               ),
                             ),
                             SizedBox(width: gap_s),
-                            Expanded(
+                            Expanded( // 예약 정보
                               flex: 2,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

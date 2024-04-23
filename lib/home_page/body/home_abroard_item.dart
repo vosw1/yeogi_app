@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../size.dart';
 import '../../../style.dart';
-import '../../components/common/set_item_data.dart';
+import '../../components/data/home_item_data.dart';
 
-// 해외 숙소 기본 틀
+// 해외 예약내역 기본 틀
 class HomeAbroadItem extends StatelessWidget {
   final ItemData homeAbroadItemData;
 
@@ -24,19 +24,20 @@ class HomeAbroadItem extends StatelessWidget {
 
           children: [
             SizedBox(height: gap_s),
-            _buildPopularItemImage(),
+            _buildPopularItemImage(), // 사진 이미지
             SizedBox(height: gap_s),
-            _buildPopularItemStar(homeAbroadItemData.starCount),
+            _buildPopularItemStar(homeAbroadItemData.starCount), // 별점
             SizedBox(height: gap_s),
-            _buildPopularItemComment(),
+            _buildPopularItemComment(), // 리뷰
             SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(homeAbroadItemData.imgTitle),
+            _buildPopularItemUserInfo(homeAbroadItemData.userImgTitle), //프로필 사진
           ],
         ),
       ),
     );
   }
 
+  // 숙소 이미지
   Widget _buildPopularItemImage() {
     return SizedBox(
       height: 210,
@@ -44,13 +45,14 @@ class HomeAbroadItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          homeAbroadItemData.imagePath,
+          "assets/images/${homeAbroadItemData.stayImgTitle}",
           fit: BoxFit.fitWidth,
         ),
       ),
     );
   }
 
+  // 별점
   Widget _buildPopularItemStar(double starCount) {
     int fullStars = starCount.floor();
     double halfStar = starCount - fullStars;
@@ -70,8 +72,7 @@ class HomeAbroadItem extends StatelessWidget {
     );
   }
 
-
-  Widget _buildPopularItemComment() {
+  Widget _buildPopularItemComment() { // 리뷰
     return Container(
       constraints: BoxConstraints(minHeight: 50),
       child: Text(
@@ -83,12 +84,13 @@ class HomeAbroadItem extends StatelessWidget {
     );
   }
 
+  // 사용자 프로필 사진제목 -> 경로로 가져오기
   Widget _buildPopularItemUserInfo(String imgTitle) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage("assets/images/${imgTitle}.png"),
+          backgroundImage: AssetImage("assets/images/${homeAbroadItemData.userImgTitle}"),
         ),
         SizedBox(width: gap_m),
         Column(

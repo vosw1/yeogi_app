@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 import 'package:yogi_project/style.dart';
-import '../../components/common/book_item_data.dart';
+import '../../components/data/book_item_data.dart';
 
 class BookInKoreaPage extends StatelessWidget {
   final List<BookItemData> bookInKoreaList;
@@ -11,14 +11,14 @@ class BookInKoreaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( // 상단 앱바(페이지 제목)
         title: Text('국내 예약내역'),
       ),
-      body: Padding(
+      body: Padding( // 이용 내역
         padding: const EdgeInsets.all(gap_m),
         child: ListView( // Wrap the Column with a ListView
           children: [
-            Column(
+            Column( // 예약 내역
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("이용 ${bookInKoreaList.length}건", style: h6()),
@@ -37,17 +37,17 @@ class BookInKoreaPage extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
+                            ClipRRect( // 예약 이미지
                               borderRadius: BorderRadius.circular(12.0),
                               child: Image.asset(
-                                bookItemData.imagePath,
+                                "assets/images/${bookItemData.stayImgTitle}",
                                 width: 150,
                                 height: 150,
                                 fit: BoxFit.cover,
                               ),
                             ),
                             SizedBox(width: gap_s),
-                            Expanded(
+                            Expanded( // 예약 정보
                               flex: 2,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

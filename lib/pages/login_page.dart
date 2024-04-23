@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/login_page/components/login_form.dart';
 import 'package:yogi_project/size.dart';
 
+// 로그인 페이지
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 

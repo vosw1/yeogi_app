@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../size.dart';
 import '../../../style.dart';
-import '../../components/common/set_item_data.dart';
+import '../../components/data/home_item_data.dart';
 
 // 숙소 추천시 기본 틀
 class HomeItem extends StatelessWidget {
@@ -20,37 +20,37 @@ class HomeItem extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: gap_m, right: gap_m),
-        child: Column(
+        child: Column( // 숙소 추천 기본 틀
           children: [
             SizedBox(height: gap_s),
-            _buildItemImage(itemData.imagePath),
+            _buildItemImage(itemData.stayImgTitle), // 이미지 경로
             SizedBox(height: gap_s),
-            _buildItemStar(itemData.starCount),
+            _buildItemStar(itemData.starCount), // 별점
             SizedBox(height: gap_s),
-            _buildItemComment(itemData.comment),
+            _buildItemComment(itemData.comment), // 리뷰
             SizedBox(height: gap_s),
-            _buildItemUserInfo(itemData.userName, itemData.location, itemData.imgTitle),
+            _buildItemUserInfo(itemData.userName, itemData.location, itemData.userImgTitle), // 유저 정보
           ],
         ),
       ),
     );
   }
 
-  Widget _buildItemImage(String imagePath) {
+  Widget _buildItemImage(String imagePath) { // 숙소 이미지
     return SizedBox(
       height: 210,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          imagePath,
+          "assets/images/${itemData.stayImgTitle}",
           fit: BoxFit.fitWidth,
         ),
       ),
     );
   }
 
-  Widget _buildItemStar(double starCount) {
+  Widget _buildItemStar(double starCount) { // 별점
     int fullStars = starCount.floor();
     double halfStar = starCount - fullStars;
 
@@ -69,9 +69,7 @@ class HomeItem extends StatelessWidget {
     );
   }
 
-
-
-  Widget _buildItemComment(String comment) {
+  Widget _buildItemComment(String comment) { // 리뷰
     return Container(
       constraints: BoxConstraints(minHeight: 50),
       child: Text(
@@ -83,12 +81,13 @@ class HomeItem extends StatelessWidget {
     );
   }
 
+  //유저 정보
   Widget _buildItemUserInfo(String userName, String location, String imgTitle) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage("assets/images/${imgTitle}.png"),
+          backgroundImage: AssetImage("assets/images/${itemData.userImgTitle}"),
         ),
         SizedBox(width: gap_m),
         Column(

@@ -83,6 +83,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
   }
 }
 
+// 자주 묻는 질문 버튼
 class FAQPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

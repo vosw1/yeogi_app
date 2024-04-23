@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../size.dart';
 import 'header_appbar_item.dart';
 
+// 홈 페이지에 앱바 (아이콘 + 텍스트)
 class HomeHeaderAppBar extends StatelessWidget {
   const HomeHeaderAppBar({Key? key});
 

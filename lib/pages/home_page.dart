@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 import '../home_page/_header/home_header.dart';
 import '../home_page/body/home_body.dart';
-import '_main_holder.dart';
 
 // 홈페이지 기본 틀
 class HomePage extends StatefulWidget {

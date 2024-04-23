@@ -37,6 +37,7 @@ class _MainScreensState extends State<MainHolder> {
   }
 }
 
+// 하단 네비데이션바
 class HomeBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
   final Function(int) onItemTapped;

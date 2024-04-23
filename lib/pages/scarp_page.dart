@@ -26,7 +26,7 @@ class _ScrapPageState extends State<ScrapPage>
     );
   }
 
-  Widget _buildTabBar() {
+  Widget _buildTabBar() { // 상단버튼
     return Padding(
       padding: const EdgeInsets.only(top: 30.0),
       child: TabBar(
@@ -39,7 +39,7 @@ class _ScrapPageState extends State<ScrapPage>
     );
   }
 
-  Widget _buildTabBarView() {
+  Widget _buildTabBarView() { // 찜페이지 바디
     return TabBarView(
       controller: _tabController,
       children: [

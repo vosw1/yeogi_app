@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:yogi_project/size.dart';
 
+// 주변 페이지
 class NearFromMePage extends StatefulWidget {
   @override
   _NearFromMePageState createState() => _NearFromMePageState();
@@ -30,7 +31,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: gap_l),
-            TextField(
+            TextField( // 검색바
                 onChanged: (value) {
                   setState(() {
                     _searchText = value;
@@ -53,7 +54,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
               ),
             SizedBox(height: gap_xs),
             ElevatedButton.icon(
-              onPressed: () {}, // 내 위치 찾기 기능 추가
+              onPressed: () {}, // todo : 내 위치 찾기 기능 추가
               icon: Icon(Icons.location_on),
               label: Text('내 위치에서 찾아보기'),
               style: ElevatedButton.styleFrom(
