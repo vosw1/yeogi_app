@@ -1,26 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/reservation/reservation_check/book_in_abroad_page.dart';
-import 'package:yogi_project/reservation/reservation_check/book_in_korea_page.dart';
-
 import '../components/common/book_item_data.dart';
+import '../reservation/book_check/book_in_abroad_page.dart';
+import '../reservation/book_check/book_in_korea_page.dart';
 
 class MyPageBookMenuHolder extends StatelessWidget {
   const MyPageBookMenuHolder({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    // Sample book item data
-    final bookItemData = BookItemData(
-      imagePath: "assets/images/p1.png",
-      imgTitle: "p1",
-      stayName: "오늘의 숙소",
-      roomName: "트윈룸",
-      location: "서울시 어딘가",
-      checkInDate: "2024.4.30",
-      checkOutDate: "2024.5.2",
-      personCount: "2명",
-      price: "50,000원",
-    );
+    // 샘플 예약 데이터 목록
+    final List<BookItemData> bookInKoreaList = [
+      BookItemData(
+        imagePath: "assets/images/stay1.png",
+        imgTitle: "stay1",
+        stayName: "소래포구 3S",
+        roomName: "오픈특가룸",
+        location: "인천 남동구 논현동",
+        checkInDate: "2024.4.30",
+        checkOutDate: "2024.5.2",
+        personCount: "2명",
+        price: "50,000원",
+      ),
+      BookItemData(
+        imagePath: "assets/images/stay1.png",
+        imgTitle: "stay1",
+        stayName: "소래포구 3S",
+        roomName: "오픈특가룸",
+        location: "인천 남동구 논현동",
+        checkInDate: "2024.4.30",
+        checkOutDate: "2024.5.2",
+        personCount: "2명",
+        price: "50,000원",
+      ),
+      BookItemData(
+        imagePath: "assets/images/stay1.png",
+        imgTitle: "stay1",
+        stayName: "소래포구 3S",
+        roomName: "오픈특가룸",
+        location: "인천 남동구 논현동",
+        checkInDate: "2024.4.30",
+        checkOutDate: "2024.5.2",
+        personCount: "2명",
+        price: "50,000원",
+      ),
+    ];
+
+    // 샘플 예약 데이터 목록
+    final List<BookItemData> bookInAbroardList = [
+      BookItemData(
+        imagePath: "assets/images/stayaboard1.png",
+        imgTitle: "stayaboard1",
+        stayName: "샹그릴라 탄중아루",
+        roomName: "최저가보장룸",
+        location: "Shangri-La Tanjung Aru, Kota Kinabalu",
+        checkInDate: "2024.4.30",
+        checkOutDate: "2024.5.2",
+        personCount: "2명",
+        price: "100,000원",
+      ),
+      BookItemData(
+        imagePath: "assets/images/stayaboard1.png",
+        imgTitle: "stayaboard1",
+        stayName: "샹그릴라 탄중아루",
+        roomName: "최저가보장룸",
+        location: "Shangri-La Tanjung Aru, Kota Kinabalu",
+        checkInDate: "2024.4.30",
+        checkOutDate: "2024.5.2",
+        personCount: "2명",
+        price: "100,000원",
+      ),
+    ];
 
     return Column(
       children: <Widget>[
@@ -31,11 +80,11 @@ class MyPageBookMenuHolder extends StatelessWidget {
           title: Text('국내숙소'),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            // Navigate to the BookInKoreaPage and pass the bookItemData
+            // 국내숙소 탭 시 BookInKoreaPage로 모든 예약 데이터 목록을 전달합니다.
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BookInKoreaPage(bookItemData: bookItemData),
+                builder: (context) => BookInKoreaPage(bookInKoreaList: bookInKoreaList), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },
@@ -44,10 +93,12 @@ class MyPageBookMenuHolder extends StatelessWidget {
           title: Text('해외숙소'),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            // Navigate to the BookInAbroadPage
+            // 해외숙소 탭 시 BookInAbroadPage로 이동합니다.
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BookInAbroadPage()),
+              MaterialPageRoute(
+                builder: (context) => BookInAbroadPage(bookInAbroardList: bookInAbroardList), // 수정된 생성자에 전체 목록 전달
+              ),
             );
           },
         ),
