@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../book_page/book_check/book_in_abroad_page.dart';
-import '../book_page/book_check/book_in_korea_page.dart';
+import '../book_page/book_in_abroad_page.dart';
+import '../book_page/book_in_korea_page.dart';
 import '../components/data/book_item_data.dart';
 
 // 마이페이지의 예약메뉴

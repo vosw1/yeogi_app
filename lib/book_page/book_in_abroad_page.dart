@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../components/data/book_item_data.dart';
-import '../../size.dart';
-import '../../style.dart';
+import '../components/data/book_item_data.dart';
+import '../size.dart';
+import '../style.dart';
 
 class BookInAbroadPage extends StatelessWidget {
   final List<BookItemData> bookInAbroardList;
