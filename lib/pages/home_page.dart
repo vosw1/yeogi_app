@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           FloatingActionButton(
+            heroTag: 'up_button',
             onPressed: () {
               // 버튼을 누르면 맨 위로 올라가도록 스크롤 위치를 조정
               _scrollController.animateTo(
@@ -53,6 +54,7 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(height: 1), // 버튼 사이의 간격을 줄이기
           FloatingActionButton(
+            heroTag: 'down_button',
             onPressed: () {
               // 버튼을 누르면 맨 아래로 이동하도록 스크롤 위치 조정
               _scrollController.animateTo(
