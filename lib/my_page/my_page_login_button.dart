@@ -28,7 +28,7 @@ class MyPageLoginButton extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.redAccent,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
