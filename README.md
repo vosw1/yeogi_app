@@ -1,16 +1,16 @@
 # yogi_project
 
-A new Flutter project.
+- 홈 페이지
+- 검색 페이지
+- 주변 페이지
+- 찜 페이지
+- 내 정보 페이지
 
-## Getting Started
+## 기술스택
 
-This project is a starting point for a Flutter application.
+- google_fonts: ^4.0.4
+- intl: ^0.17.0
+- flutter_naver_map: ^1.2.2
+- geolocator: ^7.6.2
+- url_launcher: ^6.0.9
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
