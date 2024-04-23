@@ -10,7 +10,9 @@
 
 - google_fonts: ^4.0.4
 - intl: ^0.17.0
-- flutter_naver_map: ^1.2.2
 - geolocator: ^7.6.2
 - url_launcher: ^6.0.9
 
+## 사용한 API
+
+- flutter_naver_map: ^1.2.
