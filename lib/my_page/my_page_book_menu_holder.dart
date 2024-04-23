@@ -4,7 +4,7 @@ import '../reservation/book_check/book_in_abroad_page.dart';
 import '../reservation/book_check/book_in_korea_page.dart';
 
 class MyPageBookMenuHolder extends StatelessWidget {
-  const MyPageBookMenuHolder({Key? key});
+  const MyPageBookMenuHolder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
           title: Text('국내숙소'),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            // 국내숙소 탭 시 BookInKoreaPage로 모든 예약 데이터 목록을 전달합니다.
+            // 국내숙소 탭 시 BookInKoreaPage로 모든 예약 데이터 목록을 전달
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -96,7 +96,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
           title: Text('해외숙소'),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            // 해외숙소 탭 시 BookInAbroadPage로 이동합니다.
+            // 해외숙소 탭 시 BookInAbroadPage로 이동
             Navigator.push(
               context,
               MaterialPageRoute(
