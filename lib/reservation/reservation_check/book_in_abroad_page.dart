@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../size.dart';
 
-class ReservationInAbroadPage extends StatelessWidget {
+class BookInAbroadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
