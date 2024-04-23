@@ -39,6 +39,7 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
         Padding(
           padding: const EdgeInsets.only(top: gap_l, left: gap_m, right: gap_m),
@@ -223,8 +224,7 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
   }
 }
 
-
-
+// 검색 필터 기본 틀
 class CustomPopupMenuButton extends StatelessWidget {
   final String? initialValue;
   final List<String> items;
