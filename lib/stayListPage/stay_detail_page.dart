@@ -20,12 +20,12 @@ class StayDetailPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(gap_m),
         child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('${itemData.stayName}', style: h5()), // 숙소명
             SizedBox(
-              width:600,
-              height:200,
+                width:600,
+                height:200,
                 child: Image.asset('assets/images/${itemData.stayImgTitle}')), // 숙소 이미지
             SizedBox(height: gap_m),
 
@@ -38,20 +38,25 @@ class StayDetailPage extends StatelessWidget {
             Text('${itemData.checkOutDate}', style: subtitle1()), // 체크아웃 시간
             Text('${itemData.roomInfo}', style: subtitle1()), // 추가정보
             Text('${itemData.amenities}', style: subtitle1()), // 편의시설
-            Text('${itemData.cancellationAndRefundPolicy
-                }', style: subtitle1()), // 취소 및 환불 정책
+            Text('${itemData.cancellationAndRefundPolicy}', style: subtitle1()), // 취소 및 환불 정책
             Text('${itemData.notice}', style: subtitle1()), // 여어떻노 공지
-            Text('${itemData.price}', style: subtitle1()), // 금액
-            ElevatedButton( // 예약하기 버튼
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookPage(),
-                  ),
-                );
-              },
-              child: Text('예약하기'),
+            SizedBox(height: gap_m), // 예약하기 버튼 위 여백
+            SizedBox( // 예약하기 버튼
+              width: double.infinity, // 가로로 꽉 채우도록 설정
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookPage(itemData: itemData),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.redAccent, // 글자색을 흰색으로 설정
+                ),
+                child: Text('예약하기'),
+              ),
             ),
           ],
         ),
