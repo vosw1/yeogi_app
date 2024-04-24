@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yogi_project/size.dart';
 
-// 주변 페이지
 class NearFromMePage extends StatefulWidget {
   @override
   _NearFromMePageState createState() => _NearFromMePageState();
@@ -14,12 +13,30 @@ class NearFromMePage extends StatefulWidget {
 class _NearFromMePageState extends State<NearFromMePage> {
   String _searchText = '';
   List<String> searchResults = [];
-  late Completer<NaverMapController> _controllerCompleter;
+  late Completer<GoogleMapController> _controllerCompleter;
+
+  final CameraPosition _initialPosition = CameraPosition(
+    target: LatLng(35.1796, 129.0756), // 서울을 기본 위치로 설정
+    zoom: 12,
+  );
+
+  final Set<Marker> markers = {};
 
   @override
   void initState() {
     super.initState();
-    _controllerCompleter = Completer<NaverMapController>();
+    _controllerCompleter = Completer<GoogleMapController>();
+  }
+
+  void addMarker(LatLng coordinate) {
+    int id = Random().nextInt(100);
+
+    setState(() {
+      markers.add(Marker(
+        position: coordinate,
+        markerId: MarkerId(id.toString()),
+      ));
+    });
   }
 
   @override
@@ -31,54 +48,48 @@ class _NearFromMePageState extends State<NearFromMePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: gap_l),
-            TextField( // 검색바
-                onChanged: (value) {
-                  setState(() {
-                    _searchText = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: '주변 숙소를 찾아보세요',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        searchResults = [];
-                      });
-                    },
-                  ),
+            TextField(
+              onChanged: (value) {
+                setState(() {
+                  _searchText = value;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: '주변 숙소를 찾아보세요',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                prefixIcon: IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      searchResults = [];
+                    });
+                  },
                 ),
               ),
+            ),
             SizedBox(height: gap_xs),
             ElevatedButton.icon(
               onPressed: () {}, // todo : 내 위치 찾기 기능 추가
               icon: Icon(Icons.location_on),
               label: Text('내 위치에서 찾아보기'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent, // 배경색은 레드 악센트
-                foregroundColor: Colors.white, // 아이콘과 글자는 흰색
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.white,
               ),
             ),
             SizedBox(height: gap_xs),
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(gap_s),
-                child: NaverMap(
-                  // Flutter Naver Map 위젯 추가
-                  options: const NaverMapViewOptions(
-                    indoorEnable: true, // 실내 맵 사용 가능 설정
-                    locationButtonEnable: false, // 위치 버튼 표시 설정
-                    consumeSymbolTapEvents: false, // 심볼 탭 이벤트 소비 설정
-                  ),
-                  onMapReady: (controller) async {
-                    // 지도가 준비되었을 때 호출되는 콜백 함수
-                    // NaverMapController를 Completer에 완료합니다.
+                child: GoogleMap(
+                  initialCameraPosition: _initialPosition,
+                  onMapCreated: (controller) async {
                     _controllerCompleter.complete(controller);
-                    log("onMapReady", name: "onMapReady"); // 로그 출력
                   },
+                  onTap: addMarker,
+                  markers: markers,
                 ),
               ),
             ),
@@ -87,7 +98,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
               '결과 ${searchResults.length}건',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Divider(), // 라인 그어주는 Divider 추가
+            Divider(),
             Expanded(
               child: ListView.builder(
                 itemCount: searchResults.length,
@@ -104,3 +115,4 @@ class _NearFromMePageState extends State<NearFromMePage> {
     );
   }
 }
+
