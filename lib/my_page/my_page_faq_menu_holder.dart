@@ -44,6 +44,25 @@ class MyPageFaqMenuHolder extends StatelessWidget {
           return ListTile(
             leading: Icon(menuItem.iconData),
             title: Text(menuItem.title),
+            trailing: (index == 2 || index == 3)
+                ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    '오전 9시 ~ 오전 6시',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            )
+                : Icon(Icons.arrow_forward_ios),
             onTap: () {
               _handleMenuAction(context, menuItem.menuType); // 메뉴 유형에 따른 액션 처리
             },
@@ -82,6 +101,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
     }
   }
 }
+
 
 // 자주 묻는 질문 버튼
 class FAQPage extends StatelessWidget {
