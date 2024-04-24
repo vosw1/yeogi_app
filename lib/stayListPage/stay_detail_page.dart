@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/components/data/home_item_data.dart';
+import 'package:yogi_project/size.dart';
+import 'package:yogi_project/style.dart';
+
+import '../book_page/book_page.dart';
 
 class StayDetailPage extends StatelessWidget {
   final ItemData itemData;
@@ -12,17 +17,42 @@ class StayDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('상세 페이지'),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(gap_m),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('상세 정보'),
-            Text('숙소 이미지: ${itemData.stayImgTitle}'),
-            Text('별점: ${itemData.starCount}'),
-            Text('코멘트: ${itemData.comment}'),
-            Text('사용자 이미지: ${itemData.userImgTitle}'),
-            Text('사용자 이름: ${itemData.userName}'),
-            Text('위치: ${itemData.location}'),
+            Text('${itemData.stayName}', style: h5()), // 숙소명
+            SizedBox(
+              width:600,
+              height:200,
+                child: Image.asset('assets/images/${itemData.stayImgTitle}')), // 숙소 이미지
+            SizedBox(height: gap_m),
+
+            Text('${itemData.location}', style: subtitle1()), // 위치
+            Text('${itemData.roomName}', style: subtitle1()), // 방이름
+            Text('${itemData.stayInfo}', style: subtitle1()), // 특이사항
+            Text('${itemData.personCount}', style: subtitle1()), // 인원수
+            Text('${itemData.price}', style: subtitle1()), // 금액
+            Text('${itemData.checkInDate}', style: subtitle1()), // 체크인 시간
+            Text('${itemData.checkOutDate}', style: subtitle1()), // 체크아웃 시간
+            Text('${itemData.roomInfo}', style: subtitle1()), // 추가정보
+            Text('${itemData.amenities}', style: subtitle1()), // 편의시설
+            Text('${itemData.cancellationAndRefundPolicy
+                }', style: subtitle1()), // 취소 및 환불 정책
+            Text('${itemData.notice}', style: subtitle1()), // 여어떻노 공지
+            Text('${itemData.price}', style: subtitle1()), // 금액
+            ElevatedButton( // 예약하기 버튼
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookPage(),
+                  ),
+                );
+              },
+              child: Text('예약하기'),
+            ),
           ],
         ),
       ),

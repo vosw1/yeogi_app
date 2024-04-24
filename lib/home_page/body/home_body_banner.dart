@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/components/data/set_banner_data.dart';
+import 'package:yogi_project/components/data/banner_data.dart';
 import '../../../size.dart';
 import '../../../style.dart';
 

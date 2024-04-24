@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/home_page/body/home_abroard_item.dart';
-import 'package:yogi_project/components/data/set_banner_data.dart';
-import '../../../size.dart';
-import '../../../style.dart';
-import '../../components/data/home_item_data.dart';
+import 'package:yogi_project/components/data/home_item_data.dart';
+import '../../components/data/banner_data.dart';
+import '../../size.dart';
+import '../../stayListPage/stay_detail_page.dart';
+import 'home_banner_page.dart';
 import 'home_body_banner.dart';
 import 'home_item.dart';
-import 'home_popular_item.dart';
 
-// 홈페이지 바디 부분 - 특가숙소, 인기숙소, 해외숙소
 class HomeBody extends StatelessWidget {
-  const HomeBody({Key? key});
+  const HomeBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,57 +16,131 @@ class HomeBody extends StatelessWidget {
     List<ItemData> saleItemsData = [
       ItemData(
         stayImgTitle: "p1.png",
-        starCount: 5,
+        stayName: "제주의 아침",
+        stayInfo: "ㅇ",
+        roomName: "바다뷰",
+        roomInfo: "ㅇ",
+        amenities: "드라이기, 칫솔, 스타일러",
+        location: "제주도",
+        checkInDate: "2024-04-30",
+        checkOutDate: "2024-05-02",
+        personCount: "2",
+        price: "60,000",
+        cancellationAndRefundPolicy: "일주일 이내 환불 가능 및 당일 취소 불가",
+        notice: "여기요는..",
+        starCount: 4,
         comment: "역시 제주도~ 귤 나무들도 너무 예뻤고 산책로도 있어서 너무 좋았어요!!",
         userImgTitle: "p2.png",
         userName: "낭만여행가",
-        location: "제주도",
       ),
       ItemData(
         stayImgTitle: "p1.png",
-        starCount: 5,
+        stayName: "제주의 아침",
+        stayInfo: "ㅇ",
+        roomName: "바다뷰",
+        roomInfo: "ㅇ",
+        amenities: "드라이기, 칫솔, 스타일러",
+        location: "제주도",
+        checkInDate: "2024-04-30",
+        checkOutDate: "2024-05-02",
+        personCount: "2",
+        price: "60,000",
+        cancellationAndRefundPolicy: "일주일 이내 환불 가능 및 당일 취소 불가",
+        notice: "여기요는..",
+        starCount: 4,
         comment: "역시 제주도~ 귤 나무들도 너무 예뻤고 산책로도 있어서 너무 좋았어요!!",
         userImgTitle: "p2.png",
         userName: "낭만여행가",
-        location: "제주도",
       ),
     ];
     // 인기 숙소 리스트
     List<ItemData> popularItemsData = [
       ItemData(
-        stayImgTitle: "p10.png",
-        starCount: 4.5,
-        comment: "경주ㅜㅠ너무 좋아요 산인데 벌레도 없고 친절하시고 너무 좋네요",
-        userImgTitle: "avarta.png",
-        userName: "메타트립",
-        location: "경주",
+        stayImgTitle: "p1.png",
+        stayName: "제주의 아침",
+        stayInfo: "ㅇ",
+        roomName: "바다뷰",
+        roomInfo: "ㅇ",
+        amenities: "드라이기, 칫솔, 스타일러",
+        location: "제주도",
+        checkInDate: "2024-04-30",
+        checkOutDate: "2024-05-02",
+        personCount: "2",
+        price: "60,000",
+        cancellationAndRefundPolicy: "일주일 이내 환불 가능 및 당일 취소 불가",
+        notice: "여기요는..",
+        starCount: 4,
+        comment: "역시 제주도~ 귤 나무들도 너무 예뻤고 산책로도 있어서 너무 좋았어요!!",
+        userImgTitle: "p2.png",
+        userName: "낭만여행가",
       ),
       ItemData(
-        stayImgTitle: "p10.png",
-        starCount: 5,
-        comment: "경주ㅜㅠ너무 좋아요 산인데 벌레도 없고 친절하시고 너무 좋네요",
-        userImgTitle: "avarta.png",
-        userName: "메타트립",
-        location: "경주",
+        stayImgTitle: "p1.png",
+        stayName: "제주의 아침",
+        stayInfo: "ㅇ",
+        roomName: "바다뷰",
+        roomInfo: "ㅇ",
+        amenities: "드라이기, 칫솔, 스타일러",
+        location: "제주도",
+        checkInDate: "2024-04-30",
+        checkOutDate: "2024-05-02",
+        personCount: "2",
+        price: "60,000",
+        cancellationAndRefundPolicy: "일주일 이내 환불 가능 및 당일 취소 불가",
+        notice: "여기요는..",
+        starCount: 4,
+        comment: "역시 제주도~ 귤 나무들도 너무 예뻤고 산책로도 있어서 너무 좋았어요!!",
+        userImgTitle: "p2.png",
+        userName: "낭만여행가",
       ),
     ];
     // 해외 숙소 리스트
     List<ItemData> homeAbroadItemData = [
       ItemData(
-        stayImgTitle: "LosAngeles.png",
-        starCount: 5,
-        comment: "할리우드 처음가봤는데 진짜 안가봤으면 후회해요! 다들 꼭 가보세요",
-        userImgTitle: "avarta.png",
-        userName: "메타트립",
-        location: "미국 LosAngeles",
+        stayImgTitle: "p1.png",
+        stayName: "제주의 아침",
+        stayInfo: "ㅇ",
+        roomName: "바다뷰",
+        roomInfo: "ㅇ",
+        amenities: "드라이기, 칫솔, 스타일러",
+        location: "제주도",
+        checkInDate: "2024-04-30",
+        checkOutDate: "2024-05-02",
+        personCount: "2",
+        price: "60,000",
+        cancellationAndRefundPolicy: "일주일 이내 환불 가능 및 당일 취소 불가",
+        notice: "여기요는..",
+        starCount: 4,
+        comment: "역시 제주도~ 귤 나무들도 너무 예뻤고 산책로도 있어서 너무 좋았어요!!",
+        userImgTitle: "p2.png",
+        userName: "낭만여행가",
       ),
       ItemData(
-        stayImgTitle: "Guam.png",
-        starCount: 5,
-        comment: "괌..역시 신혼여행의 성지...너무 좋아요ㅜㅠ",
-        userImgTitle: "avarta.png",
-        userName: "해외여행중독",
-        location: "괌 Guam",
+        stayImgTitle: "p1.png",
+        stayName: "제주의 아침",
+        stayInfo: "ㅇ",
+        roomName: "바다뷰",
+        roomInfo: "ㅇ",
+        amenities: "드라이기, 칫솔, 스타일러",
+        location: "제주도",
+        checkInDate: "2024-04-30",
+        checkOutDate: "2024-05-02",
+        personCount: "2",
+        price: "60,000",
+        cancellationAndRefundPolicy: "일주일 이내 환불 가능 및 당일 취소 불가",
+        notice: "여기요는..",
+        starCount: 4,
+        comment: "역시 제주도~ 귤 나무들도 너무 예뻤고 산책로도 있어서 너무 좋았어요!!",
+        userImgTitle: "p2.png",
+        userName: "낭만여행가",
+      ),
+    ];
+
+    List<BannerData> bannerData = [
+      BannerData(
+        imageTitle: "banner.png", // 이미지 제목
+        bannerTitle: "여어떻노?", // 배너 제목
+        bannerText: "퍼뜩 예약하꾸마", // 배너 내용
       ),
     ];
 
@@ -82,99 +154,90 @@ class HomeBody extends StatelessWidget {
               height: 240, // 배너의 높이 조정
               child: PageView(
                 children: [
-                  GestureDetector(
-                    onTap: () {// 클릭 시 이동할 URL
-                      String url = "https://example.com";
-                      // URL로 이동
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(url: url)));
-                    },
-                    // 배너 기본 틀
-                    child: HomeBodyBanner(
-                      BannerData(
-                        "body_banner.jpg", // 이미지 경로
-                        "body_banner", // 이미지 제목
-                        "여어떻노?", // 배너 제목
-                      ),
+                  for (var bannerData in bannerData)
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                HomeBannerPage(bannerData: bannerData),
+                          ),
+                        );
+                      },
+                      child: HomeBodyBanner(
+                          bannerData), // bannerData를 직접 전달합니다.
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // 클릭 시 이동할 URL
-                      String url = "https://example.com";
-                      // URL로 이동
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(url: url)));
-                    },
-                    // 배너 기본틀
-                    child: HomeBodyBanner(
-                      BannerData(
-                        "assets/images/body_banner.jpg", // 이미지 경로
-                        "body_banner", // 이미지 제목
-                        "여어떻노?", // 배너 제목
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
-            SizedBox(// 특가 숙소 추천 타이틀
+            SizedBox(height: 8),
+            SizedBox(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: gap_m),
-                  Text("특가 숙소 추천", style: h5()),
+                  SizedBox(width: 16),
+                  Text("인기 숙소 추천", style: TextStyle(fontSize: 20)),
                 ],
               ),
             ),
-            SizedBox(// 특가 숙소 리스트 페이지뷰
-              height: 400,
-              child: PageView(
-                children: [
-                  for (var itemData in saleItemsData)
-                    HomeItem(itemData: itemData),
-                ],
-              ),
-            ),
-            SizedBox(height: gap_xs),
-            SizedBox( // 인기 숙소 추천 타이틀
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: gap_m),
-                  Text("인기 숙소 추천", style: h5()),
-                ],
-              ),
-            ),
-            SizedBox( // 인기 숙소 리스트 페이지뷰
+            // 인기 숙소 리스트 페이지뷰
+            SizedBox(
               height: 400,
               child: PageView(
                 children: [
                   for (var itemData in popularItemsData)
-                    HomePopularItem(popularItemsData: itemData),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                StayDetailPage(itemData: itemData),
+                          ),
+                        );
+                      },
+                      child: HomeItem(itemData: itemData),
+                    ),
                 ],
               ),
             ),
-            SizedBox(height: gap_xs),
-            SizedBox( // 인기 해외 추천 타이틀
+            SizedBox(height: 8),
+            SizedBox(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: gap_m),
-                  Text("인기 해외 추천", style: h5()),
+                  SizedBox(width: 16),
+                  Text("인기 해외 추천", style: TextStyle(fontSize: 20)),
                 ],
               ),
             ),
-            SizedBox( // 인기 해외 추천 페이지뷰
+            // 인기 해외 숙소 리스트 페이지뷰
+            SizedBox(
               height: 400,
               child: PageView(
                 children: [
                   for (var itemData in homeAbroadItemData)
-                    HomeAbroadItem(homeAbroadItemData: itemData),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                StayDetailPage(itemData: itemData),
+                          ),
+                        );
+                      },
+                      child: HomeItem(itemData: itemData),
+                    ),
                 ],
               ),
             ),
           ],
-        ),
-      ),
+        )
+        ,
+      )
+      ,
     );
   }
 }
