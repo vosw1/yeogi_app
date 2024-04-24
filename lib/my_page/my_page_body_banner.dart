@@ -16,7 +16,7 @@ class MyPageBodyBanner extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Image.asset(
-            "assets/images/IDEL3.jpg",
+            "assets/images/IDLE3.jpg",
             fit: BoxFit.cover,
           ),
         ),
