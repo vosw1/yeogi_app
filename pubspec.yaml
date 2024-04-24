@@ -41,7 +41,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   font_awesome_flutter: ^10.7.0
+
   google_maps_flutter: ^2.2.8
+  map_launcher: ^3.3.0
+
 
 dev_dependencies:
   flutter_test:
