@@ -3,7 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:yogi_project/size.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:yogi_project/size.dart'; // 위치 서비스를 사용하기 위한 패키지
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -14,9 +15,10 @@ class _NearFromMePageState extends State<NearFromMePage> {
   String _searchText = '';
   List<String> searchResults = [];
   late Completer<GoogleMapController> _controllerCompleter;
+  late LatLng _currentPosition; // 현재 위치를 저장할 변수
 
   final CameraPosition _initialPosition = CameraPosition(
-    target: LatLng(35.1796, 129.0756), // 서울을 기본 위치로 설정
+    target: LatLng(35.1796, 129.0756), // 부산을 기본 위치로 설정
     zoom: 12,
   );
 
@@ -26,6 +28,16 @@ class _NearFromMePageState extends State<NearFromMePage> {
   void initState() {
     super.initState();
     _controllerCompleter = Completer<GoogleMapController>();
+    _getCurrentLocation(); // initState에서 현재 위치 가져오기
+  }
+
+  // 위치 가져오기
+  Future<void> _getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      _currentPosition = LatLng(position.latitude, position.longitude);
+    });
   }
 
   void addMarker(LatLng coordinate) {
@@ -71,7 +83,9 @@ class _NearFromMePageState extends State<NearFromMePage> {
             ),
             SizedBox(height: gap_xs),
             ElevatedButton.icon(
-              onPressed: () {}, // todo : 내 위치 찾기 기능 추가
+              onPressed: () {
+                _goToCurrentPosition(); // 내 위치로 이동하는 함수 호출
+              },
               icon: Icon(Icons.location_on),
               label: Text('내 위치에서 찾아보기'),
               style: ElevatedButton.styleFrom(
@@ -114,5 +128,10 @@ class _NearFromMePageState extends State<NearFromMePage> {
       ),
     );
   }
-}
 
+  // 현재 위치로 지도 이동하는 함수
+  Future<void> _goToCurrentPosition() async {
+    final GoogleMapController controller = await _controllerCompleter.future;
+    controller.animateCamera(CameraUpdate.newLatLng(_currentPosition));
+  }
+}

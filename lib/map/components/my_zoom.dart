@@ -5,10 +5,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MyZoom extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MyZoomState createState() => _MyZoomState();
 }
 
-class _HomePageState extends State<MyZoom> {
+class _MyZoomState extends State<MyZoom> {
   Completer<GoogleMapController> _controller = Completer();
 
   CameraPosition _currentPosition = CameraPosition(
