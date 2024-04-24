@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // 고객센터 메뉴 유형 enum
 enum MenuType {
   FAQ,
-  KakaoInquiry,
+
   CallCustomerService,
 }
 
@@ -20,7 +20,6 @@ class MyPageMenu {
 
 final List<MyPageMenu> myPageMenu = [
   MyPageMenu(title: '자주 묻는 질문', iconData: FontAwesomeIcons.info, menuType: MenuType.FAQ),
-  MyPageMenu(title: '1:1 카카오 문의', iconData: FontAwesomeIcons.comment, menuType: MenuType.KakaoInquiry),
   MyPageMenu(title: '고객 행복센터 연결', iconData: FontAwesomeIcons.phone, menuType: MenuType.CallCustomerService),
 ];
 
@@ -81,9 +80,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
           MaterialPageRoute(builder: (context) => FAQPage()),
         );
         break;
-      case MenuType.KakaoInquiry:
-      // 카카오 문의 액션 추가
-        break;
+
       case MenuType.CallCustomerService:
       // 고객 행복센터 전화 액션 추가
         _makePhoneCall('전화번호');
