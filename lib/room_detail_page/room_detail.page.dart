@@ -1,22 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yogi_project/book_page/book_page.dart';
+import 'package:yogi_project/room_detail_page/room_detail_appbar.dart';
 import 'package:yogi_project/components/data/home_item_data.dart';
-import 'package:yogi_project/room_detail_page/room_detail.page.dart';
-import 'package:yogi_project/size.dart';
-import 'package:yogi_project/style.dart';
+import 'package:yogi_project/stayListPage/stay_detail_page.dart';
 
-import '../home_page/body/home_item.dart';
+import '../size.dart';
+import '../style.dart'; // StayDetailPage를 import해야 합니다.
 
-class StayDetailPage extends StatelessWidget {
+class RoomDetailPage extends StatelessWidget {
   final ItemData itemData;
 
-  const StayDetailPage({Key? key, required this.itemData}) : super(key: key);
+  const RoomDetailPage({Key? key, required this.itemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('숙소 상세 페이지'),
+        title: Text('룸 상세 페이지'),
       ),
       body: Padding(
         padding: EdgeInsets.all(gap_m),
@@ -41,17 +41,23 @@ class StayDetailPage extends StatelessWidget {
             Text('${itemData.amenities}', style: subtitle1()), // 편의시설
             Text('${itemData.cancellationAndRefundPolicy}', style: subtitle1()), // 취소 및 환불 정책
             Text('${itemData.notice}', style: subtitle1()), // 여어떻노 공지
-            SizedBox(height: 16),
-            // todo : 상세보기 버튼이 아니라 룸 리스트 만들어서 거기서 이동하게 만들기
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RoomDetailPage(itemData: itemData)),
-                );
-              },
-
-              child: Text('상세보기'),
+            SizedBox(height: gap_m), // 예약하기 버튼 위 여백
+            SizedBox( // 예약하기 버튼
+              width: double.infinity, // 가로로 꽉 채우도록 설정
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookPage(itemData: itemData),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.redAccent, // 글자색을 흰색으로 설정
+                ),
+                child: Text('예약하기'),
+              ),
             ),
           ],
         ),

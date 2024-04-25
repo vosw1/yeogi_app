@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/components/data/home_item_data.dart';
 import '../../components/data/banner_data.dart';
+import '../../room_detail_page/room_detail.page.dart';
 import '../../size.dart';
 import '../../stayListPage/stay_detail_page.dart';
 import 'home_banner_page.dart';
