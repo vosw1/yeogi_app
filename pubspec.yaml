@@ -45,6 +45,7 @@ dependencies:
 
   google_maps_flutter: ^2.2.8
   map_launcher: ^3.3.0
+  flutter_svg: ^2.0.10+1
 
 
 dev_dependencies:
