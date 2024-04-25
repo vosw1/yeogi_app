@@ -13,7 +13,7 @@ class ItemData {
   final int price; // 가격
   final String cancellationAndRefundPolicy; // 취소 및 환불 정책
   final String notice; // 여어떻노 공지
-  final String userImgTitle;// 유저 프로필 이미지
+  final String userImgTitle; // 유저 프로필 이미지
   final double starCount; // 별점
   final String comment; // 리뷰 내용
   final String userName; // 리뷰 작성한 유저네임
