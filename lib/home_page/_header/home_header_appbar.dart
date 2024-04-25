@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:yogi_project/stayListPage/camping_page.dart';
+import 'package:yogi_project/stayListPage/guesthouse_page.dart';
+import 'package:yogi_project/stayListPage/home_and_billa_page.dart';
+import 'package:yogi_project/stayListPage/hotel_page.dart';
+import 'package:yogi_project/stayListPage/motel_page.dart';
+import 'package:yogi_project/stayListPage/pension_page.dart';
+import 'package:yogi_project/stayListPage/sale_stay_page.dart';
 import '../../../size.dart';
+import '../../stayListPage/abroad_stay_page.dart';
 import 'header_appbar_item.dart';
 
+// 홈 페이지에 앱바 (아이콘 + 텍스트)
 class HomeHeaderAppBar extends StatelessWidget {
   const HomeHeaderAppBar({Key? key});
 
@@ -14,7 +23,7 @@ class HomeHeaderAppBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(right: gap_m, left: gap_m),
+        padding: EdgeInsets.only(right: gap_xm, left: gap_xm),
         child: HeaderAppbarItemList(),
       ),
     );
@@ -36,28 +45,40 @@ class HeaderAppbarItemList extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                _navigateToUrl('특가 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SaleStayPage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.gift, text: '특가'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(
               onTap: () {
-                _navigateToUrl('이벤트 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AbroadStayPage()),
+                );
               },
-              child: HeadAppBarItem(iconData: FontAwesomeIcons.tags, text: '이벤트'),
+              child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(
               onTap: () {
-                _navigateToUrl('모텔 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MotelPage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.bed, text: '모텔'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(
               onTap: () {
-                _navigateToUrl('호텔 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HotelPage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.hotel, text: '호텔'),
             ),
@@ -69,28 +90,40 @@ class HeaderAppbarItemList extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                _navigateToUrl('펜션 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PensionPage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.umbrellaBeach, text: '펜션'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(
               onTap: () {
-                _navigateToUrl('홈&빌라 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeAndBillaPage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.house, text: '홈&빌라'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(
               onTap: () {
-                _navigateToUrl('캠핑 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CampingPage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.mountainCity, text: '캠핑'),
             ),
             SizedBox(width: gap_xm),
             GestureDetector(
               onTap: () {
-                _navigateToUrl('게하 아이콘 클릭 시 이동할 URL');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GuesthousePage()),
+                );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.warehouse, text: '게하'),
             ),

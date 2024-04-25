@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/size.dart';
 
+// 고객센터 밑에 이미지
 class MyPageBodyBanner extends StatelessWidget {
   const MyPageBodyBanner({super.key});
 
@@ -15,7 +16,7 @@ class MyPageBodyBanner extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Image.asset(
-            "assets/images/IDEL3.jpg",
+            "assets/images/IDLE3.jpg",
             fit: BoxFit.cover,
           ),
         ),

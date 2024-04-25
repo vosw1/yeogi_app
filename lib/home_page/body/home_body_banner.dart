@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/home_page/body/set_banner_data.dart';
+import 'package:yogi_project/components/data/banner_data.dart';
 import '../../../size.dart';
 import '../../../style.dart';
 
+// 이벤트 배너 기본 틀
 class HomeBodyBanner extends StatelessWidget {
-  final BannerData bannerData; // 배너 데이터를 저장할 변수를 추가합니다.
+  final BannerData bannerData; // 배너 데이터 저장 변수
 
-  HomeBodyBanner(this.bannerData); // 생성자를 수정하여 배너 데이터를 받도록 합니다.
+  HomeBodyBanner(this.bannerData);
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +24,16 @@ class HomeBodyBanner extends StatelessWidget {
   Widget _buildBanner(BuildContext context) {
     return Stack(
       children: [
-        ClipRRect(
+        ClipRRect( // 배너 이미지
           borderRadius: BorderRadius.circular(20),
           child: Image.asset(
-            bannerData.imagePath, // 받은 배너 데이터의 이미지 경로를 사용
+            "assets/images/${bannerData.imageTitle}", // 받은 배너 데이터의 이미지
             fit: BoxFit.fill,
             width: double.infinity,
             height: 180,
           ),
         ),
-        Positioned(
+        Positioned(// 배너 text
           top: gap_xs,
           left: gap_m,
           child: Column(
@@ -53,6 +54,7 @@ class HomeBodyBanner extends StatelessWidget {
     );
   }
 
+  // 배너 text 기본 틀
   Widget _buildCaptionText(String text, TextStyle style) {
     return Container(
       constraints: BoxConstraints(maxWidth: 250),

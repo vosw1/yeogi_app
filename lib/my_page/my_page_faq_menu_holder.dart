@@ -1,6 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/my_page/data/my_page_menu_icon.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// 고객센터 메뉴 유형 enum
+enum MenuType {
+  FAQ,
+
+  CallCustomerService,
+}
+
+// 고객센터 메뉴
+class MyPageMenu {
+  final String title;
+  final IconData iconData;
+  final MenuType menuType; // 메뉴 유형 추가
+
+  MyPageMenu({required this.title, required this.iconData, required this.menuType});
+}
+
+final List<MyPageMenu> myPageMenu = [
+  MyPageMenu(title: '자주 묻는 질문', iconData: FontAwesomeIcons.info, menuType: MenuType.FAQ),
+  MyPageMenu(title: '고객 행복센터 연결', iconData: FontAwesomeIcons.phone, menuType: MenuType.CallCustomerService),
+];
+
+// 마이페이지 고객센터 화면
 class MyPageFaqMenuHolder extends StatelessWidget {
   const MyPageFaqMenuHolder({super.key});
 
@@ -8,41 +31,86 @@ class MyPageFaqMenuHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: myPageMenu.length + 1,
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) {
           return ListTile(
             title: Text('고객센터', style: TextStyle(fontWeight: FontWeight.bold)),
-            onTap: () {},
           );
         } else {
+          final menuItem = myPageMenu[index - 1];
           return ListTile(
-            leading: Icon(myPageMenu[index - 1].iconData), // 인덱스 조정
-            title: Text(myPageMenu[index - 1].title),
+            leading: Icon(menuItem.iconData),
+            title: Text(menuItem.title),
             trailing: (index == 2 || index == 3)
                 ? Row(
-                    // 인덱스 조정으로 1:1 카카오 문의와 고객 행복센터 연결에만 특별한 트레일링 추가
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          '오전 9시 ~ 새벽 3시',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ),
-                      Icon(Icons.arrow_forward_ios),
-                    ],
-                  )
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    '오전 9시 ~ 오전 6시',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            )
                 : Icon(Icons.arrow_forward_ios),
-            onTap: () {},
+            onTap: () {
+              _handleMenuAction(context, menuItem.menuType); // 메뉴 유형에 따른 액션 처리
+            },
           );
         }
       },
+    );
+  }
+
+  // 메뉴 유형에 따른 액션 처리 함수
+  void _handleMenuAction(BuildContext context, MenuType menuType) {
+    switch (menuType) {
+      case MenuType.FAQ:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FAQPage()),
+        );
+        break;
+
+      case MenuType.CallCustomerService:
+      // 고객 행복센터 전화 액션 추가
+        _makePhoneCall('전화번호');
+        break;
+    }
+  }
+
+  // 전화 거는 함수
+  void _makePhoneCall(String phoneNumber) async {
+    final url = 'tel:$phoneNumber';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw '전화 걸기에 실패했습니다: $url';
+    }
+  }
+}
+
+
+// 자주 묻는 질문 버튼
+class FAQPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('자주 묻는 질문'),
+      ),
+      body: Center(
+        child: Text('자주 묻는 질문'),
+      ),
     );
   }
 }

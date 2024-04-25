@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// 검색 결과 리스트
 class SearchResultList extends StatelessWidget {
   const SearchResultList({
     super.key,

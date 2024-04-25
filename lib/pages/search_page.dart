@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../serch_page/search_result)list.dart';
 import '../size.dart';
 
+// 검색 페이지 기본 틀
 class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+// todo : 검색 기능 구현하기
+class _SearchPageState extends State<SearchPage> { // 검색 필터
   String? _selectedPersonCount = '인원';
   String? _selectedUseType = '유형';
   String? _selectedReservationType = '예약여부';
@@ -37,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
         Padding(
           padding: const EdgeInsets.only(top: gap_l, left: gap_m, right: gap_m),
@@ -221,8 +224,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-
-
+// 검색 필터 기본 틀
 class CustomPopupMenuButton extends StatelessWidget {
   final String? initialValue;
   final List<String> items;
