@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/components/data/home_item_data.dart';
 import 'package:yogi_project/room_detail_page/room_detail.page.dart';
 import 'package:yogi_project/size.dart';
 import 'package:yogi_project/style.dart';
 
-import '../home_page/body/home_item.dart';
 
 class StayDetailPage extends StatelessWidget {
   final ItemData itemData;
