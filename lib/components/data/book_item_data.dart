@@ -7,7 +7,7 @@ class BookItemData {
   final String checkInDate; // 체크인 날짜
   final String checkOutDate; // 체크아웃 날짜
   final String personCount; // 사람수
-  final String price; // 가격
+  final int price; // 가격
 
   BookItemData({
     required this.stayImgTitle,

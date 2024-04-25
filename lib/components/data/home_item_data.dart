@@ -10,7 +10,7 @@ class ItemData {
   final String checkInDate; // 체크인 날짜
   final String checkOutDate; // 체크아웃 날짜
   final String personCount; // 사람수
-  final String price; // 가격
+  final int price; // 가격
   final String cancellationAndRefundPolicy; // 취소 및 환불 정책
   final String notice; // 여어떻노 공지
   final String userImgTitle;// 유저 프로필 이미지
