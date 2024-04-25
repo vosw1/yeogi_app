@@ -19,7 +19,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
         checkInDate: "2024.4.30",
         checkOutDate: "2024.5.2",
         personCount: "2명",
-        price: "50,000원",
+        price: 50000,
       ),
       BookItemData(
         stayImgTitle: "stay1.png",
@@ -29,7 +29,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
         checkInDate: "2024.4.30",
         checkOutDate: "2024.5.2",
         personCount: "2명",
-        price: "50,000원",
+        price: 50000,
       ),
       BookItemData(
         stayImgTitle: "stay1.png",
@@ -39,7 +39,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
         checkInDate: "2024.4.30",
         checkOutDate: "2024.5.2",
         personCount: "2명",
-        price: "50,000원",
+        price: 50000,
       ),
     ];
 
@@ -53,7 +53,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
         checkInDate: "2024.4.30",
         checkOutDate: "2024.5.2",
         personCount: "2명",
-        price: "100,000원",
+        price: 100000,
       ),
       BookItemData(
         stayImgTitle: "stayaboard1.png",
@@ -63,7 +63,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
         checkInDate: "2024.4.30",
         checkOutDate: "2024.5.2",
         personCount: "2명",
-        price: "100,000원",
+        price: 100000,
       ),
       BookItemData(
         stayImgTitle: "stayaboard1.png",
@@ -73,38 +73,9 @@ class MyPageBookMenuHolder extends StatelessWidget {
         checkInDate: "2024.4.30",
         checkOutDate: "2024.5.2",
         personCount: "2명",
-        price: "100,000원",
+        price: 100000,
       ),
-      BookItemData(
-        stayImgTitle: "stayaboard1.png",
-        stayName: "샹그릴라 탄중아루",
-        roomName: "최저가보장룸",
-        location: "Shangri-La Tanjung Aru, Kota Kinabalu",
-        checkInDate: "2024.4.30",
-        checkOutDate: "2024.5.2",
-        personCount: "2명",
-        price: "100,000원",
-      ),
-      BookItemData(
-        stayImgTitle: "stayaboard1.png",
-        stayName: "샹그릴라 탄중아루",
-        roomName: "최저가보장룸",
-        location: "Shangri-La Tanjung Aru, Kota Kinabalu",
-        checkInDate: "2024.4.30",
-        checkOutDate: "2024.5.2",
-        personCount: "2명",
-        price: "100,000원",
-      ),
-      BookItemData(
-        stayImgTitle: "stayaboard1.png",
-        stayName: "샹그릴라 탄중아루",
-        roomName: "최저가보장룸",
-        location: "Shangri-La Tanjung Aru, Kota Kinabalu",
-        checkInDate: "2024.4.30",
-        checkOutDate: "2024.5.2",
-        personCount: "2명",
-        price: "100,000원",
-      ),
+
     ];
 
     return Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/book_page/payment_page.dart';
+import 'package:yogi_project/payment/payment_page.dart';
 import '../components/data/home_item_data.dart';
 import '../size.dart';
 import '../style.dart';
@@ -343,7 +343,7 @@ class _BookPageState extends State<BookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '제공받는 자\t소래포구 3S\n'
+              '제공받는 자\t${widget.itemData.stayName}\n'
                   '제공 목적\t숙박예약서비스 이용계약 이행\n'
                   '(서비스 제공, 확인, 이용자 정보 확인)\n'
                   '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)\n'
@@ -377,7 +377,7 @@ class _BookPageState extends State<BookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '여기어때는 만 14세 미만 아동의 서비스 이용을 제한하고 있습니다.\n\n'
+              '여어떻노는 만 14세 미만 아동의 서비스 이용을 제한하고 있습니다.\n\n'
                   '개인정보 보호법에는 만 14세 미만 아동의 개인정보 수집 시 법정대리인 동의를 받도록 규정하고 있으며,\n'
                   '만 14세 미만 아동이 법정대리인 동의없이 서비스 이용이 확인된 경우 서비스 이용이 제한될 수 있음을 알려드립니다.',
             ),
@@ -417,7 +417,7 @@ class _BookPageState extends State<BookPage> {
     );
   }
 
-  void _showPopups(BuildContext context) {
+  _showPopups(BuildContext context) {
     List<String> messages = [];
     if (!_subCheckboxValues.every((element) => element)) {
       messages.add('모두 동의해주세요');
@@ -460,7 +460,7 @@ class _BookPageState extends State<BookPage> {
       // 예약 결제 페이지로 이동
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PaymentPage()),
+        MaterialPageRoute(builder: (context) => PaymentPage(itemData: widget.itemData)),
       );
     }
   }
