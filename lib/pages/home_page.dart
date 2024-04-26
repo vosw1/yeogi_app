@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/room_detail_page/room_detail.page.dart';
 import 'package:yogi_project/size.dart';
 import '../home_page/_header/home_header.dart';
 import '../home_page/body/home_body.dart';
+import '../room_detail_page/room_detail_appbar.dart'; // RoomDetailAppBar 파일 경로로 수정해주세요
 
-// 홈페이지 기본 틀
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -48,8 +49,7 @@ class _HomePageState extends State<HomePage> {
             },
             mini: true, // 버튼 크기 최소화
             backgroundColor: Colors.white,
-            child: Icon(Icons.keyboard_arrow_up,
-                color: Colors.black),
+            child: Icon(Icons.keyboard_arrow_up, color: Colors.black),
           ),
           SizedBox(height: 1), // 버튼 사이의 간격을 줄이기
           FloatingActionButton(
@@ -64,13 +64,10 @@ class _HomePageState extends State<HomePage> {
             },
             mini: true, // 버튼 크기 최소화
             backgroundColor: Colors.white,
-            child: Icon(Icons.keyboard_arrow_down,
-                color: Colors.black),
+            child: Icon(Icons.keyboard_arrow_down, color: Colors.black),
           ),
         ],
       ),
     );
   }
 }
-
-
