@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/pages/login_page.dart';
 
 class ScrapPage extends StatefulWidget {
   @override
@@ -60,7 +61,13 @@ class _ScrapPageState extends State<ScrapPage>
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LoginPage(),
+                      ),
+                    );
                   },
                   child: Text("로그인", style: TextStyle(color: Colors.white), ),
                   style: ElevatedButton.styleFrom(
@@ -89,7 +96,13 @@ class _ScrapPageState extends State<ScrapPage>
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LoginPage(),
+                      ),
+                    );
                   },
                   child: Text("로그인", style: TextStyle(color: Colors.white), ),
                   style: ElevatedButton.styleFrom(
