@@ -204,7 +204,7 @@ class FAQItem {
   });
 }
 
-// 자주 묻는 질문 리스트 데이터
+// 자주 묻는 질문 리스트
 List<FAQItem> faqItemsData = [
   FAQItem(
     question: '[숙박] 예약을 취소하고 싶어요.',
