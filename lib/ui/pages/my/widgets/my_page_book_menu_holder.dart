@@ -70,7 +70,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => OverseasStayPage(bookInAbroardList: bookInAbroardList), // 수정된 생성자에 전체 목록 전달
+                builder: (context) => OverseasStayPage(bookInAbroardList: bookInAbroardList, stayData: stayData,), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },
