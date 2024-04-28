@@ -58,7 +58,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OverseasStayPage(bookInAbroardList: [],)),
+                  MaterialPageRoute(builder: (context) => OverseasStayPage(bookInAbroardList: [], stayData: stayData)),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
