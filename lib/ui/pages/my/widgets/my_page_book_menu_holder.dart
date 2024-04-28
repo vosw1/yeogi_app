@@ -6,6 +6,9 @@ import '../../../../data/dtos/book_request.dart';
 import '../../../../data/models/stay.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
+  final Stay stayData;
+
+  MyPageBookMenuHolder({required this.stayData});
 
 
   @override

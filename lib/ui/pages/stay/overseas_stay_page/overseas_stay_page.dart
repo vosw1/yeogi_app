@@ -6,9 +6,10 @@ import 'package:yogi_project/ui/pages/room/room_page.dart';
 import '../../../../data/models/stay.dart';
 
 class OverseasStayPage extends StatelessWidget {
+  final Stay stayData;
   final List<Book> bookInAbroardList; // 예약 리스트 추가
 
-  const OverseasStayPage({required this.bookInAbroardList});
+  const OverseasStayPage({required this.stayData, required this.bookInAbroardList});
 
   get roomData => null;
 
@@ -30,7 +31,7 @@ class OverseasStayPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => RoomPage(),
+                  builder: (context) => RoomPage(stayData: stayData),
                 ),
               );
             },

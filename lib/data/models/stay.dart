@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
+
 import '../../_core/constants/move.dart';
 import '../../ui/pages/room/room_page.dart';
 import '../../ui/pages/stay/stay_page.dart'; // Import DateFormat
@@ -24,17 +26,11 @@ class Stay {
 
   // Getters for all properties
   String get getStayImgTitle => stayImgTitle;
-
   String get getStayName => stayName;
-
   String get getStayInfo => stayInfo;
-
   String get getLocation => location;
-
   String get getNotice => notice;
-
   double get getStarCount => starCount;
-
   String get getComment => comment;
 
   // Convert Stay object to JSON
@@ -55,6 +51,7 @@ class Stay {
       // Other routes remain unchanged
 
       Move.stayPage: (context) => StayPage(stayData: stayData), // 숙소 페이지
+      Move.roomPage: (context) => RoomPage(stayData: stayData), // 방 페이지
     };
   }
 }

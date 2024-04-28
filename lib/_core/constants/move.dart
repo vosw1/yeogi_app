@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../data/models/payment.dart';
 import '../../data/models/room.dart';
 import '../../data/models/stay.dart';
@@ -20,6 +21,7 @@ import '../../ui/pages/auth/login/login_page.dart';
 import '../../ui/pages/my/my_page.dart';
 import '../../ui/pages/scrap/scarp_page.dart';
 import '../../ui/pages/search/search_page.dart';
+import '../../ui/pages/stay/stay_page.dart';
 import '../../ui/pages/stay/stay_page.dart';
 
 // URL 설정
@@ -96,13 +98,20 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.domesticStayPage: (context) => DomesticStayPage(bookInKoreaList: []), // 국내 숙소 페이지
     Move.overseasStayPage: (context) => OverseasStayPage(bookInAbroardList: []), // 해외 숙소 페이지
     Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
+    Move.myPage: (context) => MyPage(), // 마이 페이지
+    Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
+    Move.domesticStayPage: (context) => DomesticStayPage(bookInKoreaList: []), // 국내 숙소 페이지
+    Move.overseasStayPage: (context) => OverseasStayPage(bookInAbroardList: []), // 해외 숙소 페이지
+    Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
     Move.hotelStayPage: (context) => const HotelStayPage(), // 호텔 숙소 페이지
     Move.motelStayPage: (context) => const ModelStayPage(), // 모텔 숙소 페이지
     Move.pansionStayPage: (context) => const PansionStayPage(), // 펜션 숙소 페이지
     Move.homeAndBillaStayPage: (context) => const HomeAndBillaStayPage(), // 홈&빌라 숙소 페이지
     Move.campingStayPage: (context) => const CampingStayPage(), // 캠핑 숙소 페이지
     Move.guestHouseStayPage: (context) => const GuestHouseStayPage(), // 게하 숙소 페이지
-    Move.roomPage: (context) => RoomPage(),
+    Move.bookPage: (context) => BookPage(roomData: roomData,), // 예약 페이지
+    Move.paymetPage: (context) => PaymentPage(),
+    Move.roomPage: (context) => RoomPage(stayData: stayData),
     Move.bookPage: (context) => BookPage(roomData: roomData,), // 예약 페이지
     Move.paymetPage: (context) => PaymentPage(),
   };

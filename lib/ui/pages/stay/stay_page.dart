@@ -38,7 +38,7 @@ class StayPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RoomPage(),
+                    builder: (context) => RoomPage(stayData: stayData),
                   ),
                 );
               },

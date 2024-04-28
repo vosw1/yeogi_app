@@ -34,7 +34,7 @@ class _MainScreensState extends State<MainHolder> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: [HomePage(), SearchPage(), NearFromMePage(), ScrapPage(), MyPage()],
+        children: [HomePage(), SearchPage(), NearFromMePage(), ScrapPage(), MyPage(stayData:stayData)],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(
         currentIndex: _selectedIndex,

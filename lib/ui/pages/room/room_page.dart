@@ -7,6 +7,11 @@ import '../../../_core/constants/style.dart';
 import '../../../data/models/stay.dart';
 
 class RoomPage extends StatelessWidget {
+  final Stay stayData; // Add stayData property
+
+  const RoomPage({
+      required this.stayData}); // Modify constructor to include stayData
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
