@@ -1,12 +1,12 @@
-// 홈페이지 상단 앱바에 아이콘 + text 세트 기본 틀
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
-class HomeHeaderItems extends StatelessWidget {
+// 홈페이지 상단 앱바에 아이콘 + text 세트 기본 틀
+class HeadAppBarItem extends StatelessWidget {
   final IconData iconData;
   final String text;
 
-  const HomeHeaderItems({
+  const HeadAppBarItem({
     required this.iconData,
     required this.text,
   });

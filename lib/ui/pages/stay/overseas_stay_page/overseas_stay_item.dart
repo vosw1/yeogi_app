@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../_core/constants/color.dart';
-import '../../_core/constants/size.dart';
-import '../../_core/constants/style.dart';
-import '../../data/models/pay.dart';
+import '../../../../_core/constants/color.dart';
+import '../../../../_core/constants/size.dart';
+import '../../../../_core/constants/style.dart';
+import '../../../../data/models/stay.dart'; // Import Stay model
+import '../../../../data/models/user.dart';
 
-// 국내 숙소 기본 틀
-class HomePopularItem extends StatelessWidget {
-  final Stay popularItemsData;
+class OverseasBookItem extends StatelessWidget {
+  final Stay stayData; // Corrected Stay model import
+  final User userData;
 
-  HomePopularItem({Key? key, required this.popularItemsData}) : super(key: key);
+  OverseasBookItem({Key? key, required this.stayData, required this.userData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,34 +24,34 @@ class HomePopularItem extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: gap_s),
-            _buildPopularItemImage(), // 숙소 이미지
+            _buildPopularItemImage(), // 사진 이미지
             SizedBox(height: gap_s),
-            _buildPopularItemStar(popularItemsData.starCount), // 별점
+            _buildPopularItemStar(stayData.starCount), // 별점
             SizedBox(height: gap_s),
             _buildPopularItemComment(), // 리뷰
             SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(popularItemsData.userImgTitle), // 유저정보
+            _buildPopularItemUserInfo(userData.userImgTitle), //프로필 사진
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPopularItemImage() { // 숙소 이미지
+  Widget _buildPopularItemImage() {
     return SizedBox(
       height: 210,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          "assets/images/${popularItemsData.stayImgTitle}",
+          "assets/images/${stayData.stayImgTitle}",
           fit: BoxFit.fitWidth,
         ),
       ),
     );
   }
 
-  Widget _buildPopularItemStar(double starCount) { // 별점
+  Widget _buildPopularItemStar(double starCount) {
     int fullStars = starCount.floor();
     double halfStar = starCount - fullStars;
 
@@ -60,20 +61,20 @@ class HomePopularItem extends StatelessWidget {
           Icon(Icons.star, color: kAccentColor),
         if (halfStar > 0.0)
           Icon(Icons.star_half, color: kAccentColor),
-        SizedBox(width: 4), // 별과 텍스트 사이의 간격 조정
+        SizedBox(width: 4),
         Text(
           '$starCount 점',
-          style: TextStyle(color: Colors.black), // 검정색 글자로 표시
+          style: TextStyle(color: Colors.black),
         ),
       ],
     );
   }
 
-  Widget _buildPopularItemComment() { // 리뷰
+  Widget _buildPopularItemComment() {
     return Container(
       constraints: BoxConstraints(minHeight: 50),
       child: Text(
-        popularItemsData.comment,
+        "${stayData.comment}",
         style: body1(),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -81,22 +82,22 @@ class HomePopularItem extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularItemUserInfo(String imgTitle) { // 유저 정보
+  Widget _buildPopularItemUserInfo(String imgTitle) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage("assets/images/${popularItemsData.userImgTitle}"),
+          backgroundImage: AssetImage("assets/images/$imgTitle"), // Corrected usage of imgTitle
         ),
         SizedBox(width: gap_m),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              popularItemsData.userName,
+              userData.userName,
               style: subtitle1(),
             ),
-            Text(popularItemsData.location),
+            Text(stayData.location),
           ],
         )
       ],

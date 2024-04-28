@@ -1,15 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
-import '../../../../data/models/pay.dart';
+import '../../../../data/models/stay.dart';
+import '../../../../data/models/user.dart';
 
 // 숙소 추천시 기본 틀
 class HomeItem extends StatelessWidget {
-  final Stay itemData;
+  final Stay stayData;
+  final User userData;
 
-  HomeItem({Key? key, required this.itemData}) : super(key: key);
+  HomeItem({required this.userData, required this.stayData});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +26,13 @@ class HomeItem extends StatelessWidget {
         child: Column( // 숙소 추천 기본 틀
           children: [
             SizedBox(height: gap_s),
-            _buildItemImage(itemData.stayImgTitle), // 이미지 경로
+            _buildItemImage(stayData.stayImgTitle), // 이미지 경로
             SizedBox(height: gap_s),
-            _buildItemStar(itemData.starCount), // 별점
+            _buildItemStar(stayData.starCount), // 별점
             SizedBox(height: gap_s),
-            _buildItemComment(itemData.comment), // 리뷰
+            _buildItemComment(stayData.comment), // 리뷰
             SizedBox(height: gap_s),
-            _buildItemUserInfo(itemData.userName, itemData.location, itemData.userImgTitle), // 유저 정보
+            _buildItemUserInfo(userData.userName, stayData.location, userData.userImgTitle), // 유저 정보
           ],
         ),
       ),
@@ -44,7 +46,7 @@ class HomeItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          "assets/images/${itemData.stayImgTitle}",
+          "assets/images/${stayData.stayImgTitle}",
           fit: BoxFit.fitWidth,
         ),
       ),
@@ -88,7 +90,7 @@ class HomeItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage("assets/images/${itemData.userImgTitle}"),
+          backgroundImage: AssetImage("assets/images/${userData.userImgTitle}"),
         ),
         SizedBox(width: gap_m),
         Column(

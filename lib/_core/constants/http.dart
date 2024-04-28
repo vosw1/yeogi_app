@@ -11,4 +11,4 @@ final dio = Dio(
   ),
 );
 
-const secureStorage = FlutterSecureStorage();
+//const secureStorage = FlutterSecureStorage();
