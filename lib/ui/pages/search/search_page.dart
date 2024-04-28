@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../serch_page/search_result)list.dart';
+import 'widgets/search_result)list.dart';
 import '../../../_core/constants/size.dart';
 
 // 검색 페이지 기본 틀

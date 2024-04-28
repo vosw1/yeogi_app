@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/ui/pages/stay/domestic_stay_page/domestic_stay_page.dart';
 import 'package:yogi_project/ui/pages/stay/overseas_stay_page/overseas_stay_page.dart';
-import '../data/dtos/book_request.dart';
 
+import '../../../../data/dtos/book_request.dart';
+import '../../../../data/models/stay.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
-  const MyPageBookMenuHolder({super.key});
+
 
   @override
   Widget build(BuildContext context) {

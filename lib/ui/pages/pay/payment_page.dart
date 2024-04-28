@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
 
 class PaymentPage extends StatelessWidget {
-  final Tab itemData;
-
-  const PaymentPage({Key? key, required this.itemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

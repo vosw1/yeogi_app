@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
-import 'package:yogi_project/login_page/components/login_text_form_field.dart';
-import 'package:yogi_project/login_page/social_login.dart';
+import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
 class LoginForm extends StatefulWidget {

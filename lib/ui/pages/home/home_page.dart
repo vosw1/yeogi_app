@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/home/widgets/home_header.dart';
-import '../../../home_page/body/home_body.dart';
-import '../../../room_detail_page/room_detail_appbar.dart'; // RoomDetailAppBar 파일 경로로 수정해주세요
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -24,9 +20,6 @@ class _HomePageState extends State<HomePage> {
             // 여백
             SizedBox(height: gap_m),
             //상단 로고, 벨 아이콘
-            HomeHeader(),
-            // 배너 + 추천 숙소 리스트
-            HomeBody(),
             SizedBox(height: 20), // 스크롤 가능한 공간을 추가하여 버튼과 컨텐츠를 분리합니다.
           ],
         ),

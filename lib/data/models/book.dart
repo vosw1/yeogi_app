@@ -1,4 +1,5 @@
-// 예약 기본 틀
+import 'package:intl/intl.dart'; // Import DateFormat for date parsing
+
 class Book {
   final String stayImgTitle; // 숙소 이미지 제목
   final String stayName; // 숙소 이름
@@ -19,28 +20,34 @@ class Book {
     required this.personCount,
     required this.price,
   });
+
+  Map<String, dynamic> toJson() => {
+    "stayImgTitle": stayImgTitle,
+    "stayName": stayName,
+    "roomName": roomName,
+    "location": location,
+    "checkInDate": checkInDate,
+    "checkOutDate": checkOutDate,
+    "personCount": personCount,
+    "price": price,
+  };
+
+  // FromJson constructor to convert JSON to Book object
+  factory Book.fromJson(Map<String, dynamic> json) {
+    return Book(
+      stayImgTitle: json["stayImgTitle"],
+      stayName: json["stayName"],
+      roomName: json["roomName"],
+      location: json["location"],
+      checkInDate: json["checkInDate"],
+      checkOutDate: json["checkOutDate"],
+      personCount: json["personCount"],
+      price: json["price"],
+    );
+  }
+
+  // Method to format updatedAt date
+  // String getUpdated() {
+  //   return DateFormat.MMMd().format(updatedAt!);
+  // }
 }
-
-// Map<String, dynamic> toJson() => {
-//   "id": id,
-//   "title": title,
-//   "content": content,
-//   "user": user,
-//   "createdAt": createdAt,
-//   "updatedAt": updatedAt,
-// };
-
-// 통신을 위해서 json 처럼 생긴 문자열 {"id":1} => Dart 오브젝트
-
-// Book.fromJson(Map<String, dynamic> json)
-//     : id = json["id"],
-// title = json["title"],
-// content = json["content"],
-// user = User.fromJson(json["user"]),
-// createdAt = DateFormat("yyyy-mm-dd").parse(json["created"]),
-// updatedAt = DateFormat("yyyy-mm-dd").parse(json["updated"]);
-//
-// String getUpdated() {
-// return DateFormat.MMMd().format(updatedAt!);
-// }
-
