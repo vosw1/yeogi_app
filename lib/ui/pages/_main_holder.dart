@@ -4,17 +4,24 @@ import 'package:yogi_project/ui/pages/surroundings/surroundings_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
 
-import '../ui/pages/home/home_page.dart';
-import '../ui/pages/my/my_page.dart';
+import '../../data/models/payment.dart';
+import '../../data/models/stay.dart';
+import 'home/home_page.dart';
+import 'my/my_page.dart';
 
 // 전체 화면 틀
 class MainHolder extends StatefulWidget {
+
   @override
   _MainScreensState createState() => _MainScreensState();
 }
 
 class _MainScreensState extends State<MainHolder> {
   int _selectedIndex = 0;
+
+  get roomData => null;
+
+  get stayData => null;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -27,7 +34,7 @@ class _MainScreensState extends State<MainHolder> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: [HomePage(), SearchPage(), NearFromMePage(), ScrapPage(), MyPage()],
+        children: [HomePage(), SearchPage(), NearFromMePage(), ScrapPage(), MyPage(stayData:stayData)],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(
         currentIndex: _selectedIndex,

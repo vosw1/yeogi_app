@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'data/my_page_body_icon.dart';
+
+import 'my_page_body_icon.dart';
 
 // 마이페이지에 앱바 -> 로그인 버튼 밑에 버튼
 class MyPageAppBar extends StatelessWidget {

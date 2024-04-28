@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/data/models/user.dart';
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
-import '../../../../data/models/pay.dart';
+import '../../../../data/models/payment.dart';
+import '../../../../data/models/stay.dart';
 
-// 해외 예약내역 기본 틀
-class HomeAbroadItem extends StatelessWidget {
-  final Stay homeAbroadItemData;
+// 국내 숙소 기본 틀
+class DomesticStayItem extends StatelessWidget {
+  final Stay stayData;
+  final User userData;
 
-  HomeAbroadItem({Key? key, required this.homeAbroadItemData}) : super(key: key);
+  DomesticStayItem({required this.userData, required this.stayData});
 
   @override
   Widget build(BuildContext context) {
@@ -21,39 +24,36 @@ class HomeAbroadItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: gap_m, right: gap_m),
         child: Column(
-
           children: [
             SizedBox(height: gap_s),
-            _buildPopularItemImage(), // 사진 이미지
+            _buildPopularItemImage(), // 숙소 이미지
             SizedBox(height: gap_s),
-            _buildPopularItemStar(homeAbroadItemData.starCount), // 별점
+           //_buildPopularItemStar(stayData.starCount), // 별점
             SizedBox(height: gap_s),
-            _buildPopularItemComment(), // 리뷰
+            //_buildPopularItemComment(), // 리뷰
             SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(homeAbroadItemData.userImgTitle), //프로필 사진
+            _buildPopularItemUserInfo(userData.userImgTitle), // 유저정보
           ],
         ),
       ),
     );
   }
 
-  // 숙소 이미지
-  Widget _buildPopularItemImage() {
+  Widget _buildPopularItemImage() { // 숙소 이미지
     return SizedBox(
       height: 210,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          "assets/images/${homeAbroadItemData.stayImgTitle}",
+          "assets/images/${stayData.stayImgTitle}",
           fit: BoxFit.fitWidth,
         ),
       ),
     );
   }
 
-  // 별점
-  Widget _buildPopularItemStar(double starCount) {
+  Widget _buildPopularItemStar(double starCount) { // 별점
     int fullStars = starCount.floor();
     double halfStar = starCount - fullStars;
 
@@ -72,35 +72,34 @@ class HomeAbroadItem extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularItemComment() { // 리뷰
-    return Container(
-      constraints: BoxConstraints(minHeight: 50),
-      child: Text(
-        homeAbroadItemData.comment,
-        style: body1(),
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-  }
+  // Widget _buildPopularItemComment() { // 리뷰
+  //   return Container(
+  //     constraints: BoxConstraints(minHeight: 50),
+  //     child: Text(
+  //       ///stayData.comment,
+  //       style: body1(),
+  //       maxLines: 2,
+  //       overflow: TextOverflow.ellipsis,
+  //     ),
+  //   );
+  // }
 
-  // 사용자 프로필 사진제목 -> 경로로 가져오기
-  Widget _buildPopularItemUserInfo(String imgTitle) {
+  Widget _buildPopularItemUserInfo(String imgTitle) { // 유저 정보
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage("assets/images/${homeAbroadItemData.userImgTitle}"),
+          backgroundImage: AssetImage("assets/images/${userData.userImgTitle}"),
         ),
         SizedBox(width: gap_m),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              homeAbroadItemData.userName,
+              userData.userName,
               style: subtitle1(),
             ),
-            Text(homeAbroadItemData.location),
+            Text(stayData.location),
           ],
         )
       ],

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/my_page/my_page_appbar.dart';
-import 'package:yogi_project/my_page/my_page_body_banner.dart';
-import 'package:yogi_project/my_page/my_page_faq_menu_holder.dart';
-import 'package:yogi_project/my_page/my_page_header_banner.dart';
-import 'package:yogi_project/my_page/my_page_login_button.dart';
-import 'package:yogi_project/my_page/my_page_book_menu_holder.dart';
-import 'package:yogi_project/my_page/my_page_notice_menu_holder.dart';
+import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/my/widgets/my_page_book_menu_holder.dart';
+import 'package:yogi_project/ui/pages/my/widgets/my_page_faq_menu_holder.dart';
+import 'package:yogi_project/ui/pages/my/widgets/my_page_login_button.dart';
+import 'widgets/my_page_appbar.dart';
+import 'widgets/my_page_body_banner.dart';
+import 'widgets/my_page_header_banner.dart';
+import 'widgets/my_page_notice_menu_holder.dart';
 
-// 마이페이지 기본 틀
 class MyPage extends StatelessWidget {
-  const MyPage({super.key});
+  final Stay stayData;
+
+  MyPage({required this.stayData});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class MyPage extends StatelessWidget {
             thickness: 10.0,
           ),
           // 예약 메뉴
-          MyPageBookMenuHolder(),
+          MyPageBookMenuHolder(stayData: stayData),
           Divider(
             color: Colors.grey[100],
             thickness: 10.0,

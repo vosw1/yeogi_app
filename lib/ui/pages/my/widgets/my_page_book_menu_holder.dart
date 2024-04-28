@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/ui/pages/stay/domestic_stay_page/domestic_stay_page.dart';
 import 'package:yogi_project/ui/pages/stay/overseas_stay_page/overseas_stay_page.dart';
-import '../data/dtos/book_request.dart';
 
+import '../../../../data/dtos/book_request.dart';
+import '../../../../data/models/stay.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
-  const MyPageBookMenuHolder({super.key});
+  final Stay stayData;
+
+  MyPageBookMenuHolder({required this.stayData});
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +70,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => OverseasStayPage(bookInAbroardList: bookInAbroardList), // 수정된 생성자에 전체 목록 전달
+                builder: (context) => OverseasStayPage(bookInAbroardList: bookInAbroardList, stayData: stayData,), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },
