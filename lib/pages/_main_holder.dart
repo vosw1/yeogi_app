@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yogi_project/pages/near_from_me_page.dart';
-import 'package:yogi_project/pages/scarp_page.dart';
-import 'package:yogi_project/pages/search_page.dart';
+import 'package:yogi_project/ui/pages/surroundings/surroundings_page.dart';
+import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
+import 'package:yogi_project/ui/pages/search/search_page.dart';
 
-import 'home_page.dart';
-import 'my_page.dart';
+import '../ui/pages/home/home_page.dart';
+import '../ui/pages/my/my_page.dart';
 
 // 전체 화면 틀
 class MainHolder extends StatefulWidget {

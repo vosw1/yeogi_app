@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/book_page/book_page.dart';
-import 'package:yogi_project/components/data/home_item_data.dart';
-import '../size.dart';
+import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart';
+import '../_core/constants/size.dart';
 
 class RoomDetailPage extends StatelessWidget {
-  final ItemData itemData;
+  final Room itemData;
 
   const RoomDetailPage({Key? key, required this.itemData}) : super(key: key);
 

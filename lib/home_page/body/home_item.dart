@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../constants.dart';
-import '../../../size.dart';
-import '../../../style.dart';
-import '../../components/data/home_item_data.dart';
+import '../../_core/constants/color.dart';
+import '../../_core/constants/size.dart';
+import '../../_core/constants/style.dart';
+import '../../data/models/pay.dart';
 
 // 숙소 추천시 기본 틀
 class HomeItem extends StatelessWidget {
-  final ItemData itemData;
+  final Stay itemData;
 
   HomeItem({Key? key, required this.itemData}) : super(key: key);
 

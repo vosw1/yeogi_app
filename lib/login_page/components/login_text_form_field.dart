@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/size.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 
 class LoginTextFormField extends StatelessWidget {
   final String text;

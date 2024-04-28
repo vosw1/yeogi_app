@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/book_page/book_page.dart';
-import 'package:yogi_project/room_detail_page/room_detail_appbar.dart';
-import 'package:yogi_project/components/data/home_item_data.dart';
-import 'package:yogi_project/stayListPage/stay_detail_page.dart';
-
-import '../size.dart';
-import '../style.dart'; // StayDetailPage를 import해야 합니다.
+import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart';
+import '../_core/constants/size.dart';
+import '../_core/constants/style.dart'; // StayDetailPage를 import해야 합니다.
 
 class RoomDetailPage extends StatelessWidget {
-  final ItemData itemData;
+  final Room itemData;
 
   const RoomDetailPage({Key? key, required this.itemData}) : super(key: key);
 

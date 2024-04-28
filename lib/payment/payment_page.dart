@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../components/data/home_item_data.dart';
-import '../size.dart';
-import '../style.dart';
+import '../_core/constants/size.dart';
+import '../_core/constants/style.dart';
 
 class PaymentPage extends StatelessWidget {
-  final ItemData itemData;
+  final Tab itemData;
 
   const PaymentPage({Key? key, required this.itemData}) : super(key: key);
 
