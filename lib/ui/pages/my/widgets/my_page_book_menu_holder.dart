@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/ui/pages/stay/domestic_stay_page/domestic_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/overseas_stay_page/overseas_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/domestic_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/overseas_stay_page.dart';
 
 import '../../../../data/dtos/book_request.dart';
 import '../../../../data/models/stay.dart';
