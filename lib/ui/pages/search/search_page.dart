@@ -39,7 +39,6 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
         Padding(
           padding: const EdgeInsets.only(top: gap_l, left: gap_m, right: gap_m),
@@ -80,19 +79,6 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
                   });
                 },
                 buttonText: '$_selectedPersonCount',
-                selectedColor: Colors.redAccent,
-                itemWidth: 30, // 각 팝업 메뉴 아이템의 너비 조절
-              ),
-              SizedBox(width: gap_s),
-              CustomPopupMenuButton(
-                initialValue: _selectedUseType,
-                items: ['숙박', '대실'],
-                onSelected: (String value) {
-                  setState(() {
-                    _selectedUseType = value;
-                  });
-                },
-                buttonText: '$_selectedUseType',
                 selectedColor: Colors.redAccent,
                 itemWidth: 30, // 각 팝업 메뉴 아이템의 너비 조절
               ),
@@ -147,7 +133,7 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
                   child: Row(
                     children: [
                       Icon(Icons.date_range, color: Colors.redAccent, size: 24),
-                      SizedBox(width: 8),
+                      SizedBox(width: gap_xx),
                       Text(
                         _checkInDate != null
                             ? ' 체크인 날짜\n ${_formatDate(_checkInDate)}'
@@ -180,10 +166,10 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
                   child: Row(
                     children: [
                       Icon(Icons.date_range, color: Colors.redAccent, size: 24),
-                      SizedBox(width: 8),
+                      SizedBox(width: gap_xx),
                       Text(
                         _checkOutDate != null
-                            ? ' 체크아웃 날짜\n ${_formatDate(_checkOutDate)}'
+                            ? '체크아웃 날짜\n ${_formatDate(_checkOutDate)}'
                             : '체크아웃 날짜',
                         style: TextStyle(
                           fontSize: 18,

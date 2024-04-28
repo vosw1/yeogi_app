@@ -93,15 +93,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.homePage: (context) => HomePage(), // 홈 페이지
     Move.searchPage: (context) => SearchPage(), // 검색 페이지
     Move.scrapPage: (context) => ScrapPage(), // 내 주변 페이지 TODO : 없어질 수 있음
-    Move.myPage: (context) => MyPage(), // 마이 페이지
+    Move.myPage: (context) => MyPage(stayData: stayData,), // 마이 페이지
     Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
     Move.domesticStayPage: (context) => DomesticStayPage(bookInKoreaList: []), // 국내 숙소 페이지
-    Move.overseasStayPage: (context) => OverseasStayPage(bookInAbroardList: []), // 해외 숙소 페이지
-    Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
-    Move.myPage: (context) => MyPage(), // 마이 페이지
-    Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
-    Move.domesticStayPage: (context) => DomesticStayPage(bookInKoreaList: []), // 국내 숙소 페이지
-    Move.overseasStayPage: (context) => OverseasStayPage(bookInAbroardList: []), // 해외 숙소 페이지
+    Move.overseasStayPage: (context) => OverseasStayPage(bookInAbroardList: [], stayData: stayData,), // 해외 숙소 페이지
     Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
     Move.hotelStayPage: (context) => const HotelStayPage(), // 호텔 숙소 페이지
     Move.motelStayPage: (context) => const ModelStayPage(), // 모텔 숙소 페이지
@@ -109,8 +104,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.homeAndBillaStayPage: (context) => const HomeAndBillaStayPage(), // 홈&빌라 숙소 페이지
     Move.campingStayPage: (context) => const CampingStayPage(), // 캠핑 숙소 페이지
     Move.guestHouseStayPage: (context) => const GuestHouseStayPage(), // 게하 숙소 페이지
-    Move.bookPage: (context) => BookPage(roomData: roomData,), // 예약 페이지
-    Move.paymetPage: (context) => PaymentPage(),
     Move.roomPage: (context) => RoomPage(stayData: stayData),
     Move.bookPage: (context) => BookPage(roomData: roomData,), // 예약 페이지
     Move.paymetPage: (context) => PaymentPage(),
