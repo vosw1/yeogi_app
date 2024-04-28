@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:yogi_project/ui/pages/stay/camping_stay_page/camping_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/guest_house_page/guest_house_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/home_and_billa_dtay_page/home_and_billa_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/hotel_stay_page/hotel_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/overseas_stay_page/overseas_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/pansion_stay_page/pension_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/camping_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/guest_house_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/home_and_billa_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/hotel_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/overseas_stay_page.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/pension_stay_page.dart';
 import '../../../../_core/constants/move.dart';
 import '../../../../_core/constants/size.dart';
-import '../../stay/motel_stay_page/motel_stay_page.dart';
-import '../../stay/sale_stay_page/sale_stay_page.dart';
+import '../../stay/widgets/motel_stay_page.dart';
+import '../../stay/widgets/sale_stay_page.dart';
 import 'home_header_appbar_item.dart';
 
 // 홈 페이지에 앱바 (아이콘 + 텍스트)
