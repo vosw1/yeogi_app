@@ -5,8 +5,8 @@ Function validateEmail() {
   return (String? value) {
     if (value!.isEmpty) {
       return "이메일은 공백이 들어갈 수 없습니다.";
-    } else if (!isEmail(value)) {
-      return "이메일 형식에 맞지 않습니다.";
+   // } else if (!isEmail(value)) {
+     // return "이메일 형식에 맞지 않습니다.";
     } else {
       return null;
     }

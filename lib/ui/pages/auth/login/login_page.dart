@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/login_page/login_form.dart';
+import 'package:yogi_project/ui/pages/room/widgets/login_form.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
 // 로그인 페이지

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/size.dart';
+import '../../../../_core/constants/size.dart';
 
 // 여 어떻노 로고 + 종모양 아이콘
 class HomeHeaderLogo extends StatelessWidget {
