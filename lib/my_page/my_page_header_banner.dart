@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/size.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 
 // 마이페이지 상단 회원가입/로그인 버튼 위 이미지
 class MyPageHeaderBanner extends StatelessWidget {
