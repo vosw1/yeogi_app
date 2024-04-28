@@ -4,7 +4,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:yogi_project/size.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 
 import 'my_page_faq_menu_holder.dart';
 
