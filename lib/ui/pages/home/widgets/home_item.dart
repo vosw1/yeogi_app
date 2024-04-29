@@ -100,7 +100,15 @@ class HomeItem extends StatelessWidget {
               userName,
               style: subtitle1(),
             ),
-            Text(location),
+            Container(
+              constraints: BoxConstraints(minHeight: 40),
+              child: Text(
+              location,
+                style: subtitle1(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         )
       ],
