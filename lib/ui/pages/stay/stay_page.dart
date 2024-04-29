@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/ui/pages/room/room_page.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-
-import '../../../data/models/payment.dart';
-import '../../../data/models/room.dart';
 import '../../../data/models/stay.dart';
 
 

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/ui/pages/surroundings/surroundings_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
-
-import '../../data/models/payment.dart';
-import '../../data/models/stay.dart';
+import '../../_core/constants/move.dart';
 import 'home/home_page.dart';
 import 'my/my_page.dart';
 
@@ -20,8 +18,6 @@ class _MainScreensState extends State<MainHolder> {
   int _selectedIndex = 0;
 
   get roomData => null;
-
-  get stayData => null;
 
   void _onItemTapped(int index) {
     setState(() {

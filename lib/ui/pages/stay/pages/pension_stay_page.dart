@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PansionStayPage extends StatelessWidget {
-  const PansionStayPage({super.key});
+class PensionStayPage extends StatelessWidget {
+  const PensionStayPage({super.key});
 
   @override
   Widget build(BuildContext context) {

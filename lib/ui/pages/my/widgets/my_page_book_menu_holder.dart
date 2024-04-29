@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/ui/pages/stay/widgets/domestic_stay_page.dart';
-import 'package:yogi_project/ui/pages/stay/widgets/overseas_stay_page.dart';
 
 import '../../../../data/dtos/book_request.dart';
 import '../../../../data/models/stay.dart';
+import '../../stay/pages/domestic_stay_page.dart';
+import '../../stay/pages/overseas_stay_page.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
   final Stay stayData;
@@ -16,7 +16,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
     // 샘플 국내예약 데이터 목록
     final List<Book> bookInKoreaList = [
       Book(
-        stayImgTitle: "stay1.png",
+        stayImgTitle: "hotel/hotel1.png",
         stayName: "소래포구 3S",
         roomName: "오픈특가룸",
         location: "인천 남동구 논현동",
@@ -30,7 +30,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
     // 샘플 해외예약 데이터 목록
     final List<Book> bookInAbroardList = [
       Book(
-        stayImgTitle: "stayaboard1.png",
+        stayImgTitle: "hotel/hotel1.png",
         stayName: "샹그릴라 탄중아루",
         roomName: "최저가보장룸",
         location: "Shangri-La Tanjung Aru, Kota Kinabalu",
