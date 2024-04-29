@@ -7,13 +7,19 @@ import '../../../_core/constants/style.dart';
 class RoomPage extends StatelessWidget {
   final Room roomData; // Add stayData property
 
-  const RoomPage({required this.roomData}); // Modify constructor to include stayData
+  const RoomPage(
+      {required this.roomData}); // Modify constructor to include stayData
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('룸 상세 페이지'),
+        title: Text(
+          '${roomData.roomName}',
+          style: h5(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(gap_m),
@@ -21,18 +27,18 @@ class RoomPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              constraints: BoxConstraints(minHeight: 40),
-              child: Text(
-                '${roomData.roomName}',
-                style: h5(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            SizedBox(
               width: 600,
               height: 200,
-              child: Image.asset('assets/images/${roomData.roomImgTitle}'),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(gap_s),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(gap_s),
+                child: Image.asset(
+                  'assets/images/${roomData.roomImgTitle}',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             // 숙소 이미지
             SizedBox(height: gap_m),
@@ -59,7 +65,7 @@ class RoomPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          BookPage(roomData:roomData), // Pass roomData
+                          BookPage(roomData: roomData), // Pass roomData
                     ),
                   );
                 },

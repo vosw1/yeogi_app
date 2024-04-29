@@ -14,7 +14,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 샘플 국내예약 데이터 목록
-    final List<Book> bookInKoreaList = [
+    final List<Book> DomesticStayBookList = [
       Book(
         stayImgTitle: "hotel/hotel1.png",
         stayName: "소래포구 3S",
@@ -28,7 +28,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
     ];
 
     // 샘플 해외예약 데이터 목록
-    final List<Book> bookInAbroardList = [
+    final List<Book> OverseasStayBookList = [
       Book(
         stayImgTitle: "hotel/hotel1.png",
         stayName: "샹그릴라 탄중아루",
@@ -57,7 +57,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DomesticStayPage(bookInKoreaList: bookInKoreaList), // 수정된 생성자에 전체 목록 전달
+                builder: (context) => DomesticStayPage(DomesticStayBookList: DomesticStayBookList), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },
@@ -70,7 +70,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => OverseasStayPage(bookInAbroardList: bookInAbroardList, stayData: stayData,), // 수정된 생성자에 전체 목록 전달
+                builder: (context) => OverseasStayPage(OverseasStayBookList: OverseasStayBookList, stayData: stayData,), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },

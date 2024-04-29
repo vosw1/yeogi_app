@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 import '../../../../_core/constants/size.dart';
 import '../../../../data/models/stay.dart';
@@ -9,61 +10,61 @@ class GuestHouseStayPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 캠핑 숙소 리스트
-    List<Stay> campingDataList = [
+    // 게스트하우스 숙소 리스트
+    List<Stay>guestHouseDataList = [
       Stay(
-        stayImgTitle: "camping/camping1.png",
-        stayName: "영흥도 코코로망스 카라반",
-        stayInfo: "도심에서 가깝고, 바다가 보이는 코코로망스입니다\n다양한 부대시설을 구비하였으며 카라반 및 캠핑이 가능합니다",
-        location: "인천 옹진군 영흥면 내리 1651-4",
-        notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
+        stayImgTitle: "guest_house/guestHouse1.png",
+        stayName: "전주 소소한 한옥",
+        stayInfo: "소소하게 행복이 머무는 공간입니다\n #새로 오픈했어요",
+        location: "전북특별자치도 전주시 완산구 풍남동2가 11-2",
+        notice: "현장 요금 추가 정보\n인원 추가 시 1인 20000원(영유아 포함)",
         starCount: 4.5,
-        comment: "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^\n사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+        comment: "시댁이 전주라 한옥마을 자주 이용하는편인데 지금까지 이용했던 숙소중에 제일 좋았어요~",
       ),
       Stay(
-        stayImgTitle: "camping/camping2.png",
-        stayName: "가평 조이캠핑",
-        stayInfo: "텐트앞 계곡뷰가 아름다운 캠핑",
-        location: "경기 가평군 북면 목동리 344-1",
-        notice: "\n예약시 참조하세요\n객실 예약은 2인기준 예약/숯불/캠프파이어 추가인원 현장결제\n바비큐or캠프파이어 두 개종 한개는 필수선택입니다",
+        stayImgTitle: "guest_house/guestHouse2.png",
+        stayName: "전주 한옥마을 한옥고택 고을",
+        stayInfo: "안녕하세요! 한옥고택고을입니다\n천년의숨결 그대로, 그리고 전주한옥마을이 함께하는 곳\n휴식에 휴식을 더하는 힐링공간으로 초대합니다",
+        location: "전라북도 전주시 완산구 풍남동3가 76-63",
+        notice: "인원 추가 시 10,000원 (12개월 이상~성인), 12개월 미만 1인까지 무료 (단, 2명부터 요금 발생)",
         starCount: 5,
-        comment: "가평에 4시간달려서 온 조이글램핑장.사진이랑 비슷한 캠핑장에 시설도 주방장비들도 구비되어있어서 좋았어요.",
+        comment: "오랫만에 전주한옥마을에서 잤는데 공영주차장2 와 거리가 5~7분정도여서 빠르게 숙소에 들어갈 수 있었어요",
       ),
       Stay(
-        stayImgTitle: "camping/camping3.png",
-        stayName: "가평 더상상풀빌라&캠핑",
-        stayInfo: "야외 수영장, 전 객실 개별 바비큐와 불멍을 즐길 수 있는 캠핑장입니다",
-        location: "경기 가평군 가평읍 경반리 583-71",
-        notice: "입실 : 15:00 | 퇴실 : 11:00\n22시 이후 입실 시 사전문의 (필수)\n무료 Wi-Fi\n주차 가능",
+        stayImgTitle: "guest_house/guestHouse3.png",
+        stayName: "군산 여미랑",
+        stayInfo: "여미랑(잊을 여, 못할 미, 사랑채 랑)은 아픈 역사를 잊지 말고 하룻밤 묵으면서 만든 추억도 잊지 말자는 의미로,\n일제시대의 아픔을 되새기고자 만들어진 근대역사의 체험공간이자 숙박시설입니다",
+        location: "전북 군산시 월명동 16-8",
+        notice: "체크인 15~23시까지 (늦은 체크인 미리 연락 필수)\n애완동물 동반 입실 불가",
         starCount: 5,
         comment: "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^사진에서 봤던것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
       ),
       Stay(
-        stayImgTitle: "camping/camping4.png",
-        stayName: "가평 디프라이빗 캠핑",
-        stayInfo: "낭만적인 뷰가 끝내주는 럭셔리 아트빌라 캠핑장입니다\n프라이빗한 글램핑과 감성 돋는 카라반 객실이 갖춰져 있습니다",
-        location: "경기 가평군 북면 적목리 337",
-        notice: " 화장실이 개별화장실 입니다\n도로 결빙/안전을 위하여 동절기(12월-2월) 에는 입실 제한이 오후 7시 입니다. 이점 유의 하시여 예약 부탁 드립니다",
+        stayImgTitle: "guest_house/guestHouse4.png",
+        stayName: "경주 행복 한옥마을 셔블",
+        stayInfo: "신라 천년이 이야기가 있는 신라 왕릉과 돌담길, 정감이 있는 한옥\n더불어 “셔블”\n“행복 한옥마을 셔블”에 오신 것을 환영합니다.",
+        location: "경상북도 경주시 황남동 76-10",
+        notice: " PM 11 : 00 시 이후 소등\n객실 내 식음 금지\n시설물을 파손하거나 침구류 훼손 및 오염 (세탁 불가능) 시 전액 배상",
         starCount: 5,
-        comment: "여기 예약했다가 칭찬 퍼레이드 받았어요",
+        comment: "한옥 숙소는 처음 가봣는데 전체적으로 만족 햇어요 ",
       ),
       Stay(
-        stayImgTitle: "camping/camping5.png",
-        stayName: "포천 백운계곡 글램핑",
-        stayInfo: "서울 근교에 가족, 연인, 친구들과 추억을 만들 수 있는 럭셔리한 캠핑장입니다\n난방 완비된 깨끗한 공용 부대시설과 객실에서 편안한 휴식을 취할 수 있습니다",
-        location: "경기 포천시 이동면 도평리 272-5",
+        stayImgTitle: "guest_house/guestHouse5.png",
+        stayName: "전주 한옥마을 골목길 게스트하우스",
+        stayInfo: "인거리100m옆.도보1분\n모든방은 한옥 민박 가족방입니다.가족*연인*친구가 따로따로 주무시는 방1개와화장실1개의 독립적인 방입니다.\n4인까지 무조건 추가요금 전혀없이 숙박합니다.",
+        location: "전라북도 전주시 완산구 교동 45-6 전주골목길게스트하우스",
         notice: "입실 : 15:00 | 퇴실 : 11:00\n객실은 현장배정(고객 지정 불가)\n동계 시즌 가스난로 이용 시 1박당 20,000원 추가됩니다",
         starCount: 5,
-        comment: "플로 예약하고 갔었는데 저희가 간 주말에는 이용객이 많이 없어서 그런지 달빛존으로 업그레이드 해주셔서 침대도 두개고 넓어서 너무 좋았어요!!!^",
+        comment: "겨울에 방문하고 날씨가 따뜻해 지고 다시 한번 골목길 게스트하우스에 하루 쉬어갔습니다~\n여전히 깨끗하고 아늑해서  넘 좋았습니다~ 보일러도  나에게 맞게 조절 할 수 있어서 밤에 따뜻하게 잘 잤습니다.",
       ),
       Stay(
-        stayImgTitle: "camping/camping6.png",
-        stayName: "가평 캡틴 캠핑&글램핑",
-        stayInfo: "확 트인 자연의 풍경을 감상하며 일상에 지쳐 있던 심신을 힐링 받을 수 있는 곳입니다\n넓고 깨끗한 수영장과 고객님들에게 청결과 친절을 최우선으로 생각하여 편안한 여행의 도움을 드리겠습니다",
-        location: "경기 가평군 상면 임초리 493-1",
+        stayImgTitle: "guest_house/guestHouse6.png",
+        stayName: "경주 신라고택",
+        stayInfo: "황리단길 중심지에 위치하며,주변에 유명 맛집/커피숍/술집.상가 형성되어있습니다.\n주변관광지는(대릉원도보 5분거리,첨성대도보10분거리,안압지 도보 15분거리,교촌마을(월정교)도보 15분 거리\n국립박물관 도보 15분거리)소요됩니다.",
+        location: "경상북도 경주시 황남동 229-33  번지",
         notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
         starCount: 5.0,
-        comment: "사장님도 매우 친절하시고 귀여운 고양이들이 많이 있습니다. 정말 시간 가는줄 모르고 재미있게 잘 놀았습니다. ",
+        comment: "늦은시간에 체크인을 했는데 친절하게 맞이해주시던 사장님!!!!\n숙소는 제가 넘  조아하는 아늑함\n여기는 민박도 아닌 여관도 아닌 요즘 핫한 한옥숙소느낌!",
       ),
     ];
 
@@ -71,67 +72,76 @@ class GuestHouseStayPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('게스트하우스'),
       ),
-      body: ListView.builder(
-        itemCount: campingDataList.length,
-        itemBuilder: (context, index) {
-          final Stay stay = campingDataList[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
-            child: Row(
-              children: [
-                SizedBox(height: gap_xs),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => StayPage(stayData: stay),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 150, // 사진의 높이
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
-                          fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: gap_m),
+        child: ListView.builder(
+          itemCount: guestHouseDataList.length,
+          itemBuilder: (context, index) {
+            final Stay stay = guestHouseDataList[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+              child: Row(
+                children: [
+                  SizedBox(height: gap_xs),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StayPage(stayData: stay),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 150, // 사진의 높이
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(width: 8), // 사진과 텍스트 사이 간격
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        stay.stayName, // 숙소 이름
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 4), // 텍스트 사이 간격
-                      Text(
-                        stay.location, // 숙소 위치
-                        style: TextStyle(),
-                      ),
-                      SizedBox(height: 4), // 텍스트 사이 간격
-                      Text(
-                        stay.stayInfo, // 숙소 정보
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
+                  SizedBox(width: 8), // 사진과 텍스트 사이 간격
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity, // 화면 너비에 맞추기 위해 사용
+                          child: Text(
+                            stay.stayName,
+                            style: h5(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(height: 4), // 텍스트 사이 간격
+                        Text(
+                          stay.location, // 숙소 위치
+                          style: subtitle1(),maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 4), // 텍스트 사이 간격
+                        Text(
+                          stay.stayInfo, // 숙소 정보
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

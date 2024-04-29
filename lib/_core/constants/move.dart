@@ -95,8 +95,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.scrapPage: (context) => ScrapPage(), // 내 주변 페이지 TODO : 없어질 수 있음
     Move.myPage: (context) => MyPage(stayData: stayData,), // 마이 페이지
     Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
-    Move.domesticStayPage: (context) => DomesticStayPage(bookInKoreaList: []), // 국내 숙소 페이지
-    Move.overseasStayPage: (context) => OverseasStayPage(bookInAbroardList: [], stayData: stayData,), // 해외 숙소 페이지
+    Move.domesticStayPage: (context) => DomesticStayPage(DomesticStayBookList: []), // 국내 숙소 페이지
+    Move.overseasStayPage: (context) => OverseasStayPage(OverseasStayBookList: [], stayData: stayData,), // 해외 숙소 페이지
     Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
     Move.hotelStayPage: (context) => const HotelStayPage(), // 호텔 숙소 페이지
     Move.motelStayPage: (context) => const ModelStayPage(), // 모텔 숙소 페이지
