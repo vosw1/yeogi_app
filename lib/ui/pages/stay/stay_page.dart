@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/ui/pages/room/room_page.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import '../../../_core/constants/move.dart';
 import '../../../data/models/stay.dart';
 
 
@@ -35,7 +36,7 @@ class StayPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RoomPage(stayData: stayData),
+                    builder: (context) => RoomPage(roomData: roomData),
                   ),
                 );
               },

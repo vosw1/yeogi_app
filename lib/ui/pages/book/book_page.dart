@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
 import '../../../data/models/room.dart';
 import '../pay/payment_page.dart';
 
 class BookPage extends StatefulWidget {
+  final Room roomData;
+
+  BookPage({required this.roomData});
 
   @override
   _BookPageState createState() => _BookPageState();
@@ -47,7 +51,7 @@ class _BookPageState extends State<BookPage> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                            "assets/images/hotel/hotel1.png"),
+                            "assets/images/${roomData.roomImgTitle}"),
                       ),
                     ),
                   ),
@@ -56,16 +60,12 @@ class _BookPageState extends State<BookPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '',
-                          style: h5(),
-                        ),
                         SizedBox(height: gap_s),
-                        Text('', style: subtitle1()),
+                        Text('${roomData.roomName}', style: subtitle1()),
                         SizedBox(height: gap_xs),
-                        Text('체크인 : '),
-                        Text('체크아웃 : '),
-                        Text('인원 : 명'),
+                        Text('체크인 : ${roomData.checkInDate}'),
+                        Text('체크아웃 : ${roomData.checkOutDate}'),
+                        Text('인원 : ${roomData.personCount}명'),
                       ],
                     ),
                   ),
@@ -152,7 +152,7 @@ class _BookPageState extends State<BookPage> {
               padding: EdgeInsets.symmetric(vertical: 15.0),
             ),
             child: Text(
-              '원 결제하기',
+              '${roomData.price}원 결제하기',
               style: h6(mColor: Colors.white),
             ),
           ),
@@ -342,7 +342,7 @@ class _BookPageState extends State<BookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '제공받는 자\t\n'
+              '제공받는 자\t${roomData.roomName}\n'
                   '제공 목적\t숙박예약서비스 이용계약 이행\n'
                   '(서비스 제공, 확인, 이용자 정보 확인)\n'
                   '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)\n'
