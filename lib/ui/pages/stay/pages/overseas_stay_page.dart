@@ -5,141 +5,146 @@ import 'package:yogi_project/ui/pages/room/room_page.dart';
 
 import '../../../../../data/models/stay.dart';
 import '../../../../_core/constants/size.dart';
+import '../../../../_core/constants/style.dart';
 import '../stay_page.dart';
 
 class OverseasStayPage extends StatelessWidget {
   final Stay stayData;
-  final List<Book> bookInAbroardList; // 예약 리스트 추가
+  final List<Book> OverseasStayBookList; // 예약 리스트 추가
 
-  const OverseasStayPage({required this.stayData, required this.bookInAbroardList});
+  const OverseasStayPage({required this.stayData, required this.OverseasStayBookList});
 
   get roomData => null;
 
   @override
   Widget build(BuildContext context) {
     // 캠핑 숙소 리스트
-    List<Stay> campingDataList = [
+    List<Stay> OverseasStayBookList = [
       Stay(
-        stayImgTitle: "camping/camping1.png",
-        stayName: "영흥도 코코로망스 카라반",
-        stayInfo: "도심에서 가깝고, 바다가 보이는 코코로망스입니다\n다양한 부대시설을 구비하였으며 카라반 및 캠핑이 가능합니다",
-        location: "인천 옹진군 영흥면 내리 1651-4",
-        notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
-        starCount: 4.5,
-        comment: "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^\n사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
-      ),
+        stayImgTitle: "overseas/overseas1.png",
+        stayName: "두짓타니 괌 리조트",
+        stayInfo: "본 숙소(두짓타니 괌 리조트)는 괌에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 즐거운 시간을 보낼 수 있도록 다양한 시설과 특전을 제공합니다. 24시간 룸서비스, Wi-Fi (무료/전 객실), 24시간 경비 서비스, 일일 청소 서비스, 24시간 프런트 데스크 등 여러 가지를 즐길 수 있습니다. 객실은 최적의 편안함을 제공할 수 있도록 설계되어 있으며, 일부 객실에서 평면 TV, 리넨, 슬리퍼, 타월, 옷장 등을 이용할 수 있습니다. 관광 후 아늑한 객실에서 휴식을 취하거나 온수 욕조, 피트니스센터, 사우나, 실외 수영장, 스파 등을 즐길 수 있습니다. 본 숙소(두짓타니 괌 리조트)를 괌 여행의 근거지로 정해 본격적인 여행을 시작해 보세요.",
+        location: "1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913",
+        notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
+        starCount: 4.0,
+        comment: "가격이 비싼감이 없지않지만 환율과 괌 물가 대비 적당하다는 생각이 들었어요 일단 깨끗한건 말할것도 없고요 부족함이 없었던 숙소였어요",),
       Stay(
-        stayImgTitle: "camping/camping2.png",
-        stayName: "가평 조이캠핑",
-        stayInfo: "텐트앞 계곡뷰가 아름다운 캠핑",
-        location: "경기 가평군 북면 목동리 344-1",
-        notice: "\n예약시 참조하세요\n객실 예약은 2인기준 예약/숯불/캠프파이어 추가인원 현장결제\n바비큐or캠프파이어 두 개종 한개는 필수선택입니다",
-        starCount: 5,
-        comment: "가평에 4시간달려서 온 조이글램핑장.사진이랑 비슷한 캠핑장에 시설도 주방장비들도 구비되어있어서 좋았어요.",
-      ),
-      Stay(
-        stayImgTitle: "camping/camping3.png",
-        stayName: "가평 더상상풀빌라&캠핑",
-        stayInfo: "야외 수영장, 전 객실 개별 바비큐와 불멍을 즐길 수 있는 캠핑장입니다",
-        location: "경기 가평군 가평읍 경반리 583-71",
-        notice: "입실 : 15:00 | 퇴실 : 11:00\n22시 이후 입실 시 사전문의 (필수)\n무료 Wi-Fi\n주차 가능",
-        starCount: 5,
-        comment: "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^사진에서 봤던것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
-      ),
-      Stay(
-        stayImgTitle: "camping/camping4.png",
-        stayName: "가평 디프라이빗 캠핑",
-        stayInfo: "낭만적인 뷰가 끝내주는 럭셔리 아트빌라 캠핑장입니다\n프라이빗한 글램핑과 감성 돋는 카라반 객실이 갖춰져 있습니다",
-        location: "경기 가평군 북면 적목리 337",
-        notice: " 화장실이 개별화장실 입니다\n도로 결빙/안전을 위하여 동절기(12월-2월) 에는 입실 제한이 오후 7시 입니다. 이점 유의 하시여 예약 부탁 드립니다",
-        starCount: 5,
-        comment: "여기 예약했다가 칭찬 퍼레이드 받았어요",
-      ),
-      Stay(
-        stayImgTitle: "camping/camping5.png",
-        stayName: "포천 백운계곡 글램핑",
-        stayInfo: "서울 근교에 가족, 연인, 친구들과 추억을 만들 수 있는 럭셔리한 캠핑장입니다\n난방 완비된 깨끗한 공용 부대시설과 객실에서 편안한 휴식을 취할 수 있습니다",
-        location: "경기 포천시 이동면 도평리 272-5",
-        notice: "입실 : 15:00 | 퇴실 : 11:00\n객실은 현장배정(고객 지정 불가)\n동계 시즌 가스난로 이용 시 1박당 20,000원 추가됩니다",
-        starCount: 5,
-        comment: "플로 예약하고 갔었는데 저희가 간 주말에는 이용객이 많이 없어서 그런지 달빛존으로 업그레이드 해주셔서 침대도 두개고 넓어서 너무 좋았어요!!!^",
-      ),
-      Stay(
-        stayImgTitle: "camping/camping6.png",
-        stayName: "가평 캡틴 캠핑&글램핑",
-        stayInfo: "확 트인 자연의 풍경을 감상하며 일상에 지쳐 있던 심신을 힐링 받을 수 있는 곳입니다\n넓고 깨끗한 수영장과 고객님들에게 청결과 친절을 최우선으로 생각하여 편안한 여행의 도움을 드리겠습니다",
-        location: "경기 가평군 상면 임초리 493-1",
-        notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
+        stayImgTitle: "overseas/overseas2.png",
+        stayName: "호텔 토리피토 하타카 기온",
+        stayInfo: "",
+        location: "8-24 Reisenmachi, 하카타, 후쿠오카 / 훗쿠오카, 일본, 812-0039",
+        notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         starCount: 5.0,
-        comment: "사장님도 매우 친절하시고 귀여운 고양이들이 많이 있습니다. 정말 시간 가는줄 모르고 재미있게 잘 놀았습니다. ",
+        comment: "맘에 들어요 일본숙소치고 룸도 넓고  1인 베드도 넓어서 좋아요 트윈베드에 쇼파베드가 있어 3명이 와도 사용할수있어요",),
+      Stay(
+        stayImgTitle: "overseas/overseas3.png",
+        stayName: "빌리지 호텔 센토사 바이 퍼 이스트 호스피탈리티 (SG 클린 인증)",
+        stayInfo: "",
+        location: "10 Artillery Avenue, 센토사, 싱가포르 / 싱가폴, 싱가포르, 099951",
+        notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
+        starCount: 5.0,
+        comment: "다양한 호텔 중에 넓은 수영장과 아주 특별한 외관에 한눈에 반해서 예약한 호텔! 위치도 Imbiah station 모노레일역 바로 앞에 있어서 이동하기도 너무 편했답니다.",),
+      Stay(
+        stayImgTitle: "overseas/overseas4.png",
+        stayName: "샹그릴라 탄중아루 코타키나발루",
+        stayInfo: "본 숙소(샹그릴라스 탄중 아루 리조트 앤드 스파)는 코타키나발루에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 즐거운 시간을 보낼 수 있도록 다양한 시설과 특전을 제공합니다. 일일 청소 서비스, 기념품 가게, 프라이빗 체크인/체크아웃, 티켓 서비스, 24시간 프런트 데스크 등을 포함해 필요한 모든 시설이 준비되어 있습니다. 각 객실은 아름답게 꾸며져 있으며 편리한 시설을 갖추고 있습니다. 긴 하루를 보낸 후 카누, 미니골프코스, 워터파크, 윈드서핑, 스노클링 등을 통해 휴식을 취해보시기 바랍니다. 본 숙소(샹그릴라스 탄중 아루 리조트 앤드 스파)를 코타키나발루 여행의 근거지로 정해 본격적인 여행을 시작해 보세요.",
+        location: "No 20, Jalan Aru, Tanjung Aru, 탄중 아루, 코타키나발루, 말레이시아, 88100",
+        notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
+        starCount: 5.0,
+        comment: "명성만큼 선셋타임 맞춰 선셋바는 정말 멋져요. 선셋바 음식은 비싸니 맥주 한 병 시켜 놓고 자연 감상하며 1시간 정도 쉬었다 왔는데 좋았어요 ~ 사진도 많이 남기고요 ! 룸 내부 컨디션은 넓직하나 세월의 흔적이 조금씩 느껴지는 부분이 있었어요 그래도 1층 묵어보니 룸테라스로 나가면 바로 정원과 연결되어 아침에 테라스에서 커피 한 잔 여유 좋았구요 .. 리조트 내 유료 사용 결제는 오로지 카드만 가능합니다 .",),
+      Stay(
+        stayImgTitle: "overseas/overseas5.png",
+        stayName: "The Landmark London",
+        stayInfo: "본 숙소(랜드마크 런던)는 런던에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 편안함과 편리함을 느낄 수 있도록 다양한 서비스 및 편의 시설을 제공하고 있습니다. 서비스 마인드를 지닌 랜드마크 런던 직원들이 투숙객을 따뜻하게 환영하고 안내합니다. 아늑한 객실에서 편안한 시간을 보낼 수 있으며, 일부 객실에서는 슬리퍼, 평면 TV, 에어컨, 난방, 모닝콜 서비스 등을 이용할 수 있습니다. 본 숙소에서 다양한 여가 시설을 이용할 수 있습니다. 런던 방문 이유와 상관없이 랜드마크 런던에서는 집과 같은 편안함을 느낄 수 있습니다.",
+        location: "222 Marylebone Road, 하이드 파크, 런던, 영국, NW1 6JQ",
+        notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
+        starCount: 4.0,
+        comment: "They tried to offer everything already, but the building is still too old", ),
+      Stay(
+        stayImgTitle: "overseas/overseas6.png",
+        stayName: "더 풀러턴 호텔 시드니",
+        stayInfo: "",
+        location: "1 Martin Place, Sydney, New South Wales, 시드니 CBD, 시드니, 호주, 2000",
+        notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
+        starCount: 5.0,
+        comment: "시드니에 머무는 동안 너무 편안하게 묵었습니다! 헬스장도 잘되어있어서 잘 이용했네여 헬스장 내 샤워실에도 수건샴푸린스바디워시칫솔치약이 구비되어 있어, 운동 후 샤워하기 편했습니다. ",
       ),
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('해외 숙소'),
+        title: Text('해외'),
       ),
-      body: ListView.builder(
-        itemCount: campingDataList.length,
-        itemBuilder: (context, index) {
-          final Stay stay = campingDataList[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
-            child: Row(
-              children: [
-                SizedBox(height: gap_xs),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => StayPage(stayData: stay),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 150, // 사진의 높이
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
-                          fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: gap_m),
+        child: ListView.builder(
+          itemCount: OverseasStayBookList.length,
+          itemBuilder: (context, index) {
+            final Stay stay = OverseasStayBookList[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+              child: Row(
+                children: [
+                  SizedBox(height: gap_xs),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StayPage(stayData: stay),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 150, // 사진의 높이
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(width: 8), // 사진과 텍스트 사이 간격
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        stay.stayName, // 숙소 이름
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 4), // 텍스트 사이 간격
-                      Text(
-                        stay.location, // 숙소 위치
-                        style: TextStyle(),
-                      ),
-                      SizedBox(height: 4), // 텍스트 사이 간격
-                      Text(
-                        stay.stayInfo, // 숙소 정보
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
+                  SizedBox(width: 8), // 사진과 텍스트 사이 간격
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity, // 화면 너비에 맞추기 위해 사용
+                          child: Text(
+                            stay.stayName,
+                            style: h5(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(height: 4), // 텍스트 사이 간격
+                        Text(
+                          stay.location, // 숙소 위치
+                          style: subtitle1(),maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 4), // 텍스트 사이 간격
+                        Text(
+                          stay.stayInfo, // 숙소 정보
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

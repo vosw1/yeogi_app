@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../_core/constants/size.dart';
+import '../../../../_core/constants/style.dart';
 import '../../../../data/models/stay.dart';
 import '../stay_page.dart';
 
@@ -10,60 +11,60 @@ class HotelStayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 캠핑 숙소 리스트
-    List<Stay> campingDataList = [
+    List<Stay> hotelDataList = [
       Stay(
-        stayImgTitle: "camping/camping1.png",
-        stayName: "영흥도 코코로망스 카라반",
-        stayInfo: "도심에서 가깝고, 바다가 보이는 코코로망스입니다\n다양한 부대시설을 구비하였으며 카라반 및 캠핑이 가능합니다",
-        location: "인천 옹진군 영흥면 내리 1651-4",
-        notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
+        stayImgTitle: "hotel/hotel1.png",
+        stayName: "하이원리조트 마운틴콘도",
+        stayInfo: "복층 구조의 넓고 여유로운 공간, 고급 대리석과 원목 마루로 마감한 격조높은 인테리어가 차원이 다른 편안함을 드립니다\n최고의 부대시설을 갖춘 마운틴 콘도에서 내 집처럼 편안한 휴식을 취해 보세요",
+        location: "강원 정선군 고한읍 고한리 438",
+        notice: "공지사항\n리조트 시설 확인 및 운영여부, 운영시간, 기타문의 등 하이원리조트 대표번호 (1588-7789) 문의 부탁 드립니다\n객실 이미지는 대표 객실이며, 체크인 시 배정받는 동에 따라 객실 이미지와 상이할 수 있습니다",
         starCount: 4.5,
-        comment: "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^\n사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+        comment: "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
       ),
       Stay(
-        stayImgTitle: "camping/camping2.png",
-        stayName: "가평 조이캠핑",
-        stayInfo: "텐트앞 계곡뷰가 아름다운 캠핑",
+        stayImgTitle: "hotel/hotel2.png",
+        stayName: "하이원 그랜드 호텔 컨벤션타워",
+        stayInfo: "고객 편의를 위해 호텔 관련 모든 정보의 시스템 구축과 ONE STOP SERVICE 제공에 중점을 둔 호텔입니다\n고객의 니즈를 충족시키기 위해 다양한 유형의 객실을 갖추고 있습니다",
         location: "경기 가평군 북면 목동리 344-1",
-        notice: "\n예약시 참조하세요\n객실 예약은 2인기준 예약/숯불/캠프파이어 추가인원 현장결제\n바비큐or캠프파이어 두 개종 한개는 필수선택입니다",
+        notice: "리조트 시설 확인 및 운영 여부, 운영시간, 할인 적용, 기타 문의 등 하이원리조트 대표번호(1588-7789) 문의 부탁드립니다",
         starCount: 5,
-        comment: "가평에 4시간달려서 온 조이글램핑장.사진이랑 비슷한 캠핑장에 시설도 주방장비들도 구비되어있어서 좋았어요.",
+        comment: "삼척촛대바위를 여행하고 오늘 숙박할 하이원그랜드호텔로 향합니다 ",
       ),
       Stay(
-        stayImgTitle: "camping/camping3.png",
-        stayName: "가평 더상상풀빌라&캠핑",
-        stayInfo: "야외 수영장, 전 객실 개별 바비큐와 불멍을 즐길 수 있는 캠핑장입니다",
-        location: "경기 가평군 가평읍 경반리 583-71",
-        notice: "입실 : 15:00 | 퇴실 : 11:00\n22시 이후 입실 시 사전문의 (필수)\n무료 Wi-Fi\n주차 가능",
+        stayImgTitle: "hotel/hotel3.png",
+        stayName: "하이원리조트 힐콘도",
+        stayInfo: "정선하이원 리조트에 처음으로 가봤는데\n정말 크고 건물도 여러개있더라구요\n왜 셀프체크인 하는지 알것같았어요",
+        location: "강원 정선군 고한읍 고한리 1-239",
+        notice: "리조트 시설 확인 및 운영여부, 운영시간, 기타문의 등 하이원리조트 대표번호 (1588-7789) 문의 부탁 드립니다",
         starCount: 5,
-        comment: "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^사진에서 봤던것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+        comment: "정선하이원 리조트에 처음으로 가봤는데\n정말 크고 건물도 여러개있더라구요\n왜 셀프체크인 하는지 알것같았어요",
       ),
       Stay(
-        stayImgTitle: "camping/camping4.png",
-        stayName: "가평 디프라이빗 캠핑",
-        stayInfo: "낭만적인 뷰가 끝내주는 럭셔리 아트빌라 캠핑장입니다\n프라이빗한 글램핑과 감성 돋는 카라반 객실이 갖춰져 있습니다",
-        location: "경기 가평군 북면 적목리 337",
-        notice: " 화장실이 개별화장실 입니다\n도로 결빙/안전을 위하여 동절기(12월-2월) 에는 입실 제한이 오후 7시 입니다. 이점 유의 하시여 예약 부탁 드립니다",
+        stayImgTitle: "hotel/hotel4.png",
+        stayName: "스카이베이호텔 경포",
+        stayInfo: "번화한 경포 해수욕장에 자리 잡은 호텔로 탁 트인 바다 전망을 감상할 수 있습니다\n현대적이고 고급스러운 객실에서 편안하게 휴식할 수 있습니다\n수영장과 레스토랑, 피트니스센터 등 다양한 편의시설을 갖추고 있습니다",
+        location: "강원 강릉시 강문동 258-4",
+        notice: "기본정보\n체크인 : 15:00 | 체크아웃 : 11:00\n22시 이후 체크인 시 호텔 프론트 문의\n무료 Wi-Fi\n전 객실 금연\n주차 가능 (무료 / 객실 당 1대)\n[그린 캠페인] 플라스틱 없는 호텔 만들기로 기본 욕실 어메니티 3종(샴푸, 린스, 바디워시) 이외에 1회 용품은 제공하지 않습니다",
         starCount: 5,
-        comment: "여기 예약했다가 칭찬 퍼레이드 받았어요",
+        comment: "강릉의 랜드마크 호텔인 스파이베이 경포답게 전면은 시원한 바다뷰와 함께 경포해변이 보이고, 반대편으로는 넓은 경포호수가 보이는 뷰맛집 호텔이에요!",
       ),
       Stay(
-        stayImgTitle: "camping/camping5.png",
-        stayName: "포천 백운계곡 글램핑",
-        stayInfo: "서울 근교에 가족, 연인, 친구들과 추억을 만들 수 있는 럭셔리한 캠핑장입니다\n난방 완비된 깨끗한 공용 부대시설과 객실에서 편안한 휴식을 취할 수 있습니다",
-        location: "경기 포천시 이동면 도평리 272-5",
+        stayImgTitle: "hotel/hotel5.png",
+        stayName: "제주신라호텔",
+        stayInfo: "세계 자연문화유산인 제주의 아름다운 풍광을 담은 리조트로써 그 명성을 쌓아가고 있는 제주신라호텔은 1980년 개관부터 지금까지 품격과 문화가 있는 휴식지로서 수많은 굵직한 국제행사를 성공적으로 치러온 최고의 리조트입니다",
+        location: "제주도 서귀포시 색달동 3039-3",
         notice: "입실 : 15:00 | 퇴실 : 11:00\n객실은 현장배정(고객 지정 불가)\n동계 시즌 가스난로 이용 시 1박당 20,000원 추가됩니다",
         starCount: 5,
-        comment: "플로 예약하고 갔었는데 저희가 간 주말에는 이용객이 많이 없어서 그런지 달빛존으로 업그레이드 해주셔서 침대도 두개고 넓어서 너무 좋았어요!!!^",
+        comment: "세월의 흔적이 있지만 너무나 청결한 숙소 정말 오랜만에 찾았는데 여전하면서 세련됐어요. 신라호텔에만 있어도 될 것 같아요.",
       ),
       Stay(
-        stayImgTitle: "camping/camping6.png",
-        stayName: "가평 캡틴 캠핑&글램핑",
-        stayInfo: "확 트인 자연의 풍경을 감상하며 일상에 지쳐 있던 심신을 힐링 받을 수 있는 곳입니다\n넓고 깨끗한 수영장과 고객님들에게 청결과 친절을 최우선으로 생각하여 편안한 여행의 도움을 드리겠습니다",
-        location: "경기 가평군 상면 임초리 493-1",
-        notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
+        stayImgTitle: "hotel/hotel6.png",
+        stayName: "힐튼 경주",
+        stayInfo: "국내외 귀빈들이 머물렀던 최고 수준의 힐튼호텔에서 특별한 하루를 보낼 수 있습니다\n보문호수 부근에 위치해 경주의 주요 관광지로의 뛰어난 접근성을 자랑합니다\n심플하고 모던한 분위기의 속의 세련되고 편안한 라이프스타일을 반영한 객실에서 비즈니스와 여가를 모두 누리기에 좋습니다",
+        location: "경북 경주시 신평동 370",
+        notice: "기본정보\n체크인 : 15:00 | 체크아웃 : 11:00\n무료 Wi-Fi\n전 객실 금연\nBath Amenity (치약, 칫솔 유료)\n주차가능 (무료 / 객실당 1대)",
         starCount: 5.0,
-        comment: "사장님도 매우 친절하시고 귀여운 고양이들이 많이 있습니다. 정말 시간 가는줄 모르고 재미있게 잘 놀았습니다. ",
+        comment: "경주힐튼에 대한 리뷰도 이번이 세번째는 되는거 같아요~제가 사는 곳이 대구다보니 가족들과 접근성이 좋은 경주로 자주 가게 되는거 같아요 ",
       ),
     ];
 
@@ -71,70 +72,77 @@ class HotelStayPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('호텔'),
       ),
-      body: ListView.builder(
-        itemCount: campingDataList.length,
-        itemBuilder: (context, index) {
-          final Stay stay = campingDataList[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
-            child: Row(
-              children: [
-                SizedBox(height: gap_xs),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => StayPage(stayData: stay),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 150, // 사진의 높이
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
-                          fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: gap_m),
+        child: ListView.builder(
+          itemCount: hotelDataList.length,
+          itemBuilder: (context, index) {
+            final Stay stay = hotelDataList[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+              child: Row(
+                children: [
+                  SizedBox(height: gap_xs),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StayPage(stayData: stay),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 150, // 사진의 높이
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(width: 8), // 사진과 텍스트 사이 간격
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        stay.stayName, // 숙소 이름
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 4), // 텍스트 사이 간격
-                      Text(
-                        stay.location, // 숙소 위치
-                        style: TextStyle(),
-                      ),
-                      SizedBox(height: 4), // 텍스트 사이 간격
-                      Text(
-                        stay.stayInfo, // 숙소 정보
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
+                  SizedBox(width: 8), // 사진과 텍스트 사이 간격
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity, // 화면 너비에 맞추기 위해 사용
+                          child: Text(
+                            stay.stayName,
+                            style: h5(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(height: 4), // 텍스트 사이 간격
+                        Text(
+                          stay.location, // 숙소 위치
+                          style: subtitle1(),maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 4), // 텍스트 사이 간격
+                        Text(
+                          stay.stayInfo, // 숙소 정보
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
-
-

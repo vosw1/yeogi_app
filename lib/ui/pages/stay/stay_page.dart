@@ -5,7 +5,6 @@ import 'package:yogi_project/_core/constants/style.dart';
 import '../../../_core/constants/move.dart';
 import '../../../data/models/stay.dart';
 
-
 class StayPage extends StatelessWidget {
   final Stay stayData;
 
@@ -15,7 +14,12 @@ class StayPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('숙소 상세 페이지'),
+        title: Text(
+          '${stayData.stayName}',
+          style: h5(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(gap_m),
@@ -23,19 +27,20 @@ class StayPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              constraints: BoxConstraints(minHeight: 40),
-              child: Text(
-                '${stayData.stayName}',
-                style: h5(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            SizedBox(
               width: 600,
               height: 200,
-              child: Image.asset('assets/images/${stayData.stayImgTitle}'),
-            ), // 숙소 이미지
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(gap_s),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(gap_s),
+                child: Image.asset(
+                  'assets/images/${stayData.stayImgTitle}',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            // 숙소 이미지
             SizedBox(height: gap_m),
             Text('${stayData.location}', style: subtitle1()), // 위치
             SizedBox(height: 16),

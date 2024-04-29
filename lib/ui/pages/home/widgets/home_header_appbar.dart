@@ -58,7 +58,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HotelStayPage()),
+                  MaterialPageRoute(builder: (context) => OverseasStayPage(OverseasStayBookList: [], stayData: stayData)),
                  );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
@@ -68,7 +68,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OverseasStayPage(bookInAbroardList: [], stayData: stayData)),
+                  MaterialPageRoute(builder: (context) => HotelStayPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.hotel, text: '호텔'),
@@ -78,7 +78,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HotelStayPage()),
+                  MaterialPageRoute(builder: (context) => ModelStayPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.bed, text: '모텔'),
