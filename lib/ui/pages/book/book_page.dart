@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
@@ -224,7 +223,7 @@ class _BookPageState extends State<BookPage> {
     AlertDialog alertDialog;
 
     switch (text) {
-      case '이용규칙 및 취소/환불 규정 동의(필수)':
+      case '이용규칙 및 취소/환불 동의(필수)':
         alertDialog = _buildUsageRulesDialog();
         break;
       case '개인정보 수집 및 이용 동의(필수)':
@@ -261,7 +260,7 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               '19세 미만 청소년의 혼숙은 법적으로 불가하며, 이에 대한 숙소의 입실 거부 시 취소/환불이 불가합니다.\n'
-                  '업체 현장에서 객실 컨디션 및 서비스로 인해 발생된 분쟁은 여기어때에서 책임지지 않습니다.',
+              '업체 현장에서 객실 컨디션 및 서비스로 인해 발생된 분쟁은 여기어때에서 책임지지 않습니다.',
             ),
             SizedBox(height: 10),
             Text(
@@ -270,7 +269,7 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               '취소/환불 가능 여부는 숙소의 정책을 따릅니다.\n'
-                  '취소/환불 규정에 따라 취소 수수료가 발생하는 경우, 취소 수수료는 판매가(상품가격) 기준으로 계산됩니다.',
+              '취소/환불 규정에 따라 취소 수수료가 발생하는 경우, 취소 수수료는 판매가(상품가격) 기준으로 계산됩니다.',
             ),
           ],
         ),
@@ -378,8 +377,8 @@ class _BookPageState extends State<BookPage> {
           children: [
             Text(
               '여어떻노는 만 14세 미만 아동의 서비스 이용을 제한하고 있습니다.\n\n'
-                  '개인정보 보호법에는 만 14세 미만 아동의 개인정보 수집 시 법정대리인 동의를 받도록 규정하고 있으며,\n'
-                  '만 14세 미만 아동이 법정대리인 동의없이 서비스 이용이 확인된 경우 서비스 이용이 제한될 수 있음을 알려드립니다.',
+              '개인정보 보호법에는 만 14세 미만 아동의 개인정보 수집 시 법정대리인 동의를 받도록 규정하고 있으며,\n'
+              '만 14세 미만 아동이 법정대리인 동의없이 서비스 이용이 확인된 경우 서비스 이용이 제한될 수 있음을 알려드립니다.',
             ),
           ],
         ),
