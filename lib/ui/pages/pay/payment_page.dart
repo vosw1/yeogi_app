@@ -28,6 +28,13 @@ class PaymentPage extends StatelessWidget {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.all(gap_m),
+              child: Text(
+                "신용카드/페이코/카카오페이/네이버페이",
+                style: subtitle2(),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(right: gap_m, left: gap_m, bottom: gap_s),
               child: Container(
                 alignment: Alignment.center,
@@ -40,7 +47,7 @@ class PaymentPage extends StatelessWidget {
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(
                       vertical: gap_s / 2,
-                      horizontal: gap_m * 2,
+                      horizontal: gap_xxl,
                     ),
                   ),
                   child: Text(
@@ -50,7 +57,12 @@ class PaymentPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: gap_xm),
+            SizedBox(height: gap_s),
+            Divider(
+              color: Colors.grey[100],
+              thickness: 10.0,
+            ),
+            SizedBox(height: gap_s),
             Padding(
               padding: const EdgeInsets.only(right: gap_m, left: gap_m, bottom: gap_s),
               child: Container(

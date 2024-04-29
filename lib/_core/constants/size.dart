@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 
 // 간격
+const double gap_xxl = 100;
 const double gap_xl = 80;
 const double gap_l = 50;
 const double gap_xm = 40;
