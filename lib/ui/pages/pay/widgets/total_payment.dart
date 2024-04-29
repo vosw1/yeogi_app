@@ -2,10 +2,11 @@ import 'package:bootpay/bootpay.dart';
 import 'package:bootpay/model/extra.dart';
 import 'package:bootpay/model/item.dart';
 import 'package:bootpay/model/payload.dart';
-import 'package:bootpay/model/stat_item.dart';
 import 'package:bootpay/model/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 
 class TotalPayment extends StatelessWidget {
   // You can ask Get to find a Controller that is being used by another page and redirect you to it.
@@ -18,15 +19,48 @@ class TotalPayment extends StatelessWidget {
   Widget build(context) {
     // Access the updated count variable
     return Scaffold(
-        body: SafeArea(
-            child: Center(
-                child: TextButton(
-                    onPressed: () => bootpayTest(context),
-                    child: const Text('결제화면으로 이동', style: TextStyle(fontSize: 16.0))
-                )
-            )
-        )
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(gap_m),
+                child: ElevatedButton(
+                  onPressed: () => bootpayTest(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    padding: EdgeInsets.symmetric(
+                      vertical: gap_m,
+                      horizontal: gap_xxl,
+                    ),
+                  ),
+                  child: Text(
+                    '결제화면으로 이동',
+                    style: TextStyle(fontSize: 16.0, color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(height: gap_m), // Add some space between the buttons
+              TextButton(
+                onPressed: () {
+                  // Navigate to the payment_page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PaymentPage()),
+                  );
+                },
+                child: Text(
+                  '결제 취소',
+                  style: TextStyle(fontSize: 16.0, color: Colors.redAccent),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+
   }
 
   void bootpayTest(BuildContext context) {
@@ -85,13 +119,13 @@ class TotalPayment extends StatelessWidget {
     item1.name = "미키 '마우스"; // 주문정보에 담길 상품명
     item1.qty = 1; // 해당 상품의 주문 수량
     item1.id = "ITEM_CODE_MOUSE"; // 해당 상품의 고유 키
-    item1.price = 500; // 상품의 가격
+    item1.price = 50000; // 상품의 가격
 
     Item item2 = Item();
     item2.name = "키보드"; // 주문정보에 담길 상품명
     item2.qty = 1; // 해당 상품의 주문 수량
     item2.id = "ITEM_CODE_KEYBOARD"; // 해당 상품의 고유 키
-    item2.price = 500; // 상품의 가격
+    item2.price = 50000; // 상품의 가격
     List<Item> itemList = [item1, item2];
 
     payload.webApplicationId = webApplicationId; // web application id
@@ -102,8 +136,8 @@ class TotalPayment extends StatelessWidget {
     payload.pg = '나이스페이';
     // payload.method = '카드';
     // payload.methods = ['card', 'phone', 'vbank', 'bank', 'kakao'];
-    payload.orderName = "테스트 상품"; //결제할 상품명
-    payload.price = 1000.0; //정기결제시 0 혹은 주석
+    payload.orderName = "리조트상품"; //결제할 상품명
+    payload.price = 100000.0; //정기결제시 0 혹은 주석
 
 
     payload.orderId = DateTime.now().millisecondsSinceEpoch.toString(); //주문번호, 개발사에서 고유값으로 지정해야함
