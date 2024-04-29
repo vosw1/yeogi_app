@@ -223,7 +223,7 @@ class _BookPageState extends State<BookPage> {
     AlertDialog alertDialog;
 
     switch (text) {
-      case '이용규칙 및 취소/환불 동의(필수)':
+      case '이용규칙 및 취소/환불 규정 동의(필수)': // 수정된 부분
         alertDialog = _buildUsageRulesDialog();
         break;
       case '개인정보 수집 및 이용 동의(필수)':
@@ -249,7 +249,7 @@ class _BookPageState extends State<BookPage> {
 
   AlertDialog _buildUsageRulesDialog() {
     return AlertDialog(
-      title: Text('이용규칙 및 취소/환불 규정 동의', style: h6()),
+      title: Text('이용규칙 및 취소/환불 동의', style: h6()),
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
