@@ -49,24 +49,24 @@ class Move {
 
 // Sample data for stay and room
 final Stay stayData = Stay(
-  stayName: 'Sample Stay',
-  stayImgTitle: 'user/avarta.png',
-  location: 'Sample Location',
+  stayName: '★당일특가★ 하이원리조트 마운틴콘도',
+  stayImgTitle: 'hotel/hotel1.png',
+  location: '강원 정선군 고한읍 고한리 438',
   stayInfo: '',
   notice: '',
-  starCount: 1,
+  starCount: 5,
   comment: '',
   // Add more properties as needed
 );
 
 final Room roomData = Room(
-  roomName: 'Sample Room',
+  roomName: '마운틴 패밀리 스위트',
   roomImgTitle: 'hotel/hotel1.png',
-  personCount: "2",
-  price: 100,
-  checkInDate: '2024-04-30',
-  checkOutDate: '2024-05-01',
-  cancellationAndRefundPolicy: 'Sample Policy',
+  personCount: "2명",
+  price: 100000,
+  checkInDate: '체크인 날짜 : 2024-04-30',
+  checkOutDate: '체크아웃 날짜 : 2024-05-01',
+  cancellationAndRefundPolicy: '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요.',
   roomInfo: '',
   amenities: '',
   notice: '',
@@ -104,8 +104,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.homeAndBillaStayPage: (context) => const HomeAndBillaStayPage(), // 홈&빌라 숙소 페이지
     Move.campingStayPage: (context) => const CampingStayPage(), // 캠핑 숙소 페이지
     Move.guestHouseStayPage: (context) => const GuestHouseStayPage(), // 게하 숙소 페이지
-    Move.roomPage: (context) => RoomPage(stayData: stayData),
-    Move.bookPage: (context) => BookPage(), // 예약 페이지
+    Move.roomPage: (context) => RoomPage(roomData: roomData,),
+    Move.bookPage: (context) => BookPage(roomData: roomData), // 예약 페이지
     Move.paymetPage: (context) => PaymentPage(),
   };
 }

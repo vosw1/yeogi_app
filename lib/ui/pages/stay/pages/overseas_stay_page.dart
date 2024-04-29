@@ -31,7 +31,7 @@ class OverseasStayPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => RoomPage(stayData: stayData),
+                  builder: (context) => RoomPage(roomData: roomData),
                 ),
               );
             },

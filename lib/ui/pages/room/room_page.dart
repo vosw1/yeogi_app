@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/book_page.dart';
-import '../../../_core/constants/move.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
-import '../../../data/models/stay.dart';
 
 class RoomPage extends StatelessWidget {
-  final Stay stayData; // Add stayData property
+  final Room roomData; // Add stayData property
 
-  const RoomPage({
-      required this.stayData}); // Modify constructor to include stayData
+  const RoomPage({required this.roomData}); // Modify constructor to include stayData
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +29,6 @@ class RoomPage extends StatelessWidget {
             ),
             // 숙소 이미지
             SizedBox(height: gap_m),
-
-            Text('${stayData.location}', style: subtitle1()),
-            // 위치
             Text('${roomData.roomName}', style: subtitle1()),
             // 방이름
             Text('${roomData.personCount}', style: subtitle1()),
@@ -57,7 +52,7 @@ class RoomPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          BookPage(), // Pass roomData
+                          BookPage(roomData:roomData), // Pass roomData
                     ),
                   );
                 },
