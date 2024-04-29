@@ -33,9 +33,8 @@ class _HomePageState extends State
             SizedBox(height: gap_xm),
             //상단 로고, 벨 아이콘 + 상단 아이콘
             HomeHeader(),
-            SizedBox(height: gap_xm),
+            SizedBox(height: gap_m),
             HomeBody(),
-            SizedBox(height: 20), // 스크롤 가능한 공간을 추가하여 버튼과 컨텐츠를 분리합니다.
           ],
         ),
       ),

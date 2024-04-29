@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../_core/constants/size.dart';
 import '../../../../data/models/stay.dart';
 import '../../stay/stay_page.dart';
 
@@ -74,9 +75,10 @@ class CampingStayPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final Stay stay = campingDataList[index];
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
             child: Row(
               children: [
+                SizedBox(height: gap_xs),
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
