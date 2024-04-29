@@ -24,7 +24,7 @@ class HomeHeaderItemList extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(right: gap_m, left: gap_m),
+        padding: EdgeInsets.symmetric(horizontal: gap_xm, vertical: gap_m),
         child: HeaderAppbarItemList(),
       ),
     );
@@ -53,7 +53,17 @@ class HeaderAppbarItemList extends StatelessWidget {
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.gift, text: '특가'),
             ),
-            SizedBox(width: gap_xm),
+            SizedBox(width: gap_m),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HotelStayPage()),
+                 );
+              },
+              child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
+            ),
+            SizedBox(width: gap_m),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -61,19 +71,9 @@ class HeaderAppbarItemList extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => OverseasStayPage(bookInAbroardList: [], stayData: stayData)),
                 );
               },
-              child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
+              child: HeadAppBarItem(iconData: FontAwesomeIcons.hotel, text: '호텔'),
             ),
-            SizedBox(width: gap_xm),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ModelStayPage()),
-                );
-              },
-              child: HeadAppBarItem(iconData: FontAwesomeIcons.bed, text: '모텔'),
-            ),
-            SizedBox(width: gap_xm),
+            SizedBox(width: gap_m),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -81,7 +81,7 @@ class HeaderAppbarItemList extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => HotelStayPage()),
                 );
               },
-              child: HeadAppBarItem(iconData: FontAwesomeIcons.hotel, text: '호텔'),
+              child: HeadAppBarItem(iconData: FontAwesomeIcons.bed, text: '모텔'),
             ),
           ],
         ),
@@ -98,7 +98,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.umbrellaBeach, text: '펜션'),
             ),
-            SizedBox(width: gap_xm),
+            SizedBox(width: gap_m),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -108,7 +108,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.house, text: '홈&빌라'),
             ),
-            SizedBox(width: gap_xm),
+            SizedBox(width: gap_m),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -118,7 +118,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.mountainCity, text: '캠핑'),
             ),
-            SizedBox(width: gap_xm),
+            SizedBox(width: gap_m),
             GestureDetector(
               onTap: () {
                 Navigator.push(
