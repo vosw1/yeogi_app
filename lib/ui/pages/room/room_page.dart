@@ -57,7 +57,7 @@ class RoomPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          BookPage(roomData: widget.roomData), // Pass roomData
+                          BookPage(), // Pass roomData
                     ),
                   );
                 },

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
@@ -5,9 +6,6 @@ import '../../../data/models/room.dart';
 import '../pay/payment_page.dart';
 
 class BookPage extends StatefulWidget {
-  final Room roomData;
-  const BookPage({required this.roomData});
-
 
   @override
   _BookPageState createState() => _BookPageState();
@@ -50,7 +48,7 @@ class _BookPageState extends State<BookPage> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                            "assets/images/${widget.roomData.roomImgTitle}"),
+                            "assets/images/hotel/hotel1.png"),
                       ),
                     ),
                   ),
@@ -60,15 +58,15 @@ class _BookPageState extends State<BookPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${widget.roomData.roomName}',
+                          '',
                           style: h5(),
                         ),
                         SizedBox(height: gap_s),
-                        Text('${widget.roomData.roomName}', style: subtitle1()),
+                        Text('', style: subtitle1()),
                         SizedBox(height: gap_xs),
-                        Text('체크인 : ${widget.roomData.checkInDate}'),
-                        Text('체크아웃 : ${widget.roomData.checkOutDate}'),
-                        Text('인원 : ${widget.roomData.personCount} 명'),
+                        Text('체크인 : '),
+                        Text('체크아웃 : '),
+                        Text('인원 : 명'),
                       ],
                     ),
                   ),
@@ -123,7 +121,7 @@ class _BookPageState extends State<BookPage> {
                 context: context,
                 title: '전체 동의',
                 subtitle: [
-                  '숙소 이용규칙 및 취소/환불 규정 동의(필수)',
+                  '이용규칙 및 취소/환불 규정 동의(필수)',
                   '개인정보 수집 및 이용 동의(필수)',
                   '개인정보 제3자 제공 동의(필수)',
                   '만 14세 이상 확인(필수)',
@@ -155,7 +153,7 @@ class _BookPageState extends State<BookPage> {
               padding: EdgeInsets.symmetric(vertical: 15.0),
             ),
             child: Text(
-              '${widget.roomData.price}원 결제하기',
+              '원 결제하기',
               style: h6(mColor: Colors.white),
             ),
           ),
@@ -226,7 +224,7 @@ class _BookPageState extends State<BookPage> {
     AlertDialog alertDialog;
 
     switch (text) {
-      case '숙소 이용규칙 및 취소/환불 규정 동의(필수)':
+      case '이용규칙 및 취소/환불 규정 동의(필수)':
         alertDialog = _buildUsageRulesDialog();
         break;
       case '개인정보 수집 및 이용 동의(필수)':
@@ -263,7 +261,7 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               '19세 미만 청소년의 혼숙은 법적으로 불가하며, 이에 대한 숙소의 입실 거부 시 취소/환불이 불가합니다.\n'
-              '업체 현장에서 객실 컨디션 및 서비스로 인해 발생된 분쟁은 여기어때에서 책임지지 않습니다.',
+                  '업체 현장에서 객실 컨디션 및 서비스로 인해 발생된 분쟁은 여기어때에서 책임지지 않습니다.',
             ),
             SizedBox(height: 10),
             Text(
@@ -272,7 +270,7 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               '취소/환불 가능 여부는 숙소의 정책을 따릅니다.\n'
-              '취소/환불 규정에 따라 취소 수수료가 발생하는 경우, 취소 수수료는 판매가(상품가격) 기준으로 계산됩니다.',
+                  '취소/환불 규정에 따라 취소 수수료가 발생하는 경우, 취소 수수료는 판매가(상품가격) 기준으로 계산됩니다.',
             ),
           ],
         ),
@@ -304,21 +302,21 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               '필수\t예약/구매 서비스 제공 상담 및 부정거래 기록 확인\t\n'
-              '[예약·구매]\n'
-              '예약자 정보(이름, 휴대전화번호)\n'
-              '[결제]\n'
-              '거래내역\n'
-              '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
-              '[거래명세서 발급]\n'
-              '이메일주소\n'
-              '[현금영수증 발급]\n'
-              '휴대전화번호, 이메일주소\n'
-              '[취소·환불]\n'
-              '은행명, 계좌번호, 예금주명\n'
-              '- 회원 탈퇴 시 까지\n'
-              '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
-              '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
-              '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
+                  '[예약·구매]\n'
+                  '예약자 정보(이름, 휴대전화번호)\n'
+                  '[결제]\n'
+                  '거래내역\n'
+                  '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
+                  '[거래명세서 발급]\n'
+                  '이메일주소\n'
+                  '[현금영수증 발급]\n'
+                  '휴대전화번호, 이메일주소\n'
+                  '[취소·환불]\n'
+                  '은행명, 계좌번호, 예금주명\n'
+                  '- 회원 탈퇴 시 까지\n'
+                  '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
+                  '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
+                  '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
             ),
           ],
         ),
@@ -345,14 +343,14 @@ class _BookPageState extends State<BookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '제공받는 자\t${widget.roomData.roomName}\n'
-              '제공 목적\t숙박예약서비스 이용계약 이행\n'
-              '(서비스 제공, 확인, 이용자 정보 확인)\n'
-              '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)\n'
-              '제공받는 자의 개인정보\n'
-              '보유 및 이용기간\t예약서비스 제공 완료 후 6개월\n'
-              '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
-              '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
+              '제공받는 자\t\n'
+                  '제공 목적\t숙박예약서비스 이용계약 이행\n'
+                  '(서비스 제공, 확인, 이용자 정보 확인)\n'
+                  '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)\n'
+                  '제공받는 자의 개인정보\n'
+                  '보유 및 이용기간\t예약서비스 제공 완료 후 6개월\n'
+                  '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
+                  '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
             ),
           ],
         ),
@@ -380,8 +378,8 @@ class _BookPageState extends State<BookPage> {
           children: [
             Text(
               '여어떻노는 만 14세 미만 아동의 서비스 이용을 제한하고 있습니다.\n\n'
-              '개인정보 보호법에는 만 14세 미만 아동의 개인정보 수집 시 법정대리인 동의를 받도록 규정하고 있으며,\n'
-              '만 14세 미만 아동이 법정대리인 동의없이 서비스 이용이 확인된 경우 서비스 이용이 제한될 수 있음을 알려드립니다.',
+                  '개인정보 보호법에는 만 14세 미만 아동의 개인정보 수집 시 법정대리인 동의를 받도록 규정하고 있으며,\n'
+                  '만 14세 미만 아동이 법정대리인 동의없이 서비스 이용이 확인된 경우 서비스 이용이 제한될 수 있음을 알려드립니다.',
             ),
           ],
         ),
