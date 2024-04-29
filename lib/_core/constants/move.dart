@@ -89,7 +89,7 @@ final Payment payData = Payment(
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
     Move.loginPage: (context) => const LoginPage(), // 로그인 페이지
-    Move.joinPage: (context) => const JoinPage(), // 회원가입 페이지
+    Move.joinPage: (context) => JoinPage(), // 회원가입 페이지
     Move.homePage: (context) => HomePage(), // 홈 페이지
     Move.searchPage: (context) => SearchPage(), // 검색 페이지
     Move.scrapPage: (context) => ScrapPage(), // 내 주변 페이지 TODO : 없어질 수 있음

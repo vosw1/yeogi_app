@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:yogi_project/_core/utils/validator_util.dart';
+import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
@@ -107,32 +109,50 @@ class _LoginFormState extends State<LoginForm> {
   Widget _buildKakaoLoginButton() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_s),
-      child: ElevatedButton(
-        onPressed: signInWithKakao,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FaIcon(FontAwesomeIcons.comment, color: Colors.black),
-            SizedBox(width: 10),
-            Text(
-              '카카오로 로그인',
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: signInWithKakao,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FaIcon(FontAwesomeIcons.comment, color: Colors.black),
+                SizedBox(width: 10),
+                Text(
+                  '카카오로 로그인',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: gap_m),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              backgroundColor: Colors.yellow,
+            ),
+          ),
+          SizedBox(height: gap_l),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage()));
+            },
+            child: Text(
+              '아직 회원이 아니시면 회원가입',
               style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                color: Colors.redAccent,
+                decoration: TextDecoration.underline,
               ),
             ),
-          ],
-        ),
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: gap_m),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
           ),
-          backgroundColor: Colors.yellow,
-        ),
+        ],
       ),
     );
   }
+
 
   Future<void> signInWithKakao() async {
     try {
@@ -159,11 +179,3 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-String? validatePassword(String? value) {
-  if (value == null || value.isEmpty) {
-    return "비밀번호를 입력해주세요";
-  } else if (value.length < 8) {
-    return "비밀번호는 8자 이상이어야 합니다";
-  }
-  return null;
-}
