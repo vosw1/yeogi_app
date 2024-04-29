@@ -13,16 +13,15 @@ import '../../ui/pages/auth/login/login_page.dart';
 import '../../ui/pages/my/my_page.dart';
 import '../../ui/pages/scrap/scarp_page.dart';
 import '../../ui/pages/search/search_page.dart';
-import '../../ui/pages/stay/pages/camping_stay_page.dart';
 import '../../ui/pages/book/widgets/domestic_book_page.dart';
-import '../../ui/pages/stay/pages/guest_house_stay_page.dart';
-import '../../ui/pages/stay/pages/home_and_billa_stay_page.dart';
-import '../../ui/pages/stay/pages/hotel_stay_page.dart';
-import '../../ui/pages/stay/pages/motel_stay_page.dart';
-import '../../ui/pages/stay/pages/overseas_stay_page.dart';
-import '../../ui/pages/stay/pages/pension_stay_page.dart';
-import '../../ui/pages/stay/pages/sale_stay_page.dart';
-import '../../ui/pages/stay/stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/camping_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/guest_house_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/home_and_billa_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/hotel_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/motel_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/overseas_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/pension_stay_page.dart';
+import '../../ui/pages/stay/stay_list_pages/sale_stay_page.dart';
 import '../../ui/pages/stay/stay_page.dart';
 
 // URL 설정
@@ -99,7 +98,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
     Move.domesticBookPage: (context) => DomesticBookPage(DomesticStayBookList: []), // 국내 숙소 예약확인 페이지
     Move.domesticBookPage: (context) => OverseasBookPage(OverseasStayBookList: []), // 해외 숙소 예약확인// 페이지
-    Move.overseasStayPage: (context) => OverseasStayPage(OverseasStayBookList: [], stayData: stayData,), // 해외 숙소 페이지
+    Move.overseasStayPage: (context) => OverseasStayPage(stayData: stayData,), // 해외 숙소 페이지
     Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
     Move.hotelStayPage: (context) => const HotelStayPage(), // 호텔 숙소 페이지
     Move.motelStayPage: (context) => const ModelStayPage(), // 모텔 숙소 페이지

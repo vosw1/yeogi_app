@@ -10,16 +10,15 @@ import '../stay_page.dart';
 
 class OverseasStayPage extends StatelessWidget {
   final Stay stayData;
-  final List<Book> OverseasStayBookList; // 예약 리스트 추가
 
-  const OverseasStayPage({required this.stayData, required this.OverseasStayBookList});
+  const OverseasStayPage({required this.stayData});
 
   get roomData => null;
 
   @override
   Widget build(BuildContext context) {
     // 캠핑 숙소 리스트
-    List<Stay> OverseasStayBookList = [
+    List<Stay> OverseasStayList = [
       Stay(
         stayImgTitle: "overseas/overseas1.png",
         stayName: "두짓타니 괌 리조트",
@@ -78,9 +77,9 @@ class OverseasStayPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(bottom: gap_m),
         child: ListView.builder(
-          itemCount: OverseasStayBookList.length,
+          itemCount: OverseasStayList.length,
           itemBuilder: (context, index) {
-            final Stay stay = OverseasStayBookList[index];
+            final Stay stay = OverseasStayList[index];
             return Padding(
               padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
               child: Row(

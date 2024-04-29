@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../_core/constants/move.dart';
 import '../../../../_core/constants/size.dart';
-import '../../stay/pages/camping_stay_page.dart';
-import '../../stay/pages/guest_house_stay_page.dart';
-import '../../stay/pages/home_and_billa_stay_page.dart';
-import '../../stay/pages/hotel_stay_page.dart';
-import '../../stay/pages/motel_stay_page.dart';
-import '../../stay/pages/overseas_stay_page.dart';
-import '../../stay/pages/pension_stay_page.dart';
-import '../../stay/pages/sale_stay_page.dart';
+import '../../stay/stay_list_pages/camping_stay_page.dart';
+import '../../stay/stay_list_pages/guest_house_stay_page.dart';
+import '../../stay/stay_list_pages/home_and_billa_stay_page.dart';
+import '../../stay/stay_list_pages/hotel_stay_page.dart';
+import '../../stay/stay_list_pages/motel_stay_page.dart';
+import '../../stay/stay_list_pages/overseas_stay_page.dart';
+import '../../stay/stay_list_pages/pension_stay_page.dart';
+import '../../stay/stay_list_pages/sale_stay_page.dart';
 import 'home_header_appbar_item.dart';
 
 // 홈 페이지에 앱바 (아이콘 + 텍스트)
@@ -58,7 +58,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OverseasStayPage(OverseasStayBookList: [], stayData: stayData)),
+                  MaterialPageRoute(builder: (context) => OverseasStayPage(stayData: stayData)),
                  );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
