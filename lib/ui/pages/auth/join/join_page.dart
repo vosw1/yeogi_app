@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 
@@ -22,7 +23,7 @@ class JoinPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(gap_m),
           child: Form(
             key: _formKey,
             child: Column(
@@ -35,8 +36,9 @@ class JoinPage extends StatelessWidget {
                   hintText: 'example@email.com',
                   validator: validateEmail,
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: gap_s),
                 DuplimentEmailCheck(emailController: _emailController),
+                SizedBox(height: gap_s),
                 JoinTextFormField(
                   controller: _passwordController,
                   obscureText: true,
@@ -44,21 +46,21 @@ class JoinPage extends StatelessWidget {
                   validator: validatePassword,
                   hintText: "패스워드를 입력하세요",
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: gap_m),
                 JoinTextFormField(
                   controller: _nameController,
                   labelText: '이름',
                   validator: validateName,
                   hintText: "이름을 입력하세요",
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: gap_m),
                 JoinTextFormField(
                   controller: _addressController,
                   labelText: '주소',
                   validator: validateAddress,
                   hintText: "주소를 입력하세요",
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: gap_m),
                 JoinTextFormField(
                   controller: _ageController,
                   keyboardType: TextInputType.number,
@@ -66,7 +68,7 @@ class JoinPage extends StatelessWidget {
                   hintText: 'YYYYMMDD',
                   validator: validateAge,
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: gap_m),
                 JoinTextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
@@ -92,6 +94,7 @@ class JoinPage extends StatelessWidget {
                   ),
                   child: Text('회원가입', style: TextStyle(color: Colors.white)),
                 ),
+                SizedBox(height: gap_l),
               ],
             ),
           ),
