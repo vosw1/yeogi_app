@@ -61,11 +61,20 @@ class _BookPageState extends State<BookPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: gap_s),
-                        Text('${roomData.roomName}', style: subtitle1()),
-                        SizedBox(height: gap_xs),
-                        Text('체크인 : ${roomData.checkInDate}'),
-                        Text('체크아웃 : ${roomData.checkOutDate}'),
+                        Container(
+                          constraints: BoxConstraints(minHeight: 40),
+                          child: Text(
+                            '${roomData.roomName}',
+                            style: h5(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text('체크인: ${roomData.checkInDate}'),
+                        Text('체크아웃: ${roomData.checkOutDate}'),
                         Text('인원 : ${roomData.personCount}명'),
+                        SizedBox(height: gap_s),
+                        Text('가격 : ${roomData.price}원'),
                       ],
                     ),
                   ),
@@ -223,7 +232,7 @@ class _BookPageState extends State<BookPage> {
     AlertDialog alertDialog;
 
     switch (text) {
-      case '이용규칙 및 취소/환불 동의(필수)':
+      case '이용규칙 및 취소/환불 규정 동의(필수)': // 수정된 부분
         alertDialog = _buildUsageRulesDialog();
         break;
       case '개인정보 수집 및 이용 동의(필수)':
@@ -249,7 +258,7 @@ class _BookPageState extends State<BookPage> {
 
   AlertDialog _buildUsageRulesDialog() {
     return AlertDialog(
-      title: Text('이용규칙 및 취소/환불 규정 동의', style: h6()),
+      title: Text('이용규칙 및 취소/환불 동의', style: h6()),
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,21 +310,21 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               '필수\t예약/구매 서비스 제공 상담 및 부정거래 기록 확인\t\n'
-                  '[예약·구매]\n'
-                  '예약자 정보(이름, 휴대전화번호)\n'
-                  '[결제]\n'
-                  '거래내역\n'
-                  '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
-                  '[거래명세서 발급]\n'
-                  '이메일주소\n'
-                  '[현금영수증 발급]\n'
-                  '휴대전화번호, 이메일주소\n'
-                  '[취소·환불]\n'
-                  '은행명, 계좌번호, 예금주명\n'
-                  '- 회원 탈퇴 시 까지\n'
-                  '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
-                  '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
-                  '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
+              '[예약·구매]\n'
+              '예약자 정보(이름, 휴대전화번호)\n'
+              '[결제]\n'
+              '거래내역\n'
+              '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
+              '[거래명세서 발급]\n'
+              '이메일주소\n'
+              '[현금영수증 발급]\n'
+              '휴대전화번호, 이메일주소\n'
+              '[취소·환불]\n'
+              '은행명, 계좌번호, 예금주명\n'
+              '- 회원 탈퇴 시 까지\n'
+              '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
+              '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
+              '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
             ),
           ],
         ),
@@ -343,13 +352,13 @@ class _BookPageState extends State<BookPage> {
           children: [
             Text(
               '제공받는 자\t${roomData.roomName}\n'
-                  '제공 목적\t숙박예약서비스 이용계약 이행\n'
-                  '(서비스 제공, 확인, 이용자 정보 확인)\n'
-                  '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)\n'
-                  '제공받는 자의 개인정보\n'
-                  '보유 및 이용기간\t예약서비스 제공 완료 후 6개월\n'
-                  '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
-                  '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
+              '제공 목적\t숙박예약서비스 이용계약 이행\n'
+              '(서비스 제공, 확인, 이용자 정보 확인)\n'
+              '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)\n'
+              '제공받는 자의 개인정보\n'
+              '보유 및 이용기간\t예약서비스 제공 완료 후 6개월\n'
+              '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
+              '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
             ),
           ],
         ),
@@ -459,8 +468,7 @@ class _BookPageState extends State<BookPage> {
       // 예약 결제 페이지로 이동
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => PaymentPage()),
+        MaterialPageRoute(builder: (context) => PaymentPage()),
       );
     }
   }

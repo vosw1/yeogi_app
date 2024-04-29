@@ -20,8 +20,15 @@ class RoomPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${roomData.roomName}', style: h5()),
-            // 숙소명
+            Container(
+              constraints: BoxConstraints(minHeight: 40),
+              child: Text(
+                '${roomData.roomName}',
+                style: h5(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             SizedBox(
               width: 600,
               height: 200,

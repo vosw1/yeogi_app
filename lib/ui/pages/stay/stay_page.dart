@@ -22,7 +22,15 @@ class StayPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${stayData.stayName}', style: h5()), // 숙소명
+            Container(
+              constraints: BoxConstraints(minHeight: 40),
+              child: Text(
+                '${stayData.stayName}',
+                style: h5(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             SizedBox(
               width: 600,
               height: 200,
