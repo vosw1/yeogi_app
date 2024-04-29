@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_header.dart';
-import 'package:yogi_project/ui/pages/home/widgets/home_item.dart';
-
-import '../../../_core/constants/move.dart';
 import '../../../data/models/user.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 List<User> userDataList = [
   User(
-    userImgTitle: "p1.png",
+    userImgTitle: "user/avarta.png",
     userName: "메타코딩",
     email: "ssar@nate.com",
   ),
@@ -37,7 +34,6 @@ class _HomePageState extends State
             HomeHeader(),
             SizedBox(height: gap_m),
             HomeBody(),
-
             SizedBox(height: 20), // 스크롤 가능한 공간을 추가하여 버튼과 컨텐츠를 분리합니다.
           ],
         ),
