@@ -47,6 +47,8 @@ dependencies:
   flutter_svg: ^2.0.9
   bootpay: ^4.4.5
   get: ^4.6.5
+  flutter_masked_text2: ^0.9.1
+
 
 
 dev_dependencies:
