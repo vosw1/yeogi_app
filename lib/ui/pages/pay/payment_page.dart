@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/ui/pages/pay/widgets/total_payment.dart';
@@ -31,7 +32,7 @@ class PaymentPage extends StatelessWidget {
               padding: const EdgeInsets.all(gap_m),
               child: Text(
                 "신용카드/페이코/카카오페이/네이버페이",
-                style: subtitle2(),
+                style: subtitle1(),
               ),
             ),
             Padding(
@@ -58,37 +59,37 @@ class PaymentPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: gap_s),
-            Divider(
-              color: Colors.grey[100],
-              thickness: 10.0,
-            ),
-            SizedBox(height: gap_s),
-            Padding(
-              padding: const EdgeInsets.only(right: gap_m, left: gap_m, bottom: gap_s),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(gap_s),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    // 전체 가격 결제 로직 추가
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                    padding: EdgeInsets.symmetric(
-                      vertical: gap_s / 2,
-                      horizontal: gap_m * 2,
-                    ),
-                  ),
-                  child: Text(
-                    '예약 완료',
-                    style: subtitle1(mColor: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: gap_m),
+            // Divider(
+            //   color: Colors.grey[100],
+            //   thickness: 10.0,
+            // ),
+            // // SizedBox(height: gap_s),
+            // Padding(
+            //   padding: const EdgeInsets.only(right: gap_m, left: gap_m, bottom: gap_s),
+            //   child: Container(
+            //     alignment: Alignment.center,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(gap_s),
+            //     ),
+            //     child: ElevatedButton(
+            //       onPressed: () {
+            //         // 전체 가격 결제 로직 추가
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         backgroundColor: Colors.redAccent,
+            //         padding: EdgeInsets.symmetric(
+            //           vertical: gap_s / 2,
+            //           horizontal: gap_m * 2,
+            //         ),
+            //       ),
+            //       child: Text(
+            //         '예약 완료',
+            //         style: subtitle1(mColor: Colors.white),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(height: gap_m),
             SizedBox(height: gap_xs),
             Container(
               color: Colors.grey.shade100,
