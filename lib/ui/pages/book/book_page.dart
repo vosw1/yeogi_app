@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/_core/utils/validator_util.dart';
+import 'package:yogi_project/ui/pages/book/widgets/book_text_form_field.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
 import '../../../data/models/room.dart';
@@ -97,30 +99,25 @@ class _BookPageState extends State<BookPage> {
               SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_m),
+              SizedBox(height: gap_m),
               Text(
                 "예약자 정보",
                 style: h5(),
               ),
-              SizedBox(height: gap_m),
-              TextField(
+              SizedBox(height: gap_s),
+              BookTextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: '이름',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(gap_s),
-                  ),
-                ),
+                labelText: '이름',
+                hintText: "이름을 입력하세요",
+                validator: validateName,
               ),
               SizedBox(height: gap_s),
-              TextField(
+              BookTextFormField(
                 controller: _phoneNumberController,
+                labelText: '전화번호',
+                hintText: '000-0000-0000',
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: '전화번호',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(gap_s),
-                  ),
-                ),
+                validator: validatePhoneNumber,
               ),
               SizedBox(height: gap_s),
               Divider(),
@@ -424,19 +421,10 @@ class _BookPageState extends State<BookPage> {
       ],
     );
   }
-
   _showPopups(BuildContext context) {
     List<String> messages = [];
     if (!_subCheckboxValues.every((element) => element)) {
       messages.add('모두 동의해주세요');
-    }
-
-    if (_nameController.text.isEmpty) {
-      messages.add('이름을 입력해주세요');
-    }
-
-    if (_phoneNumberController.text.isEmpty) {
-      messages.add('전화번호를 입력해주세요');
     }
 
     if (messages.isNotEmpty) {

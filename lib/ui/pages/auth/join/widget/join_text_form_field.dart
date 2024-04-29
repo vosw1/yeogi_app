@@ -8,6 +8,7 @@ class JoinTextFormField extends StatefulWidget {
   final String? hintText;
   final FormFieldValidator<String>? validator;
   final bool? obscureText;
+  final Function(DateTime)? onDateSelected; // Callback for selected date
 
   JoinTextFormField({
     required this.controller,
@@ -16,6 +17,7 @@ class JoinTextFormField extends StatefulWidget {
     this.hintText,
     this.validator,
     this.obscureText,
+    this.onDateSelected,
   });
 
   @override
@@ -42,7 +44,7 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
                 color: Colors.redAccent,
               ),
             ),
-          InkWell(
+          GestureDetector(
             onTap: () {
               if (widget.labelText == '생년월일') {
                 _selectDate(context);
@@ -51,7 +53,7 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
             child: TextFormField(
               keyboardType: widget.keyboardType,
               controller: widget.controller,
-              readOnly: widget.labelText == '생년월일',
+              readOnly: true, // Always readOnly to prevent keyboard input
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 enabledBorder: OutlineInputBorder(
@@ -67,11 +69,11 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              validator: (value) {
-                if (widget.validator != null) {
-                  return widget.validator!(value);
+              validator: widget.validator,
+              onTap: () {
+                if (widget.labelText == '생년월일') {
+                  _selectDate(context);
                 }
-                return null;
               },
             ),
           ),
@@ -91,6 +93,10 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
       setState(() {
         _selectedDate = picked;
         widget.controller.text = _selectedDate!.toString().split(' ')[0];
+        // Notify the parent widget about the selected date
+        if (widget.onDateSelected != null) {
+          widget.onDateSelected!(_selectedDate!);
+        }
       });
     }
   }
