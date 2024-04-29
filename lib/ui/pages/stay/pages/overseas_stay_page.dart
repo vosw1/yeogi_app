@@ -3,7 +3,7 @@ import 'package:yogi_project/data/dtos/book_request.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/ui/pages/room/room_page.dart';
 
-import '../../../../data/models/stay.dart';
+import '../../../../../data/models/stay.dart';
 
 class OverseasStayPage extends StatelessWidget {
   final Stay stayData;
