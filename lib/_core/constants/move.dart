@@ -105,7 +105,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.campingStayPage: (context) => const CampingStayPage(), // 캠핑 숙소 페이지
     Move.guestHouseStayPage: (context) => const GuestHouseStayPage(), // 게하 숙소 페이지
     Move.roomPage: (context) => RoomPage(stayData: stayData),
-    Move.bookPage: (context) => BookPage(roomData: roomData,), // 예약 페이지
+    Move.bookPage: (context) => BookPage(), // 예약 페이지
     Move.paymetPage: (context) => PaymentPage(),
   };
 }
