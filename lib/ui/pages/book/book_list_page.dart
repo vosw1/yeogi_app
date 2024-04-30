@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 
 import '../../../data/dtos/book_request.dart';
@@ -24,6 +26,13 @@ class BookListPage extends StatelessWidget {
         itemCount: bookList.length,
         itemBuilder: (context, index) {
           final book = bookList[index];
+
+          // Calculate the duration of stay
+          final checkIn = book.checkInDate;
+          final checkOut = book.checkOutDate;
+          final duration = checkOut.difference(checkIn);
+          final numberOfNights = duration.inDays;
+
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -46,7 +55,7 @@ class BookListPage extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(width: 16.0),
+                  SizedBox(width: gap_s),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,24 +66,23 @@ class BookListPage extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(height: 8.0),
+                        SizedBox(height: gap_xs),
                         Text(
                           book.location,
+                          style: subtitle1(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(height: 8.0),
-                        // Text(
-                        //   book.checkInDate,
-                        //   maxLines: 1,
-                        //   overflow: TextOverflow.ellipsis,
-                        // ),
-                        // SizedBox(height: 8.0),
-                        // Text(
-                        //   book.checkOutDate,
-                        //   maxLines: 1,
-                        //   overflow: TextOverflow.ellipsis,
-                        // ),
+                        SizedBox(height: gap_xs),
+                        Text(
+                          '${DateFormat('yyyy-MM-dd HH:mm').format(checkIn)} | ${DateFormat('yyyy-MM-dd HH:mm').format(checkOut)}',
+                          style: TextStyle(fontSize: gap_s),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: gap_xs),
+                        Text('${numberOfNights} 박 ${numberOfNights + 1} 일',
+                            style: TextStyle(fontSize: gap_s)),
                       ],
                     ),
                   ),

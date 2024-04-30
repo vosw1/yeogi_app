@@ -1,17 +1,18 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/user.dart';
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
-import '../../../../data/models/payment.dart';
+
 import '../../../../data/models/stay.dart';
 
 // 국내 숙소 기본 틀
 class DomesticStayItem extends StatelessWidget {
   final Stay stayData;
-  final User userData;
+  final Comment commentData;
 
-  DomesticStayItem({required this.userData, required this.stayData});
+  DomesticStayItem({required this.commentData, required this.stayData});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,6 @@ class DomesticStayItem extends StatelessWidget {
            //_buildPopularItemStar(stayData.starCount), // 별점
             SizedBox(height: gap_s),
             //_buildPopularItemComment(), // 리뷰
-            SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(userData.userImgTitle), // 유저정보
           ],
         ),
       ),
@@ -68,40 +67,6 @@ class DomesticStayItem extends StatelessWidget {
           '$starCount 점',
           style: TextStyle(color: Colors.black), // 검정색 글자로 표시
         ),
-      ],
-    );
-  }
-
-  // Widget _buildPopularItemComment() { // 리뷰
-  //   return Container(
-  //     constraints: BoxConstraints(minHeight: 50),
-  //     child: Text(
-  //       ///stayData.comment,
-  //       style: body1(),
-  //       maxLines: 2,
-  //       overflow: TextOverflow.ellipsis,
-  //     ),
-  //   );
-  // }
-
-  Widget _buildPopularItemUserInfo(String imgTitle) { // 유저 정보
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CircleAvatar(
-          backgroundImage: AssetImage("assets/images/${userData.userImgTitle}"),
-        ),
-        SizedBox(width: gap_m),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userData.userName,
-              style: subtitle1(),
-            ),
-            Text(stayData.location),
-          ],
-        )
       ],
     );
   }

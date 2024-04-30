@@ -22,7 +22,7 @@ import '../../ui/pages/stay/stay_list_pages/motel_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/sale_stay_list.dart';
-import '../../ui/pages/stay/stay_page.dart';
+import '../../ui/pages/stay/stay_detail_page.dart';
 
 // URL 설정
 class Move {
@@ -68,7 +68,7 @@ final Room roomData = Room(
   checkOutDate: '2024-05-01',
   checkInTime: '',
   checkOutTime:"",
-  cancellationAndRefundPolicy: '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요.',
+  cancellationAndRefundPolicy: '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요',
   roomInfo: '',
   amenities: '',
   notice: '',
@@ -94,9 +94,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.joinPage: (context) => JoinPage(), // 회원가입 페이지
     Move.homePage: (context) => HomePage(), // 홈 페이지
     Move.searchPage: (context) => SearchPage(), // 검색 페이지
-    Move.scrapPage: (context) => ScrapPage(), // 내 주변 페이지 TODO : 없어질 수 있음
+    Move.scrapPage: (context) => ScrapListPage(), // 내 주변 페이지
     Move.myPage: (context) => MyPage(stayData: stayData,), // 마이 페이지
-    Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
+    Move.stayPage: (context) => StayDetailPage(stayData: stayData), // 기업(숙서) 페이지
     Move.domesticBookList: (context) => DomesticBookList(domesticbookList: [],), // 국내 숙소 예약확인 페이지
     Move.domesticBookList: (context) => OverseasBookList(overseasbookList: []), // 해외 숙소 예약확인// 페이지
     Move.overseasStayList: (context) => OverseasStayList(), // 해외 숙소 페이지
