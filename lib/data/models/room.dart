@@ -6,7 +6,8 @@ class Room {
   final String amenities; // 방 편의시설
   final String checkInDate; // 체크인 날짜
   final String checkOutDate; // 체크아웃 날짜
-  final String personCount; // 사람수
+  final String checkInTime; // 입실
+  final String checkOutTime; // 퇴실
   final int price; // 가격
   final String cancellationAndRefundPolicy; // 취소 및 환불 정책
   final String notice; // 여어떻노 공지
@@ -19,7 +20,8 @@ class Room {
     required this.amenities,
     required this.checkInDate,
     required this.checkOutDate,
-    required this.personCount,
+    required this.checkInTime,
+    required this.checkOutTime,
     required this.price,
     required this.cancellationAndRefundPolicy,
     required this.notice,
