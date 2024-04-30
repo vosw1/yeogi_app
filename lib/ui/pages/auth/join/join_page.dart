@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 
 import 'widget/join_text_form_field.dart';
 
-class JoinPage extends StatelessWidget {
+class JoinPage extends StatefulWidget {
+  @override
+  _JoinPageState createState() => _JoinPageState();
+}
+
+class _JoinPageState extends State<JoinPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -37,11 +43,15 @@ class JoinPage extends StatelessWidget {
                   validator: validateEmail,
                 ),
                 SizedBox(height: gap_s),
+                Text(
+                  _emailController.text.isNotEmpty ? validateEmail(_emailController.text) ?? '' : '',
+                  style: TextStyle(color: Colors.redAccent),
+                ),
+                SizedBox(height: gap_s),
                 DuplimentEmailCheck(emailController: _emailController),
                 SizedBox(height: gap_s),
                 JoinTextFormField(
                   controller: _passwordController,
-                  obscureText: true,
                   labelText: '비밀번호',
                   validator: validatePassword,
                   hintText: "패스워드를 입력하세요",
