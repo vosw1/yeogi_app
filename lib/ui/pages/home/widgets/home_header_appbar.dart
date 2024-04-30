@@ -24,7 +24,7 @@ class HomeHeaderItemList extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_xm, vertical: gap_m),
+        padding: EdgeInsets.symmetric(horizontal: gap_xm, vertical: gap_s),
         child: HeaderAppbarItemList(),
       ),
     );
