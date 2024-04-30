@@ -4,7 +4,7 @@ import '../../data/models/payment.dart';
 import '../../data/models/room.dart';
 import '../../data/models/stay.dart';
 import '../../ui/pages/auth/join/join_page.dart';
-import '../../ui/pages/book/widgets/overseas_book_page.dart';
+import '../../ui/pages/book/widgets/overseas_book_list.dart';
 import '../../ui/pages/pay/payment_page.dart';
 import '../../ui/pages/room/room_page.dart';
 import '../../ui/pages/book/book_page.dart';
@@ -13,15 +13,15 @@ import '../../ui/pages/auth/login/login_page.dart';
 import '../../ui/pages/my/my_page.dart';
 import '../../ui/pages/scrap/scarp_page.dart';
 import '../../ui/pages/search/search_page.dart';
-import '../../ui/pages/book/widgets/domestic_book_page.dart';
-import '../../ui/pages/stay/stay_list_pages/camping_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/guest_house_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/home_and_billa_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/hotel_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/motel_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/overseas_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/pension_stay_page.dart';
-import '../../ui/pages/stay/stay_list_pages/sale_stay_page.dart';
+import '../../ui/pages/book/widgets/domestic_book_list.dart';
+import '../../ui/pages/stay/stay_list_pages/camping_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/motel_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/pension_stay_list.dart';
+import '../../ui/pages/stay/stay_list_pages/sale_stay_list.dart';
 import '../../ui/pages/stay/stay_page.dart';
 
 // URL 설정
@@ -33,16 +33,16 @@ class Move {
   static String scrapPage = "/scrap";
   static String myPage = "/my";
   static String stayPage = "/stay";
-  static String domesticBookPage = "/book/domestic";
-  static String overseasBookPage = "/book/domestic";
-  static String overseasStayPage = "/stay/Overseas";
-  static String saleStayPage = "/stay/sale";
-  static String hotelStayPage = "/stay/hotel";
-  static String motelStayPage = "/stay/motel";
-  static String pansionStayPage = "/stay/pansion";
-  static String homeAndBillaStayPage = "/stay/homeAndBilla";
-  static String campingStayPage = "/stay/camping";
-  static String guestHouseStayPage = "/stay/guestHouse";
+  static String domesticBookList = "/book/domestic";
+  static String overseasBookList = "/book/overseas";
+  static String overseasStayList = "/Overseas";
+  static String saleStayList = "/sale";
+  static String hotelStayList = "/hotel";
+  static String motelStayList = "/motel";
+  static String pensionStayList = "/spension";
+  static String homeAndBillaStayList = "/homeAndBilla";
+  static String campingStayList = "/camping";
+  static String guestHouseStayList = "/guestHouse";
   static String roomPage = "/room";
   static String bookPage = "/book";
   static String paymetPage = "/pay";
@@ -63,10 +63,11 @@ final Stay stayData = Stay(
 final Room roomData = Room(
   roomName: '마운틴 패밀리 스위트',
   roomImgTitle: 'hotel/hotel1.png',
-  personCount: "2명",
   price: 100000,
   checkInDate: '2024-04-30',
   checkOutDate: '2024-05-01',
+  checkInTime: '',
+  checkOutTime:"",
   cancellationAndRefundPolicy: '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요.',
   roomInfo: '',
   amenities: '',
@@ -96,16 +97,16 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.scrapPage: (context) => ScrapPage(), // 내 주변 페이지 TODO : 없어질 수 있음
     Move.myPage: (context) => MyPage(stayData: stayData,), // 마이 페이지
     Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
-    Move.domesticBookPage: (context) => DomesticBookPage(DomesticStayBookList: []), // 국내 숙소 예약확인 페이지
-    Move.domesticBookPage: (context) => OverseasBookPage(OverseasStayBookList: []), // 해외 숙소 예약확인// 페이지
-    Move.overseasStayPage: (context) => OverseasStayPage(stayData: stayData,), // 해외 숙소 페이지
-    Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
-    Move.hotelStayPage: (context) => const HotelStayPage(), // 호텔 숙소 페이지
-    Move.motelStayPage: (context) => const ModelStayPage(), // 모텔 숙소 페이지
-    Move.pansionStayPage: (context) => const PensionStayPage(), // 펜션 숙소 페이지
-    Move.homeAndBillaStayPage: (context) => const HomeAndBillaStayPage(), // 홈&빌라 숙소 페이지
-    Move.campingStayPage: (context) => const CampingStayPage(), // 캠핑 숙소 페이지
-    Move.guestHouseStayPage: (context) => const GuestHouseStayPage(), // 게하 숙소 페이지
+    Move.domesticBookList: (context) => DomesticBookList(domesticbookList: [],), // 국내 숙소 예약확인 페이지
+    Move.domesticBookList: (context) => OverseasBookList(overseasbookList: []), // 해외 숙소 예약확인// 페이지
+    Move.overseasStayList: (context) => OverseasStayList(), // 해외 숙소 페이지
+    Move.saleStayList: (context) => SaleStayList(), // 특가 숙소 페이지
+    Move.hotelStayList: (context) => const HotelStayList(), // 호텔 숙소 페이지
+    Move.motelStayList: (context) => const MotelStayList(), // 모텔 숙소 페이지
+    Move.pensionStayList: (context) => const PensionStayList(), // 펜션 숙소 페이지
+    Move.homeAndBillaStayList: (context) => const HomeAndBillaStayList(), // 홈&빌라 숙소 페이지
+    Move.campingStayList: (context) => const CampingStayList(), // 캠핑 숙소 리스트
+    Move.guestHouseStayList: (context) => const GuestHouseStayList(), // 게하 숙소 페이지
     Move.roomPage: (context) => RoomPage(roomData: roomData,),
     Move.bookPage: (context) => BookPage(roomData: roomData), // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),

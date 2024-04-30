@@ -42,17 +42,13 @@ class RoomPage extends StatelessWidget {
             ),
             // 숙소 이미지
             SizedBox(height: gap_m),
-            Text('${roomData.roomName}', style: subtitle1()),
-            // 방이름
-            Text('${roomData.personCount}', style: subtitle1()),
-            // 인원수
-            Text('${roomData.price}', style: subtitle1()),
-            // 금액
-            Text('${roomData.checkInDate}', style: subtitle1()),
-            // 체크인 시간
-            Text('${roomData.checkOutDate}', style: subtitle1()),
-            // 편의시설
-            Text('${roomData.cancellationAndRefundPolicy}', style: subtitle1()),
+            Text('${roomData.roomName}', style: subtitle1()), // 방이름
+            Text('${roomData.price}', style: subtitle1()), // 금액
+            Text('${roomData.checkInDate}', style: subtitle1()), // 체크인 날짜
+            Text('${roomData.checkOutDate}', style: subtitle1()), // 체크아웃 날짜
+            Text('${roomData.checkInTime}', style: subtitle1()), // 체크인 시간
+            Text('${roomData.checkOutTime}', style: subtitle1()), // 체크아웃 시간
+            Text('${roomData.cancellationAndRefundPolicy}', style: subtitle1()), // 환불 정책
             SizedBox(height: gap_m),
             // 예약하기 버튼 위 여백
             SizedBox(

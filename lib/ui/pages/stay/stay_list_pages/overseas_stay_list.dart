@@ -1,24 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
-import 'package:yogi_project/data/models/payment.dart';
-import 'package:yogi_project/ui/pages/room/room_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
-import '../../../../../data/models/stay.dart';
-import '../../../../_core/constants/size.dart';
-import '../../../../_core/constants/style.dart';
-import '../stay_page.dart';
+import '../../../../data/models/stay.dart';
 
-class OverseasStayPage extends StatelessWidget {
-  final Stay stayData;
-
-  const OverseasStayPage({required this.stayData});
-
-  get roomData => null;
+class OverseasStayList extends StayListPage {
+  const OverseasStayList({Key? key})
+      : super(key: key, appBarTitle: '해외');
 
   @override
-  Widget build(BuildContext context) {
-    // 캠핑 숙소 리스트
-    List<Stay> OverseasStayList = [
+  List<Stay> getStayDataList() {
+    return [
+    // 해외 숙소 리스트
       Stay(
         stayImgTitle: "overseas/overseas1.png",
         stayName: "두짓타니 괌 리조트",
@@ -69,82 +61,5 @@ class OverseasStayPage extends StatelessWidget {
         comment: "시드니에 머무는 동안 너무 편안하게 묵었습니다! 헬스장도 잘되어있어서 잘 이용했네여 헬스장 내 샤워실에도 수건샴푸린스바디워시칫솔치약이 구비되어 있어, 운동 후 샤워하기 편했습니다. ",
       ),
     ];
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('해외'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: gap_m),
-        child: ListView.builder(
-          itemCount: OverseasStayList.length,
-          itemBuilder: (context, index) {
-            final Stay stay = OverseasStayList[index];
-            return Padding(
-              padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
-              child: Row(
-                children: [
-                  SizedBox(height: gap_xs),
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StayPage(stayData: stay),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 150, // 사진의 높이
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 8), // 사진과 텍스트 사이 간격
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity, // 화면 너비에 맞추기 위해 사용
-                          child: Text(
-                            stay.stayName,
-                            style: h5(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        SizedBox(height: 4), // 텍스트 사이 간격
-                        Text(
-                          stay.location, // 숙소 위치
-                          style: subtitle1(),maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 4), // 텍스트 사이 간격
-                        Text(
-                          stay.stayInfo, // 숙소 정보
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-    );
   }
 }

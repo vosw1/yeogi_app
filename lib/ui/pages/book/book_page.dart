@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
@@ -71,10 +72,12 @@ class _BookPageState extends State<BookPage> {
                           ),
                         ),
                         Text('체크인: ${roomData.checkInDate}'),
+                        Text('입실: ${roomData.checkInTime}'),
                         Text('체크아웃: ${roomData.checkOutDate}'),
-                        Text('인원 : ${roomData.personCount}명'),
+                        Text('퇴실: ${roomData.checkOutTime}'),
                         SizedBox(height: gap_s),
-                        Text('가격 : ${roomData.price}원'),
+                        Text(
+                            '결제금액 : ${NumberFormat('#,###').format(roomData.price)} 원'),
                       ],
                     ),
                   ),
@@ -161,7 +164,7 @@ class _BookPageState extends State<BookPage> {
               padding: EdgeInsets.symmetric(vertical: 15.0),
             ),
             child: Text(
-              '${roomData.price}원 결제하기',
+              '${NumberFormat('#,###').format(roomData.price)} 원 결제하기',
               style: h6(mColor: Colors.white),
             ),
           ),

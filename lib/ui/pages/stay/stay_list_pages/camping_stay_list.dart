@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/size.dart';
-import '../../../../../data/models/stay.dart';
-import '../../../../_core/constants/style.dart';
-import '../stay_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
-class SaleStayPage extends StatelessWidget {
-  final Stay stayData;
+import '../../../../data/models/stay.dart';
 
-  SaleStayPage({required this.stayData});
+class CampingStayList extends StayListPage {
+  const CampingStayList({Key? key})
+      : super(key: key, appBarTitle: '캠핑');
 
   @override
-  Widget build(BuildContext context) {
+  List<Stay> getStayDataList() {
+    return [
     // 캠핑 숙소 리스트
-    List<Stay> campingDataList = [
       Stay(
         stayImgTitle: "camping/camping1.png",
         stayName: "영흥도 코코로망스 카라반",
@@ -68,82 +66,5 @@ class SaleStayPage extends StatelessWidget {
         comment: "사장님도 매우 친절하시고 귀여운 고양이들이 많이 있습니다. 정말 시간 가는줄 모르고 재미있게 잘 놀았습니다. ",
       ),
     ];
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('특가'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: gap_m),
-        child: ListView.builder(
-          itemCount: campingDataList.length,
-          itemBuilder: (context, index) {
-            final Stay stay = campingDataList[index];
-            return Padding(
-              padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
-              child: Row(
-                children: [
-                  SizedBox(height: gap_xs),
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StayPage(stayData: stay),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 150, // 사진의 높이
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 8), // 사진과 텍스트 사이 간격
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity, // 화면 너비에 맞추기 위해 사용
-                          child: Text(
-                            stay.stayName,
-                            style: h5(),
-                            maxLines: 1, // 최대 2줄까지 표시
-                            overflow: TextOverflow.ellipsis, // 2줄 초과 시 생략 부호 표시
-                          ),
-                        ),
-                        SizedBox(height: 4), // 텍스트 사이 간격
-                        Text(
-                          stay.location, // 숙소 위치
-                          style: subtitle1(),maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 4), // 텍스트 사이 간격
-                        Text(
-                          stay.stayInfo, // 숙소 정보
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-    );
   }
 }
