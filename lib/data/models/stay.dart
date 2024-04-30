@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 
 import '../../_core/constants/move.dart';
 import '../../ui/pages/room/room_page.dart';
-import '../../ui/pages/stay/stay_page.dart'; // Import DateFormat
+import '../../ui/pages/stay/stay_detail_page.dart'; // Import DateFormat
 
 class Stay {
   final String stayImgTitle; // 숙소 이미지 제목
   final String stayName; // 숙소 이름
-  final String stayInfo; // 숙소 특이사항
+  final String stayInfo; // 숙소 소개
   final String location; // 위치
-  final String notice; // 여어떻노 공지
+  final String notice; // 이용공지
   final double starCount; // 별점
   final String comment; // 리뷰 내용
 

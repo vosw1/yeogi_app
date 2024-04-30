@@ -25,7 +25,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
   void initState() {
     super.initState();
     _checkInDate = widget.book.checkInDate;
-    _checkOutDate = widget.book.checkOutDate;
+    _checkOutDate = widget.book.checkOutDate ?? DateTime.now();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
   }
 
@@ -66,7 +66,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       style: TextStyle(fontSize: gap_m)),
                   Text('${widget.book.location}'),
                   SizedBox(height: gap_m),
-                  Text('숙박기간 : $_numberOfNights박 ${_numberOfNights + 1}일', style: TextStyle(fontSize: gap_m)),
+                  Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_m),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,7 +199,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     //   ),
                     // );
                   },
-
                   child: Text('예'),
                 ),
                 SizedBox(width: gap_s),

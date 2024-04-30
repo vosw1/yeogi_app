@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
 import '../../../../data/models/stay.dart';
-import '../../stay/stay_page.dart';
+import '../../stay/stay_detail_page.dart';
 
 abstract class StayListPage extends StatelessWidget {
   const StayListPage({Key? key, required this.appBarTitle}) : super(key: key);

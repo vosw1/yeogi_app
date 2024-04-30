@@ -4,7 +4,7 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
 import '../../../../_core/constants/size.dart';
 import '../../../../data/models/stay.dart';
-import '../stay_page.dart';
+import '../stay_detail_page.dart';
 
 class GuestHouseStayList extends StayListPage {
   const GuestHouseStayList({Key? key})

@@ -9,7 +9,7 @@ import '../../stay/stay_list_pages/hotel_stay_list.dart';
 import '../../stay/stay_list_pages/motel_stay_list.dart';
 import '../../stay/stay_list_pages/overseas_stay_list.dart';
 import '../../stay/stay_list_pages/pension_stay_list.dart';
-import '../../stay/stay_list_pages/sale_stay_list.dart';
+import '../../stay/sale_stay_list.dart';
 import 'home_header_appbar_item.dart';
 
 // 홈 페이지에 앱바 (아이콘 + 텍스트)
@@ -24,7 +24,7 @@ class HomeHeaderItemList extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_xm, vertical: gap_m),
+        padding: EdgeInsets.symmetric(horizontal: gap_xm, vertical: gap_s),
         child: HeaderAppbarItemList(),
       ),
     );

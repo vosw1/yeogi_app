@@ -21,8 +21,8 @@ import '../../ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/motel_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/pension_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/sale_stay_list.dart';
-import '../../ui/pages/stay/stay_page.dart';
+import '../../ui/pages/stay/sale_stay_list.dart';
+import '../../ui/pages/stay/stay_detail_page.dart';
 
 // URL 설정
 class Move {
@@ -68,7 +68,7 @@ final Room roomData = Room(
   checkOutDate: '2024-05-01',
   checkInTime: '',
   checkOutTime:"",
-  cancellationAndRefundPolicy: '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요.',
+  cancellationAndRefundPolicy: '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요',
   roomInfo: '',
   amenities: '',
   notice: '',
