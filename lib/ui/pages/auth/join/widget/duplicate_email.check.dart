@@ -30,9 +30,7 @@ class DuplimentEmailCheck extends StatelessWidget {
     // 이메일 유효성 검사
     String? validationResult = validateEmail(email);
     if (validationResult != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(validationResult)),
-      );
+      _showErrorDialog(context, validationResult);
       return;
     }
 
@@ -41,14 +39,10 @@ class DuplimentEmailCheck extends StatelessWidget {
 
     if (isEmailDuplicate) {
       // 이메일이 중복되었을 경우 처리
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('중복된 이메일입니다.')),
-      );
+      _showErrorDialog(context, '중복된 이메일입니다.');
     } else {
       // 이메일이 중복되지 않았을 경우 처리
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('사용 가능한 이메일입니다.')),
-      );
+      _showSuccessDialog(context, '사용 가능한 이메일입니다.');
     }
   }
 
@@ -76,5 +70,47 @@ class DuplimentEmailCheck extends StatelessWidget {
       r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
     );
     return emailRegex.hasMatch(value ?? '');
+  }
+
+  // 에러 다이얼로그 표시
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('오류'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('확인'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // 성공 다이얼로그 표시
+  void _showSuccessDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('성공'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('확인'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -47,7 +47,7 @@ class _JoinPageState extends State<JoinPage> {
                   _emailController.text.isNotEmpty ? validateEmail(_emailController.text) ?? '' : '',
                   style: TextStyle(color: Colors.redAccent),
                 ),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_xxx),
                 DuplimentEmailCheck(emailController: _emailController),
                 SizedBox(height: gap_s),
                 JoinTextFormField(
