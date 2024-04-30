@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/service_agreement.dart';
+
 
 import 'widget/join_text_form_field.dart';
 
-class JoinPage extends StatelessWidget {
+class JoinPage extends StatefulWidget {
+  @override
+  _JoinPageState createState() => _JoinPageState();
+}
+
+class _JoinPageState extends State<JoinPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -14,6 +22,7 @@ class JoinPage extends StatelessWidget {
   final _addressController = TextEditingController();
   final _ageController = MaskedTextController(mask: '0000-00-00');
   final _phoneController = MaskedTextController(mask: '000-0000-0000');
+  bool _serviceAgreementChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +50,6 @@ class JoinPage extends StatelessWidget {
                 SizedBox(height: gap_s),
                 JoinTextFormField(
                   controller: _passwordController,
-                  obscureText: true,
                   labelText: '비밀번호',
                   validator: validatePassword,
                   hintText: "패스워드를 입력하세요",
@@ -76,10 +84,38 @@ class JoinPage extends StatelessWidget {
                   hintText: '000-0000-0000',
                   validator: validatePhoneNumber,
                 ),
+                SizedBox(height: gap_m),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _serviceAgreementChecked,
+                      onChanged: (value) {
+                        setState(() {
+                          _serviceAgreementChecked = value ?? false;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ServiceAgreement()), // 서비스 약관 페이지로 이동
+                        );
+                      },
+                      child: Text(
+                        '서비스 약관에 동의합니다',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 32.0),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate() && _serviceAgreementChecked) {
                       // 회원가입 로직 구현
                       print('이메일: ${_emailController.text}');
                       print('비밀번호: ${_passwordController.text}');

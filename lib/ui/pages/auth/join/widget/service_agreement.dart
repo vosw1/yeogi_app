@@ -1,112 +1,205 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class ServiceAgreement extends StatefulWidget {
-  const ServiceAgreement({super.key});
-
   @override
-  State<ServiceAgreement> createState() => _ServiceAgreementState();
+  _ServiceAgreementState createState() => _ServiceAgreementState();
 }
 
 class _ServiceAgreementState extends State<ServiceAgreement> {
-  List<bool> _isChecked = List.generate(5, (_) => false);
-
-  bool get _buttonActive => _isChecked[1] && _isChecked[2] && _isChecked[3];
-
-  void _updateCheckState(int index) {
-    setState(() {
-      // 모두 동의 체크박스일 경우
-      if (index == 0) {
-        bool isAllChecked = !_isChecked.every((element) => element);
-        _isChecked = List.generate(5, (index) => isAllChecked);
-      } else {
-        _isChecked[index] = !_isChecked[index];
-        _isChecked[0] = _isChecked.getRange(1, 5).every((element) => element);
-      }
-    });
-  }
+  List<bool> _subCheckboxValues = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
+    return Material(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('서비스 약관 내용'), // 페이지 타이틀 제목
+        ),
+        body: Column(
+          children: [
+            for (int index = 0; index < _subCheckboxValues.length; index++)
+              _buildSubCheckbox(index),
+            // 이후에 필요한 위젯 추가 가능
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSubCheckbox(int index) {
+    return Column(
+      children: [
+        Text(
+          '서비스 약관 내용 ${index + 1}',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        Row(
+          children: [
+            Checkbox(
+              value: _subCheckboxValues[index],
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _subCheckboxValues[index] = value;
+                  });
+                }
+              },
+            ),
+            GestureDetector(
+              onTap: () {
+                _showPopup(context, index);
+              },
+              child: Text(
+                '약관 보기',
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void _showPopup(BuildContext context, int index) {
+    AlertDialog alertDialog;
+
+    switch (index) {
+      case 0:
+        alertDialog = _buildDialog(
+          title: '이용규칙 및 취소/환불 동의',
+          content: [
+            _buildDialogContent('이용규칙', '내용'),
+            _buildDialogContent('취소/환불 규정', '내용'),
+          ],
+        );
+        break;
+      case 1:
+        alertDialog = _buildDialog(
+          title: '개인정보 수집 및 이용 동의',
+          content: [
+            _buildDialogContent('구분', '내용'),
+          ],
+        );
+        break;
+      case 2:
+        alertDialog = _buildDialog(
+          title: '만 14세 이상 확인',
+          content: [
+            _buildDialogContent('', '내용'),
+          ],
+        );
+        break;
+      default:
+        alertDialog = _buildDefaultDialog(context);
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alertDialog;
+      },
+    );
+  }
+
+  Widget _buildDialogContent(String title, String content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Text(content),
+        SizedBox(height: 10),
+      ],
+    );
+  }
+
+  AlertDialog _buildDialog({required String title, required List<Widget> content}) {
+    return AlertDialog(
+      title: Text(title, style: h6()),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: content,
+        ),
+      ),
+      backgroundColor: Colors.white,
+      actions: <Widget>[
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.black,
+          child: Text('확인'),
+        ),
+      ],
+    );
+  }
+
+  AlertDialog _buildDefaultDialog(BuildContext context) {
+    return AlertDialog(
+      title: Text('Notice'),
+      content: Text('일치하는 팝업이 없습니다.'),
+      backgroundColor: Colors.white,
+      actions: <Widget>[
+        Center(
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('확인'),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('회원가입 약관 동의', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 50),
-            ..._renderCheckList(),
-            const Spacer(),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _buttonActive ? Colors.blue : Colors.grey,
-                    ),
-                    onPressed: () {},
-                    child: const Text('가입하기',style: TextStyle(color: Colors.white),),
-                  ),
+      ],
+    );
+  }
+
+  void _showPopups(BuildContext context) {
+    List<String> uncheckedAgreements = [];
+
+    // 각 약관에 대해 동의하지 않은 경우를 확인하여 리스트에 추가합니다.
+    for (int index = 0; index < _subCheckboxValues.length; index++) {
+      if (!_subCheckboxValues[index]) {
+        uncheckedAgreements.add('서비스 약관 내용 ${index + 1}');
+      }
+    }
+
+    // 모든 약관에 동의하지 않은 경우 알림 다이얼로그를 표시합니다.
+    if (uncheckedAgreements.isNotEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Notice'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: uncheckedAgreements
+                  .map((agreement) => Text(agreement))
+                  .toList(),
+            ),
+            backgroundColor: Colors.white,
+            actions: <Widget>[
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
                 ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  List<Widget> _renderCheckList() {
-    List<String> labels = [
-      '모두 동의',
-      '만 14세 이상입니다.(필수)',
-      '개인정보처리방침(필수)',
-      '서비스 이용 약관(필수)',
-      '이벤트 및 할인 혜택 안내 동의(선택)',
-    ];
-
-    List<Widget> list = [
-      renderContainer(_isChecked[0], labels[0], () => _updateCheckState(0)),
-      const Divider(thickness: 1.0),
-    ];
-
-    list.addAll(List.generate(4, (index) => renderContainer(_isChecked[index + 1], labels[index + 1], () => _updateCheckState(index + 1))));
-
-    return list;
-  }
-
-  Widget renderContainer(bool checked, String text, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-        color: Colors.white,
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: checked ? Colors.blue : Colors.grey, width: 2.0),
-                color: checked ? Colors.blue : Colors.white,
               ),
-              child: Icon(Icons.check, color: checked ? Colors.white : Colors.grey, size: 18),
-            ),
-            const SizedBox(width: 15),
-            Text(text, style: const TextStyle(color: Colors.grey, fontSize: 18)),
-          ],
-        ),
-      ),
-    );
+            ],
+          );
+        },
+      );
+    }
   }
 }
