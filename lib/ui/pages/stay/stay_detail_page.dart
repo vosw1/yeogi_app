@@ -4,16 +4,16 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 
-class StayPage extends StatefulWidget {
+class StayDetailPage extends StatefulWidget {
   final Stay stayData;
 
-  StayPage({required this.stayData});
+  StayDetailPage({required this.stayData});
 
   @override
   _StayPageState createState() => _StayPageState();
 }
 
-class _StayPageState extends State<StayPage> {
+class _StayPageState extends State<StayDetailPage> {
   final ScrollController _scrollController = ScrollController();
   bool isFavorite = false; // Track if the stay is favorited
 

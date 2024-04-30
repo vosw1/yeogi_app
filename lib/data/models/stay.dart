@@ -50,7 +50,7 @@ class Stay {
     return {
       // Other routes remain unchanged
 
-      Move.stayPage: (context) => StayPage(stayData: stayData), // 숙소 페이지
+      Move.stayPage: (context) => StayDetailPage(stayData: stayData), // 숙소 페이지
       Move.roomPage: (context) => RoomPage(roomData: roomData), // 방 페이지
     };
   }

@@ -3,8 +3,8 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
 import '../../../../data/models/stay.dart';
 
-class ScrapList extends StayListPage {
-  const ScrapList({Key? key})
+class ScrapListPage extends StayListPage {
+  const ScrapListPage({Key? key})
       : super(key: key, appBarTitle: '찜한 숙소');
 
   @override

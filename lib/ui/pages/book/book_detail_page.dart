@@ -140,16 +140,34 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ),
             SizedBox(height: gap_m),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _showCancelConfirmationDialog(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  side: BorderSide.none, // 테두리 없음
-                ),
-                child: Text('예약 취소'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _showCancelConfirmationDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent,
+                      side: BorderSide.none, // 테두리 없음
+                    ),
+                    child: Text('예약 취소'),
+                  ),
+                  SizedBox(width: gap_m),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Show review writing dialog
+                      _showReviewWritingDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent,
+                      side: BorderSide.none, // 테두리 없음
+                    ),
+                    child: Text('리뷰 작성'),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: gap_m),
@@ -215,8 +233,37 @@ class _BookDetailPageState extends State<BookDetailPage> {
       },
     );
   }
+
+  void _showReviewWritingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('리뷰 작성'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: '리뷰 내용'),
+                maxLines: 3,
+              ),
+              SizedBox(height: gap_m),
+              ElevatedButton(
+                onPressed: () {
+                  // Add logic to handle submitting the review
+                  Navigator.of(context).pop();
+                },
+                child: Text('작성 완료'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
 String formatDate(DateTime dateTime) {
   return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
 }
+
