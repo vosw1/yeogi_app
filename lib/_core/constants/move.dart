@@ -94,7 +94,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.joinPage: (context) => JoinPage(), // 회원가입 페이지
     Move.homePage: (context) => HomePage(), // 홈 페이지
     Move.searchPage: (context) => SearchPage(), // 검색 페이지
-    Move.scrapPage: (context) => ScrapPage(), // 내 주변 페이지 TODO : 없어질 수 있음
+    Move.scrapPage: (context) => ScrapList(), // 내 주변 페이지
     Move.myPage: (context) => MyPage(stayData: stayData,), // 마이 페이지
     Move.stayPage: (context) => StayPage(stayData: stayData), // 기업(숙서) 페이지
     Move.domesticBookList: (context) => DomesticBookList(domesticbookList: [],), // 국내 숙소 예약확인 페이지
