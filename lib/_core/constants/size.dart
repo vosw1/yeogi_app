@@ -10,6 +10,7 @@ const double gap_m = 20;
 const double gap_s = 10;
 const double gap_xs = 5;
 const double gap_xx = 1;
+const double gap_xxx = 0.1;
 
 // 헤더 높이
 const double header_height = 620;
