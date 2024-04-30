@@ -4,11 +4,18 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 
-class StayPage extends StatelessWidget {
+class StayPage extends StatefulWidget {
   final Stay stayData;
-  final ScrollController _scrollController = ScrollController(); // ScrollController 추가
 
   StayPage({required this.stayData});
+
+  @override
+  _StayPageState createState() => _StayPageState();
+}
+
+class _StayPageState extends State<StayPage> {
+  final ScrollController _scrollController = ScrollController();
+  bool isFavorite = false; // Track if the stay is favorited
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +27,21 @@ class StayPage extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.favorite,
+                color: isFavorite ? Colors.redAccent : null, // Change color based on state
+              ),
+              onPressed: () {
+                // Toggle the favorite state when the icon is pressed
+                setState(() {
+                  isFavorite = !isFavorite;
+                });
+              },
+            ),
+            SizedBox(width: gap_s),
+          ],
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // ScrollController 전달
