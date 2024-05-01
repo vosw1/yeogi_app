@@ -32,12 +32,7 @@ class FAQList extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FAQAnswerPage(faqItem: faqItems[index]),
-                    ),
-                  );
+                  faqItems[index].toggle(); // 아이템의 확장 상태를 토글합니다.
                 },
                 child: Row(
                   children: [
@@ -47,7 +42,7 @@ class FAQList extends StatelessWidget {
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Icon(Icons.arrow_drop_down), // ">" 아이콘 추가
+                    Icon(faqItems[index].isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down), // 확장 상태에 따라 아이콘 변경
                   ],
                 ),
               ),
@@ -76,7 +71,7 @@ class FAQAnswerPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("자주 묻는 질문")),
       body: Padding(
-        padding: const EdgeInsets.all(gap_m),
+        padding: const EdgeInsets.all(gap_l),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

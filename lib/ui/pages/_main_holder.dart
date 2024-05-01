@@ -54,6 +54,7 @@ class HomeBottomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
       onTap: onItemTapped,
+      selectedItemColor: Colors.redAccent,
       items: [
         const BottomNavigationBarItem(
           label: '홈',
