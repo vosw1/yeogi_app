@@ -48,6 +48,7 @@ dependencies:
   bootpay: ^4.4.5
   get: ^4.6.5
   flutter_masked_text2: ^0.9.1
+  flutter_phone_direct_caller: ^2.1.1
 
 
 
