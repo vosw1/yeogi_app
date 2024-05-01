@@ -92,6 +92,8 @@ class _StayPageState extends State<StayDetailPage> {
               RoomInfoWidget(roomData: widget.roomData),
               SizedBox(height: gap_s),
               // 숙소 소개 섹션
+              Divider(),
+              SizedBox(height: gap_xs),
               Text(
                 '숙소 소개',
                 style: h6(),
