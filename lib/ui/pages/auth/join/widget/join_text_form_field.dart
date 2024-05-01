@@ -7,8 +7,8 @@ class JoinTextFormField extends StatefulWidget {
   final String? labelText;
   final String? hintText;
   final FormFieldValidator<String>? validator;
-  final bool? obscureText;
-  final Function(DateTime)? onDateSelected; // 선택한 날짜에 대한 콜백
+  final bool? obscureText; // 수정된 부분: 비밀번호 부분을 *로 표시하기 위한 속성 추가
+  final Function(DateTime)? onDateSelected;
 
   JoinTextFormField({
     required this.controller,
@@ -16,7 +16,7 @@ class JoinTextFormField extends StatefulWidget {
     this.labelText,
     this.hintText,
     this.validator,
-    this.obscureText,
+    this.obscureText, // 수정된 부분: 비밀번호 부분을 *로 표시하기 위한 속성 추가
     this.onDateSelected,
   });
 
@@ -31,7 +31,6 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
   @override
   void initState() {
     super.initState();
-    // validator 함수를 호출하여 초기 에러 메시지 설정
     _errorText = widget.validator!(widget.controller.text);
   }
 
@@ -63,7 +62,7 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
                   ? TextInputType.text
                   : widget.keyboardType,
               controller: widget.controller,
-              // readOnly: true, // 키보드 입력 방지
+              obscureText: widget.obscureText ?? false, // 수정된 부분: 비밀번호 부분을 *로 표시
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 enabledBorder: OutlineInputBorder(
@@ -78,14 +77,13 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                errorText: _errorText, // 에러 메시지 표시
+                errorText: _errorText,
               ),
               validator: (value) {
-                // 유효성 검사를 widget.validator 함수에 위임하고 반환된 에러 메시지를 사용
                 setState(() {
-                  _errorText = widget.validator!(value); // 에러 메시지 설정
+                  _errorText = widget.validator!(value);
                 });
-                return null; // validator 콜백은 항상 null을 반환
+                return null;
               },
               onTap: () {
                 if (widget.labelText == '생년월일') {
@@ -99,7 +97,6 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
     );
   }
 
-  // 생년월일 선택 기능 추가
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -111,7 +108,6 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
       setState(() {
         _selectedDate = picked;
         widget.controller.text = _selectedDate!.toString().split(' ')[0];
-        // 부모 위젯에 선택한 날짜 알림
         if (widget.onDateSelected != null) {
           widget.onDateSelected!(_selectedDate!);
         }

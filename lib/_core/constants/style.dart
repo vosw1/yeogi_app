@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 
 TextStyle h4({Color mColor = Colors.black}) {
-  return TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: mColor);
+  return TextStyle(fontSize: 25, color: mColor);
 }
 
 TextStyle h5({Color mColor = Colors.black}) {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: mColor);
+  return TextStyle(fontSize: 20, color: mColor);
 }
 
 TextStyle h6({Color mColor = Colors.black}) {
