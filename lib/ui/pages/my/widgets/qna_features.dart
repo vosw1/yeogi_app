@@ -5,8 +5,9 @@ import 'package:yogi_project/_core/constants/size.dart';
 class FAQItem {
   final String question;
   final String answer;
+  bool isExpanded; // 토글 상태
 
-  FAQItem({required this.question, required this.answer});
+  FAQItem({required this.question, required this.answer, this.isExpanded = false});
 }
 
 // 자주 묻는 질문 리스트를 표시하는 위젯입니다.
@@ -22,15 +23,20 @@ class FAQList extends StatelessWidget {
       body: ListView.builder(
         itemCount: faqItems.length,
         itemBuilder: (context, index) {
-          return ListTile(
+          return ExpansionTile(
             title: Text(faqItems[index].question),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FAQAnswerPage(faqItem: faqItems[index]),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(gap_l),
+                child: Text(
+                  faqItems[index].answer,
+                  style: TextStyle(fontSize: 16),
                 ),
-              );
+              ),
+            ],
+            initiallyExpanded: faqItems[index].isExpanded,
+            onExpansionChanged: (isExpanded) {
+              faqItems[index].isExpanded = isExpanded;
             },
           );
         },
@@ -50,7 +56,7 @@ class FAQAnswerPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("자주 묻는 질문")),
       body: Padding(
-        padding: const EdgeInsets.all(gap_m),
+        padding: const EdgeInsets.all(gap_l),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
