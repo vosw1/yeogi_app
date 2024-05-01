@@ -4,10 +4,10 @@ import 'package:yogi_project/ui/pages/book/book_page.dart';
 import '../../../_core/constants/size.dart';
 import '../../../_core/constants/style.dart';
 
-class RoomPage extends StatelessWidget {
-  final Room roomData; // Add stayData property
+class RoomDetailPage extends StatelessWidget {
+  final Room roomData;
 
-  const RoomPage(
+  const RoomDetailPage(
       {required this.roomData}); // Modify constructor to include stayData
 
   @override
@@ -48,7 +48,6 @@ class RoomPage extends StatelessWidget {
             Text('${roomData.checkOutDate}', style: subtitle1()), // 체크아웃 날짜
             Text('${roomData.checkInTime}', style: subtitle1()), // 체크인 시간
             Text('${roomData.checkOutTime}', style: subtitle1()), // 체크아웃 시간
-            Text('${roomData.cancellationAndRefundPolicy}', style: subtitle1()), // 환불 정책
             SizedBox(height: gap_m),
             // 예약하기 버튼 위 여백
             SizedBox(

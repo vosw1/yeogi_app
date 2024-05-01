@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import '../../../../_core/constants/size.dart';
-import '../../../../data/models/home_banner.dart';
 import '../../../../data/models/stay.dart';
-import 'home_body_banner.dart';
 
 class HomeBody extends StatelessWidget {
   final String title;
@@ -35,7 +34,7 @@ class HomeBody extends StatelessWidget {
           child: Row(
             children: List.generate(
               stayData.length,
-                  (index) => Container(
+              (index) => Container(
                 width: 190,
                 margin: EdgeInsets.symmetric(horizontal: gap_m),
                 child: Column(

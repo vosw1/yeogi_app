@@ -4,6 +4,9 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 
+import '../room/concrete_room_list_page.dart';
+import '../room/room_list_page.dart';
+
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;
 
@@ -22,26 +25,26 @@ class _StayPageState extends State<StayDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '${stayData.stayName}',
+          '${widget.stayData.stayName}',
           style: h5(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.favorite,
-                color: isFavorite ? Colors.redAccent : null, // Change color based on state
-              ),
-              onPressed: () {
-                // Toggle the favorite state when the icon is pressed
-                setState(() {
-                  isFavorite = !isFavorite;
-                });
-              },
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.bookmark,
+              color: isFavorite ? Colors.redAccent : null, // Change color based on state
             ),
-            SizedBox(width: gap_s),
-          ],
+            onPressed: () {
+              // Toggle the favorite state when the icon is pressed
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
+          ),
+          SizedBox(width: gap_s),
+        ],
       ),
       body: SingleChildScrollView(
         controller: _scrollController, // ScrollController 전달
@@ -60,20 +63,12 @@ class _StayPageState extends State<StayDetailPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(gap_s),
                   child: Image.asset(
-                    'assets/images/${stayData.stayImgTitle}',
+                    'assets/images/${widget.stayData.stayImgTitle}',
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               SizedBox(height: gap_m),
-
-              // 숙소 정보 섹션
-              Text(
-                '${stayData.location}',
-                style: subtitle1(),
-              ),
-              SizedBox(height: gap_m),
-
               // 리뷰 섹션
               Text(
                 '리뷰',
@@ -82,13 +77,13 @@ class _StayPageState extends State<StayDetailPage> {
               SizedBox(height: gap_s),
               Container(
                 height: 120,
-                child: stayData.comment.isEmpty ? SizedBox() : ListView.builder(
+                child: widget.stayData.comment.isEmpty ? SizedBox() : ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 1, // 하나의 코멘트로만 구성된 리스트
                   itemBuilder: (context, index) {
                     // 리뷰 정보 가져오기
-                    final stars = stayData.starCount;
-                    final comment = stayData.comment;
+                    final stars = widget.stayData.starCount;
+                    final comment = widget.stayData.comment;
                     // 리뷰 카드 생성
                     return Container(
                       width: 200,
@@ -148,7 +143,7 @@ class _StayPageState extends State<StayDetailPage> {
                 style: h6(),
               ),
               SizedBox(height: gap_m),
-              // TODO: 객실 데이터 리스트 구현
+              ConcreteRoomListPage(appBarTitle: '트윈베드', roomDataList: [],),
               SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_s),
@@ -159,7 +154,7 @@ class _StayPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-                stayData.stayInfo,
+                widget.stayData.stayInfo,
               ),
               SizedBox(height: gap_s),
               Divider(),
@@ -171,7 +166,7 @@ class _StayPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-                stayData.notice,
+                widget.stayData.notice,
               ),
               SizedBox(height: gap_s),
               Divider(),
@@ -183,7 +178,7 @@ class _StayPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-                roomData.cancellationAndRefundPolicy,
+               '객실별 취소 정책이 상이하니 객싱 상세정보에서 확인해주세요'
               ),
             ],
           ),

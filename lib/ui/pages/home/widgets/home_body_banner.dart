@@ -7,7 +7,7 @@ import '../../../../data/models/home_banner.dart';
 class HomeBodyBanner extends StatelessWidget {
   final BannerData bannerData; // 배너 데이터 저장 변수
 
-  HomeBodyBanner(this.bannerData);
+  HomeBodyBanner({required this.bannerData});
 
   @override
   Widget build(BuildContext context) {
