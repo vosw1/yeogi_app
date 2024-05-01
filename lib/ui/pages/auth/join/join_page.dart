@@ -105,7 +105,7 @@ class _JoinPageState extends State<JoinPage> {
                       child: Text(
                         '서비스 약관에 동의합니다',
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.redAccent,
                           decoration: TextDecoration.underline,
                         ),
                       ),
