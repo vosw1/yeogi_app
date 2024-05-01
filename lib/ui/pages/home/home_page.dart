@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';
+import 'package:yogi_project/ui/pages/home/widgets/home_body_banner.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_header.dart';
 
 import '../../../data/models/home_banner.dart';
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
         comment: "맘에 들어요 일본숙소치고 룸도 넓고  1인 베드도 넓어서 좋아요 트윈베드에 쇼파베드가 있어 3명이 와도 사용할수있어요",),
     ];
 
-    List<BannerData> bannerData = [
+    List<BannerData> bannerDataList = [
       BannerData(
         imageTitle: "hotel/hotel1.png", // 이미지 제목
         bannerTitle: "여어떻노?", // 배너 제목
@@ -122,14 +123,8 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: gap_m),
             Container(
               width: double.infinity,
-              height: 130,
-              color: Colors.blue, // 파란색 배경
-              child: Center(
-                child: Text(
-                  '여기는 나중에 이벤트 배너 들어올 자리',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+              height: 180,
+              child: HomeBodyBanner(bannerDataList: bannerDataList),
             ),
             // 이미지와 텍스트를 가로 스크롤로 구성
             SizedBox(height: gap_m),
