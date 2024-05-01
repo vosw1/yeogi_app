@@ -12,9 +12,9 @@ class OverseasBookList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Book> overseasbookList = [
       Book(
-        stayName: '두짓타니 괌 리조트',
+        stayName: 'Dusit Thani Guam Resort',
         roomImgTitle: 'overseas/overseas1.png',
-        roomName: '괌숙소',
+        roomName: 'Mountain View King',
         location: '1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913',
         checkInDate: DateTime(2024, 5, 1, 18, 0),
         // 체크인 날짜와 시간
@@ -27,9 +27,9 @@ class OverseasBookList extends StatelessWidget {
         payAt: DateTime.parse('2024-04-20'), // 문자열을 DateTime으로 변환
       ),
       Book(
-        stayName: '두짓타니 괌 리조트',
+        stayName: 'Dusit Thani Guam Resort',
         roomImgTitle: 'overseas/overseas1.png',
-        roomName: '괌숙소',
+        roomName: 'Mountain View King',
         location: '1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913',
         checkInDate: DateTime(2024, 5, 1, 18, 0),
         // 체크인 날짜와 시간

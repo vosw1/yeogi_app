@@ -1,15 +1,17 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
-import '../../../../data/models/stay.dart'; // Import Stay model
-import '../../../../data/models/user.dart';
+import '../../../../data/models/stay.dart';
 
 class OverseasBookItem extends StatelessWidget {
   final Stay stayData; // Corrected Stay model import
-  final User userData;
+  final Comment userData;
 
-  OverseasBookItem({Key? key, required this.stayData, required this.userData}) : super(key: key);
+  OverseasBookItem({Key? key, required this.stayData, required this.userData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,6 @@ class OverseasBookItem extends StatelessWidget {
             _buildPopularItemStar(stayData.starCount), // 별점
             SizedBox(height: gap_s),
             _buildPopularItemComment(), // 리뷰
-            SizedBox(height: gap_s),
-            _buildPopularItemUserInfo(userData.userImgTitle), //프로필 사진
           ],
         ),
       ),
@@ -59,8 +59,7 @@ class OverseasBookItem extends StatelessWidget {
       children: [
         for (int i = 0; i < fullStars; i++)
           Icon(Icons.star, color: kAccentColor),
-        if (halfStar > 0.0)
-          Icon(Icons.star_half, color: kAccentColor),
+        if (halfStar > 0.0) Icon(Icons.star_half, color: kAccentColor),
         SizedBox(width: 4),
         Text(
           '$starCount 점',
@@ -87,19 +86,9 @@ class OverseasBookItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage("assets/images/$imgTitle"), // Corrected usage of imgTitle
+          backgroundImage: AssetImage(
+              "assets/images/$imgTitle"), // Corrected usage of imgTitle
         ),
-        SizedBox(width: gap_m),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userData.userName,
-              style: subtitle1(),
-            ),
-            Text(stayData.location),
-          ],
-        )
       ],
     );
   }

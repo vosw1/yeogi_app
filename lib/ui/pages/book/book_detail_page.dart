@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/ui/pages/book/widgets/domestic_book_list.dart';
+import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
 import '../../../_core/constants/size.dart';
 import '../../../data/dtos/book_request.dart';
 import 'book_list_page.dart';
@@ -25,7 +25,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
   void initState() {
     super.initState();
     _checkInDate = widget.book.checkInDate;
-    _checkOutDate = widget.book.checkOutDate;
+    _checkOutDate = widget.book.checkOutDate ?? DateTime.now();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
   }
 
@@ -66,7 +66,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       style: TextStyle(fontSize: gap_m)),
                   Text('${widget.book.location}'),
                   SizedBox(height: gap_m),
-                  Text('숙박기간 : $_numberOfNights박 ${_numberOfNights + 1}일', style: TextStyle(fontSize: gap_m)),
+                  Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_m),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,16 +140,34 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ),
             SizedBox(height: gap_m),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _showCancelConfirmationDialog(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  side: BorderSide.none, // 테두리 없음
-                ),
-                child: Text('예약 취소'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _showCancelConfirmationDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent,
+                      side: BorderSide.none, // 테두리 없음
+                    ),
+                    child: Text('예약 취소'),
+                  ),
+                  SizedBox(width: gap_m),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Show review writing dialog
+                      _showReviewWritingDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent,
+                      side: BorderSide.none, // 테두리 없음
+                    ),
+                    child: Text('리뷰 작성'),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: gap_m),
@@ -199,7 +217,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     //   ),
                     // );
                   },
-
                   child: Text('예'),
                 ),
                 SizedBox(width: gap_s),
@@ -216,8 +233,37 @@ class _BookDetailPageState extends State<BookDetailPage> {
       },
     );
   }
+
+  void _showReviewWritingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('리뷰 작성'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: '리뷰 내용'),
+                maxLines: 3,
+              ),
+              SizedBox(height: gap_m),
+              ElevatedButton(
+                onPressed: () {
+                  // Add logic to handle submitting the review
+                  Navigator.of(context).pop();
+                },
+                child: Text('작성 완료'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
 String formatDate(DateTime dateTime) {
   return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
 }
+
