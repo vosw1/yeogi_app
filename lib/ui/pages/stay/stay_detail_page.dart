@@ -4,9 +4,9 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
+import '../../../_core/constants/scroll_fab.dart';
 import '../../../data/models/room.dart';
 import '../room/room_data_info.dart';
-import 'widgets/ReviewWidget.dart';
 
 // 숙소 상세 페이지
 class StayDetailPage extends StatefulWidget {
@@ -129,39 +129,7 @@ class _StayPageState extends State<StayDetailPage> {
           ),
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            heroTag: 'up_button',
-            onPressed: () {
-              _scrollController.animateTo(
-                0,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-            },
-            mini: true,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.keyboard_arrow_up, color: Colors.black),
-          ),
-          SizedBox(height: 1),
-          FloatingActionButton(
-            heroTag: 'down_button',
-            onPressed: () {
-              _scrollController.animateTo(
-                _scrollController.position.maxScrollExtent,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-            },
-            mini: true,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.keyboard_arrow_down, color: Colors.black),
-          ),
-        ],
-      ),
+      floatingActionButton: ScrollFAB(controller: _scrollController),
     );
   }
 }
