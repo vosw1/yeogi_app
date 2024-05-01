@@ -4,6 +4,7 @@ import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body_banner.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_header.dart';
 
+import '../../../_core/constants/scroll_fab.dart';
 import '../../../data/models/home_banner.dart';
 import '../../../data/models/stay.dart';
 
@@ -144,41 +145,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       // 맨 위, 맨 아래로 이동하는 버튼
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            heroTag: 'up_button',
-            onPressed: () {
-              // 맨 위로 스크롤
-              _scrollController.animateTo(
-                0,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-            },
-            mini: true, // 버튼 크기 최소화
-            backgroundColor: Colors.white,
-            child: Icon(Icons.keyboard_arrow_up, color: Colors.black),
-          ),
-          SizedBox(height: 1), // 버튼 사이의 간격
-          FloatingActionButton(
-            heroTag: 'down_button',
-            onPressed: () {
-              // 맨 아래로 스크롤
-              _scrollController.animateTo(
-                _scrollController.position.maxScrollExtent,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-            },
-            mini: true, // 버튼 크기 최소화
-            backgroundColor: Colors.white,
-            child: Icon(Icons.keyboard_arrow_down, color: Colors.black),
-          ),
-        ],
-      ),
+      floatingActionButton: ScrollFAB(controller: _scrollController),
     );
   }
 }

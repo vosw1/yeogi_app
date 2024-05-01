@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/ui/pages/search/widgets/custom_popup_menu_button.dart';
+import 'package:yogi_project/ui/pages/search/widgets/search_result_list.dart';
 
-import 'widgets/search_result)list.dart';
 import '../../../_core/constants/size.dart';
 
-// 검색 페이지 기본 틀
 class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
-// todo : 검색 기능 구현하기
-class _SearchPageState extends State<SearchPage> { // 검색 필터
+class _SearchPageState extends State<SearchPage> {
   String? _selectedPersonCount = '인원';
   String? _selectedUseType = '유형';
   String? _selectedReservationType = '예약여부';
   String? _selectedUsePrice = '희망가격';
+  String? _selectedRegion = '지역'; // 추가된 지역 변수
   List<String> searchResults = [];
 
   DateTime? _checkInDate;
@@ -71,6 +71,19 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
             children: [
               SizedBox(width: gap_xs),
               CustomPopupMenuButton(
+                initialValue: _selectedRegion, // 지역 선택 초기값 설정
+                items: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '경기', '강원', '경남', '제주'],
+                onSelected: (String value) {
+                  setState(() {
+                    _selectedRegion = value;
+                  });
+                },
+                buttonText: '$_selectedRegion',
+                selectedColor: Colors.redAccent,
+                itemWidth: 60,
+              ),
+              SizedBox(width: gap_s),
+              CustomPopupMenuButton(
                 initialValue: _selectedPersonCount,
                 items: ['1명', '2명', '3명', '4명+'],
                 onSelected: (String value) {
@@ -80,7 +93,7 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
                 },
                 buttonText: '$_selectedPersonCount',
                 selectedColor: Colors.redAccent,
-                itemWidth: 30, // 각 팝업 메뉴 아이템의 너비 조절
+                itemWidth: 30,
               ),
               SizedBox(width: gap_s),
               CustomPopupMenuButton(
@@ -93,7 +106,7 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
                 },
                 buttonText: '$_selectedReservationType',
                 selectedColor: Colors.redAccent,
-                itemWidth: 60, // 각 팝업 메뉴 아이템의 너비 조절
+                itemWidth: 60,
               ),
               SizedBox(width: gap_s),
               CustomPopupMenuButton(
@@ -106,7 +119,7 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
                 },
                 buttonText: '$_selectedUsePrice',
                 selectedColor: Colors.redAccent,
-                itemWidth: 70, // 각 팝업 메뉴 아이템의 너비 조절
+                itemWidth: 70,
               ),
             ],
           ),
@@ -206,87 +219,6 @@ class _SearchPageState extends State<SearchPage> { // 검색 필터
         ),
         SearchResultList(searchResults: searchResults),
       ],
-    );
-  }
-}
-
-// 검색 필터 기본 틀
-class CustomPopupMenuButton extends StatelessWidget {
-  final String? initialValue;
-  final List<String> items;
-  final ValueChanged<String> onSelected;
-  final String buttonText;
-  final Color selectedColor;
-  final double itemWidth; // 팝업 메뉴 아이템의 너비
-
-  const CustomPopupMenuButton({
-    Key? key,
-    required this.initialValue,
-    required this.items,
-    required this.onSelected,
-    required this.buttonText,
-    required this.selectedColor,
-    required this.itemWidth, // 추가된 itemWidth
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        final RenderBox button = context.findRenderObject() as RenderBox;
-        final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
-        final RelativeRect position = RelativeRect.fromRect(
-          Rect.fromPoints(
-            button.localToGlobal(button.size.bottomLeft(Offset.zero), ancestor: overlay),
-            button.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay),
-          ),
-          Offset.zero & overlay.size,
-        );
-
-        showMenu(
-          context: context,
-          position: position,
-          items: items.map((String item) {
-            String label;
-            switch (item) {
-              case '인원':
-                label = '인수 유형';
-                break;
-              case '유형':
-                label = '기기';
-                break;
-              case '예약여부':
-                label = '예약 가능 여부';
-                break;
-              default:
-                label = item;
-                break;
-            }
-            return PopupMenuItem<String>(
-              value: item,
-              child: SizedBox(
-                width: itemWidth, // 각 팝업 메뉴 아이템의 너비 조절
-                child: Text(label),
-              ),
-            );
-          }).toList(),
-        ).then((value) {
-          if (value != null) {
-            onSelected(value);
-          }
-        });
-      },
-      child: Text(
-        buttonText,
-        style: TextStyle(
-          color: buttonText == initialValue ? Colors.white : null,
-        ),
-      ),
-      style: ButtonStyle(
-        backgroundColor: buttonText == initialValue
-            ? MaterialStateProperty.all<Color>(selectedColor)
-            : null,
-      ),
     );
   }
 }

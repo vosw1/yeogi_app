@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-// 검색 결과 리스트
 class SearchResultList extends StatelessWidget {
   const SearchResultList({
-    super.key,
+    Key? key,
     required this.searchResults,
-  });
+  }) : super(key: key);
 
   final List<String> searchResults;
 

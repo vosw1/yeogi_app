@@ -3,6 +3,9 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
+import 'qna_features.dart';
+import 'my_page_faq_menu_holder.dart';
+
 // 고객센터 메뉴 유형 enum
 enum MenuType {
   FAQ,
@@ -78,7 +81,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
             )
                 : Icon(Icons.arrow_forward_ios),
             onTap: () {
-              _handleMenuAction(context, menuItem.menuType); // 메뉴 유형에 따른 액션 처리
+              _handleMenuAction(context, menuItem.menuType);
             },
           );
         }
