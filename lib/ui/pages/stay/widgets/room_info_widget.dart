@@ -8,6 +8,6 @@ class RoomInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(roomData.roomInfo);  // 간단화된 예시, 상세 구현 필요
+    return Text(roomData.roomInfo);
   }
 }

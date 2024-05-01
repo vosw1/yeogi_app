@@ -5,8 +5,13 @@ import 'package:yogi_project/_core/constants/size.dart';
 class FAQItem {
   final String question;
   final String answer;
+  bool isExpanded;
 
-  FAQItem({required this.question, required this.answer});
+  FAQItem({required this.question, required this.answer, this.isExpanded = false});
+
+  void toggle() {
+    isExpanded = !isExpanded;
+  }
 }
 
 // 자주 묻는 질문 리스트를 표시하는 위젯입니다.
@@ -22,16 +27,37 @@ class FAQList extends StatelessWidget {
       body: ListView.builder(
         itemCount: faqItems.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(faqItems[index].question),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FAQAnswerPage(faqItem: faqItems[index]),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FAQAnswerPage(faqItem: faqItems[index]),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        faqItems[index].question,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Icon(Icons.arrow_drop_down), // ">" 아이콘 추가
+                  ],
                 ),
-              );
-            },
+              ),
+              if (faqItems[index].isExpanded)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: gap_m),
+                  child: Text(faqItems[index].answer),
+                ),
+              Divider(),
+            ],
           );
         },
       ),

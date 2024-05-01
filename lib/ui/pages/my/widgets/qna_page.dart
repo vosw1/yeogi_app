@@ -19,16 +19,19 @@ class FAQList extends StatelessWidget {
     return ListView.builder(
       itemCount: 10, // 자주 묻는 질문의 개수를 10개로 지정합니다.
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('질문 ${index + 1}'), // 질문을 리스트 타일에 표시합니다.
+        return GestureDetector(
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => FAQAnswerPage(index + 1), // 탭한 아이템에 대한 답변 페이지로 이동
+                builder: (context) => FAQAnswerPage(questionNumber: index + 1), // 탭한 아이템에 대한 답변 페이지로 이동
               ),
             );
           },
+          child: ListTile(
+            title: Text('질문 ${index + 1}'), // 질문을 리스트 타일에 표시합니다.
+            trailing: Icon(Icons.arrow_forward), // ">" 아이콘 추가
+          ),
         );
       },
     );
@@ -39,7 +42,7 @@ class FAQList extends StatelessWidget {
 class FAQAnswerPage extends StatelessWidget {
   final int questionNumber;
 
-  FAQAnswerPage(this.questionNumber);
+  FAQAnswerPage({required this.questionNumber});
 
   @override
   Widget build(BuildContext context) {
