@@ -4,6 +4,8 @@ import '../../data/models/payment.dart';
 import '../../data/models/room.dart';
 import '../../data/models/stay.dart';
 import '../../ui/pages/auth/join/join_page.dart';
+import '../../ui/pages/book/widgets/book_list.dart';
+import '../../ui/pages/book/widgets/book_list.dart';
 import '../../ui/pages/book/widgets/overseas_book_list.dart';
 import '../../ui/pages/pay/payment_page.dart';
 import '../../ui/pages/room/room_detail_page.dart';
@@ -13,7 +15,7 @@ import '../../ui/pages/auth/login/login_page.dart';
 import '../../ui/pages/my/my_page.dart';
 import '../../ui/pages/scrap/scarp_page.dart';
 import '../../ui/pages/search/search_page.dart';
-import '../../ui/pages/book/widgets/domestic_book_list.dart';
+import '../../ui/pages/book/widgets/book_list.dart';
 import '../../ui/pages/stay/stay_list_pages/camping_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
 import '../../ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
@@ -34,7 +36,7 @@ class Move {
   static String myPage = "/my";
   static String stayDetailPage = "/stay";
   static String roomDetailPage = "/room";
-  static String domesticBookList = "/book/domestic";
+  static String bookList = "/book/list";
   static String overseasBookList = "/book/overseas";
   static String overseasStayList = "/Overseas";
   static String saleStayList = "/sale";
@@ -61,17 +63,16 @@ final Stay stayData = Stay(
 );
 
 final Room roomData = Room(
-  roomName: '마운틴 패밀리 스위트',
-  roomImgTitle: 'hotel/hotel1.png',
-  price: 100000,
-  checkInDate: '2024-04-30',
-  checkOutDate: '2024-05-01',
-  checkInTime: '',
-  checkOutTime: "",
-  roomInfo: '',
-  amenities: '',
-  notice: '',
-  // Add more properties as needed
+    roomName: '마운틴 패밀리 스위트',
+    roomImgTitle: 'hotel/hotel1.png',
+    price: 100000,
+    checkInDate: '2024-04-30',
+    checkOutDate: '2024-05-01',
+    checkInTime: '18:00',
+    checkOutTime: "11:00",
+    roomInfo: '',
+    amenities: '',
+    notice: '',
 );
 
 final Payment payData = Payment(
@@ -110,10 +111,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.bookPage: (context) => BookPage(roomData: roomData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
-    Move.domesticBookList: (context) => DomesticBookList(domesticbookList: []),
+    Move.bookList: (context) => BookList(domesticbookList: []),
     // 국내 숙소 예약확인 페이지
-    Move.domesticBookList: (context) => OverseasBookList(overseasbookList: []),
-    // 해외 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지
     Move.saleStayList: (context) => SaleStayList(),

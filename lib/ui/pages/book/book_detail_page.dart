@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/ui/pages/book/widgets/domestic_book_list.dart';
+import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
 import '../../../_core/constants/size.dart';
 import '../../../data/dtos/book_request.dart';
 import 'book_list_page.dart';

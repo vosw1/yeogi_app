@@ -4,7 +4,7 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import '../../../data/models/room.dart';
 import '../room/room_data_info.dart';
-import '../room/room_detail_page.dart';
+import 'widgets/ReviewWidget.dart';
 
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;
@@ -85,33 +85,7 @@ class _StayPageState extends State<StayDetailPage> {
                     final stars = widget.stayData.starCount;
                     final comment = widget.stayData.comment;
                     // 리뷰 카드 생성
-                    return Container(
-                      width: 200,
-                      margin: EdgeInsets.only(right: gap_m),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(gap_s),
-                        color: Colors.grey[200],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(gap_s),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // 별점 표시
-                            Row(
-                              children: List.generate(stars.toInt(), (index) => Icon(Icons.star, color: Colors.amber, size: gap_m)),
-                            ),
-                            SizedBox(height: gap_xs),
-                            // 코멘트 표시
-                            Text(
-                              comment,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                    return ReviewWidget(stars: stars.toInt(), comment: comment);
                   },
                 ),
               ),

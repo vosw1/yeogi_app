@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../../data/dtos/book_request.dart';
 import '../book_list_page.dart';
 
-class DomesticBookList extends StatelessWidget {
+class BookList extends StatelessWidget {
   final List<Book> domesticbookList;
 
-  const DomesticBookList({Key? key, required this.domesticbookList})
+  const BookList({Key? key, required this.domesticbookList})
       : super(key: key);
 
   @override
@@ -38,6 +38,6 @@ class DomesticBookList extends StatelessWidget {
         payAt: DateTime.parse('2024-04-20'), // 문자열을 DateTime으로 변환
       ),
     ];
-    return BookListPage(bookList: domesticbookList, appBarText: '국내 예약내역');
+    return BookListPage(bookList: domesticbookList, appBarText: '예약내역');
   }
 }
