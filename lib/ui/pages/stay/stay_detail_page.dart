@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/scroll_fab.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
-import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/data/models/room.dart';
-
-import '../../../_core/constants/style.dart';
+import '../../../_core/constants/scroll_fab.dart';
+import '../../../data/models/room.dart';
 import '../room/room_data_info.dart';
 
+// 숙소 상세 페이지
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;
   final Room roomData;
@@ -27,11 +27,23 @@ class _StayPageState extends State<StayDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.stayData.stayName}', style: h5(), maxLines: 1, overflow: TextOverflow.ellipsis),
+        title: Text(
+          '${widget.stayData.stayName}',
+          style: h5(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.bookmark, color: isFavorite ? Colors.redAccent : null),
-            onPressed: () => setState(() => isFavorite = !isFavorite),
+            icon: Icon(
+              Icons.bookmark,
+              color: isFavorite ? Colors.redAccent : null,
+            ),
+            onPressed: () {
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
           ),
           SizedBox(width: gap_s),
         ],
@@ -43,19 +55,78 @@ class _StayPageState extends State<StayDetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/${widget.stayData.stayImgTitle}', fit: BoxFit.cover),
-              ReviewSection(stars: widget.stayData.starCount, comment: widget.stayData.comment),
-              AmenitiesWidget(amenities: [
-                {Icons.fitness_center: '피트니스'},
-                {Icons.spa: '사우나'},
-                {Icons.wifi: '와이파이'},
-                {Icons.smoke_free: '금연'},
-                {Icons.ac_unit: '에어컨'},
-                {Icons.kitchen: '냉장고'},
-              ]),
+              Container(
+                width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(gap_s),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(gap_s),
+                  child: Image.asset(
+                    'assets/images/${widget.stayData.stayImgTitle}',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(height: gap_m),
+              // 리뷰 섹션
+              ReviewSection(
+                stars: widget.stayData.starCount.toInt(),
+                comment: widget.stayData.comment,
+              ),
+              // 편의 시설 섹션
+              AmenitySection(),
+              // 객실 선택 섹션
+              Text(
+                '객실 선택',
+                style: h6(),
+              ),
+              SizedBox(height: gap_m),
               RoomInfoWidget(roomData: widget.roomData),
-              Text(widget.stayData.stayInfo),
-              Text(widget.stayData.notice),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              // 숙소 소개 섹션
+              Divider(),
+              SizedBox(height: gap_xs),
+              Text(
+                '숙소 소개',
+                style: h6(),
+              ),
+              SizedBox(height: gap_m),
+              Text(
+                widget.stayData.stayInfo,
+              ),
+              SizedBox(height: gap_s),
+              Divider(),
+              SizedBox(height: gap_s),
+              // 이용정보 섹션
+              Text(
+                '이용 정보',
+                style: h6(),
+              ),
+              SizedBox(height: gap_m),
+              Text(
+                widget.stayData.notice,
+              ),
+              SizedBox(height: gap_s),
+              Divider(),
+              SizedBox(height: gap_s),
+              // 취소 및 환불 규정 섹션
+              Text(
+                '취소 및 환불 규정',
+                style: h6(),
+              ),
+              SizedBox(height: gap_m),
+              Text(
+                '객실별 취소 정책이 상이하니 객싱 상세정보에서 확인해주세요',
+              ),
+              SizedBox(height: gap_s),
             ],
           ),
         ),

@@ -5,9 +5,13 @@ import 'package:yogi_project/_core/constants/size.dart';
 class FAQItem {
   final String question;
   final String answer;
-  bool isExpanded; // 토글 상태
+  bool isExpanded;
 
   FAQItem({required this.question, required this.answer, this.isExpanded = false});
+
+  void toggle() {
+    isExpanded = !isExpanded;
+  }
 }
 
 // 자주 묻는 질문 리스트를 표시하는 위젯입니다.
@@ -23,21 +27,32 @@ class FAQList extends StatelessWidget {
       body: ListView.builder(
         itemCount: faqItems.length,
         itemBuilder: (context, index) {
-          return ExpansionTile(
-            title: Text(faqItems[index].question),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(gap_l),
-                child: Text(
-                  faqItems[index].answer,
-                  style: TextStyle(fontSize: 16),
+              GestureDetector(
+                onTap: () {
+                  faqItems[index].toggle(); // 아이템의 확장 상태를 토글합니다.
+                },
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        faqItems[index].question,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Icon(faqItems[index].isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down), // 확장 상태에 따라 아이콘 변경
+                  ],
                 ),
               ),
+              if (faqItems[index].isExpanded)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: gap_m),
+                  child: Text(faqItems[index].answer),
+                ),
+              Divider(),
             ],
-            initiallyExpanded: faqItems[index].isExpanded,
-            onExpansionChanged: (isExpanded) {
-              faqItems[index].isExpanded = isExpanded;
-            },
           );
         },
       ),
