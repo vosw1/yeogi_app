@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
-
-import '../room/concrete_room_list_page.dart';
-import '../room/room_list_page.dart';
+import '../../../data/models/room.dart';
+import '../room/room_data_info.dart';
+import '../room/room_detail_page.dart';
 
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;
+  final Room roomData;
 
-  StayDetailPage({required this.stayData});
+  StayDetailPage({required this.stayData, required this.roomData});
 
   @override
   _StayPageState createState() => _StayPageState();
@@ -143,10 +143,17 @@ class _StayPageState extends State<StayDetailPage> {
                 style: h6(),
               ),
               SizedBox(height: gap_m),
-              ConcreteRoomListPage(appBarTitle: '트윈베드', roomDataList: [],),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
               SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_s),
+
               // 숙소 소개 섹션
               Text(
                 '숙소 소개',
@@ -178,7 +185,7 @@ class _StayPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-               '객실별 취소 정책이 상이하니 객싱 상세정보에서 확인해주세요'
+                  '객실별 취소 정책이 상이하니 객싱 상세정보에서 확인해주세요'
               ),
             ],
           ),
@@ -235,3 +242,4 @@ class _StayPageState extends State<StayDetailPage> {
     );
   }
 }
+

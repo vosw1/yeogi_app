@@ -37,6 +37,7 @@ class Stay {
 
   String get getComment => comment;
 
+
   // Convert Stay object to JSON
   Map<String, dynamic> toJson() {
     return {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
 import '../../../../data/models/stay.dart';
@@ -23,7 +24,7 @@ abstract class StayListPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StayDetailPage(stayData: stay),
+                    builder: (context) => StayDetailPage(stayData: stay, roomData: roomData),
                   ),
                 );
               },
