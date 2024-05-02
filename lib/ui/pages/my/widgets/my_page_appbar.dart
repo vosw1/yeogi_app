@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/home_banner.dart';
 import 'package:yogi_project/data/models/my_review.dart';
 import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_update.dart';
@@ -17,6 +18,19 @@ class MyPageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<BannerData> bannerDataList = [
+      BannerData(
+        imageTitle: "hotel/hotel1.png", // 이미지 제목
+        bannerTitle: "여어떻노?", // 배너 제목
+        bannerText: "퍼뜩 예약하꾸마", // 배너 내용
+      ),
+      BannerData(
+        imageTitle: "hotel/hotel1.png", // 이미지 제목
+        bannerTitle: "여어떻노?", // 배너 제목
+        bannerText: "퍼뜩 예약하꾸마", // 배너 내용
+      ),
+    ];
+
     return Padding(
       padding: const EdgeInsets.all(gap_s),
       child: Wrap(
@@ -40,7 +54,7 @@ class MyPageAppBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => EventBannerPage()),
+                MaterialPageRoute(builder: (context) => EventBannerPage(bannerDataList: bannerDataList)),
               );
             },
           ),
