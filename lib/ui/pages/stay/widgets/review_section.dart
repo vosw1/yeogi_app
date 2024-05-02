@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../_core/constants/size.dart';
-import '../../../../data/models/review.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/review.dart';
 import 'ReviewWidget.dart';
 
 class ReviewSection extends StatelessWidget {
@@ -35,7 +33,6 @@ class ReviewSection extends StatelessWidget {
             itemCount: reviews.length,
             itemBuilder: (context, index) {
               final review = reviews[index];
-              // 레이팅을 별로 변환
               final starRating = review.rating / 5.0 * 5.0;
               return GestureDetector(
                 onTap: () {
@@ -86,7 +83,8 @@ class ReviewSection extends StatelessWidget {
                     ),
                     SizedBox(height: gap_s),
                     Text(review.comment),
-                    SizedBox(height: gap_m),
+                    SizedBox(height: gap_s),
+                    Divider(),
                   ],
                 );
               },
