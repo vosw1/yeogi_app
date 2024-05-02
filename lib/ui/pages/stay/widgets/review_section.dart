@@ -39,7 +39,7 @@ class ReviewSection extends StatelessWidget {
               final starRating = review.rating / 5.0 * 5.0;
               return GestureDetector(
                 onTap: () {
-                  _showReviewPopup(context, starRating, review.comment);
+                  _showReviewPopup(context, reviews);
                 },
                 child: ReviewWidget(
                   stars: starRating,
@@ -56,26 +56,40 @@ class ReviewSection extends StatelessWidget {
     );
   }
 
-  void _showReviewPopup(BuildContext context, double starRating, String comment) {
+  void _showReviewPopup(BuildContext context, List<Review> reviews) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('리뷰 상세'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.star, color: Colors.yellow),
-                  SizedBox(width: 8),
-                  Text('별점: ${starRating.toStringAsFixed(1)}'),
-                ],
-              ),
-              SizedBox(height: gap_s),
-              Text(comment),
-            ],
+          title: Text('리뷰 목록'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final review in reviews)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          // 별점에 따라 아이콘을 표시
+                          for (int i = 0; i < 5; i++)
+                            Icon(
+                              i < review.rating ? Icons.star : Icons.star_border,
+                              color: Colors.yellow,
+                            ),
+                          SizedBox(width: 8),
+                          Text('${review.rating.toStringAsFixed(1)} 점'),
+                        ],
+                      ),
+                      SizedBox(height: gap_s),
+                      Text(review.comment),
+                      SizedBox(height: gap_m),
+                    ],
+                  ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -89,4 +103,5 @@ class ReviewSection extends StatelessWidget {
       },
     );
   }
+
 }
