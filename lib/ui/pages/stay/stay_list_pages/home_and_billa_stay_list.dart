@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
-
-import '../../../../data/models/stay.dart';
 
 class HomeAndBillaStayList extends StayListPage {
   const HomeAndBillaStayList({Key? key}) : super(key: key, appBarTitle: '홈&빌라');
@@ -24,7 +23,7 @@ class HomeAndBillaStayList extends StayListPage {
                 "늦은 저녁 서울역에 도착하는 분들(뚜벅이)은 걸어서 10분이내 도착할 수 있어 좋아요 야경으로 서울역과 남산타워도 볼 수 있",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -44,7 +43,7 @@ class HomeAndBillaStayList extends StayListPage {
             'comment': "엄청 넓어요 예민하지 않으시면 위치도 좋고 다니기 좋아요",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -64,7 +63,7 @@ class HomeAndBillaStayList extends StayListPage {
             'comment': "작은 창문이 있는 방이네요^^ 가성비 좋은 방으로 약간의 고택느낌으로 지내실 수 있어요. ",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -83,7 +82,7 @@ class HomeAndBillaStayList extends StayListPage {
             'comment': "깨끗하고 좋았습니다!",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }

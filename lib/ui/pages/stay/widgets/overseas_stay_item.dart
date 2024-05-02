@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../_core/constants/color.dart';
-import '../../../../_core/constants/size.dart';
-import '../../../../_core/constants/style.dart';
-import '../../../../data/models/stay.dart';
+import 'package:yogi_project/_core/constants/color.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class Stay {
   final String stayImgTitle; // 숙소 이미지 제목

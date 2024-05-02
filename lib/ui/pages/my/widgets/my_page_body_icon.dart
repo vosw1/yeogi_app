@@ -4,25 +4,29 @@ import 'package:flutter/material.dart';
 class MyPageBodyIcon extends StatelessWidget {
   final IconData iconData;
   final String title;
+  final VoidCallback onTap; // 수정된 부분
 
-  const MyPageBodyIcon({Key? key, required this.iconData, required this.title})
+  const MyPageBodyIcon({Key? key, required this.iconData, required this.title, required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 80,
-      child: Column(
-        children: [
-          Icon(iconData, size: 30),
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(
-              title,
-              style: TextStyle(fontSize: 14, color: Colors.black),
-            ),
-          )
-        ],
+    return GestureDetector( // GestureDetector로 감싸서 탭 이벤트 처리
+      onTap: onTap,
+      child: Container(
+        width: 80,
+        child: Column(
+          children: [
+            Icon(iconData, size: 30),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 14, color: Colors.black),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

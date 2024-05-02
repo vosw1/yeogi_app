@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../data/dtos/book_request.dart';
-import '../book_list_page.dart';
+import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/ui/pages/book/book_list_page.dart';
 
 class OverseasBookList extends StatelessWidget {
   final List<Book> overseasbookList;

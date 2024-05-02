@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
-
-import '../../../../data/models/stay.dart';
 
 class PensionStayList extends StayListPage {
   const PensionStayList({Key? key}) : super(key: key, appBarTitle: '펜션');
@@ -55,7 +54,7 @@ class PensionStayList extends StayListPage {
             "객실 가격은 원화, 달러와 가치가 상이하니 정확한 숙박요금계산은 호스트에게 문의필수\n온라인예약의 경우 인원추가시 발생되는 추가요금 사전결제불가(현장결제)\n비수기 1인 20,000원 성수기 1인 30,000원",
         reviews: [
           {
-            'starCount': 3.5,
+            'starCount': 3,
             'comment': "화장실 샤워부스의 온수가 잘 나오지 않는 것외에는 모든 것이 다 좋았다",
           }
         ],
@@ -79,7 +78,7 @@ class PensionStayList extends StayListPage {
             "공지사항\n최대인원 초과시 입실 불가 / 환불없음\n기준인원 2인 초과 시 인원추가요금 발생(현장결제) / 사전신청필수\n24개월 미만 유아도 인원에 포함\n201 사계절 객실 제외 전 객실-객실 내 취사불가(공동주방 이용)\n바베큐 이용불가\n주차장 없음 / 주변 유료 주차장 혹은 도로변에 주차 필요(숙소 문의)\n짐보관 가능 / 귀중품 보관불가 / 분실시 책임 지지 않음",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "사장님께서 친절하셨고 숙소 내부도 매우 청결했습니다. 난방 상태도 좋았습니다. 황리단길에 숙소가 위치해 있어서 주변에서 편히 놀다가 들어올 수 있었고 인근에 편의점 등 같은 편의시설도 있어서 좋았습니다.  ",
           }

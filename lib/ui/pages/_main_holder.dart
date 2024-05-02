@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/my/my_page.dart'; // 수정된 경로 확인
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
-import 'package:yogi_project/ui/pages/surroundings/surroundings_page.dart';
-import 'package:yogi_project/ui/pages/search/search_page.dart';
+
 import 'home/home_page.dart';
-import 'my/my_page.dart';
+import 'search/search_page.dart';
+import 'surroundings/surroundings_page.dart'; // 수정된 경로 확인
 
 class MainHolder extends StatefulWidget {
   @override
@@ -30,9 +31,9 @@ class _MainHolderState extends State<MainHolder> {
         children: [
           HomePage(),
           SearchPage(),
-          NearFromMePage(),
+          NearFromMePage(), // 주변 페이지를 나타내는 위젯의 경로가 없는 것으로 보입니다. 수정이 필요할 수 있습니다.
           ScrapListPage(),
-          MyPage(userData: userData, stayData: stayData,),
+          MyPage(userData: userData, stayData: stayData),
         ],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(

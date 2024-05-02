@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
-import '../../../../data/models/stay.dart';
 
 class MotelStayList extends StayListPage {
   const MotelStayList({Key? key}) : super(key: key, appBarTitle: '모텔');
@@ -20,7 +20,7 @@ class MotelStayList extends StayListPage {
             "객실 내부 시설\n객실 배정은 손님 오시는 순서대로 랜덤 배정입니다\n특히 K클래식 준특실의 경우 욕조가 없는 객실을 배정 받을 수 있습니다.\n전객실 넷플릭스&유튜브 이용가능합니다넷플릭스 개인 계정 사용 필수)",
         reviews: [
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
                 "종로 인근에서 조용히, 편하게 1박하면서 작업하러 이용했습니다. 부띠끄 호텔 타이틀을 한만큼 그 티를 내려고 애쓴 흔적이 보입니다.",
           }
@@ -69,7 +69,7 @@ class MotelStayList extends StayListPage {
                 "리뷰가 워낙 좋아서 예약해봤는데 좋은만큼 진짜 깔끔하고 가 격대비 너무 좋은 것 같아요~ 담배 냄새 진짜 1도 안 나고 숙 소 엄청 깔끔합니다!! ",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -90,7 +90,7 @@ class MotelStayList extends StayListPage {
                 "넷플릭스 볼수있는곳이라서 너무 좋아요~~~우선 가장 최고의 장점은 역에서 가깝다는거에요!!!! 강남역에서 도보 3분정도 거리에 위치해있어서 너무 좋습니다 접근성이 좋아요",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -105,12 +105,12 @@ class MotelStayList extends StayListPage {
             "객실 내부 시설\n* 2020년 4월 15일 오픈한 신규 호텔입니다!!!\n* 당 호텔 정책상 2005년 생은 3월 부터 입실 가능 합니다",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "전체적으로 너무 깔끔하고 좋았어요. 무엇보다 인포에 계신 직원분도 너무 친절하시고 다음에도 재방문 의사 충분히 있습니다. ",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }

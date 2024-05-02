@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
-import '../../../_core/constants/size.dart';
-import '../../../data/dtos/book_request.dart';
-import 'book_list_page.dart';
-import 'book_page.dart';
+import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
 
 class BookDetailPage extends StatefulWidget {
   final Book book;
@@ -157,8 +155,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   SizedBox(width: gap_m),
                   ElevatedButton(
                     onPressed: () {
-                      // Show review writing dialog
-                      _showReviewWritingDialog(context);
+                      _showReviewWritingDialog(context); // 리뷰 작성 다이얼로그 표시
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -238,26 +235,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('리뷰 작성'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: InputDecoration(labelText: '리뷰 내용'),
-                maxLines: 3,
-              ),
-              SizedBox(height: gap_m),
-              ElevatedButton(
-                onPressed: () {
-                  // Add logic to handle submitting the review
-                  Navigator.of(context).pop();
-                },
-                child: Text('작성 완료'),
-              ),
-            ],
-          ),
-        );
+        return ReviewWritingDialog(); // ReviewWritingDialog를 호출하여 표시
       },
     );
   }
@@ -266,4 +244,3 @@ class _BookDetailPageState extends State<BookDetailPage> {
 String formatDate(DateTime dateTime) {
   return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
 }
-
