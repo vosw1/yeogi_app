@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/book/book_page.dart';
@@ -10,7 +11,7 @@ import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
-import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
+import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
@@ -21,6 +22,9 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart'
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list.dart';
+
+// 이하 내용은 동일
+
 
 // URL 설정
 class Move {
@@ -46,6 +50,13 @@ class Move {
   static String paymetPage = "/pay";
 }
 
+final User userData = User(
+  username: '홍길동',
+  password: '1234',
+  phone: '010-1234-5678',
+  birth: '1988-11-11',
+);
+
 // Sample data for stay and room
 final Stay stayData = Stay(
   stayName: '★당일특가★ 하이원리조트 마운틴콘도',
@@ -62,16 +73,16 @@ final Stay stayData = Stay(
 );
 
 final Room roomData = Room(
-    roomName: '마운틴 패밀리 스위트',
-    roomImgTitle: 'hotel/hotel1.png',
-    price: 100000,
-    checkInDate: '2024-04-30',
-    checkOutDate: '2024-05-01',
-    checkInTime: '18:00',
-    checkOutTime: "11:00",
-    roomInfo: '',
-    amenities: '',
-    notice: '',
+  roomName: '마운틴 패밀리 스위트',
+  roomImgTitle: 'hotel/hotel1.png',
+  price: 100000,
+  checkInDate: '2024-04-30',
+  checkOutDate: '2024-05-01',
+  checkInTime: '18:00',
+  checkOutTime: "11:00",
+  roomInfo: '',
+  amenities: '',
+  notice: '',
 );
 
 final Payment payData = Payment(
@@ -99,15 +110,18 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.scrapPage: (context) => ScrapListPage(),
     // 내 주변 페이지
     Move.myPage: (context) => MyPage(
-          stayData: stayData,
-        ),
+      userData: userData,
+      stayData: stayData,
+    ),
     // 마이 페이지
     Move.stayDetailPage: (context) => StayDetailPage(stayData: stayData, roomData: roomData),
     // 기업(숙서) 페이지
     Move.roomDetailPage: (context) => RoomDetailPage(
-          roomData: roomData,
-        ),
+
+      roomData: roomData,
+    ),
     // 룸 상세보기 페이지
+
     Move.bookPage: (context) => BookPage(roomData: roomData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
@@ -132,3 +146,4 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 게하 숙소 페이지),
   };
 }
+

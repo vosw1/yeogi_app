@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/my_review.dart';
+import 'package:yogi_project/data/models/user.dart';
+import 'package:yogi_project/ui/pages/my/widgets/my_page_update.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_review_page.dart';
 import 'event_banner_page.dart';
 import 'my_page_body_icon.dart';
 import 'my_profile_page.dart';
 import 'notification_page.dart';
 
-// 마이페이지에 앱바 -> 로그인 버튼 밑에 버튼
 class MyPageAppBar extends StatelessWidget {
-  const MyPageAppBar({Key? key}) : super(key: key);
+  final User user; // 사용자 정보를 전달받는 변수
+
+  const MyPageAppBar({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class MyPageAppBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyProfilePage()),
+                MaterialPageRoute(builder: (context) => MyPageUpdate(user: user)),
               );
             },
           ),
@@ -66,7 +69,3 @@ class MyPageAppBar extends StatelessWidget {
     );
   }
 }
-
-
-
-
