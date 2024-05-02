@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/ui/pages/my/widgets/my_review_page.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/star_rating.dart';
-import 'my_review_page.dart';
 
 class ReviewWritingDialog extends StatefulWidget {
   @override
