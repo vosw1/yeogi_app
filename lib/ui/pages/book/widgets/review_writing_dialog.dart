@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/my_review.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_review_page.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/star_rating.dart';
 
 class ReviewWritingDialog extends StatefulWidget {
+  final MyReview? review;
+
+  const ReviewWritingDialog({Key? key, this.review}) : super(key: key);
+
   @override
   _ReviewWritingDialogState createState() => _ReviewWritingDialogState();
 }
 
 class _ReviewWritingDialogState extends State<ReviewWritingDialog> {
   TextEditingController _reviewController = TextEditingController();
-
   double _rating = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.review != null) {
+      _reviewController.text = widget.review!.reviews!.first['comment'];
+      _rating = widget.review!.reviews!.first['starCount'].toDouble();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +58,7 @@ class _ReviewWritingDialogState extends State<ReviewWritingDialog> {
               ),
             ],
           ),
-          SizedBox(height: gap_m), // 별점과 리뷰 내용 사이 간격 추가
+          SizedBox(height: gap_m),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(gap_s),
@@ -69,15 +82,14 @@ class _ReviewWritingDialogState extends State<ReviewWritingDialog> {
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent, // 배경색 레드 악센트
-                foregroundColor: Colors.white, // 글자색 흰색
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.white,
               ),
               onPressed: () {
-                // 작성 완료 버튼 누를 때 동작하는 코드 추가
-                Navigator.of(context).pop(); // 다이얼로그 닫기
+                Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MyReviewPage(), // 내 리뷰 페이지로 이동
+                    builder: (context) => MyReviewPage(),
                   ),
                 );
               },

@@ -3,6 +3,8 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/my_review.dart';
 
+import '../../book/widgets/review_writing_dialog.dart';
+
 class MyReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -46,19 +48,60 @@ class MyReviewPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Card(
-                  elevation: 2, // Add elevation for a shadow effect
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(gap_s), // Updated border radius
-                    side: BorderSide(color: Colors.grey), // Add a border
+                    borderRadius: BorderRadius.circular(gap_s),
+                    side: BorderSide(color: Colors.grey),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(gap_s), // Add padding to create space inside the Card
+                    padding: EdgeInsets.all(gap_s),
                     child: ListTile(
-                      title: Text(review.stayName, style: h5()),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(review.stayName, style: h5()),
+                          IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('리뷰 삭제'),
+                                    content: Text('리뷰를 삭제하시겠습니까?'),
+                                    actions: <Widget>[
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('예'),
+                                          ),
+                                          SizedBox(width: 8),
+                                          TextButton(
+                                            onPressed: () {
+                                              print('Delete review: ${review.stayName}');
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('아니요'),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('이용 날짜 : ${review.checkInDate}', style: TextStyle(color: Colors.grey)),
+                          Text('이용 날짜 : ${review.checkInDate}',
+                              style: TextStyle(color: Colors.grey)),
                           SizedBox(height: 4),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,9 +114,11 @@ class MyReviewPage extends StatelessWidget {
                                       Row(
                                         children: List.generate(5, (index) {
                                           if (index < reviewData['starCount']) {
-                                            return Icon(Icons.star, color: Colors.amber);
+                                            return Icon(Icons.star,
+                                                color: Colors.amber);
                                           } else {
-                                            return Icon(Icons.star_border, color: Colors.amber);
+                                            return Icon(Icons.star_border,
+                                                color: Colors.amber);
                                           }
                                         }),
                                       ),
@@ -84,7 +129,7 @@ class MyReviewPage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: gap_s), // Added gap_s between reviews
+                                  SizedBox(height: gap_s),
                                   Text(
                                     '${reviewData['comment']}',
                                     style: TextStyle(color: Colors.black87),
@@ -95,10 +140,18 @@ class MyReviewPage extends StatelessWidget {
                           ),
                         ],
                       ),
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ReviewWritingDialog(review: review);
+                          },
+                        );
+                      },
                     ),
                   ),
                 ),
-                SizedBox(height: gap_m), // Added gap_s between reviews
+                SizedBox(height: gap_m),
               ],
             ),
           );
