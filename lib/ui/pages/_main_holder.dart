@@ -1,23 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/surroundings/surroundings_page.dart';
-import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
-import '../../_core/constants/move.dart';
 import 'home/home_page.dart';
 import 'my/my_page.dart';
 
-// 전체 화면 틀
 class MainHolder extends StatefulWidget {
-
   @override
-  _MainScreensState createState() => _MainScreensState();
+  _MainHolderState createState() => _MainHolderState();
 }
 
-class _MainScreensState extends State<MainHolder> {
+class _MainHolderState extends State<MainHolder> {
   int _selectedIndex = 0;
-
-  get roomData => null;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,7 +27,13 @@ class _MainScreensState extends State<MainHolder> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: [HomePage(), SearchPage(), NearFromMePage(), ScrapListPage(), MyPage(stayData:stayData)],
+        children: [
+          HomePage(),
+          SearchPage(),
+          NearFromMePage(),
+          ScrapListPage(),
+          MyPage(userData: userData, stayData: stayData,),
+        ],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -40,12 +43,15 @@ class _MainScreensState extends State<MainHolder> {
   }
 }
 
-// 하단 네비데이션바
 class HomeBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
   final Function(int) onItemTapped;
 
-  HomeBottomNavigationBar({required this.currentIndex, required this.onItemTapped});
+  const HomeBottomNavigationBar({
+    Key? key,
+    required this.currentIndex,
+    required this.onItemTapped,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,23 +62,23 @@ class HomeBottomNavigationBar extends StatelessWidget {
       onTap: onItemTapped,
       selectedItemColor: Colors.redAccent,
       items: [
-        const BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: '홈',
           icon: Icon(CupertinoIcons.house_fill),
         ),
-        const BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: '검색',
           icon: Icon(CupertinoIcons.search),
         ),
-        const BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: '주변',
           icon: Icon(CupertinoIcons.placemark_fill),
         ),
-        const BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: '찜',
           icon: Icon(CupertinoIcons.heart_fill),
         ),
-        const BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: '내 정보',
           icon: Icon(CupertinoIcons.smiley_fill),
         ),

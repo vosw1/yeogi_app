@@ -76,7 +76,7 @@ class _JoinPageState extends State<JoinPage> {
                   controller: _ageController,
                   keyboardType: TextInputType.number,
                   labelText: '생년월일',
-                  hintText: 'YYYYMMDD',
+                  hintText: 'YYYY-MM-DD',
                   validator: validateAge,
                 ),
                 SizedBox(height: gap_m),
