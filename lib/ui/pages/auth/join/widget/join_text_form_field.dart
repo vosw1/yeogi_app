@@ -9,6 +9,7 @@ class JoinTextFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final bool? obscureText; // 수정된 부분: 비밀번호 부분을 *로 표시하기 위한 속성 추가
   final Function(DateTime)? onDateSelected;
+  final Function()? onAddressSearch;
 
   JoinTextFormField({
     required this.controller,
@@ -18,6 +19,7 @@ class JoinTextFormField extends StatefulWidget {
     this.validator,
     this.obscureText, // 수정된 부분: 비밀번호 부분을 *로 표시하기 위한 속성 추가
     this.onDateSelected,
+    this.onAddressSearch,
   });
 
   @override
@@ -55,6 +57,8 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
             onTap: () {
               if (widget.labelText == '생년월일') {
                 _selectDate(context);
+              } else if (widget.labelText == '주소' && widget.onAddressSearch != null) {
+                widget.onAddressSearch!(); // 수정된 부분: 주소 검색 기능을 위한 콜백 호출
               }
             },
             child: TextFormField(
@@ -88,6 +92,8 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
               onTap: () {
                 if (widget.labelText == '생년월일') {
                   _selectDate(context);
+                } else if (widget.labelText == '주소' && widget.onAddressSearch != null) {
+                  widget.onAddressSearch!(); // 수정된 부분: 주소 검색 기능을 위한 콜백 호출
                 }
               },
             ),

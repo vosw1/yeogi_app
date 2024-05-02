@@ -3,11 +3,11 @@ import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_screen.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/service_agreement.dart';
-
-
-import 'widget/join_text_form_field.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart'; // 수정된 부분: JoinTextFormField 임포트 추가
+ // 수정된 부분: SearchPostcodePage 임포트 추가
 
 class JoinPage extends StatefulWidget {
   @override
@@ -67,6 +67,9 @@ class _JoinPageState extends State<JoinPage> {
                   labelText: '주소',
                   validator: validateAddress,
                   hintText: "주소를 입력하세요",
+                  onAddressSearch: () {
+                    _navigateToAddressSearch(context); // 주소 검색 다이얼로그 표시
+                  },
                 ),
                 SizedBox(height: gap_m),
                 JoinTextFormField(
@@ -137,5 +140,19 @@ class _JoinPageState extends State<JoinPage> {
         ),
       ),
     );
+  }
+
+  void _navigateToAddressSearch(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LibraryDaumPostcodeScreen()), // 주소 검색 페이지로 이동
+    ).then((selectedAddress) {
+      if (selectedAddress != null) {
+        // 선택된 주소 정보를 주소 입력 필드에 설정
+        setState(() {
+          _addressController.text = selectedAddress.toString();
+        });
+      }
+    });
   }
 }
