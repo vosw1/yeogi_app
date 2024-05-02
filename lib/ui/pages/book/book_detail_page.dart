@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/book.dart';
 import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
-import '../../../_core/constants/size.dart';
-import '../../../data/dtos/book_request.dart';
 
 class BookDetailPage extends StatefulWidget {
   final Book book;

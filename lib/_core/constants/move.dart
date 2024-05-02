@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
-
-import '../../data/models/payment.dart';
-import '../../data/models/room.dart';
-import '../../data/models/stay.dart';
-import '../../ui/pages/auth/join/join_page.dart';
-import '../../ui/pages/book/widgets/book_list.dart';
-import '../../ui/pages/book/widgets/book_list.dart';
-import '../../ui/pages/book/widgets/overseas_book_list.dart';
-import '../../ui/pages/pay/payment_page.dart';
-import '../../ui/pages/room/room_detail_page.dart';
-import '../../ui/pages/book/book_page.dart';
-import '../../ui/pages/home/home_page.dart';
-import '../../ui/pages/auth/login/login_page.dart';
-import '../../ui/pages/my/my_page.dart';
-import '../../ui/pages/scrap/scarp_page.dart';
-import '../../ui/pages/search/search_page.dart';
-import '../../ui/pages/book/widgets/book_list.dart';
-import '../../ui/pages/stay/stay_list_pages/camping_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/motel_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/pension_stay_list.dart';
-import '../../ui/pages/stay/stay_list_pages/sale_stay_list.dart';
-import '../../ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/data/models/payment.dart';
+import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
+import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart';
+import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
+import 'package:yogi_project/ui/pages/home/home_page.dart';
+import 'package:yogi_project/ui/pages/my/my_page.dart';
+import 'package:yogi_project/ui/pages/pay/payment_page.dart';
+import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
+import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
+import 'package:yogi_project/ui/pages/search/search_page.dart';
+import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list.dart';
 
 // URL 설정
 class Move {
@@ -111,9 +107,11 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.roomDetailPage: (context) => RoomDetailPage(
           roomData: roomData,
         ),
+    // 룸 상세보기 페이지
     Move.bookPage: (context) => BookPage(roomData: roomData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
+    // 결제 페이지
     Move.bookList: (context) => BookList(domesticbookList: []),
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),

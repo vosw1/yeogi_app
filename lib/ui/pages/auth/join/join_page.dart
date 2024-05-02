@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/service_agreement.dart';

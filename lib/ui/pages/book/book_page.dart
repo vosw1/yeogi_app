@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
+import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/widgets/book_text_form_field.dart';
-import '../../../_core/constants/size.dart';
-import '../../../_core/constants/style.dart';
-import '../../../data/models/room.dart';
-import '../pay/payment_page.dart';
+import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 
 class BookPage extends StatefulWidget {
   final Room roomData;
@@ -424,6 +424,7 @@ class _BookPageState extends State<BookPage> {
       ],
     );
   }
+
   _showPopups(BuildContext context) {
     List<String> messages = [];
     if (!_subCheckboxValues.every((element) => element)) {

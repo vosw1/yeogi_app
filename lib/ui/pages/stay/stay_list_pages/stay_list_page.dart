@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import '../../../../_core/constants/size.dart';
-import '../../../../_core/constants/style.dart';
-import '../../../../data/models/stay.dart';
-import '../../stay/stay_detail_page.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 abstract class StayListPage extends StatelessWidget {
   const StayListPage({Key? key, required this.appBarTitle}) : super(key: key);

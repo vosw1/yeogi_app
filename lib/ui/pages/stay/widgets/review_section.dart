@@ -58,7 +58,7 @@ class ReviewSection extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('리뷰 상세'),
+          title: Text('전체 리뷰'),
           content: SizedBox(
             width: double.maxFinite,
             height: 400, // 필요한 높이에 맞게 조정하세요

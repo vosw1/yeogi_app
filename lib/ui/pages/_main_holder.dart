@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/ui/pages/surroundings/surroundings_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scarp_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
-import '../../_core/constants/move.dart';
 import 'home/home_page.dart';
 import 'my/my_page.dart';
 

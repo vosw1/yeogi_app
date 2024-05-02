@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
-import '../../../../data/models/stay.dart';
 
 class MotelStayList extends StayListPage {
   const MotelStayList({Key? key}) : super(key: key, appBarTitle: '모텔');

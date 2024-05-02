@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
-import '../../../../_core/constants/style.dart';
 
 // 편의 시설 섹션 위젯
 class AmenitySection extends StatelessWidget {

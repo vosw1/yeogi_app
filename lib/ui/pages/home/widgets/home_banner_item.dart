@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../data/models/home_banner.dart';
+import 'package:yogi_project/data/models/home_banner.dart';
 
 class BannerItem extends StatelessWidget {
   final BannerData bannerData;

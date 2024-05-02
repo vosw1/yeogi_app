@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
-import '../../../../data/models/stay.dart';
 
 class HotelStayList extends StayListPage {
   const HotelStayList({Key? key}) : super(key: key, appBarTitle: '호텔');
@@ -25,11 +25,25 @@ class HotelStayList extends StayListPage {
                 "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
           },
           {
+            'starCount': 3,
+            'comment':
+            "그저그럼... ",
+          },
+          {
             'starCount': 4,
             'comment':
             "좋았어요 ",
           },
           {
+            'starCount': 4,
+            'comment':
+            "좋았어요 ",
+          },
+          {
+            'starCount': 4,
+            'comment':
+            "좋았어요 ",
+          },{
             'starCount': 4,
             'comment':
             "좋았어요 ",

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
-import '../../../../_core/constants/size.dart';
-import '../../../../data/models/stay.dart';
 
 class HomeBody extends StatelessWidget {
   final String title;

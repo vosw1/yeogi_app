@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 
 class BookTextFormField extends StatelessWidget {
   final TextEditingController controller;
