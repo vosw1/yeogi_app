@@ -10,7 +10,7 @@ import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
 class BookDetailPage extends StatefulWidget {
   final Book book;
 
-  const BookDetailPage({Key? key, required this.book}) : super(key: key);
+  const BookDetailPage({Key? key, required this.book, required Room roomData}) : super(key: key);
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();

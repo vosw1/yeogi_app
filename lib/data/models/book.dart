@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/dtos/book_request.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -139,7 +140,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                       );
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => BookDetailPage(book: bookData)),
+                        MaterialPageRoute(builder: (context) => BookDetailPage(book: bookData, roomData: roomData)),
                       );
                     },
                     child: Text('예약하기'),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/book_detail_page.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart';
 
 class RoomDetailPage extends StatefulWidget {
   final Room roomData;
@@ -118,15 +118,15 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('기본정보\n\n${roomData.roomInfo}'),
+                        Text('기본정보\n\n${widget.roomData.roomInfo}'), // Fixed roomData access
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('편의시설\n\n${roomData.amenities}'),
+                        Text('편의시설\n\n${widget.roomData.amenities}'), // Fixed roomData access
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('공지\n\n${roomData.notice}'),
+                        Text('공지\n\n${widget.roomData.notice}'), // Fixed roomData access
                       ],
                     ),
                   ),
@@ -141,14 +141,18 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // 결제 정보를 생성하여 결제 페이지로 이동
+                    // Navigate to BookDetailPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BookPage(roomData: widget.roomData)),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.redAccent,
                   ),
                   child: Text(
-                    '결제하기',
+                    '예약하기',
                     style: TextStyle(fontSize: 18.0),
                   ),
                 ),
