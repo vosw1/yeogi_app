@@ -13,7 +13,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
     return Column(
       children: <Widget>[
         ListTile( // 예약내역 타이틀
-          title: Text('예약내역', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: Text('예약내역'),
           onTap: () {
           },
         ),

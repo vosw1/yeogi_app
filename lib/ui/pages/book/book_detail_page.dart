@@ -171,35 +171,35 @@ class _BookDetailPageState extends State<BookDetailPage> {
         Row(
           children: [
             Text('예약자 : ', style: subtitle1()),
-            Text('${widget.book.bookName}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+            Text('${widget.book.bookName}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('전화번호 : ', style: subtitle1()),
-            Text('${widget.book.bookTel}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+            Text('${widget.book.bookTel}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_s),
         Row(
           children: [
             Text('결제금액 : ', style: subtitle1()),
-            Text('${NumberFormat('#,###').format(widget.book.price)} 원', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+            Text('${NumberFormat('#,###').format(widget.book.price)} 원'),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('결제일자 : ', style: subtitle1()),
-            Text('${formatDate(widget.book.payAt)}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+            Text('${formatDate(widget.book.payAt)}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('결제수단 : ', style: subtitle1()),
-            Text('${widget.book.way}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+            Text('${widget.book.way}', style: subtitle1()),
           ],
         ),
       ],

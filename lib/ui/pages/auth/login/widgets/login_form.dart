@@ -122,7 +122,6 @@ class _LoginFormState extends State<LoginForm> {
                   '카카오로 로그인',
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

@@ -39,7 +39,7 @@ class FAQList extends StatelessWidget {
                     Expanded(
                       child: Text(
                         faqItems[index].question,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                     Icon(faqItems[index].isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down), // 확장 상태에 따라 아이콘 변경
@@ -77,7 +77,7 @@ class FAQAnswerPage extends StatelessWidget {
           children: [
             Text(
               faqItem.question,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: gap_m),
             Text(

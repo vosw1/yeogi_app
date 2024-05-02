@@ -193,7 +193,6 @@ class _ServiceAgreementState extends State<ServiceAgreement> {
       children: [
         Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         Text(content),
         SizedBox(height: 10),

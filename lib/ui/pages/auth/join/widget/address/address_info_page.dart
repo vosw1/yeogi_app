@@ -77,7 +77,6 @@ class _AddressInfoPageState extends State<AddressInfoPage> {
               value,
               style: TextStyle(
                 fontSize: 13,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),

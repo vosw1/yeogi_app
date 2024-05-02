@@ -29,7 +29,6 @@ class BannerItem extends StatelessWidget {
                   bannerData.bannerTitle, // 배너 제목을 표시
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
                     color: Colors.redAccent, // 텍스트 색상을 흰색으로 설정
                   ),
                 ),
