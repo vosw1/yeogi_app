@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 
-// 숙소 상세보기 내 리뷰 기본 틀
 class ReviewWidget extends StatelessWidget {
-  final int stars;
+  final double stars;
   final String comment;
 
-  const ReviewWidget({required this.stars, required this.comment});
+  ReviewWidget({required this.stars, required this.comment});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,14 @@ class ReviewWidget extends StatelessWidget {
           children: [
             // 별점 표시
             Row(
-              children: List.generate(stars, (index) => Icon(Icons.star, color: Colors.amber, size: gap_m)),
+              children: List.generate(
+                5,
+                    (index) => Icon(
+                  index < stars ? Icons.star : Icons.star,
+                  color: Colors.amber,
+                  size: gap_m,
+                ),
+              ),
             ),
             SizedBox(height: gap_xs),
             // 코멘트 표시

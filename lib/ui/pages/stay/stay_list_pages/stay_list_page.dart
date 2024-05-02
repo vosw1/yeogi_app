@@ -24,7 +24,7 @@ abstract class StayListPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StayDetailPage(stayData: stay, roomData: roomData),
+                    builder: (context) => StayDetailPage(stayData: stay, roomData: roomData,),
                   ),
                 );
               },

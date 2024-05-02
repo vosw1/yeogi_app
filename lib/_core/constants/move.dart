@@ -57,9 +57,12 @@ final Stay stayData = Stay(
   location: '강원 정선군 고한읍 고한리 438',
   stayInfo: 'dsh',
   notice: 'ttfdgjn',
-  starCount: 5,
-  comment: 'tjgdfsz',
-  // Add more properties as needed
+  reviews: [
+    {
+      'starCount': 5,
+      'comment': 'tjgdfsz',
+    }
+  ],
 );
 
 final Room roomData = Room(

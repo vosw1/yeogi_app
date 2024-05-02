@@ -55,7 +55,7 @@ class HomeBody extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => StayDetailPage(stayData: stayData[index], roomData: roomData),
+                              builder: (context) => StayDetailPage(stayData: stayData[index], roomData: roomData,),
                             ),
                           );
                         },

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-
 import '../../../../_core/constants/style.dart';
 import 'ReviewWidget.dart';
 
 class ReviewSection extends StatelessWidget {
-  final int stars;
-  final String comment;
+  final List<Map<String, dynamic>> reviews;
 
-  ReviewSection({required this.stars, required this.comment});
+  ReviewSection({required this.reviews});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +18,28 @@ class ReviewSection extends StatelessWidget {
           style: h6(),
         ),
         SizedBox(height: gap_s),
-        Container(
+        reviews.isEmpty
+            ? Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            '리뷰가 없습니다',
+            style: TextStyle(fontSize: 16),
+          ),
+        )
+            : Container(
           height: 120,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 1,
+            itemCount: reviews.length,
             itemBuilder: (context, index) {
-              return ReviewWidget(stars: stars.toInt(), comment: comment);
+              final review = reviews[index];
+              // stars 값을 double로 변환하여 전달
+              final stars = (review['stars'] as num?)?.toDouble() ?? 0.0;
+              final comment = review['comment'] as String;
+              return ReviewWidget(
+                stars: stars,
+                comment: comment,
+              );
             },
           ),
         ),

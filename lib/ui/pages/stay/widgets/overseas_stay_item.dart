@@ -1,16 +1,62 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
 import '../../../../data/models/stay.dart';
 
-class OverseasBookItem extends StatelessWidget {
-  final Stay stayData; // Corrected Stay model import
-  final Comment userData;
+class Stay {
+  final String stayImgTitle; // 숙소 이미지 제목
+  final String stayName; // 숙소 이름
+  final String stayInfo; // 숙소 소개
+  final String location; // 위치
+  final String notice; // 이용공지
+  final List<Map<String, dynamic>>? reviews; // 리뷰 리스트
 
-  OverseasBookItem({Key? key, required this.stayData, required this.userData})
+  Stay({
+    required this.stayImgTitle,
+    required this.stayName,
+    required this.stayInfo,
+    required this.location,
+    required this.notice,
+    required this.reviews,
+  });
+
+  // Convert Stay object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      "stayImgTitle": stayImgTitle,
+      "stayName": stayName,
+      "stayInfo": stayInfo,
+      "location": location,
+      "notice": notice,
+      "reviews": reviews,
+    };
+  }
+
+}
+
+class Review {
+  final double starCount;
+  final String comment;
+
+  Review({
+    required this.starCount,
+    required this.comment,
+  });
+
+  // Convert Review object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      "starCount": starCount,
+      "comment": comment,
+    };
+  }
+}
+
+class OverseasBookItem extends StatelessWidget {
+  final Stay stayData;
+
+  OverseasBookItem({Key? key, required this.stayData})
       : super(key: key);
 
   @override
@@ -26,11 +72,11 @@ class OverseasBookItem extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: gap_s),
-            _buildPopularItemImage(), // 사진 이미지
+            _buildPopularItemImage(),
             SizedBox(height: gap_s),
-            _buildPopularItemStar(stayData.starCount), // 별점
+            _buildPopularItemStar(stayData.reviews),
             SizedBox(height: gap_s),
-            _buildPopularItemComment(), // 리뷰
+            _buildPopularItemComment(stayData.reviews),
           ],
         ),
       ),
@@ -51,45 +97,61 @@ class OverseasBookItem extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularItemStar(double starCount) {
-    int fullStars = starCount.floor();
-    double halfStar = starCount - fullStars;
+  Widget _buildPopularItemStar(List<Map<String, dynamic>>? reviews) {
+    if (reviews != null && reviews.isNotEmpty) {
+      double totalStarCount = 0;
+      for (var review in reviews) {
+        totalStarCount += review['starCount'];
+      }
+      double averageStarCount = totalStarCount / reviews.length;
+      int fullStars = averageStarCount.floor();
+      double halfStar = averageStarCount - fullStars;
 
-    return Row(
-      children: [
-        for (int i = 0; i < fullStars; i++)
-          Icon(Icons.star, color: kAccentColor),
-        if (halfStar > 0.0) Icon(Icons.star_half, color: kAccentColor),
-        SizedBox(width: 4),
-        Text(
-          '$starCount 점',
-          style: TextStyle(color: Colors.black),
+      return Row(
+        children: [
+          for (int i = 0; i < fullStars; i++)
+            Icon(Icons.star, color: kAccentColor),
+          if (halfStar > 0.0) Icon(Icons.star_half, color: kAccentColor),
+          SizedBox(width: 4),
+          Text(
+            '$averageStarCount 점',
+            style: TextStyle(color: Colors.black),
+          ),
+        ],
+      );
+    } else {
+      return Container(
+        constraints: BoxConstraints(minHeight: 50),
+        child: Text(
+          "리뷰가 없습니다",
+          style: body1(),
         ),
-      ],
-    );
+      );
+    }
   }
 
-  Widget _buildPopularItemComment() {
-    return Container(
-      constraints: BoxConstraints(minHeight: 50),
-      child: Text(
-        "${stayData.comment}",
-        style: body1(),
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-  }
-
-  Widget _buildPopularItemUserInfo(String imgTitle) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CircleAvatar(
-          backgroundImage: AssetImage(
-              "assets/images/$imgTitle"), // Corrected usage of imgTitle
+  Widget _buildPopularItemComment(List<Map<String, dynamic>>? reviews) {
+    if (reviews != null && reviews.isNotEmpty) {
+      // 여기에서 원하는 리뷰를 선택하거나 추출하는 로직을 구현합니다.
+      // 이 예시에서는 첫 번째 리뷰를 선택했습니다.
+      String comment = reviews.first['comment'];
+      return Container(
+        constraints: BoxConstraints(minHeight: 50),
+        child: Text(
+          comment,
+          style: body1(),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
-      ],
-    );
+      );
+    } else {
+      return Container(
+        constraints: BoxConstraints(minHeight: 50),
+        child: Text(
+          "리뷰가 없습니다",
+          style: body1(),
+        ),
+      );
+    }
   }
 }

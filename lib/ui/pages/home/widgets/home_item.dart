@@ -1,6 +1,7 @@
-import 'dart:html';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
+
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/size.dart';
 import '../../../../_core/constants/style.dart';
@@ -26,9 +27,9 @@ class HomeItem extends StatelessWidget {
             SizedBox(height: gap_s),
             _buildItemImage(stayData.stayImgTitle),
             SizedBox(height: gap_s),
-            _buildItemStar(stayData.starCount),
+            _buildItemStar(stayData.reviews),
             SizedBox(height: gap_s),
-            _buildItemComment(stayData.comment), // commentData 사용
+            _buildItemComment(stayData.reviews),
           ],
         ),
       ),
@@ -42,67 +43,64 @@ class HomeItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.asset(
-          "assets/images/${stayData.stayImgTitle}",
+          "assets/images/$imagePath",
           fit: BoxFit.fitWidth,
         ),
       ),
     );
   }
 
-  Widget _buildItemStar(double starCount) {
-    int fullStars = starCount.floor();
-    double halfStar = starCount - fullStars;
+  Widget _buildItemStar(List<Map<String, dynamic>>? reviews) {
+    if (reviews != null && reviews.isNotEmpty) {
+      // 별점 계산 로직
+      double totalStars = 0;
+      for (var review in reviews) {
+        totalStars += review['starCount'] ?? 0;
+      }
+      double averageStars = totalStars / reviews.length;
 
-    return Row(
-      children: [
-        for (int i = 0; i < fullStars; i++)
-          Icon(Icons.star, color: kAccentColor),
-        if (halfStar > 0.0)
-          Icon(Icons.star_half, color: kAccentColor),
-        SizedBox(width: 4),
-        Text(
-          '$starCount 점',
-          style: TextStyle(color: Colors.black),
+      int fullStars = averageStars.floor();
+      double halfStar = averageStars - fullStars;
+
+      return Row(
+        children: [
+          for (int i = 0; i < fullStars; i++)
+            Icon(Icons.star, color: kAccentColor),
+          if (halfStar > 0.0)
+            Icon(Icons.star_half, color: kAccentColor),
+          SizedBox(width: 4),
+          Text(
+            '${averageStars.toStringAsFixed(1)} 점',
+            style: TextStyle(color: Colors.black),
+          ),
+        ],
+      );
+    } else {
+      return Text(
+        '리뷰가 없습니다',
+        style: TextStyle(color: Colors.black),
+      );
+    }
+  }
+
+  Widget _buildItemComment(List<Map<String, dynamic>>? reviews) {
+    if (reviews != null && reviews.isNotEmpty) {
+      // 첫 번째 리뷰의 코멘트 가져오기
+      String comment = reviews.first['comment'] ?? '';
+      return Container(
+        constraints: BoxConstraints(minHeight: 50),
+        child: Text(
+          comment,
+          style: body1(),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
-      ],
-    );
-  }
-
-  Widget _buildItemComment(String comment) {
-    return Container(
-      constraints: BoxConstraints(minHeight: 50),
-      child: Text(
-        comment,
-        style: body1(),
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-  }
-
-  Widget _buildItemUserInfo(String userName, String location) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userName,
-              style: subtitle1(),
-            ),
-            Container(
-              constraints: BoxConstraints(minHeight: 40),
-              child: Text(
-                location,
-                style: subtitle1(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        )
-      ],
-    );
+      );
+    } else {
+      return Text(
+        '리뷰가 없습니다',
+        style: TextStyle(color: Colors.black),
+      );
+    }
   }
 }

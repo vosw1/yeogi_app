@@ -1,9 +1,9 @@
-// 숙소 기본 틀
+// 룸 기본 틀
 class Room {
-  final String roomImgTitle; // 숙소 이미지 제목
-  final String roomName; // 방 이름
-  final String roomInfo; // 방 정보
-  final String amenities; // 방 편의시설
+  final String roomImgTitle; // 룸 이미지 제목
+  final String roomName; // 룸 이름
+  final String roomInfo; // 룸 정보
+  final String amenities; // 룸
   final String checkInDate; // 체크인 날짜
   final String checkOutDate; // 체크아웃 날짜
   final String checkInTime; // 입실
