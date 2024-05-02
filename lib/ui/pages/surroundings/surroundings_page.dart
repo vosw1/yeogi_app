@@ -110,7 +110,6 @@ class _NearFromMePageState extends State<NearFromMePage> {
             SizedBox(height: gap_m),
             Text(
               '결과 ${searchResults.length}건',
-              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Divider(),
             Expanded(

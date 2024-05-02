@@ -8,6 +8,8 @@ import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
 
+import '../room/room_list.dart';
+
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;
   final Room roomData;
@@ -28,7 +30,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
       appBar: AppBar(
         title: Text(
           '${widget.stayData.stayName}',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -87,17 +89,23 @@ class _StayDetailPageState extends State<StayDetailPage> {
               // 객실 선택 섹션
               Text(
                 '객실 선택',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
-              RoomInfoWidget(roomData: widget.roomData), // Stay 클래스에 roomData 필드가 정의되어 있는지 확인해야 함
-              SizedBox(height: gap_xx),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_s),
               // 숙소 소개 섹션
               Text(
                 '숙소 소개',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
               Text(
@@ -109,7 +117,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               SizedBox(height: gap_s),
               Text(
                 '이용 정보',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
               Text(
@@ -121,7 +129,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               // 취소 및 환불 규정 섹션
               Text(
                 '취소 및 환불 규정',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
               Text(

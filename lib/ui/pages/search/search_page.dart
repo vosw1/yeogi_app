@@ -205,7 +205,6 @@ class _SearchPageState extends State<SearchPage> {
                 '결과 ${searchResults.length}건',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: gap_xx),

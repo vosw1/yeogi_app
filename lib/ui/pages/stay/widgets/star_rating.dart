@@ -31,7 +31,7 @@ class _StarRatingState extends State<StarRating> {
         SizedBox(width: 8), // 간격 추가
         Text(
           '${widget.rating} 점', // 현재 별점을 표시
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16),
         ),
       ],
     );

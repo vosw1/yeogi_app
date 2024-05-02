@@ -189,7 +189,7 @@ class _BookPageState extends State<BookPage> {
             ),
             Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              style: TextStyle(fontSize: 18.0),
             ),
           ],
         ),
@@ -265,7 +265,6 @@ class _BookPageState extends State<BookPage> {
           children: [
             Text(
               '이용규칙',
-              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
               '19세 미만 청소년의 혼숙은 법적으로 불가하며, 이에 대한 숙소의 입실 거부 시 취소/환불이 불가합니다.\n'
@@ -274,7 +273,6 @@ class _BookPageState extends State<BookPage> {
             SizedBox(height: 10),
             Text(
               '취소/환불 규정',
-              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
               '취소/환불 가능 여부는 숙소의 정책을 따릅니다.\n'
@@ -306,7 +304,6 @@ class _BookPageState extends State<BookPage> {
           children: [
             Text(
               '구분\t수집 목적\t수집 항목\t보유 및 이용기간',
-              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
               '필수\t예약/구매 서비스 제공 상담 및 부정거래 기록 확인\t\n'

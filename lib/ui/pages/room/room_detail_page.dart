@@ -1,79 +1,198 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/book/book_page.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/ui/pages/book/book_detail_page.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart';
 
-class RoomDetailPage extends StatelessWidget {
+class RoomDetailPage extends StatefulWidget {
   final Room roomData;
 
-  const RoomDetailPage(
-      {required this.roomData}); // Modify constructor to include stayData
+  const RoomDetailPage({required this.roomData});
+
+  @override
+  _RoomDetailPageState createState() => _RoomDetailPageState();
+}
+
+class _RoomDetailPageState extends State<RoomDetailPage> {
+  late DateTime _checkInDate;
+  late DateTime _checkOutDate;
+  int _numberOfNights = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkInDate = DateTime.now(); // 현재 날짜로 초기화
+    _checkOutDate = DateTime.now().add(Duration(days: 1)); // 다음 날짜로 초기화
+    _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '${roomData.roomName}',
-          style: h5(),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
+        title: Text('${widget.roomData.roomName}'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(gap_m),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 600,
-              height: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(gap_s),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(gap_s),
-                child: Image.asset(
-                  'assets/images/${roomData.roomImgTitle}',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            // 숙소 이미지
-            SizedBox(height: gap_m),
-            Text('${roomData.roomName}', style: subtitle1()), // 방이름
-            Text('${roomData.price}', style: subtitle1()), // 금액
-            Text('${roomData.checkInDate}', style: subtitle1()), // 체크인 날짜
-            Text('${roomData.checkOutDate}', style: subtitle1()), // 체크아웃 날짜
-            Text('${roomData.checkInTime}', style: subtitle1()), // 체크인 시간
-            Text('${roomData.checkOutTime}', style: subtitle1()), // 체크아웃 시간
-            SizedBox(height: gap_m),
-            // 예약하기 버튼 위 여백
-            SizedBox(
-              // 예약하기 버튼
-              width: double.infinity, // 가로로 꽉 채우도록 설정
-              child: ElevatedButton(
-                onPressed: () {
-                  var widget;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          BookPage(roomData: roomData), // Pass roomData
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(gap_m),
+                  child: Container(
+                    padding: EdgeInsets.all(gap_m),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(gap_s),
+                      border: Border.all(color: Colors.grey), // Changed border color
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent, // 글자색을 흰색으로 설정
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(gap_s),
+                          child: Image.asset(
+                            'assets/images/${widget.roomData.roomImgTitle}',
+                            width: double.infinity,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: gap_m),
+                                Text('체크인', style: TextStyle(fontSize: gap_m)),
+                                SizedBox(height: gap_xs),
+                                GestureDetector(
+                                  onTap: () => _selectDate(context, isCheckIn: true),
+                                  child: Container(
+                                    padding: EdgeInsets.all(gap_s),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(gap_s),
+                                      border: Border.all(color: Colors.black), // Changed border color
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(formatDate(_checkInDate)),
+                                        SizedBox(width: gap_xs),
+                                        Icon(Icons.calendar_today),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: gap_m),
+                                Text('체크아웃', style: TextStyle(fontSize: gap_m)),
+                                SizedBox(height: gap_xs),
+                                GestureDetector(
+                                  onTap: () => _selectDate(context, isCheckIn: false),
+                                  child: Container(
+                                    padding: EdgeInsets.all(gap_s),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(gap_s),
+                                      border: Border.all(color: Colors.black), // Changed border color
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(formatDate(_checkOutDate)),
+                                        SizedBox(width: gap_xs),
+                                        Icon(Icons.calendar_today),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: gap_m),
+                        Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
+                            style: TextStyle(fontSize: gap_m)),
+                        SizedBox(height: gap_s),
+                        Divider(),
+                        SizedBox(height: gap_s),
+                        Text('기본정보\n\n${widget.roomData.roomInfo}'), // Fixed roomData access
+                        SizedBox(height: gap_s),
+                        Divider(),
+                        SizedBox(height: gap_s),
+                        Text('편의시설\n\n${widget.roomData.amenities}'), // Fixed roomData access
+                        SizedBox(height: gap_s),
+                        Divider(),
+                        SizedBox(height: gap_s),
+                        Text('공지\n\n${widget.roomData.notice}'), // Fixed roomData access
+                      ],
+                    ),
+                  ),
                 ),
-                child: Text('예약하기'),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(gap_m),
+            child: Center(
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Navigate to BookDetailPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BookPage(roomData: widget.roomData)),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.redAccent,
+                  ),
+                  child: Text(
+                    '예약하기',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  String _addCommas(int price) {
+    String priceString = price.toString();
+    String formattedPrice = '';
+    for (int i = priceString.length - 1; i >= 0; i--) {
+      formattedPrice = priceString[i] + formattedPrice;
+      if ((priceString.length - i) % 3 == 0 && i != 0) {
+        formattedPrice = ',' + formattedPrice;
+      }
+    }
+    return formattedPrice;
+  }
+
+  Future<void> _selectDate(BuildContext context,
+      {required bool isCheckIn}) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: isCheckIn ? _checkInDate : _checkOutDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+    if (pickedDate != null) {
+      setState(() {
+        if (isCheckIn) {
+          _checkInDate = pickedDate;
+        } else {
+          _checkOutDate = pickedDate;
+        }
+        _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
+      });
+    }
   }
 }

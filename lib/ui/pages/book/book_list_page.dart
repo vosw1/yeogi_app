@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/dtos/book_request.dart';
 import 'book_detail_page.dart';
 
 class BookListPage extends StatelessWidget {
@@ -37,7 +38,7 @@ class BookListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookDetailPage(book: book),
+                  builder: (context) => BookDetailPage(book: book, roomData: roomData,),
                 ),
               );
             },

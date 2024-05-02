@@ -50,7 +50,6 @@ class MyPageFaqMenuHolder extends StatelessWidget {
           return ListTile(
             title: Text(
               '고객센터',
-              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           );
         } else {

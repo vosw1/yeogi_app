@@ -15,7 +15,7 @@ class ReviewSection extends StatelessWidget {
       children: [
         Text(
           '리뷰',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20),
         ),
         SizedBox(height: gap_s),
         reviews.isEmpty

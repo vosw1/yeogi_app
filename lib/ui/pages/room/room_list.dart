@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 import 'package:yogi_project/ui/pages/room/room_list_page.dart';
 
-import '../../../_core/constants/style.dart';
-
 class ConcreteRoomListPage extends RoomListPage {
-  ConcreteRoomListPage({Key? key, required String appBarTitle}) : super(key: key, appBarTitle: appBarTitle);
+  ConcreteRoomListPage({Key? key, required String appBarTitle, required List roomDataList}) : super(key: key, appBarTitle: appBarTitle);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class ConcreteRoomListPage extends RoomListPage {
             Expanded(
               flex: 1,
               child: Container(
-                height: 120,
+                height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0), // Adjust border radius as needed
                   border: Border.all(
