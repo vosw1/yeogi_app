@@ -61,34 +61,35 @@ class ReviewSection extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('리뷰 목록'),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final review in reviews)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          // 별점에 따라 아이콘을 표시
-                          for (int i = 0; i < 5; i++)
-                            Icon(
-                              i < review.rating ? Icons.star : Icons.star_border,
-                              color: Colors.yellow,
-                            ),
-                          SizedBox(width: 8),
-                          Text('${review.rating.toStringAsFixed(1)} 점'),
-                        ],
-                      ),
-                      SizedBox(height: gap_s),
-                      Text(review.comment),
-                      SizedBox(height: gap_m),
-                    ],
-                  ),
-              ],
+          title: Text('리뷰 상세'),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 400, // 필요한 높이에 맞게 조정하세요
+            child: ListView.builder(
+              itemCount: reviews.length,
+              itemBuilder: (context, index) {
+                final review = reviews[index];
+                final starRating = review.rating / 5.0 * 5.0;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        for (int i = 0; i < 5; i++)
+                          Icon(
+                            i < starRating ? Icons.star : Icons.star_border,
+                            color: Colors.yellow,
+                          ),
+                        SizedBox(width: 8),
+                        Text('${starRating.toStringAsFixed(1)} 점'),
+                      ],
+                    ),
+                    SizedBox(height: gap_s),
+                    Text(review.comment),
+                    SizedBox(height: gap_m),
+                  ],
+                );
+              },
             ),
           ),
           actions: [
@@ -103,5 +104,4 @@ class ReviewSection extends StatelessWidget {
       },
     );
   }
-
 }

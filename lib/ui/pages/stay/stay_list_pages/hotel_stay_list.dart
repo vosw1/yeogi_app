@@ -28,6 +28,11 @@ class HotelStayList extends StayListPage {
             'starCount': 4,
             'comment':
             "좋았어요 ",
+          },
+          {
+            'starCount': 4,
+            'comment':
+            "좋았어요 ",
           }
         ],
       ),
