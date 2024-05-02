@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  daum_postcode_search:
+    dependency: "direct main"
+    description:
+      name: daum_postcode_search
+      sha256: "4c160305712164e18b03fd9d02abd67049f625d4454551da7eee658085436645"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   dio:
     dependency: "direct main"
     description:
@@ -190,6 +198,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_inappwebview:
+    dependency: "direct main"
+    description:
+      name: flutter_inappwebview
+      sha256: d198297060d116b94048301ee6749cd2e7d03c1f2689783f52d210a6b7aba350
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.8.0"
   flutter_lints:
     dependency: "direct dev"
     description:
