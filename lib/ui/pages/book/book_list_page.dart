@@ -43,7 +43,7 @@ class BookListPage extends StatelessWidget {
               );
             },
             child: Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
               child: Row(
                 children: [
                   ClipRRect(
