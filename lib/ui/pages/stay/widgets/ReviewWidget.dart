@@ -22,7 +22,6 @@ class ReviewWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 별점 표시
-            // ReviewWidget에서 별점 표시 부분 수정
             Row(
               children: List.generate(
                 5,
@@ -43,6 +42,27 @@ class ReviewWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ReviewsList extends StatelessWidget {
+  final List<ReviewWidget> reviews;
+
+  ReviewsList({required this.reviews});
+
+  @override
+  Widget build(BuildContext context) {
+    return reviews.isEmpty
+        ? Center(
+      child: Text('리뷰가 없습니다.'),
+    )
+        : ListView.builder(
+      itemCount: reviews.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return reviews[index];
+      },
     );
   }
 }

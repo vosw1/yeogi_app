@@ -18,10 +18,6 @@ class ScrapListPage extends StayListPage {
         notice:
             "기본 정보\n입실 : 14:00 | 퇴실 : 12:00\n22시 이후 입실 시 사전문의 (필수)\n전 객실 금연\n주차 가능",
         reviews: [
-          {
-            'starCount': 0,
-            'comment': "",
-          }
         ],
       ),
       Stay(
@@ -34,7 +30,7 @@ class ScrapListPage extends StayListPage {
             "객실 가격은 원화, 달러와 가치가 상이하니 정확한 숙박요금계산은 호스트에게 문의필수\n온라인예약의 경우 인원추가시 발생되는 추가요금 사전결제불가(현장결제)\n비수기 1인 20,000원 성수기 1인 30,000원",
         reviews: [
           {
-            'starCount': 3.5,
+            'starCount': 3,
             'comment': "화장실 샤워부스의 온수가 잘 나오지 않는 것외에는 모든 것이 다 좋았다",
           }
         ],
