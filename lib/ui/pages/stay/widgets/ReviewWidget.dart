@@ -27,7 +27,7 @@ class ReviewWidget extends StatelessWidget {
               children: List.generate(
                 5,
                     (index) => Icon(
-                  index < (stars * 5).floor() ? Icons.star : Icons.star_border,
+                  index < stars ? Icons.star : Icons.star_border,
                   color: Colors.amber,
                   size: gap_m,
                 ),
