@@ -1,5 +1,5 @@
 class Review {
-  final double rating; // 별점
+  final int rating; // 별점
   final String comment; // 코멘트
 
   Review({

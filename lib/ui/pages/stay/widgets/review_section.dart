@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import '../../../../_core/constants/style.dart';
-import 'ReviewWidget.dart';
+import 'package:yogi_project/data/models/review.dart';
+import 'ReviewWidget.dart'; // Review 모델 import
 
 class ReviewSection extends StatelessWidget {
-  final List<Map<String, dynamic>> reviews;
+  final List<Review> reviews;
 
   ReviewSection({required this.reviews});
 
@@ -15,7 +15,7 @@ class ReviewSection extends StatelessWidget {
       children: [
         Text(
           '리뷰',
-          style: h6(),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: gap_s),
         reviews.isEmpty
@@ -33,11 +33,10 @@ class ReviewSection extends StatelessWidget {
             itemCount: reviews.length,
             itemBuilder: (context, index) {
               final review = reviews[index];
-              // stars 값을 double로 변환하여 전달
-              final stars = (review['stars'] as num?)?.toDouble() ?? 0.0;
-              final comment = review['comment'] as String;
+              final stars = review.rating; // 별점 값 가져오기
+              final comment = review.comment;
               return ReviewWidget(
-                stars: stars,
+                stars: stars.toDouble(),
                 comment: comment,
               );
             },
@@ -50,3 +49,4 @@ class ReviewSection extends StatelessWidget {
     );
   }
 }
+
