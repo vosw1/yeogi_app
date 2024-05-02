@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/my_review.dart';
 
 class MyReviewPage extends StatelessWidget {
@@ -7,14 +9,26 @@ class MyReviewPage extends StatelessWidget {
     // 가짜 데이터 예시
     List<MyReview> myReviews = [
       MyReview(
-        accommodationName: '좋은 숙소',
+        stayName: '좋은 숙소',
         checkInDate: '2024년 5월 15일',
-        reviewContent: '좋은 서비스에 만족합니다.',
+        reviews: [
+          {
+            'starCount': 4,
+            'comment':
+            "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+          },
+        ],
       ),
       MyReview(
-        accommodationName: '훌륭한 숙소',
+        stayName: '훌륭한 숙소',
         checkInDate: '2024년 5월 20일',
-        reviewContent: '쾌적한 환경과 친절한 스태프가 좋았어요.',
+        reviews: [
+          {
+            'starCount': 5,
+            'comment':
+            "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+          },
+        ],
       ),
     ];
 
@@ -26,17 +40,70 @@ class MyReviewPage extends StatelessWidget {
         itemCount: myReviews.length,
         itemBuilder: (context, index) {
           final review = myReviews[index];
-          return ListTile(
-            title: Text(review.accommodationName),
-            subtitle: Text('이용 날짜 : ${review.checkInDate}\n${review.reviewContent}'),
-            onTap: () {
-              // 리뷰 상세 페이지로 이동하는 코드를 여기에 추가할 수 있습니다.
-              // 예: Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewDetailPage(review)));
-            },
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: gap_m),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Card(
+                  elevation: 2, // Add elevation for a shadow effect
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(gap_s), // Updated border radius
+                    side: BorderSide(color: Colors.grey), // Add a border
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(gap_s), // Add padding to create space inside the Card
+                    child: ListTile(
+                      title: Text(review.stayName, style: h5()),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('이용 날짜 : ${review.checkInDate}', style: TextStyle(color: Colors.grey)),
+                          SizedBox(height: 4),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: review.reviews!.map<Widget>((reviewData) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Row(
+                                        children: List.generate(5, (index) {
+                                          if (index < reviewData['starCount']) {
+                                            return Icon(Icons.star, color: Colors.amber);
+                                          } else {
+                                            return Icon(Icons.star_border, color: Colors.amber);
+                                          }
+                                        }),
+                                      ),
+                                      SizedBox(width: gap_s),
+                                      Text(
+                                        '${reviewData['starCount']} 점',
+                                        style: TextStyle(color: Colors.black87),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: gap_s), // Added gap_s between reviews
+                                  Text(
+                                    '${reviewData['comment']}',
+                                    style: TextStyle(color: Colors.black87),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: gap_m), // Added gap_s between reviews
+              ],
+            ),
           );
         },
       ),
     );
   }
 }
-

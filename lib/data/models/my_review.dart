@@ -1,11 +1,11 @@
 class MyReview {
-  final String accommodationName;
+  final String stayName;
   final String checkInDate;
-  final String reviewContent;
+  final List<Map<String, dynamic>>? reviews; // 리뷰 리스트
 
   MyReview({
-    required this.accommodationName,
+    required this.stayName,
     required this.checkInDate,
-    required this.reviewContent,
+    this.reviews,
   });
 }
