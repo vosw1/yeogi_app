@@ -31,7 +31,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('예약 상세보기'),
+        title: Text('${widget.book.stayName}'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: gap_m),
@@ -46,26 +46,22 @@ class _BookDetailPageState extends State<BookDetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('숙소정보', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_m),
-                  Text('${widget.book.stayName}', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_xs),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
                       'assets/images/${widget.book.roomImgTitle}',
                       width: double.infinity,
-                      height: 200,
+                      height: 150,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
                   Text('${widget.book.roomName}',
                       style: TextStyle(fontSize: gap_m)),
                   Text('${widget.book.location}'),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
                   Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -119,20 +115,12 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
                   Divider(),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
                   Text('예약 정보', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_m),
-                  Text('예약자 : ${widget.book.bookName}', style: subtitle1()),
-                  SizedBox(height: gap_xs),
-                  Text('전화번호 : ${widget.book.bookTel}', style: subtitle1()),
-                  SizedBox(height: gap_m),
-                  Text('결제금액 : ${NumberFormat('#,###').format(widget.book.price)} 원', style: subtitle1()),
-                  SizedBox(height: gap_xs),
-                  Text('결제일자 : ${formatDate(widget.book.payAt)}', style: subtitle1()),
-                  SizedBox(height: gap_xs),
-                  Text('결제수단 : ${widget.book.way}', style: subtitle1()), // 결제수단 수정
+                  _buildReservationInfo(),
                 ],
               ),
             ),
@@ -171,6 +159,48 @@ class _BookDetailPageState extends State<BookDetailPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildReservationInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text('예약자 : ', style: subtitle1()),
+            Text('${widget.book.bookName}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+          ],
+        ),
+        SizedBox(height: gap_xs),
+        Row(
+          children: [
+            Text('전화번호 : ', style: subtitle1()),
+            Text('${widget.book.bookTel}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+          ],
+        ),
+        SizedBox(height: gap_s),
+        Row(
+          children: [
+            Text('결제금액 : ', style: subtitle1()),
+            Text('${NumberFormat('#,###').format(widget.book.price)} 원', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+          ],
+        ),
+        SizedBox(height: gap_xs),
+        Row(
+          children: [
+            Text('결제일자 : ', style: subtitle1()),
+            Text('${formatDate(widget.book.payAt)}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+          ],
+        ),
+        SizedBox(height: gap_xs),
+        Row(
+          children: [
+            Text('결제수단 : ', style: subtitle1()),
+            Text('${widget.book.way}', style: subtitle1().copyWith(fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ],
     );
   }
 
