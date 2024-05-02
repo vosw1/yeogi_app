@@ -21,11 +21,11 @@ class GuestHouseStayList extends StayListPage {
         notice: "현장 요금 추가 정보\n인원 추가 시 1인 20000원(영유아 포함)",
         reviews: [
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment': "시댁이 전주라 한옥마을 자주 이용하는편인데 지금까지 이용했던 숙소중에 제일 좋았어요~",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -45,7 +45,7 @@ class GuestHouseStayList extends StayListPage {
                 "오랫만에 전주한옥마을에서 잤는데 공영주차장2 와 거리가 5~7분정도여서 빠르게 숙소에 들어갈 수 있었어요",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -65,7 +65,7 @@ class GuestHouseStayList extends StayListPage {
                 "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^사진에서 봤던것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -85,7 +85,7 @@ class GuestHouseStayList extends StayListPage {
             'comment': "한옥 숙소는 처음 가봣는데 전체적으로 만족 햇어요 ",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -106,7 +106,7 @@ class GuestHouseStayList extends StayListPage {
                 "겨울에 방문하고 날씨가 따뜻해 지고 다시 한번 골목길 게스트하우스에 하루 쉬어갔습니다~\n여전히 깨끗하고 아늑해서  넘 좋았습니다~ 보일러도  나에게 맞게 조절 할 수 있어서 밤에 따뜻하게 잘 잤습니다.",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }
@@ -122,12 +122,12 @@ class GuestHouseStayList extends StayListPage {
             "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "늦은시간에 체크인을 했는데 친절하게 맞이해주시던 사장님!!!!\n숙소는 제가 넘  조아하는 아늑함\n여기는 민박도 아닌 여관도 아닌 요즘 핫한 한옥숙소느낌!",
           },
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment':
             "좋았어요 ",
           }

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/data/models/review.dart';
-import 'ReviewWidget.dart'; // Review 모델 import
+
+import '../../../../_core/constants/size.dart';
+import '../../../../data/models/review.dart';
+import 'ReviewWidget.dart';
 
 class ReviewSection extends StatelessWidget {
   final List<Review> reviews;
@@ -33,11 +35,16 @@ class ReviewSection extends StatelessWidget {
             itemCount: reviews.length,
             itemBuilder: (context, index) {
               final review = reviews[index];
-              final stars = review.rating; // 별점 값 가져오기
-              final comment = review.comment;
-              return ReviewWidget(
-                stars: stars.toDouble(),
-                comment: comment,
+              // 레이팅을 별로 변환
+              final starRating = review.rating / 5.0 * 5.0;
+              return GestureDetector(
+                onTap: () {
+                  _showReviewPopup(context, starRating, review.comment);
+                },
+                child: ReviewWidget(
+                  stars: starRating,
+                  comment: review.comment,
+                ),
               );
             },
           ),
@@ -48,5 +55,38 @@ class ReviewSection extends StatelessWidget {
       ],
     );
   }
-}
 
+  void _showReviewPopup(BuildContext context, double starRating, String comment) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('리뷰 상세'),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.star, color: Colors.yellow),
+                  SizedBox(width: 8),
+                  Text('별점: ${starRating.toStringAsFixed(1)}'),
+                ],
+              ),
+              SizedBox(height: gap_s),
+              Text(comment),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('닫기'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

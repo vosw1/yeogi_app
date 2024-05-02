@@ -22,17 +22,18 @@ class ReviewWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 별점 표시
+            // ReviewWidget에서 별점 표시 부분 수정
             Row(
               children: List.generate(
                 5,
                     (index) => Icon(
-                  index < stars ? Icons.star : Icons.star,
+                  index < (stars * 5).floor() ? Icons.star : Icons.star_border,
                   color: Colors.amber,
                   size: gap_m,
                 ),
               ),
             ),
-            SizedBox(height: gap_xs),
+            SizedBox(height: gap_s),
             // 코멘트 표시
             Text(
               comment,

@@ -71,15 +71,16 @@ class _StayDetailPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               // 리뷰 섹션
+              // StayDetailPage에서 리뷰 데이터를 Review 객체로 변환하여 ReviewSection에 전달하는 부분 수정
               ReviewSection(
                 reviews: widget.stayData.reviews
                     ?.map((review) => Review(
-                  rating: review['stars'] ?? 0,
+                  rating: (review['starCount'] ?? 0).toDouble(), // 리뷰 데이터의 별점을 double로 변환
                   comment: review['comment'] ?? '',
                 ))
-                    .toList() ??
-                    [], // reviews가 nullable일 수 있으므로 null일 경우 빈 리스트로 처리
+                    .toList() ?? [],
               ),
+
               SizedBox(height: gap_xx),
               // 편의 시설 섹션
               AmenitySection(),

@@ -19,7 +19,7 @@ class OverseasStayList extends StayListPage {
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           {
-            'starCount': 4.0,
+            'starCount': 4,
             'comment':
                 "가격이 비싼감이 없지않지만 환율과 괌 물가 대비 적당하다는 생각이 들었어요 일단 깨끗한건 말할것도 없고요 부족함이 없었던 숙소였어요",
           }
@@ -33,7 +33,7 @@ class OverseasStayList extends StayListPage {
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "맘에 들어요 일본숙소치고 룸도 넓고  1인 베드도 넓어서 좋아요 트윈베드에 쇼파베드가 있어 3명이 와도 사용할수있어요",
           }
@@ -47,7 +47,7 @@ class OverseasStayList extends StayListPage {
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "다양한 호텔 중에 넓은 수영장과 아주 특별한 외관에 한눈에 반해서 예약한 호텔! 위치도 Imbiah station 모노레일역 바로 앞에 있어서 이동하기도 너무 편했답니다.",
           }
@@ -62,7 +62,7 @@ class OverseasStayList extends StayListPage {
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "명성만큼 선셋타임 맞춰 선셋바는 정말 멋져요. 선셋바 음식은 비싸니 맥주 한 병 시켜 놓고 자연 감상하며 1시간 정도 쉬었다 왔는데 좋았어요 ~ 사진도 많이 남기고요 ! 룸 내부 컨디션은 넓직하나 세월의 흔적이 조금씩 느껴지는 부분이 있었어요 그래도 1층 묵어보니 룸테라스로 나가면 바로 정원과 연결되어 아침에 테라스에서 커피 한 잔 여유 좋았구요 .. 리조트 내 유료 사용 결제는 오로지 카드만 가능합니다 .",
           }
@@ -77,7 +77,7 @@ class OverseasStayList extends StayListPage {
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           {
-            'starCount': 4.0,
+            'starCount': 4,
             'comment':
                 "They tried to offer everything already, but the building is still too old",
           }
@@ -92,7 +92,7 @@ class OverseasStayList extends StayListPage {
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment':
                 "시드니에 머무는 동안 너무 편안하게 묵었습니다! 헬스장도 잘되어있어서 잘 이용했네여 헬스장 내 샤워실에도 수건샴푸린스바디워시칫솔치약이 구비되어 있어, 운동 후 샤워하기 편했습니다. ",
           }
