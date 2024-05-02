@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/color.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/stay.dart';
 
-import '../../../../_core/constants/color.dart';
-import '../../../../_core/constants/size.dart';
-import '../../../../_core/constants/style.dart';
-import '../../../../data/models/stay.dart';
 
 class HomeItem extends StatelessWidget {
   final Stay stayData;

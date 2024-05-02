@@ -3,9 +3,6 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
-import 'qna_item.dart';
-import 'my_page_faq_menu_holder.dart';
-
 // 고객센터 메뉴 유형 enum
 enum MenuType {
   FAQ,

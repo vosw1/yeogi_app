@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/home_banner.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body_banner.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_header.dart';
-
-import '../../../_core/constants/scroll_fab.dart';
-import '../../../data/models/home_banner.dart';
-import '../../../data/models/stay.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

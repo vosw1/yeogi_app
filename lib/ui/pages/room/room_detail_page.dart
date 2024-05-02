@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/book_page.dart';
-import '../../../_core/constants/size.dart';
-import '../../../_core/constants/style.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class RoomDetailPage extends StatelessWidget {
   final Room roomData;

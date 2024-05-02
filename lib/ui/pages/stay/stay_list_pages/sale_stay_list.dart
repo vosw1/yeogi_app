@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
-
-import '../../../../data/models/stay.dart';
 
 class SaleStayList extends StayListPage {
   const SaleStayList({Key? key})
@@ -19,7 +18,7 @@ class SaleStayList extends StayListPage {
         notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
         reviews: [
           {
-            'starCount': 4.5,
+            'starCount': 4,
             'comment': "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
           }
         ],
@@ -84,7 +83,7 @@ class SaleStayList extends StayListPage {
         notice: "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
         reviews: [
           {
-            'starCount': 5.0,
+            'starCount': 5,
             'comment': "사장님도 매우 친절하시고 귀여운 고양이들이 많이 있습니다. 정말 시간 가는줄 모르고 재미있게 잘 놀았습니다. ",
           }
         ],

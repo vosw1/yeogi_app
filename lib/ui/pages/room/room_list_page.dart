@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
-import '../../../../_core/constants/size.dart';
-import '../../../../_core/constants/style.dart';
-import '../../../data/models/room.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
+
 
 abstract class RoomListPage extends StatelessWidget {
   const RoomListPage({Key? key, required this.appBarTitle}) : super(key: key);

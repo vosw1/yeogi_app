@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 
-import '../../../_core/constants/size.dart';
-import '../../../_core/constants/style.dart';
-import '../../../data/models/room.dart';
 
 // 숙소 상세보기 내 룸 리스트 기본 틀
 class RoomInfoWidget extends StatelessWidget {

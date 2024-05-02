@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/ui/pages/book/widgets/overseas_book_list.dart';
+import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
 
-import '../../../../data/dtos/book_request.dart';
-import '../../../../data/models/stay.dart';
-import '../../book/widgets/book_list.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
   final Stay stayData;
