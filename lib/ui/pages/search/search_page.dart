@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/ui/pages/search/widgets/custom_popup_menu_button.dart';
 import 'package:yogi_project/ui/pages/search/widgets/search_result_list.dart';
 import 'package:yogi_project/_core/constants/size.dart';
@@ -215,7 +216,7 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        SearchResultList(searchResults: searchResults),
+        SearchResultList(searchResults: searchResults, stayData: stayData),
       ],
     );
   }
