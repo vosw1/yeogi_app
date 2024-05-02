@@ -8,6 +8,8 @@ import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
 
+import '../room/room_list.dart';
+
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;
   final Room roomData;
@@ -89,9 +91,14 @@ class _StayDetailPageState extends State<StayDetailPage> {
                 '객실 선택',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: gap_m),
-              RoomInfoWidget(roomData: widget.roomData), // Stay 클래스에 roomData 필드가 정의되어 있는지 확인해야 함
-              SizedBox(height: gap_xx),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
+              RoomInfoWidget(roomData: widget.roomData),
+              SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_s),
               // 숙소 소개 섹션
