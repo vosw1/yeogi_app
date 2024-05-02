@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart';
 import '../book/book_detail_page.dart';
 
 class RoomDetailPage extends StatefulWidget {
@@ -114,7 +115,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                       style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_s),
                   Divider(),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
                   Text('기본정보\n\n${roomData.roomInfo}'),
                   SizedBox(height: gap_s),
                   Divider(),
@@ -127,11 +128,39 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                 ],
               ),
             ),
-            SizedBox(height: gap_m),
+            Padding(
+              padding: const EdgeInsets.all(gap_m),
+              child: ElevatedButton(
+                onPressed: () {
+                  // 예약 정보를 생성하여 BookDetailPage로 이동
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BookPage(roomData: widget.roomData)),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.red,
+                ),
+                child: Text('${_addCommas(widget.roomData.price)}원 예약하기'),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String _addCommas(int price) {
+    String priceString = price.toString();
+    String formattedPrice = '';
+    for (int i = priceString.length - 1; i >= 0; i--) {
+      formattedPrice = priceString[i] + formattedPrice;
+      if ((priceString.length - i) % 3 == 0 && i != 0) {
+        formattedPrice = ',' + formattedPrice;
+      }
+    }
+    return formattedPrice;
   }
 
   Future<void> _selectDate(BuildContext context,
