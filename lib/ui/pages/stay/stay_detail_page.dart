@@ -91,6 +91,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
                 '객실 선택',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: gap_m),
               RoomInfoWidget(roomData: widget.roomData),
               SizedBox(height: gap_s),
               RoomInfoWidget(roomData: widget.roomData),

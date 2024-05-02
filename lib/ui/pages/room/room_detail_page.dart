@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/book/book_page.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/ui/pages/book/book_page.dart'; // intl 패키지를 가져옵니다.
 
 class RoomDetailPage extends StatelessWidget {
   final Room roomData;
@@ -12,6 +13,9 @@ class RoomDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // NumberFormat 클래스를 사용하여 숫자 형식을 지정합니다.
+    NumberFormat priceFormat = NumberFormat('#,##0', 'en_US');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,7 +47,7 @@ class RoomDetailPage extends StatelessWidget {
             // 숙소 이미지
             SizedBox(height: gap_m),
             Text('${roomData.roomName}', style: subtitle1()), // 방이름
-            Text('${roomData.price}', style: subtitle1()), // 금액
+            Text('${priceFormat.format(roomData.price.toInt())}', style: subtitle1()),
             Text('${roomData.checkInDate}', style: subtitle1()), // 체크인 날짜
             Text('${roomData.checkOutDate}', style: subtitle1()), // 체크아웃 날짜
             Text('${roomData.checkInTime}', style: subtitle1()), // 체크인 시간

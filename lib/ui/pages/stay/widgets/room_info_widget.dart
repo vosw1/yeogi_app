@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -48,11 +49,21 @@ class RoomInfoWidget extends StatelessWidget {
                     roomData.roomName,
                     style: subtitle1(),
                   ),
-                  SizedBox(height: gap_xs),
+                  SizedBox(height: gap_s),
+                  // 입실 및 퇴실 정보 표시
+                  Text(
+                    '입실: ${roomData.checkInTime}',
+                    style: subtitle2().copyWith(color: Colors.black),
+                  ),
+                  Text(
+                    '퇴실: ${roomData.checkOutTime}',
+                    style: subtitle2().copyWith(color: Colors.black),
+                  ),
+                  SizedBox(height: gap_s),
                   // 가격 표시
                   Text(
-                    '${roomData.price}원',
-                    style: subtitle1().copyWith(color: Colors.black),
+                    '${NumberFormat('#,###').format(roomData.price)}원',
+                    style: subtitle1().copyWith(color: Colors.grey),
                   ),
                 ],
               ),
@@ -60,7 +71,7 @@ class RoomInfoWidget extends StatelessWidget {
             SizedBox(width: gap_s), // 텍스트와 버튼 사이 간격 조절
             // 오른쪽에 상세보기 버튼
             SizedBox(
-              width: 100, // 버튼의 너비를 설정하여 텍스트가 한 줄로 표시되도록 함
+              width: 70, // 버튼의 너비를 설정하여 텍스트가 한 줄로 표시되도록 함
               child: ElevatedButton(
                 onPressed: () {
                   // 상세보기 페이지로 이동
@@ -71,7 +82,7 @@ class RoomInfoWidget extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('상세보기', style: TextStyle(color: Colors.white)),
+                child: Text('상세보기', style: subtitle2(mColor: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.zero, // 버튼 내부의 패딩 제거
                   shape: RoundedRectangleBorder(

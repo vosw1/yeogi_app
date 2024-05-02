@@ -62,16 +62,16 @@ final Stay stayData = Stay(
 );
 
 final Room roomData = Room(
-    roomName: '마운틴 패밀리 스위트',
-    roomImgTitle: 'hotel/hotel1.png',
-    price: 100000,
+    roomName: '슈페리어 더블',
+    roomImgTitle: 'hotel/hotelRoom1.png',
+    price: 142000,
     checkInDate: '2024-04-30',
     checkOutDate: '2024-05-01',
-    checkInTime: '18:00',
+    checkInTime: '15:00',
     checkOutTime: "11:00",
-    roomInfo: '',
-    amenities: '',
-    notice: '',
+    roomInfo: '기준2인 · 최대2\n더블베드 1개\n객실+욕실 / 12.74평',
+    amenities: 'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
+    notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인',
 );
 
 final Payment payData = Payment(
