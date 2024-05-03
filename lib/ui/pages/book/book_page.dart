@@ -186,9 +186,14 @@ class _BookPageState extends State<BookPage> {
                 onChecked(value ?? false);
               },
             ),
-            Text(
-              title,
-              style: TextStyle(fontSize: 18.0),
+            GestureDetector(
+              onTap: () {
+                _showPopup(context, title); // Pass the title instead of text
+              },
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 18.0, decoration: TextDecoration.underline),
+              ),
             ),
           ],
         ),
@@ -209,7 +214,12 @@ class _BookPageState extends State<BookPage> {
                           });
                         },
                       ),
-                      Text(text),
+                      GestureDetector( // Add GestureDetector here
+                        onTap: () {
+                          _showPopup(context, text); // Call _showPopup with the text
+                        },
+                        child: Text(text),
+                      ),
                     ],
                   ),
                 ),
