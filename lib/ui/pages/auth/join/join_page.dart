@@ -4,9 +4,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_screen.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/service_agreement.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart'; // 수정된 부분: JoinTextFormField 임포트 추가
- // 수정된 부분: SearchPostcodePage 임포트 추가
+import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
 
 class JoinPage extends StatefulWidget {
   @override
@@ -96,21 +94,65 @@ class _JoinPageState extends State<JoinPage> {
                       onChanged: (value) {
                         setState(() {
                           _serviceAgreementChecked = value ?? false;
+                          _ageCheck = _serviceAgreementChecked; // 이 부분이 추가됨
+                          _privacyCheck = _serviceAgreementChecked; // 이 부분이 추가됨
                         });
                       },
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ServiceAgreement()), // 서비스 약관 페이지로 이동
-                        );
+                      onTap: () async {
+                        _showPopup(context, 0);
                       },
                       child: Text(
                         '서비스 약관에 동의합니다',
                         style: TextStyle(
                           color: Colors.redAccent,
-                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _ageCheck,
+                      onChanged: (value) {
+                        setState(() {
+                          _ageCheck = value ?? false;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        _showPopup(context, 1);
+                      },
+                      child: Text(
+                        '만 14세 이상 확인 >',
+                        style: TextStyle(
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _privacyCheck,
+                      onChanged: (value) {
+                        setState(() {
+                          _privacyCheck = value ?? false;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        _showPopup(context, 2);
+                      },
+                      child: Text(
+                        '개인정보 수집 및 이용 동의 >',
+                        style: TextStyle(
                         ),
                       ),
                     ),
@@ -119,10 +161,7 @@ class _JoinPageState extends State<JoinPage> {
                 SizedBox(height: 32.0),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate() &&
-                        _serviceAgreementChecked &&
-                        _ageCheck &&
-                        _privacyCheck) {
+                    if (_formKey.currentState!.validate() && _serviceAgreementChecked && _ageCheck && _privacyCheck) {
                       print('이메일: ${_emailController.text}');
                       print('비밀번호: ${_passwordController.text}');
                       print('이름: ${_nameController.text}');
@@ -148,10 +187,9 @@ class _JoinPageState extends State<JoinPage> {
   void _navigateToAddressSearch(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LibraryDaumPostcodeScreen()), // 주소 검색 페이지로 이동
+      MaterialPageRoute(builder: (context) => LibraryDaumPostcodeScreen()),
     ).then((selectedAddress) {
       if (selectedAddress != null) {
-        // 선택된 주소 정보를 주소 입력 필드에 설정
         setState(() {
           _addressController.text = selectedAddress.toString();
         });
@@ -181,23 +219,22 @@ class _JoinPageState extends State<JoinPage> {
           title: '개인정보 수집 및 이용 동의',
           content: [
             _buildDialogContent(
-              '개인정보 수집 및 이용 확인 동의',
-              '필수\t예약/구매 서비스 제공 상담 및 부정거래 기록 확인\t\n'
-                  '[예약·구매]\n'
-                  '예약자 정보(이름, 휴대전화번호)\n'
-                  '[결제]\n'
-                  '거래내역\n'
-                  '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
-                  '[거래명세서 발급]\n'
-                  '이메일주소\n'
-                  '[현금영수증 발급]\n'
-                  '휴대전화번호, 이메일주소\n'
-                  '[취소·환불]\n'
-                  '은행명, 계좌번호, 예금주명\n'
-                  '- 회원 탈퇴 시 까지\n'
-                  '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
-                  '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
-                  '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
+              '개인정보 수집 및 이용 확인 동의','필수\t예약/구매 서비스 제공 상담 및 부정거래 기록 확인\t\n'
+                '[예약·구매]\n'
+                '예약자 정보(이름, 휴대전화번호)\n'
+                '[결제]\n'
+                '거래내역\n'
+                '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
+                '[거래명세서 발급]\n'
+                '이메일주소\n'
+                '[현금영수증 발급]\n'
+                '휴대전화번호, 이메일주소\n'
+                '[취소·환불]\n'
+                '은행명, 계좌번호, 예금주명\n'
+                '- 회원 탈퇴 시 까지\n'
+                '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
+                '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
+                '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
             ),
           ],
         );
@@ -216,8 +253,7 @@ class _JoinPageState extends State<JoinPage> {
     }
   }
 
-  AlertDialog _buildDialog(
-      {required String title, required List<Widget> content}) {
+  AlertDialog _buildDialog({required String title, required List<Widget> content}) {
     return AlertDialog(
       title: Text(title),
       content: Column(
@@ -226,8 +262,7 @@ class _JoinPageState extends State<JoinPage> {
         children: content,
       ),
       actions: [
-        Center(
-          // 가운데 정렬을 위해 Center 위젯 추가
+        Center( // 가운데 정렬을 위해 Center 위젯 추가
           child: TextButton(
             onPressed: () {
               Navigator.pop(context, true);
@@ -238,6 +273,7 @@ class _JoinPageState extends State<JoinPage> {
       ],
     );
   }
+
 
   Widget _buildDialogContent(String title, String content) {
     return Column(
