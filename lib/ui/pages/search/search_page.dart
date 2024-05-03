@@ -12,8 +12,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String? _selectedPersonCount = '인원';
-  String? _selectedUseType = '유형';
-  String? _selectedReservationType = '예약여부';
   String? _selectedUsePrice = '희망가격';
   String? _selectedRegion = '지역'; // 추가된 지역 변수
   List<String> searchResults = [];
@@ -105,19 +103,6 @@ class _SearchPageState extends State<SearchPage> {
                 buttonText: '$_selectedPersonCount',
                 selectedColor: Colors.redAccent,
                 itemWidth: 30,
-              ),
-              SizedBox(width: gap_s),
-              CustomPopupMenuButton(
-                initialValue: _selectedReservationType,
-                items: ['예약가능', '예약불가'],
-                onSelected: (String value) {
-                  setState(() {
-                    _selectedReservationType = value;
-                  });
-                },
-                buttonText: '$_selectedReservationType',
-                selectedColor: Colors.redAccent,
-                itemWidth: 60,
               ),
               SizedBox(width: gap_s),
               CustomPopupMenuButton(

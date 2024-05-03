@@ -42,12 +42,6 @@ class CustomPopupMenuButton extends StatelessWidget {
               case '인원':
                 label = '인수 유형';
                 break;
-              case '유형':
-                label = '기기';
-                break;
-              case '예약여부':
-                label = '예약 가능 여부';
-                break;
               case '4명 이상':
                 label = item;
                 break;
