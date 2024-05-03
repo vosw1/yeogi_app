@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/home_banner.dart';
 
-class BannerItem extends StatelessWidget {
-  final BannerData bannerData;
+class HomeBannerItem extends StatelessWidget {
+  final EventTitleBannerData bannerData; // EventTitleBannerData 타입으로 변경
 
-  const BannerItem({Key? key, required this.bannerData}) : super(key: key);
+  const HomeBannerItem({Key? key, required this.bannerData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +30,6 @@ class BannerItem extends StatelessWidget {
                   bannerData.bannerTitle, // 배너 제목을 표시
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.redAccent, // 텍스트 색상을 흰색으로 설정
-                  ),
-                ),
-                SizedBox(height: 8), // 제목과 내용 사이 간격 조절
-                Text(
-                  bannerData.bannerText, // 배너 내용을 표시
-                  style: TextStyle(
-                    fontSize: 16,
                     color: Colors.redAccent, // 텍스트 색상을 흰색으로 설정
                   ),
                 ),

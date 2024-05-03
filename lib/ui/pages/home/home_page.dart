@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/home_banner.dart';
@@ -197,18 +198,6 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
 
-    List<BannerData> bannerDataList = [
-      BannerData(
-        imageTitle: "hotel/hotel1.png", // 이미지 제목
-        bannerTitle: "여어떻노?", // 배너 제목
-        bannerText: "퍼뜩 예약하꾸마", // 배너 내용
-      ),
-      BannerData(
-        imageTitle: "hotel/hotel1.png", // 이미지 제목
-        bannerTitle: "여어떻노?", // 배너 제목
-        bannerText: "퍼뜩 예약하꾸마", // 배너 내용
-      ),
-    ];
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -222,7 +211,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               width: double.infinity,
               height: 180,
-              child: HomeBodyBanner(bannerDataList: bannerDataList),
+              child: HomeBodyBanner(eventTitleBannerDataList: eventTitleBannerDataList),
             ),
             // 이미지와 텍스트를 가로 스크롤로 구성
             SizedBox(height: gap_m),

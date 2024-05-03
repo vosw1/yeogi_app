@@ -86,6 +86,8 @@ flutter:
     - assets/images/overseas/
     - assets/images/home_and_billa/
     - assets/images/pension/
+    - assets/images/event/event_title/
+    - assets/images/event/event_content/
 
   #   - images/a_dot_ham.jpeg
 
