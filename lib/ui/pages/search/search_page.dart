@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/data/models/search.dart';
 import 'package:yogi_project/ui/pages/search/widgets/custom_popup_menu_button.dart';
 import 'package:yogi_project/ui/pages/search/widgets/search_result_list.dart';
 import 'package:yogi_project/_core/constants/size.dart';
@@ -37,6 +38,16 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Search> searchResultList = [
+      Search(
+        stayImgTitle: "overseas/overseas1.png",
+        stayName: "두짓타니 괌 리조트",
+        stayInfo:
+        "본 숙소(두짓타니 괌 리조트)는 괌에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 즐거운 시간을 보낼 수 있도록 다양한 시설과 특전을 제공합니다. 24시간 룸서비스, Wi-Fi (무료/전 객실), 24시간 경비 서비스, 일일 청소 서비스, 24시간 프런트 데스크 등 여러 가지를 즐길 수 있습니다. 객실은 최적의 편안함을 제공할 수 있도록 설계되어 있으며, 일부 객실에서 평면 TV, 리넨, 슬리퍼, 타월, 옷장 등을 이용할 수 있습니다. 관광 후 아늑한 객실에서 휴식을 취하거나 온수 욕조, 피트니스센터, 사우나, 실외 수영장, 스파 등을 즐길 수 있습니다. 본 숙소(두짓타니 괌 리조트)를 괌 여행의 근거지로 정해 본격적인 여행을 시작해 보세요.",
+        location: "1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913",
+      ),
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -152,7 +163,7 @@ class _SearchPageState extends State<SearchPage> {
                             ? ' 체크인 날짜\n ${_formatDate(_checkInDate)}'
                             : '체크인 날짜',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 15,
                           color: Colors.black,
                         ),
                       ),
@@ -182,10 +193,10 @@ class _SearchPageState extends State<SearchPage> {
                       SizedBox(width: gap_xx),
                       Text(
                         _checkOutDate != null
-                            ? '체크아웃 날짜\n ${_formatDate(_checkOutDate)}'
-                            : '체크아웃 날짜',
+                            ? ' 체크아웃 날짜\n ${_formatDate(_checkOutDate)}'
+                            : ' 체크아웃 날짜',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 15,
                           color: Colors.black,
                         ),
                       ),
@@ -197,26 +208,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         SizedBox(height: gap_s),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: gap_m),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '결과 ${searchResults.length}건',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: gap_xx),
-              Divider(
-                color: Colors.grey,
-                thickness: 1.0,
-              ),
-            ],
-          ),
-        ),
-        SearchResultList(searchResults: searchResults, stayData: stayData),
+        SearchResultList(stayData: stayData, searchResultList: [],),
       ],
     );
   }
