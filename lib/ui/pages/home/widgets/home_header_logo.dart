@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
-// 여 어떻노 로고 + 종모양 아이콘
 class HomeHeaderLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // 로고를 중앙에 위치시키기 위해 추가
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: EdgeInsets.all(gap_m),
         ),
-        Expanded( // Center 위젯 대신 Expanded 사용하여 텍스트를 중앙 정렬
+        Expanded(
           child: Padding(
             padding: const EdgeInsets.all(gap_m),
             child: Text(
@@ -26,9 +25,32 @@ class HomeHeaderLogo extends StatelessWidget {
             ),
           ),
         ),
-        Icon(
-          Icons.notifications,
-          color: Colors.grey,
+        GestureDetector(
+          onTap: () {
+            showDialog( // showDialog로 팝업 창 열기
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("new"), // 팝업 제목
+                  content:Text('예약이 완료되었습니다'),
+                  actions: <Widget>[
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // 팝업 닫기
+                        },
+                        child: Text("확인"), // 확인 버튼
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Icon(
+            Icons.notifications,
+            color: Colors.grey,
+          ),
         ),
         SizedBox(width: gap_m),
       ],
