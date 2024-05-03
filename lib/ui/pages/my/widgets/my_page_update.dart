@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
@@ -108,7 +109,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                                 'comment': 'tjgdfsz',
                               }
                             ],
-                          ),
+                          ), eventTitleBannerData: eventTitleBannerDataList,
                         ),
                       ),
                     );

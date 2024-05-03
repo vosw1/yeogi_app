@@ -33,7 +33,7 @@ class _MainHolderState extends State<MainHolder> {
           SearchPage(),
           NearFromMePage(), // 주변 페이지를 나타내는 위젯의 경로가 없는 것으로 보입니다. 수정이 필요할 수 있습니다.
           ScrapListPage(),
-          MyPage(userData: userData, stayData: stayData),
+          MyPage(userData: userData, stayData: stayData, eventTitleBannerData: eventTitleBannerDataList ),
         ],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(
