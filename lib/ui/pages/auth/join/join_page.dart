@@ -105,7 +105,6 @@ class _JoinPageState extends State<JoinPage> {
                         '서비스 약관에 동의합니다',
                         style: TextStyle(
                           color: Colors.redAccent,
-                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
@@ -129,8 +128,6 @@ class _JoinPageState extends State<JoinPage> {
                       child: Text(
                         '만 14세 이상 확인 >',
                         style: TextStyle(
-                          color: Colors.redAccent,
-                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
@@ -154,8 +151,6 @@ class _JoinPageState extends State<JoinPage> {
                       child: Text(
                         '개인정보 수집 및 이용 동의 >',
                         style: TextStyle(
-                          color: Colors.redAccent,
-                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
@@ -210,7 +205,9 @@ class _JoinPageState extends State<JoinPage> {
           content: [
             _buildDialogContent(
               '만 14세 이상 이용 확인 동의',
-              '만 14세 이상 이용 확인 동의에 대한 내용을 여기에 작성하세요.',
+              '여어떻노는 만 14세 미만 아동의 서비스 이용을 제한하고 있습니다.\n\n'
+                '개인정보 보호법에는 만 14세 미만 아동의 개인정보 수집 시 법정대리인 동의를 받도록 규정하고 있으며,\n'
+                '만 14세 미만 아동이 법정대리인 동의없이 서비스 이용이 확인된 경우 서비스 이용이 제한될 수 있음을 알려드립니다',
             ),
           ],
         );
@@ -220,8 +217,22 @@ class _JoinPageState extends State<JoinPage> {
           title: '개인정보 수집 및 이용 동의',
           content: [
             _buildDialogContent(
-              '개인정보 수집 및 이용 확인 동의',
-              '개인정보 수집 및 이용 동의에 대한 내용을 여기에 작성하세요.',
+              '개인정보 수집 및 이용 확인 동의','필수\t예약/구매 서비스 제공 상담 및 부정거래 기록 확인\t\n'
+                '[예약·구매]\n'
+                '예약자 정보(이름, 휴대전화번호)\n'
+                '[결제]\n'
+                '거래내역\n'
+                '*결제 시 개인정보는 PG사(결제대행업체)에서 수집 및 저장하고 있으며, 회사는 PG사에서 제공하는 거래 내역만 제공받음\n'
+                '[거래명세서 발급]\n'
+                '이메일주소\n'
+                '[현금영수증 발급]\n'
+                '휴대전화번호, 이메일주소\n'
+                '[취소·환불]\n'
+                '은행명, 계좌번호, 예금주명\n'
+                '- 회원 탈퇴 시 까지\n'
+                '* 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 요구하는 기한까지 보유\n'
+                '※ 위 동의 내용을 거부하실 수 있으나, 동의를 거부하실 경우 서비스를 이용하실 수 없습니다.\n'
+                '※ 개인정보 처리와 관련된 상세 내용은 \'개인정보처리방침\'을 참고',
             ),
           ],
         );
@@ -249,11 +260,13 @@ class _JoinPageState extends State<JoinPage> {
         children: content,
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
-          child: Text('확인'),
+        Center( // 가운데 정렬을 위해 Center 위젯 추가
+          child: TextButton(
+            onPressed: () {
+              Navigator.pop(context, true);
+            },
+            child: Text('확인'),
+          ),
         ),
       ],
     );
