@@ -453,7 +453,6 @@ class _BookPageState extends State<BookPage> {
         },
       );
     } else {
-      // 예약 결제 페이지로 이동
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => PaymentPage()),
