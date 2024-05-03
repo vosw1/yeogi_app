@@ -16,7 +16,7 @@ class HomeBannerItem extends StatelessWidget {
         children: [
           Image.asset(
             'assets/images/${bannerData.imageTitle}', // 이미지의 경로를 표시
-            fit: BoxFit.cover, // 이미지를 화면에 맞게 늘리기
+            fit: BoxFit.fitWidth, // 이미지를 화면에 맞게 늘리기
             width: double.infinity, // 이미지를 컨테이너의 가로 길이에 맞게 늘림
             height: double.infinity, // 이미지를 컨테이너의 세로 길이에 맞게 늘림
           ),

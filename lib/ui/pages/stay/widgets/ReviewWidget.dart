@@ -4,8 +4,13 @@ import 'package:yogi_project/_core/constants/size.dart';
 class ReviewWidget extends StatelessWidget {
   final double stars;
   final String comment;
+  final List<String> replies;
 
-  ReviewWidget({required this.stars, required this.comment});
+  ReviewWidget({
+    required this.stars,
+    required this.comment,
+    required this.replies,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,36 +38,32 @@ class ReviewWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: gap_s),
-            // 코멘트 표시
+            // 원댓글 표시
             Text(
               comment,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
+            // 대댓글 표시
+            if (replies.isNotEmpty) ...[
+              SizedBox(height: gap_s),
+              Text(
+                "대댓글:",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: replies
+                    .map((reply) => Padding(
+                  padding: EdgeInsets.only(left: gap_s),
+                  child: Text(reply),
+                ))
+                    .toList(),
+              ),
+            ],
           ],
         ),
       ),
-    );
-  }
-}
-
-class ReviewsList extends StatelessWidget {
-  final List<ReviewWidget> reviews;
-
-  ReviewsList({required this.reviews});
-
-  @override
-  Widget build(BuildContext context) {
-    return reviews.isEmpty
-        ? Center(
-      child: Text('리뷰가 없습니다.'),
-    )
-        : ListView.builder(
-      itemCount: reviews.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return reviews[index];
-      },
     );
   }
 }

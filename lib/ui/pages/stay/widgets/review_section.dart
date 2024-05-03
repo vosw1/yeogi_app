@@ -40,7 +40,7 @@ class ReviewSection extends StatelessWidget {
                 },
                 child: ReviewWidget(
                   stars: starRating,
-                  comment: review.comment,
+                  comment: review.comment, replies: [],
                 ),
               );
             },
