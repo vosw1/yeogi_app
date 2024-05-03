@@ -15,9 +15,9 @@ class NotificationListItem extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+            color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8.0),
             border: Border.all(
-              color: Colors.grey[300]!, // Adjust border color as needed
               width: 1.0, // Adjust border width as needed
             ),
           ),
