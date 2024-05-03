@@ -4,9 +4,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_screen.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/service_agreement.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart'; // 수정된 부분: JoinTextFormField 임포트 추가
- // 수정된 부분: SearchPostcodePage 임포트 추가
+import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
 
 class JoinPage extends StatefulWidget {
   @override
@@ -22,6 +20,8 @@ class _JoinPageState extends State<JoinPage> {
   final _ageController = MaskedTextController(mask: '0000-00-00');
   final _phoneController = MaskedTextController(mask: '000-0000-0000');
   bool _serviceAgreementChecked = false;
+  bool _ageCheck = false;
+  bool _privacyCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class _JoinPageState extends State<JoinPage> {
                   validator: validateAddress,
                   hintText: "주소를 입력하세요",
                   onAddressSearch: () {
-                    _navigateToAddressSearch(context); // 주소 검색 다이얼로그 표시
+                    _navigateToAddressSearch(context);
                   },
                 ),
                 SizedBox(height: gap_m),
@@ -98,11 +98,8 @@ class _JoinPageState extends State<JoinPage> {
                       },
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ServiceAgreement()), // 서비스 약관 페이지로 이동
-                        );
+                      onTap: () async {
+                        _showPopup(context, 0);
                       },
                       child: Text(
                         '서비스 약관에 동의합니다',
@@ -114,11 +111,60 @@ class _JoinPageState extends State<JoinPage> {
                     ),
                   ],
                 ),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _ageCheck,
+                      onChanged: (value) {
+                        setState(() {
+                          _ageCheck = value ?? false;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        _showPopup(context, 1);
+                      },
+                      child: Text(
+                        '만 14세 이상 확인 >',
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _privacyCheck,
+                      onChanged: (value) {
+                        setState(() {
+                          _privacyCheck = value ?? false;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        _showPopup(context, 2);
+                      },
+                      child: Text(
+                        '개인정보 수집 및 이용 동의 >',
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 32.0),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate() && _serviceAgreementChecked) {
-                      // 회원가입 로직 구현
+                    if (_formKey.currentState!.validate() && _serviceAgreementChecked && _ageCheck && _privacyCheck) {
                       print('이메일: ${_emailController.text}');
                       print('비밀번호: ${_passwordController.text}');
                       print('이름: ${_nameController.text}');
@@ -144,14 +190,87 @@ class _JoinPageState extends State<JoinPage> {
   void _navigateToAddressSearch(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LibraryDaumPostcodeScreen()), // 주소 검색 페이지로 이동
+      MaterialPageRoute(builder: (context) => LibraryDaumPostcodeScreen()),
     ).then((selectedAddress) {
       if (selectedAddress != null) {
-        // 선택된 주소 정보를 주소 입력 필드에 설정
         setState(() {
           _addressController.text = selectedAddress.toString();
         });
       }
     });
+  }
+
+  void _showPopup(BuildContext context, int index) {
+    AlertDialog? alertDialog;
+
+    switch (index) {
+      case 1:
+        alertDialog = _buildDialog(
+          title: '만 14세 이상 확인',
+          content: [
+            _buildDialogContent(
+              '만 14세 이상 이용 확인 동의',
+              '만 14세 이상 이용 확인 동의에 대한 내용을 여기에 작성하세요.',
+            ),
+          ],
+        );
+        break;
+      case 2:
+        alertDialog = _buildDialog(
+          title: '개인정보 수집 및 이용 동의',
+          content: [
+            _buildDialogContent(
+              '개인정보 수집 및 이용 확인 동의',
+              '개인정보 수집 및 이용 동의에 대한 내용을 여기에 작성하세요.',
+            ),
+          ],
+        );
+        break;
+      default:
+        break;
+    }
+
+    if (alertDialog != null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog!;
+        },
+      );
+    }
+  }
+
+  AlertDialog _buildDialog({required String title, required List<Widget> content}) {
+    return AlertDialog(
+      title: Text(title),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: content,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+          child: Text('확인'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDialogContent(String title, String content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 8),
+        Text(content),
+        SizedBox(height: 16),
+      ],
+    );
   }
 }

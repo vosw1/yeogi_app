@@ -149,7 +149,6 @@ class _BookPageState extends State<BookPage> {
       ),
       persistentFooterButtons: [
         Container(
-          // 수정된 부분
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(horizontal: gap_m),
           child: ElevatedButton(
