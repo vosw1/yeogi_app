@@ -1,10 +1,12 @@
+import 'package:yogi_project/data/models/review.dart';
+
 class Stay {
   final String stayImgTitle; // 숙소 이미지 제목
   final String stayName; // 숙소 이름
   final String stayInfo; // 숙소 소개
   final String location; // 위치
   final String notice; // 이용공지
-  final List<Map<String, dynamic>>? reviews; // 리뷰 리스트
+  final List<Review>? reviews; // 리뷰 리스트
 
   Stay({
     required this.stayImgTitle,
@@ -23,7 +25,8 @@ class Stay {
       "stayInfo": stayInfo,
       "location": location,
       "notice": notice,
-      "reviews": reviews,
+      "reviews": reviews?.map((review) => review?.toJson()).toList(),
+      // 리뷰 목록을 JSON으로 변환
     };
   }
 }

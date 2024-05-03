@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
@@ -19,11 +21,25 @@ class MotelStayList extends StayListPage {
         notice:
             "객실 내부 시설\n객실 배정은 손님 오시는 순서대로 랜덤 배정입니다\n특히 K클래식 준특실의 경우 욕조가 없는 객실을 배정 받을 수 있습니다.\n전객실 넷플릭스&유튜브 이용가능합니다넷플릭스 개인 계정 사용 필수)",
         reviews: [
-          {
-            'starCount': 4,
-            'comment':
-                "종로 인근에서 조용히, 편하게 1박하면서 작업하러 이용했습니다. 부띠끄 호텔 타이틀을 한만큼 그 티를 내려고 애쓴 흔적이 보입니다.",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -33,11 +49,25 @@ class MotelStayList extends StayListPage {
         location: "서울 종로구 관수동 104-2",
         notice: "객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요.",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "케이월드호텔은 종로3가 국일관뒷편으로교통이 편리합니다. 지하철역도보로5분거리에 위치해있고 주변에 유명맛집들도 많아서 식도락여행에 별미를 즐길수있습니다.",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -49,11 +79,25 @@ class MotelStayList extends StayListPage {
         notice:
             "객실 내부 시설\nH-AVENU HOTEL 고객님 편의사항\n숙박업소 최초 전객실 천정형 공기순환기 설치\n전객실 1GB 광랜설치\n전객실 Wi-Fi\n전객실 시스템 냉,난방\n전객실 넷플릭스 무료 이용가능\n전객실 LG스마트 TV\n전객실 스마트 비데설치\n전객실 헝가리구스 침구\n호텔내 얼음제빙기,커피머신기,렌즈통,렌즈액,전자렌지,ATM현금지급기 설치.능",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "@야외욕조(?) 라고 되어있지만 완전 야외는 아니고요. 천정유리로 되어있는 그래서 그런가 공기는 약간 야외 같기도 해요.그래도 진짜 야외였으면 추워서 이용 못했을것 같은 한겨울에도 왔었는데 그때보다 이번엔 날이 따뜻해서 덜 추웠네요.",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -63,17 +107,25 @@ class MotelStayList extends StayListPage {
         location: "서울 강남구 역삼동 677-14",
         notice: "객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요.",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "리뷰가 워낙 좋아서 예약해봤는데 좋은만큼 진짜 깔끔하고 가 격대비 너무 좋은 것 같아요~ 담배 냄새 진짜 1도 안 나고 숙 소 엄청 깔끔합니다!! ",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
-
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -84,16 +136,25 @@ class MotelStayList extends StayListPage {
         notice:
             "객실 내부 시설\n전객실 넷플릭스를 무료로 이용 가능합니다.\n전객실 욕조, 비데, 55인치 스마트TV, VOD , PC, 공기청정기 등의 시설을 갖추고 있습니다.\n최고급 구스다운 침구류와 새 린넨으로 편안한 잠자리를 경험해보세요.\n유럽 최고의 명품 브랜드 리날디 메모리폼 메트리스가 전객실 비치되어 있습니다.\n 객실내 와이파이 무료 이용 가능합니다.\n전객실 충전기가 비치되어 있습니다.\n전객실 드라이기및 고대기가 설치되어 있습니다.",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "넷플릭스 볼수있는곳이라서 너무 좋아요~~~우선 가장 최고의 장점은 역에서 가깝다는거에요!!!! 강남역에서 도보 3분정도 거리에 위치해있어서 너무 좋습니다 접근성이 좋아요",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -104,16 +165,25 @@ class MotelStayList extends StayListPage {
         notice:
             "객실 내부 시설\n* 2020년 4월 15일 오픈한 신규 호텔입니다!!!\n* 당 호텔 정책상 2005년 생은 3월 부터 입실 가능 합니다",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "전체적으로 너무 깔끔하고 좋았어요. 무엇보다 인포에 계신 직원분도 너무 친절하시고 다음에도 재방문 의사 충분히 있습니다. ",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
     ];

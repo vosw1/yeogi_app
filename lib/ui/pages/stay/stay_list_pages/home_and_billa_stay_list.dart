@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
@@ -17,16 +19,25 @@ class HomeAndBillaStayList extends StayListPage {
         notice:
             "입실 : 15시 / 퇴실 12시\n오후 10시 이후에는 사전 문의 필수\n객실 구성 : 객실 2개+거실+욕실\n침구 구성 : 퀸+퀸",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "늦은 저녁 서울역에 도착하는 분들(뚜벅이)은 걸어서 10분이내 도착할 수 있어 좋아요 야경으로 서울역과 남산타워도 볼 수 있",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -38,15 +49,25 @@ class HomeAndBillaStayList extends StayListPage {
         notice:
             "숙소 이용규칙\n인원 추가 비용 : 1인 15,000원 (대인) / 영유아, 소인 무료 (인원 추가 하실 경우 010-8618-3634로 전화 부탁드립니다.)\n침구 추가 비용 : 무료\n금연 물품사용시 깨끗이 사용 / 물품 파손시 변상해야함",
         reviews: [
-          {
-            'starCount': 5,
-            'comment': "엄청 넓어요 예민하지 않으시면 위치도 좋고 다니기 좋아요",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -58,15 +79,25 @@ class HomeAndBillaStayList extends StayListPage {
         notice:
             "입실 : 15시 / 퇴실 11시\n오후 10시 이후에는 사전 문의 필수\n 객실 구성\n1번방, 2번방 : 객실+욕실\n가족방 : 복층형 (객실+거실+욕실)\n침대\n1번방, 2번방 : 더블 1개\n가족방 : 싱글 4개",
         reviews: [
-          {
-            'starCount': 5,
-            'comment': "작은 창문이 있는 방이네요^^ 가성비 좋은 방으로 약간의 고택느낌으로 지내실 수 있어요. ",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -77,15 +108,25 @@ class HomeAndBillaStayList extends StayListPage {
         location: "전북특별자치도 군산시 신창동 49-20",
         notice: "입실 : 15시 / 퇴실 11시\n오후 10시 이후에는 사전 문의 필수\n객실 구성 : 객실 2개+거실+욕실",
         reviews: [
-          {
-            'starCount': 5,
-            'comment': "깨끗하고 좋았습니다!",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(

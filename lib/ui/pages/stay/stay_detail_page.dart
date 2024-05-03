@@ -71,24 +71,15 @@ class _StayDetailPageState extends State<StayDetailPage> {
                 ),
               ),
               SizedBox(height: gap_m),
-              // 리뷰 섹션
-              // StayDetailPage에서 리뷰 데이터를 Review 객체로 변환하여 ReviewSection에 전달하는 부분 수정
-              ReviewSection(
-                reviews: widget.stayData.reviews
-                    ?.map((review) => Review(
-                  rating: (review['starCount'] ?? 0).toDouble(), // 리뷰 데이터의 별점을 double로 변환
-                  comment: review['comment'] ?? '',
-                ))
-                    .toList() ?? [],
-              ),
-
+              // Review section
+              ReviewSection(reviews: widget.stayData.reviews ?? []),
               SizedBox(height: gap_xx),
-              // 편의 시설 섹션
+              // Amenity section
               AmenitySection(),
               SizedBox(height: gap_xx),
-              // 객실 선택 섹션
+              // Room selection section
               Text(
-                '객실 선택',
+                'Room Selection',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
@@ -102,9 +93,9 @@ class _StayDetailPageState extends State<StayDetailPage> {
               SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_s),
-              // 숙소 소개 섹션
+              // Introduction section
               Text(
-                '숙소 소개',
+                'Introduction',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
@@ -116,7 +107,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               Divider(),
               SizedBox(height: gap_s),
               Text(
-                '이용 정보',
+                'Usage Information',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
@@ -126,14 +117,14 @@ class _StayDetailPageState extends State<StayDetailPage> {
               ),
               Divider(),
               SizedBox(height: gap_s),
-              // 취소 및 환불 규정 섹션
+              // Cancellation and Refund Policy section
               Text(
-                '취소 및 환불 규정',
+                'Cancellation and Refund Policy',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
               Text(
-                '객실별 취소 정책이 상이하니 객싱 상세정보에서 확인해주세요',
+                'Cancellation policies vary by room type. Please check the room details for more information.',
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: gap_m),

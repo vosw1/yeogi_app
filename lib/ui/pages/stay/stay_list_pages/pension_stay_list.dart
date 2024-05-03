@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
@@ -28,10 +30,25 @@ class PensionStayList extends StayListPage {
         notice:
             "기본 정보\n입실 : 15:00 | 퇴실 : 11:00\n22시 이후 입실 시 사전문의 (필수)\n무료 Wi-Fi\n전 객실 금연 / 적발 시 특수 청소비(10만원) 청구\n주차 가능 (숙소 앞 마당 주차)",
         reviews: [
-          {
-            'starCount': 5,
-            'comment': "분위기좋아요. 다른손님없는 날에 이용해서 더 쾌적했네요",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -53,10 +70,25 @@ class PensionStayList extends StayListPage {
         notice:
             "객실 가격은 원화, 달러와 가치가 상이하니 정확한 숙박요금계산은 호스트에게 문의필수\n온라인예약의 경우 인원추가시 발생되는 추가요금 사전결제불가(현장결제)\n비수기 1인 20,000원 성수기 1인 30,000원",
         reviews: [
-          {
-            'starCount': 3,
-            'comment': "화장실 샤워부스의 온수가 잘 나오지 않는 것외에는 모든 것이 다 좋았다",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
       Stay(
@@ -77,11 +109,25 @@ class PensionStayList extends StayListPage {
         notice:
             "공지사항\n최대인원 초과시 입실 불가 / 환불없음\n기준인원 2인 초과 시 인원추가요금 발생(현장결제) / 사전신청필수\n24개월 미만 유아도 인원에 포함\n201 사계절 객실 제외 전 객실-객실 내 취사불가(공동주방 이용)\n바베큐 이용불가\n주차장 없음 / 주변 유료 주차장 혹은 도로변에 주차 필요(숙소 문의)\n짐보관 가능 / 귀중품 보관불가 / 분실시 책임 지지 않음",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "사장님께서 친절하셨고 숙소 내부도 매우 청결했습니다. 난방 상태도 좋았습니다. 황리단길에 숙소가 위치해 있어서 주변에서 편히 놀다가 들어올 수 있었고 인근에 편의점 등 같은 편의시설도 있어서 좋았습니다.  ",
-          }
+          Review(
+            rating: 4,
+            comment:
+            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ].map(
+                  (reply) => Review(
+                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                comment: reply!.text,
+              ),
+            ).toList(),
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          ),
         ],
       ),
     ];
