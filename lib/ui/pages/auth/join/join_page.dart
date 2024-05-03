@@ -103,11 +103,15 @@ class _JoinPageState extends State<JoinPage> {
                       onTap: () async {
                         _showPopup(context, 0);
                       },
-                      child: Text(
-                        '서비스 약관에 동의합니다',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                        ),
+                      child: Row(
+                        children: [
+                          Text(
+                            '서비스 약관에 동의합니다',
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -127,10 +131,14 @@ class _JoinPageState extends State<JoinPage> {
                       onTap: () async {
                         _showPopup(context, 1);
                       },
-                      child: Text(
-                        '만 14세 이상 확인 >',
-                        style: TextStyle(
-                        ),
+                      child: Row(
+                        children: [
+                          Text(
+                            '만 14세 이상 확인',
+                          ),
+                          SizedBox(width: 150),
+                          Icon(Icons.arrow_forward_ios, size: gap_m), // ">" 아이콘 추가
+                        ],
                       ),
                     ),
                   ],
@@ -150,10 +158,14 @@ class _JoinPageState extends State<JoinPage> {
                       onTap: () async {
                         _showPopup(context, 2);
                       },
-                      child: Text(
-                        '개인정보 수집 및 이용 동의 >',
-                        style: TextStyle(
-                        ),
+                      child: Row(
+                        children: [
+                          Text(
+                            '개인정보 수집 및 이용 동의',
+                          ),
+                          SizedBox(width: 90),
+                          Icon(Icons.arrow_forward_ios, size: gap_m), // ">" 아이콘 추가
+                        ],
                       ),
                     ),
                   ],
