@@ -5,6 +5,8 @@ import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_screen.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
+import 'package:yogi_project/ui/pages/home/home_page.dart';
+import 'package:yogi_project/ui/pages/my/my_page.dart';
 
 class JoinPage extends StatefulWidget {
   @override
@@ -174,12 +176,11 @@ class _JoinPageState extends State<JoinPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate() && _serviceAgreementChecked && _ageCheck && _privacyCheck) {
-                      print('이메일: ${_emailController.text}');
-                      print('비밀번호: ${_passwordController.text}');
-                      print('이름: ${_nameController.text}');
-                      print('주소: ${_addressController.text}');
-                      print('생년월일: ${_ageController.text}');
-                      print('전화번호: ${_phoneController.text}');
+                      // 회원가입 성공 시 홈 페이지로 이동
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage(), // HomePage()로 이동
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
