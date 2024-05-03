@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
@@ -11,12 +13,12 @@ import 'package:yogi_project/ui/pages/my/widgets/my_page_login_button.dart';
 class MyPage extends StatelessWidget {
   final Stay stayData;
   final User userData;
-  final List<EventTitleBannerData> eventTitleBannerData;
+  final List<EventMyPageBannerData> eventMyPageBannerData;
 
   MyPage({
     required this.stayData,
     required this.userData,
-    required this.eventTitleBannerData,
+    required this.eventMyPageBannerData,
   });
 
   @override
@@ -28,7 +30,7 @@ class MyPage extends StatelessWidget {
           SizedBox(height: 12),
           MyPageLoginButton(),
           SizedBox(height: 12),
-          MyPageAppBar(user: userData, eventTitleBannerDataList: eventTitleBannerData),
+          MyPageAppBar(user: userData, eventMyPageBannerDataList: eventMyPageBannerDataList),
           Divider(
             color: Colors.grey[100],
             thickness: 10.0,

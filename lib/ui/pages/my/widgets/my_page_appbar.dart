@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/event_content.dart';
+import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
+import 'package:yogi_project/data/models/home_banner.dart';
+import 'package:yogi_project/data/models/my_review.dart';
 import 'package:yogi_project/data/models/user.dart';
+import 'package:yogi_project/ui/pages/event/event_my_page_banner_page.dart';
 import 'package:yogi_project/ui/pages/event/event_title_banner_page.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_update.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_review_page.dart';
 import 'my_page_body_icon.dart';
+import 'my_profile_page.dart';
 import 'notification_page.dart';
 
 class MyPageAppBar extends StatelessWidget {
   final User user;
-  final List<EventTitleBannerData> eventTitleBannerDataList; // 이벤트 배너 데이터 추가
+  final List<EventMyPageBannerData> eventMyPageBannerDataList; // 이벤트 배너 데이터 추가
 
-  const MyPageAppBar({Key? key, required this.user, required this.eventTitleBannerDataList}) : super(key: key);
+  const MyPageAppBar({Key? key, required this.user, required this.eventMyPageBannerDataList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class MyPageAppBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => EventTitleBannerPage(eventTitleBannerDataList: eventTitleBannerDataList)),
+                MaterialPageRoute(builder: (context) => EventMyPageBannerPage(eventMyPageBannerDataList: eventMyPageBannerDataList)),
               );
             },
           ),
