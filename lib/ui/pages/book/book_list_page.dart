@@ -38,7 +38,7 @@ class BookListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookDetailPage(book: book, roomData: roomData,),
+                  builder: (context) => BookDetailPage(book: book, roomData: roomData),
                 ),
               );
             },
