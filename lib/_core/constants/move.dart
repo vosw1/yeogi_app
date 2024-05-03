@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -124,6 +125,33 @@ final List<EventTitleBannerData> eventTitleBannerDataList = [
   ),
 ];
 
+final List<EventMyPageBannerData> eventMyPageBannerDataList = [
+  EventMyPageBannerData(
+    imageTitle: '신규 회원 할인 이벤트',
+    bannerTitle: '',
+    imagePath: 'assets/images/event/event_title/eventTitle1.png',
+    deadLine: ' 신규 회원 가입시',
+  ),
+  EventMyPageBannerData(
+    imageTitle: '여어떻노 GOOD REVIEWER 이벤트',
+    bannerTitle: '',
+    imagePath: 'assets/images/event/event_title/eventTitle2.png',
+    deadLine: ' 24/12/31 까지 ',
+  ),
+  EventMyPageBannerData(
+    imageTitle: '가정의 달 할인 이벤트',
+    bannerTitle: '',
+    imagePath: 'assets/images/event/event_title/eventTitle3.png',
+    deadLine: ' 24/5/31 까지 ',
+  ),
+  EventMyPageBannerData(
+    imageTitle: '슈퍼위크 이벤트',
+    bannerTitle: '',
+    imagePath: 'assets/images/event/event_title/eventTitle4.png',
+    deadLine: ' 24/5/20 부터 ~ 24/5/26 까지 ',
+  ),
+];
+
 // URL에 해당 페이지 연결
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
@@ -140,7 +168,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.myPage: (context) => MyPage(
       userData: userData,
       stayData: stayData,
-      eventTitleBannerData: eventTitleBannerDataList,
+      eventMyPageBannerData: eventMyPageBannerDataList,
     ),
     // 마이 페이지
     Move.stayDetailPage: (context) => StayDetailPage(stayData: stayData, roomData: roomData),

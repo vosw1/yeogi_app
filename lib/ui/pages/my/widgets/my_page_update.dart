@@ -109,7 +109,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                                 'comment': 'tjgdfsz',
                               }
                             ],
-                          ), eventTitleBannerData: eventTitleBannerDataList,
+                          ), eventMyPageBannerData: eventMyPageBannerDataList,
                         ),
                       ),
                     );
