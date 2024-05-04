@@ -7,7 +7,7 @@ import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 
 import 'home/home_page.dart';
 import 'search/search_page.dart';
-import 'surroundings/surroundings_page.dart'; // 수정된 경로 확인
+import 'surroundings/near_from_me_page.dart'; // 수정된 경로 확인
 
 class MainHolder extends StatefulWidget {
   @override

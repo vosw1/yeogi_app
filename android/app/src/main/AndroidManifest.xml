@@ -17,7 +17,7 @@
         <!-- Google Maps API 키 설정 -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY_HERE"/>
+            android:value="AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA"/>
 
         <!-- 카카오 SDK 설정 -->
         <activity
