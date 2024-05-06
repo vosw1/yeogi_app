@@ -4,19 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('GoogleMap'),
-        ),
-        body: MapSample(),
-      ),
-    ),
-  );
-}
-
 class MapSample extends StatefulWidget {
   @override
   State<MapSample> createState() => MapSampleState();

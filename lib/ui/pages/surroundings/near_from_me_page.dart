@@ -104,6 +104,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
                   },
                   onTap: addMarker,
                   markers: markers,
+                  myLocationEnabled: true, // 사용자의 현재 위치를 표시
+                  myLocationButtonEnabled: true, // 사용자의 현재 위치로 이동하는 버튼 표시
                 ),
               ),
             ),
