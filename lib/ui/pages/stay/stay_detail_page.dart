@@ -133,7 +133,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-                '객실별 취소 정책이 상이하니 객싱 상세정보에서 확인해주세요',
+                '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요',
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: gap_m),
