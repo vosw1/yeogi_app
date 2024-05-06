@@ -79,7 +79,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               SizedBox(height: gap_xx),
               // Room selection section
               Text(
-                'Room Selection',
+                '객실 선택',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
@@ -95,7 +95,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               SizedBox(height: gap_s),
               // Introduction section
               Text(
-                'Introduction',
+                '숙소 소개',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
@@ -107,7 +107,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               Divider(),
               SizedBox(height: gap_s),
               Text(
-                'Usage Information',
+                '이용정보',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
@@ -119,12 +119,12 @@ class _StayDetailPageState extends State<StayDetailPage> {
               SizedBox(height: gap_s),
               // Cancellation and Refund Policy section
               Text(
-                'Cancellation and Refund Policy',
+                '취소 및 환불 정책',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
               Text(
-                'Cancellation policies vary by room type. Please check the room details for more information.',
+                '',
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: gap_m),

@@ -27,7 +27,7 @@ class ReviewWidget extends StatelessWidget {
                 5,
                     (index) => Icon(
                   index < stars ? Icons.star : Icons.star_border,
-                  color: Colors.amber,
+                  color: Colors.redAccent,
                   size: gap_m,
                 ),
               ),
@@ -57,12 +57,15 @@ class ReviewsList extends StatelessWidget {
         ? Center(
       child: Text('리뷰가 없습니다.'),
     )
-        : ListView.builder(
-      itemCount: reviews.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return reviews[index];
-      },
+        : SizedBox(
+      height: 200, // Height of the review widget
+      child: PageView.builder(
+        itemCount: reviews.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return reviews[index];
+        },
+      ),
     );
   }
 }
