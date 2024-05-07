@@ -30,6 +30,9 @@ class ReviewWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 사용자 정보 표시
+            _buildReviewUserInfo(),
+            SizedBox(height: gap_xs),
             // 별점 표시
             Row(
               children: List.generate(
@@ -41,8 +44,6 @@ class ReviewWidget extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: gap_xs),
-            _buildReviewUserInfo(userName, userImgTitle),
             SizedBox(height: gap_xs),
             // 코멘트 표시
             Text(
@@ -56,7 +57,7 @@ class ReviewWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewUserInfo(String userName, String userImgTitle) {
+  Widget _buildReviewUserInfo() {
     return Row(
       children: [
         CircleAvatar(
@@ -73,30 +74,6 @@ class ReviewWidget extends StatelessWidget {
           ],
         )
       ],
-    );
-  }
-}
-
-class ReviewsList extends StatelessWidget {
-  final List<ReviewWidget> reviews;
-
-  ReviewsList({required this.reviews});
-
-  @override
-  Widget build(BuildContext context) {
-    return reviews.isEmpty
-        ? Center(
-      child: Text('리뷰가 없습니다.'),
-    )
-        : SizedBox(
-      height: 200, // Height of the review widget
-      child: PageView.builder(
-        itemCount: reviews.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return reviews[index];
-        },
-      ),
     );
   }
 }
