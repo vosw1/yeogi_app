@@ -19,7 +19,7 @@ class Review {
       "rating": rating,
       "comment": comment,
       "userName": userName,
-      "userAvatar": userImgTitle,
+      "userImgTitle": userImgTitle,
       "replies": replies.map((reply) => reply.toJson()).toList(),
       // 대댓글 목록을 JSON으로 변환
     };
