@@ -43,13 +43,13 @@ class _HomePageState extends State<HomePage> {
             ]
                 .map((reply) => Review(
               rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-              comment: reply.text,
+              comment: reply.text, userName: '', userImgTitle: '',
             ))
-                .toList(),
+                .toList(), userName: '', userImgTitle: '',
           ),
           Review(
             rating: 3,
-            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.", userName: '', userImgTitle: '',
           ),
           Review(
             rating: 4,
@@ -62,13 +62,13 @@ class _HomePageState extends State<HomePage> {
             ]
                 .map((reply) => Review(
               rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-              comment: reply.text,
+              comment: reply.text, userName: '', userImgTitle: '',
             ))
-                .toList(),
+                .toList(), userName: '', userImgTitle: '',
           ),
           Review(
             rating: 3,
-            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.", userName: '', userImgTitle: '',
           ),
         ],
       ),
@@ -96,13 +96,13 @@ class _HomePageState extends State<HomePage> {
             ]
                 .map((reply) => Review(
               rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-              comment: reply.text,
+              comment: reply.text, userName: '', userImgTitle: '',
             ))
-                .toList(),
+                .toList(), userName: '', userImgTitle: '',
           ),
           Review(
             rating: 3,
-            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.", userName: '', userImgTitle: '',
           ),
           Review(
             rating: 4,
@@ -115,13 +115,13 @@ class _HomePageState extends State<HomePage> {
             ]
                 .map((reply) => Review(
               rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-              comment: reply.text,
+              comment: reply.text, userName: '', userImgTitle: '',
             ))
-                .toList(),
+                .toList(), userName: '', userImgTitle: '',
           ),
           Review(
             rating: 3,
-            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.", userName: '', userImgTitle: '',
           ),
         ],
       ),
@@ -146,13 +146,13 @@ class _HomePageState extends State<HomePage> {
           ]
               .map((reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text,
+                    comment: reply.text, userName: '', userImgTitle: '',
                   ))
-              .toList(),
+              .toList(), userName: '', userImgTitle: '',
         ),
         Review(
           rating: 3,
-          comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.", userName: '', userImgTitle: '',
         ),
         Review(
           rating: 4,
@@ -165,13 +165,13 @@ class _HomePageState extends State<HomePage> {
           ]
               .map((reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text,
+                    comment: reply.text, userName: '', userImgTitle: '',
                   ))
-              .toList(),
+              .toList(), userName: '', userImgTitle: '',
         ),
         Review(
           rating: 3,
-          comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+          comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.", userName: '', userImgTitle: '',
         ),
       ],
     ),

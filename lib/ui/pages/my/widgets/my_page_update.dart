@@ -117,8 +117,8 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                                     ),
                                   ].map((reply) => Review(
                                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                                    comment: reply.text,
-                                  )).toList(),
+                                    comment: reply.text, userName: '', userImgTitle: '',
+                                  )).toList(), userName: '', userImgTitle: '',
                                 ),
                                 Review(
                                   rating: 3,
@@ -129,8 +129,8 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                                     ),
                                   ].map((reply) => Review(
                                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                                    comment: reply.text,
-                                  )).toList(),
+                                    comment: reply.text, userName: '', userImgTitle: '',
+                                  )).toList(), userName: '', userImgTitle: '',
                                 ),
                               ],
                             ), eventTitleBannerData: [],

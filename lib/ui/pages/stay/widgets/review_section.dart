@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/review.dart';
 
 import 'ReviewWidget.dart';
@@ -39,9 +40,16 @@ class ReviewSection extends StatelessWidget {
                 onTap: () {
                   _showReviewPopup(context, review);
                 },
-                child: ReviewWidget(
-                  stars: starRating,
-                  comment: review.comment,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildReviewUserInfo(review.userName, review.userImgTitle),
+                    SizedBox(height: gap_xs),
+                    ReviewWidget(
+                      stars: starRating,
+                      comment: review.comment,
+                    ),
+                  ],
                 ),
               );
             },
@@ -124,6 +132,33 @@ class ReviewSection extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildReviewUserInfo(String userName, String userAvatar) {
+    return Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: AssetImage(userAvatar),
+        ),
+        SizedBox(width: gap_s),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              userName,
+              style: subtitle1(),
+            ),
+            Text(
+              "작성자",
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

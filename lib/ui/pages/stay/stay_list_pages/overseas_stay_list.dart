@@ -4,7 +4,6 @@ import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
-
 class OverseasStayList extends StayListPage {
   const OverseasStayList({Key? key}) : super(key: key, appBarTitle: '해외');
 
@@ -16,28 +15,34 @@ class OverseasStayList extends StayListPage {
         stayImgTitle: "overseas/overseas1.png",
         stayName: "두짓타니 괌 리조트",
         stayInfo:
-        "본 숙소(두짓타니 괌 리조트)는 괌에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 즐거운 시간을 보낼 수 있도록 다양한 시설과 특전을 제공합니다. 24시간 룸서비스, Wi-Fi (무료/전 객실), 24시간 경비 서비스, 일일 청소 서비스, 24시간 프런트 데스크 등 여러 가지를 즐길 수 있습니다. 객실은 최적의 편안함을 제공할 수 있도록 설계되어 있으며, 일부 객실에서 평면 TV, 리넨, 슬리퍼, 타월, 옷장 등을 이용할 수 있습니다. 관광 후 아늑한 객실에서 휴식을 취하거나 온수 욕조, 피트니스센터, 사우나, 실외 수영장, 스파 등을 즐길 수 있습니다. 본 숙소(두짓타니 괌 리조트)를 괌 여행의 근거지로 정해 본격적인 여행을 시작해 보세요.",
+            "본 숙소(두짓타니 괌 리조트)는 괌에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 즐거운 시간을 보낼 수 있도록 다양한 시설과 특전을 제공합니다. 24시간 룸서비스, Wi-Fi (무료/전 객실), 24시간 경비 서비스, 일일 청소 서비스, 24시간 프런트 데스크 등 여러 가지를 즐길 수 있습니다. 객실은 최적의 편안함을 제공할 수 있도록 설계되어 있으며, 일부 객실에서 평면 TV, 리넨, 슬리퍼, 타월, 옷장 등을 이용할 수 있습니다. 관광 후 아늑한 객실에서 휴식을 취하거나 온수 욕조, 피트니스센터, 사우나, 실외 수영장, 스파 등을 즐길 수 있습니다. 본 숙소(두짓타니 괌 리조트)를 괌 여행의 근거지로 정해 본격적인 여행을 시작해 보세요.",
         location: "1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913",
         notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
         reviews: [
           Review(
             rating: 4,
             comment:
-            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
                 text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
               ),
-            ].map(
+            ]
+                .map(
                   (reply) => Review(
-                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                comment: reply.text,
-              ),
-            ).toList(),
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
           ),
         ],
       ),
@@ -51,21 +56,27 @@ class OverseasStayList extends StayListPage {
           Review(
             rating: 4,
             comment:
-            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
                 text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
               ),
-            ].map(
+            ]
+                .map(
                   (reply) => Review(
-                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                comment: reply.text,
-              ),
-            ).toList(),
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
           ),
         ],
       ),
@@ -79,21 +90,27 @@ class OverseasStayList extends StayListPage {
           Review(
             rating: 4,
             comment:
-            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
                 text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
               ),
-            ].map(
+            ]
+                .map(
                   (reply) => Review(
-                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                comment: reply.text,
-              ),
-            ).toList(),
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
           ),
         ],
       ),
@@ -108,21 +125,27 @@ class OverseasStayList extends StayListPage {
           Review(
             rating: 4,
             comment:
-            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
                 text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
               ),
-            ].map(
+            ]
+                .map(
                   (reply) => Review(
-                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                comment: reply.text,
-              ),
-            ).toList(),
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
           ),
         ],
       ),
@@ -137,21 +160,27 @@ class OverseasStayList extends StayListPage {
           Review(
             rating: 4,
             comment:
-            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
                 text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
               ),
-            ].map(
+            ]
+                .map(
                   (reply) => Review(
-                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                comment: reply.text,
-              ),
-            ).toList(),
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
           ),
         ],
       ),
@@ -166,21 +195,27 @@ class OverseasStayList extends StayListPage {
           Review(
             rating: 4,
             comment:
-            "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
                 text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
               ),
-            ].map(
+            ]
+                .map(
                   (reply) => Review(
-                rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                comment: reply.text,
-              ),
-            ).toList(),
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
           ),
         ],
       ),
