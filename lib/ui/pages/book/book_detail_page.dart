@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/book_request.dart';
-import 'package:yogi_project/data/models/book.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
 

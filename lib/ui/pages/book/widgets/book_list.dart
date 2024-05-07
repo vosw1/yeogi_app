@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/data/dtos/book_request.dart';
-import 'package:yogi_project/data/models/book.dart'; // 수정된 import 문
 import 'package:yogi_project/ui/pages/book/book_list_page.dart';
 
 class BookList extends StatelessWidget {

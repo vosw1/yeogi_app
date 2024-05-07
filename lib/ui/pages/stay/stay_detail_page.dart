@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
-import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
-
-import '../room/room_list.dart';
 
 class StayDetailPage extends StatefulWidget {
   final Stay stayData;

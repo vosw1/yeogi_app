@@ -17,8 +17,6 @@ class HomeHeaderItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isWideScreen = screenWidth > 600; // 웹을 위한 임계값
 
     return Container(
       width: double.infinity,
