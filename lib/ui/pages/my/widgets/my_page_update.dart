@@ -132,7 +132,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                                   )).toList(), userName: '', userImgTitle: '',
                                 ),
                               ],
-                            ), eventTitleBannerData: [],
+                            ), eventMyPageBannerData: [],
                           ),
                         ),
                       );

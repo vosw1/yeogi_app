@@ -114,6 +114,7 @@ class ReviewPopup extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: gap_s),
             Divider(),
             // 대댓글 표시
             ListView.builder(
