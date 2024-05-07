@@ -26,7 +26,7 @@ class HotelStayList extends StayListPage {
                 "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
             replies: [
               Reply(
-                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+                text: "이용해주셔서 감사합니다!",
               ),
             ]
                 .map(
@@ -36,8 +36,8 @@ class HotelStayList extends StayListPage {
                   ),
                 )
                 .toList(),
-            userName: '',
-            userImgTitle: '',
+            userName: '메타트립',
+            userImgTitle: 'user1.png',
           ),
           Review(
             rating: 3,

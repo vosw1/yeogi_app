@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class ReviewWidget extends StatelessWidget {
   final double stars;
   final String comment;
+  final String userName;
+  final String userImgTitle;
 
-  ReviewWidget({required this.stars, required this.comment});
+  ReviewWidget({
+    required this.stars,
+    required this.comment,
+    required this.userName,
+    required this.userImgTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200,
+      height: 150,
       margin: EdgeInsets.only(right: gap_m),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_s),
@@ -32,7 +41,9 @@ class ReviewWidget extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: gap_s),
+            SizedBox(height: gap_xs),
+            _buildReviewUserInfo(userName, userImgTitle),
+            SizedBox(height: gap_xs),
             // 코멘트 표시
             Text(
               comment,
@@ -42,6 +53,26 @@ class ReviewWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildReviewUserInfo(String userName, String userImgTitle) {
+    return Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: AssetImage(userImgTitle),
+        ),
+        SizedBox(width: gap_s),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              userName,
+              style: subtitle1(),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
