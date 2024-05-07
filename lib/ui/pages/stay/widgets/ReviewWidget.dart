@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class ReviewWidget extends StatelessWidget {
   final double stars;
   final String comment;
-  final List<String> replies;
+  final String userName;
+  final String userImgTitle;
 
   ReviewWidget({
     required this.stars,
     required this.comment,
-    required this.replies,
+    required this.userName,
+    required this.userImgTitle,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200,
+      height: 150,
       margin: EdgeInsets.only(right: gap_m),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_s),
@@ -26,44 +30,50 @@ class ReviewWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 사용자 정보 표시
+            _buildReviewUserInfo(),
+            SizedBox(height: gap_xs),
             // 별점 표시
             Row(
               children: List.generate(
                 5,
                     (index) => Icon(
                   index < stars ? Icons.star : Icons.star_border,
-                  color: Colors.amber,
+                  color: Colors.redAccent,
                   size: gap_m,
                 ),
               ),
             ),
-            SizedBox(height: gap_s),
-            // 원댓글 표시
+            SizedBox(height: gap_xs),
+            // 코멘트 표시
             Text(
               comment,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
-            // 대댓글 표시
-            if (replies.isNotEmpty) ...[
-              SizedBox(height: gap_s),
-              Text(
-                "대댓글:",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: replies
-                    .map((reply) => Padding(
-                  padding: EdgeInsets.only(left: gap_s),
-                  child: Text(reply),
-                ))
-                    .toList(),
-              ),
-            ],
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildReviewUserInfo() {
+    return Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: AssetImage(userImgTitle),
+        ),
+        SizedBox(width: gap_s),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              userName,
+              style: subtitle1(),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

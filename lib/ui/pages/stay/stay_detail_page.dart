@@ -71,17 +71,8 @@ class _StayDetailPageState extends State<StayDetailPage> {
                 ),
               ),
               SizedBox(height: gap_m),
-              // 리뷰 섹션
-              // StayDetailPage에서 리뷰 데이터를 Review 객체로 변환하여 ReviewSection에 전달하는 부분 수정
-              ReviewSection(
-                reviews: widget.stayData.reviews
-                    ?.map((review) => Review(
-                  rating: (review['starCount'] ?? 0).toDouble(), // 리뷰 데이터의 별점을 double로 변환
-                  comment: review['comment'] ?? '',
-                ))
-                    .toList() ?? [],
-              ),
-
+              // Review section
+              ReviewSection(reviews: widget.stayData.reviews ?? []),
               SizedBox(height: gap_xx),
               // 편의 시설 섹션
               AmenitySection(),
@@ -128,7 +119,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               SizedBox(height: gap_s),
               // 취소 및 환불 규정 섹션
               Text(
-                '취소 및 환불 규정',
+                '취소 및 환불 정책',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),

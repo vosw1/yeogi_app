@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart';
 
@@ -18,16 +20,31 @@ class CampingStayList extends StayListPage {
         notice:
             "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
         reviews: [
-          {
-            'starCount': 4,
-            'comment':
-                "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^\n사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ]
+                .map(
+                  (reply) => Review(
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
+          ),
         ],
       ),
       Stay(
@@ -38,16 +55,31 @@ class CampingStayList extends StayListPage {
         notice:
             "\n예약시 참조하세요\n객실 예약은 2인기준 예약/숯불/캠프파이어 추가인원 현장결제\n바비큐or캠프파이어 두 개종 한개는 필수선택입니다",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "가평에 4시간달려서 온 조이글램핑장.사진이랑 비슷한 캠핑장에 시설도 주방장비들도 구비되어있어서 좋았어요.",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ]
+                .map(
+                  (reply) => Review(
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
+          ),
         ],
       ),
       Stay(
@@ -58,16 +90,31 @@ class CampingStayList extends StayListPage {
         notice:
             "입실 : 15:00 | 퇴실 : 11:00\n22시 이후 입실 시 사전문의 (필수)\n무료 Wi-Fi\n주차 가능",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^사진에서 봤던것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ]
+                .map(
+                  (reply) => Review(
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
+          ),
         ],
       ),
       Stay(
@@ -79,15 +126,31 @@ class CampingStayList extends StayListPage {
         notice:
             " 화장실이 개별화장실 입니다\n도로 결빙/안전을 위하여 동절기(12월-2월) 에는 입실 제한이 오후 7시 입니다. 이점 유의 하시여 예약 부탁 드립니다",
         reviews: [
-          {
-            'starCount': 5,
-            'comment': "여기 예약했다가 칭찬 퍼레이드 받았어요",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ]
+                .map(
+                  (reply) => Review(
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
+          ),
         ],
       ),
       Stay(
@@ -99,16 +162,31 @@ class CampingStayList extends StayListPage {
         notice:
             "입실 : 15:00 | 퇴실 : 11:00\n객실은 현장배정(고객 지정 불가)\n동계 시즌 가스난로 이용 시 1박당 20,000원 추가됩니다",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "플로 예약하고 갔었는데 저희가 간 주말에는 이용객이 많이 없어서 그런지 달빛존으로 업그레이드 해주셔서 침대도 두개고 넓어서 너무 좋았어요!!!^",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ]
+                .map(
+                  (reply) => Review(
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
+          ),
         ],
       ),
       Stay(
@@ -120,16 +198,31 @@ class CampingStayList extends StayListPage {
         notice:
             "20시 이후 체크인 시 사전 문의 필수\n객실 내 취사 불가, 공용개수대 및 주방 시설 이용가능\n카라반 전 객실 요금은 2인 기준이며, 최대 3인까지 투숙가능\n(성인 3명은 비좁을 수 있으니 가급적 가족단위 3인까지 이용 요망)\n[당일이용-숙박불가]피크닉 상품 이용안내\n\n(7세 미만 추가금 없음 -> 고기 미제공)",
         reviews: [
-          {
-            'starCount': 5,
-            'comment':
-                "사장님도 매우 친절하시고 귀여운 고양이들이 많이 있습니다. 정말 시간 가는줄 모르고 재미있게 잘 놀았습니다. ",
-          },
-          {
-            'starCount': 4,
-            'comment':
-            "좋았어요 ",
-          }
+          Review(
+            rating: 4,
+            comment:
+                "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+            replies: [
+              Reply(
+                text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+              ),
+            ]
+                .map(
+                  (reply) => Review(
+                    rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+                    comment: reply.text, userName: '', userImgTitle: '',
+                  ),
+                )
+                .toList(),
+            userName: '',
+            userImgTitle: '',
+          ),
+          Review(
+            rating: 3,
+            comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+            userName: '',
+            userImgTitle: '',
+          ),
         ],
       ),
     ];

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/payment.dart';
-import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
@@ -70,13 +68,34 @@ final Stay stayData = Stay(
   location: "1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913",
   notice: "체크인 : 15:00 | 체크아웃 : 12:00\n정확한 체크인/체크아웃 시간은 숙소에 문의해주세요.",
   reviews: [
-    {
-      'starCount': 4,
-      'comment':
-      "가격이 비싼감이 없지않지만 환율과 괌 물가 대비 적당하다는 생각이 들었어요 일단 깨끗한건 말할것도 없고요 부족함이 없었던 숙소였어요",
-    }
+    Review(
+      rating: 4,
+      comment:
+      "스노우월드 가기위해서 객실 예약을 했는데 늦은시간 입실했지만 조용하고 24시간 편의점도 꽤 커서 잘 놀다가요! 객실도 따뜻하고 깨끗해서 너무 좋았고 화장실도 두개나 있어서 여유있게 사용했습니다 :) 스노우월드는 너무 너무 강추해요!!! 다음엔 스키타러 또 올게요~",
+      replies: [
+        Reply(
+          text: "우리 기업도 함께 노력하겠습니다. 감사합니다!",
+        ),
+      ].map(
+            (reply) => Review(
+          rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
+          comment: reply.text,
+              userName: '',
+              userImgTitle: '',
+        ),
+      ).toList(),
+      userName: '',
+      userImgTitle: '',
+    ),
+    Review(
+      rating: 3,
+      comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
+      userName: '',
+      userImgTitle: '',
+    ),
   ],
 );
+
 
 final Room roomData = Room(
   roomName: '슈페리어 더블',
@@ -90,7 +109,6 @@ final Room roomData = Room(
   amenities: 'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
   notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인',
 );
-
 
 final Payment payData = Payment(
   roomImgTitle: '',
