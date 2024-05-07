@@ -26,7 +26,6 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
           },
           onLoadStop: (controller, url) async {
             if (url.toString().contains('주소검색 완료 페이지 URL')) {
-              // 주소 검색 완료 페이지 URL에 대한 조건을 지정
               var selectedAddress = await _webViewController.evaluateJavascript(source: '''
                 // JavaScript 코드: 주소 정보를 가져오는 스크립트
                 // 예시: var address = '서울특별시 강남구 삼성동';

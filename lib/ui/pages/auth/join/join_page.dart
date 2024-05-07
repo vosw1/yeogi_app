@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_screen.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_page.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
-import 'package:yogi_project/ui/pages/my/my_page.dart';
 
 class JoinPage extends StatefulWidget {
   @override
@@ -205,7 +204,7 @@ class _JoinPageState extends State<JoinPage> {
   void _navigateToAddressSearch(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LibraryDaumPostcodeScreen()),
+      MaterialPageRoute(builder: (context) => LibraryDaumPostcodePage()),
     ).then((selectedAddress) {
       if (selectedAddress != null) {
         setState(() {
@@ -301,7 +300,6 @@ class _JoinPageState extends State<JoinPage> {
       children: [
         Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
         Text(content),

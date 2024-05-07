@@ -20,7 +20,7 @@ class EventMyPageBannerItem extends StatelessWidget {
               Expanded(
                 child: Text(
                   eventMyPageBannerData.imageTitle,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                  style: TextStyle(fontSize: 24, color: Colors.black),
                 ),
               ),
               SizedBox(width: 16), // 타이틀과 이미지 사이의 간격 조정

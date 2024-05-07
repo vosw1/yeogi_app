@@ -18,7 +18,6 @@ class SearchResultList extends StatelessWidget {
             '결과 ${searchResultList.length}건',
             style: TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.bold,
             ),
           ),
           Divider(), // 결과 몇 건인지를 나타내는 디바이더 추가
