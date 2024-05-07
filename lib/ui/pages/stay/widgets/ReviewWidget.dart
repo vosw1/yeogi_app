@@ -7,12 +7,14 @@ class ReviewWidget extends StatelessWidget {
   final String comment;
   final String userName;
   final String userImgTitle;
+  final double rating;
 
   ReviewWidget({
     required this.stars,
     required this.comment,
     required this.userName,
     required this.userImgTitle,
+    required this.rating,
   });
 
   @override
@@ -35,14 +37,20 @@ class ReviewWidget extends StatelessWidget {
             SizedBox(height: gap_xs),
             // 별점 표시
             Row(
-              children: List.generate(
-                5,
-                    (index) => Icon(
-                  index < stars ? Icons.star : Icons.star_border,
-                  color: Colors.redAccent,
-                  size: gap_m,
-                ),
-              ),
+              children: [
+                Row(
+                    children: List.generate(
+                      5,
+                          (index) => Icon(
+                        index < stars ? Icons.star : Icons.star_border,
+                        color: Colors.redAccent,
+                        size: gap_m,
+                      ),
+                    ),
+                  ),
+                SizedBox(width: gap_xs), // 별 아이콘과 텍스트 사이의 간격 조정
+                Text('${rating.toStringAsFixed(1)} 점'),
+              ],
             ),
             SizedBox(height: gap_xs),
             // 코멘트 표시
