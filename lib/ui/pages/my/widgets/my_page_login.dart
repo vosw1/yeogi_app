@@ -18,9 +18,12 @@ class MyPageLogin extends StatelessWidget {
           onPressed: () {
             final User userData = User(
               username: '홍길동',
-              password: '1234',
-              phone: '010-1234-5678',
-              birth: '1988-11-11',
+              id: 1,
+              email: '',
+              password: '',
+              createdAt: null,
+              updatedAt: null,
+
             );
             final Stay stayData = Stay(
               stayName: '★당일특가★ 하이원리조트 마운틴콘도',

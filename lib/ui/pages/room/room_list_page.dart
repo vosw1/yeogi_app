@@ -55,6 +55,24 @@ abstract class RoomListPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 4), // 텍스트 사이 간격
+                if (room.discountedPrice != null && room.discountedPrice! < room.price) // 할인된 가격이 있고, 기존 가격보다 작을 경우에만 표시
+                  Row(
+                    children: [
+                      Text(
+                        '\$${room.price.toStringAsFixed(2)}', // 기존 가격
+                        style: TextStyle(decoration: TextDecoration.lineThrough),
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '\$${room.discountedPrice!.toStringAsFixed(2)}', // 할인된 가격
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ],
+                  ),
+                if (room.discountedPrice == null || room.discountedPrice! >= room.price) // 할인된 가격이 없거나 기존 가격과 동일한 경우에만 기존 가격만 표시
+                  Text(
+                    '\$${room.price.toStringAsFixed(2)}',
+                  ),
               ],
             ),
           ),

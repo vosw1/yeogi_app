@@ -36,13 +36,13 @@ class HomeAndBillaStayList extends StayListPage {
                 )
                 .toList(),
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
         ],
       ),
@@ -72,13 +72,13 @@ class HomeAndBillaStayList extends StayListPage {
                 )
                 .toList(),
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
         ],
       ),
@@ -108,13 +108,13 @@ class HomeAndBillaStayList extends StayListPage {
                 )
                 .toList(),
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
         ],
       ),
@@ -143,13 +143,13 @@ class HomeAndBillaStayList extends StayListPage {
                 )
                 .toList(),
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
           Review(
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
         ],
       ),

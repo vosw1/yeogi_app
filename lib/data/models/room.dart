@@ -1,4 +1,3 @@
-// 룸 기본 틀
 class Room {
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
@@ -9,8 +8,8 @@ class Room {
   final String checkInTime; // 입실
   final String checkOutTime; // 퇴실
   final int price; // 가격
+  final int? discountedPrice; // 할인된 가격 (null일 수 있음)
   final String notice; // 여어떻노 공지
-
 
   Room({
     required this.roomImgTitle,
@@ -22,6 +21,7 @@ class Room {
     required this.checkInTime,
     required this.checkOutTime,
     required this.price,
+    required this.discountedPrice,
     required this.notice,
   });
 }

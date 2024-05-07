@@ -6,7 +6,6 @@ import 'package:bootpay/model/payload.dart';
 import 'package:bootpay/model/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 
 class TotalPayment extends StatefulWidget {
   @override
@@ -110,9 +109,7 @@ class _TotalPaymentState extends State<TotalPayment> {
     User user = User();
     user.username = "사용자 이름";
     user.email = "user1234@gmail.com";
-    user.area = "서울";
     user.phone = "010-4033-4678";
-    user.addr = '서울시 동작구 상도로 222';
 
     Extra extra = Extra();
     extra.appScheme = 'bootpayFlutterExample';

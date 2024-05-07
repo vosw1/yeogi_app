@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
-import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
@@ -88,7 +88,7 @@ class _LoginFormState extends State<LoginForm> {
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            Navigator.pushNamed(context, "/home");
+            Navigator.pushReplacementNamed(context, Move.loginPage);
           }
         },
         child: Text(
@@ -137,7 +137,9 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: gap_l),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage()));
+
+
+              Navigator.pushReplacementNamed(context, Move.joinPage);
             },
             child: Text(
               '아직 회원이 아니시면 회원가입',
