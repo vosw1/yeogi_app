@@ -38,7 +38,7 @@ class ReviewSection extends StatelessWidget {
               final starRating = review.rating / 5.0 * 5.0;
               return GestureDetector(
                 onTap: () {
-                  _showReviewPopup(context, review);
+                  _showReviewPopup(context, index);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,13 +63,11 @@ class ReviewSection extends StatelessWidget {
     );
   }
 
-  void _showReviewPopup(BuildContext context, Review review) {
-    // 단일 리뷰를 포함하는 리스트 생성
-    List<Review> singleReviewList = [review];
+  void _showReviewPopup(BuildContext context, int initialIndex) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ReviewPopup(reviews: singleReviewList, initialIndex: 0);
+        return ReviewPopup(reviews: reviews, initialIndex: initialIndex);
       },
     );
   }

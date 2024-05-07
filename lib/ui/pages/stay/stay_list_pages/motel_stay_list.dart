@@ -212,7 +212,7 @@ class MotelStayList extends StayListPage {
                 )
                 .toList(),
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
           Review(
             rating: 3,
