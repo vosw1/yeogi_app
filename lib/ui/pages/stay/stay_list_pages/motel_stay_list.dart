@@ -32,7 +32,7 @@ class MotelStayList extends StayListPage {
                 .map(
                   (reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text, userName: '', userImgTitle: '',
+                    comment: reply.text, userName: '', userImgTitle: 'user1.png',
                   ),
                 )
                 .toList(),
@@ -66,7 +66,7 @@ class MotelStayList extends StayListPage {
                 .map(
                   (reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text, userName: '', userImgTitle: '',
+                    comment: reply.text, userName: '', userImgTitle: 'user1.png',
                   ),
                 )
                 .toList(),
@@ -102,7 +102,7 @@ class MotelStayList extends StayListPage {
                 .map(
                   (reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text, userName: '', userImgTitle: '',
+                    comment: reply.text, userName: '', userImgTitle: 'user1.png',
                   ),
                 )
                 .toList(),
@@ -136,7 +136,7 @@ class MotelStayList extends StayListPage {
                 .map(
                   (reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text, userName: '', userImgTitle: '',
+                    comment: reply.text, userName: '', userImgTitle: 'user1.png',
                   ),
                 )
                 .toList(),
@@ -171,7 +171,7 @@ class MotelStayList extends StayListPage {
                 .map(
                   (reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
-                    comment: reply.text, userName: '', userImgTitle: '',
+                    comment: reply.text, userName: '', userImgTitle: 'user1.png',
                   ),
                 )
                 .toList(),
@@ -207,7 +207,7 @@ class MotelStayList extends StayListPage {
                   (reply) => Review(
                     rating: 4, // 대댓글에는 별점이 없으므로 기본값으로 설정
                     comment: reply.text,
-                    userName: '', userImgTitle: '',
+                    userName: '', userImgTitle: 'user1.png',
                   ),
                 )
                 .toList(),
@@ -218,7 +218,7 @@ class MotelStayList extends StayListPage {
             rating: 3,
             comment: "별루였어요. 다음에는 다른 곳을 이용해볼 생각입니다.",
             userName: '',
-            userImgTitle: '',
+            userImgTitle: 'user1.png',
           ),
         ],
       ),
