@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
+import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
 
 class BookDetailPage extends StatefulWidget {
-  final Book book;
+  final Book bookData;
+  final Room roomData;
+  final Payment payData;
 
-  const BookDetailPage({Key? key, required this.book, required Room roomData}) : super(key: key);
+  const BookDetailPage({Key? key, required this.bookData, required this.roomData, required this.payData});
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();
@@ -23,8 +26,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
   @override
   void initState() {
     super.initState();
-    _checkInDate = widget.book.checkInDate;
-    _checkOutDate = widget.book.checkOutDate ?? DateTime.now();
+    _checkInDate = widget.bookData.checkInDate;
+    _checkOutDate = widget.bookData.checkOutDate ?? DateTime.now();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
   }
 
@@ -32,7 +35,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.book.stayName}'),
+        title: Text('${widget.bookData.stayName}'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: gap_m),
@@ -50,16 +53,16 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets/images/${widget.book.roomImgTitle}',
+                      'assets/images/${widget.bookData.roomImgTitle}',
                       width: double.infinity,
                       height: 150,
                       fit: BoxFit.cover,
                     ),
                   ),
                   SizedBox(height: gap_s),
-                  Text('${widget.book.roomName}',
+                  Text('${widget.bookData.roomName}',
                       style: TextStyle(fontSize: gap_m)),
-                  Text('${widget.book.location}'),
+                  Text('${widget.bookData.location}'),
                   SizedBox(height: gap_s),
                   Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_s),
@@ -170,35 +173,35 @@ class _BookDetailPageState extends State<BookDetailPage> {
         Row(
           children: [
             Text('예약자 : ', style: subtitle1()),
-            Text('${widget.book.bookName}', style: subtitle1()),
+            Text('${widget.bookData.bookName}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('전화번호 : ', style: subtitle1()),
-            Text('${widget.book.bookTel}', style: subtitle1()),
+            Text('${widget.bookData.bookTel}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_s),
         Row(
           children: [
             Text('결제금액 : ', style: subtitle1()),
-            Text('${NumberFormat('#,###').format(widget.book.price)} 원'),
+            Text('${NumberFormat('#,###').format(widget.bookData.price)} 원'),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('결제일자 : ', style: subtitle1()),
-            Text('${formatDate(widget.book.payAt)}', style: subtitle1()),
+            Text('${formatDate(widget.payData.payAt)}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('결제수단 : ', style: subtitle1()),
-            Text('${widget.book.way}', style: subtitle1()),
+            Text('${widget.payData.way}', style: subtitle1()),
           ],
         ),
       ],
