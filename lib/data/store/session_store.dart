@@ -1,12 +1,11 @@
 // 창고 데이터
-import 'package:bootpay/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
+import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/data/repositories/user_repository.dart';
 import 'package:yogi_project/main.dart';
 
@@ -14,6 +13,7 @@ class SessionUser {
   User? user;
   String? accessToken;
   bool isLogin = false;
+  int? selectedPostId;
 
   SessionUser();
 }
@@ -22,21 +22,32 @@ class SessionUser {
 class SessionStore extends SessionUser {
   final mContext = navigatorKey.currentContext;
 
+  SessionStore();
+
+  void loginCheck(String path) {
+    if (isLogin) {
+      Navigator.pushNamed(mContext!, path);
+    } else {
+      Navigator.pushNamed(mContext!, Move.loginPage);
+    }
+  }
+
   Future<void> join(JoinReqDTO joinReqDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
 
     // 비지니스 로직
     if (responseDTO.success) {
-      Navigator.pushNamed(mContext!, Move.loginPage);
+      Navigator.pushNamed(mContext!, Move.mainHolder);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
-        SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")),
+        SnackBar(content: Text("회원가입 실패 : ${responseDTO.errorMessage}")),
       );
     }
   }
 
-  Future<bool> login(LoginReqDTO loginReqDTO) async {
-    var (responseDTO, accessToken) = await UserRepository().fetchLogin(loginReqDTO);
+  Future<void> login(LoginReqDTO loginReqDTO) async {
+    var (responseDTO, accessToken) =
+        await UserRepository().fetchLogin(loginReqDTO);
 
     if (responseDTO.success) {
       await secureStorage.write(key: "accessToken", value: accessToken);
@@ -45,21 +56,15 @@ class SessionStore extends SessionUser {
       this.accessToken = accessToken;
       this.isLogin = true;
 
-      return true; // 로그인 성공을 반환
-    } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-          SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")));
-      return false; // 로그인 실패를 반환
+      // 비지니스 로직
+      if (responseDTO.success) {
+        Navigator.pushNamed(mContext!, Move.mainHolder);
+      } else {
+        ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")),
+        );
+      }
     }
-  }
-
-  // 로그아웃
-  Future<void> logout() async {
-    this.user = null;
-    this.accessToken = null; // 수정: jwt 대신 accessToken 사용
-    this.isLogin = false;
-    await secureStorage.delete(key: "accessToken"); // 수정: "jwt" 대신 "accessToken" 삭제
-    Logger().d("세션 종료 및 디바이스 JWT 삭제");
   }
 }
 

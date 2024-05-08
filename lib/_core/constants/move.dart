@@ -34,6 +34,7 @@ class Move {
   static String loginPage = "/users/login";
   static String joinPage = "/users/join";
   static String homePage = "/home";
+  static String mainHolder = "/home";
   static String searchPage = "/search";
   static String scrapPage = "/scrap";
   static String myPage = "/my";

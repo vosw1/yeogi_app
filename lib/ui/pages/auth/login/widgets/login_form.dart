@@ -6,7 +6,6 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
-import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'kakao_login_button.dart';
 
 class LoginForm extends ConsumerWidget {
@@ -30,7 +29,7 @@ class LoginForm extends ConsumerWidget {
             _buildEmailField(),
             _buildPasswordField(),
             SizedBox(height: gap_xx),
-            _buildLoginButton(ref),
+            _buildLoginButton(ref, context),
             SizedBox(height: gap_xx),
             _buildKakaoLoginButton(),
             SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
@@ -74,48 +73,38 @@ class LoginForm extends ConsumerWidget {
     );
   }
 
-  Widget _buildLoginButton(WidgetRef ref) {
-    return Builder(
-      builder: (context) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
-        child: ElevatedButton(
-          onPressed: () async {
-            if (_formKey.currentState!.validate()) {
-              // 이메일과 비밀번호 가져오기
-              String email = _emailController.text;
-              String password = _passwordController.text;
+  Widget _buildLoginButton(WidgetRef ref, context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
+      child: ElevatedButton(
+        onPressed: () async {
+          if (_formKey.currentState!.validate()) {
+            // 이메일과 비밀번호 가져오기
+            String email = _emailController.text;
+            String password = _passwordController.text;
 
-              // 로그인 요청 DTO 생성
-              LoginReqDTO loginReqDTO = LoginReqDTO(email: email, password: password);
+            // 로그인 요청 DTO 생성
+            LoginReqDTO loginReqDTO =
+                LoginReqDTO(email: email, password: password);
 
-              // 로그인 메서드 호출
-              final sessionStore = ref.read(sessionProvider);
-              bool loginSuccess = await sessionStore.login(loginReqDTO);
+            // 로그인 메서드 호출
+            final sessionStore = ref.read(sessionProvider);
+            await sessionStore.login(loginReqDTO);
 
-              if (loginSuccess) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              } else {
-                // 로그인 실패 시 작업을 추가할 수 있습니다.
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('로그인에 실패했습니다.')),
-                );
-              }
-            }
-          },
-          child: Text(
-            "로그인",
-            style: TextStyle(fontSize: 17, color: Colors.white),
+            // 로그인 성공 여부는 sessionStore.login의 반환 값으로 판단하므로 loginSuccess 변수 사용하지 않음
+            Navigator.pushNamed(context, Move.homePage);
+          }
+        },
+        child: Text(
+          "로그인",
+          style: TextStyle(fontSize: 17, color: Colors.white),
+        ),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: gap_m),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
           ),
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: gap_m),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            backgroundColor: Colors.redAccent,
-          ),
+          backgroundColor: Colors.redAccent,
         ),
       ),
     );
