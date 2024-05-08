@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
+import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/data/models/book.dart';
 import 'package:yogi_project/ui/pages/book/book_list_page.dart';
 
 class OverseasBookList extends StatelessWidget {
@@ -23,8 +24,6 @@ class OverseasBookList extends StatelessWidget {
         price: 300000,
         bookName: '설동훈',
         bookTel: '010-1234-5678',
-        way: '카드결제',
-        payAt: DateTime.parse('2024-04-20'), // 문자열을 DateTime으로 변환
       ),
       Book(
         stayName: 'Dusit Thani Guam Resort',
@@ -38,10 +37,8 @@ class OverseasBookList extends StatelessWidget {
         price: 300000,
         bookName: '설동훈',
         bookTel: '010-1234-5678',
-        way: '카드결제',
-        payAt: DateTime.parse('2024-04-20'), // 문자열을 DateTime으로 변환
       ),
     ];
-    return BookListPage(bookList: overseasbookList, appBarText: '해외 예약내역');
+    return BookListPage(bookList: overseasbookList, appBarText: '해외 예약내역', payData: payData,);
   }
 }
