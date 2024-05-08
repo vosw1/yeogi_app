@@ -9,12 +9,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          SizedBox(height: gap_xl),
-          LoginForm(),
-        ],
-      ),
+      body: LoginForm(),
     );
   }
 }

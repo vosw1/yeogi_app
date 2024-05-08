@@ -1,55 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:yogi_project/_core/constants/move.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/dtos/user_request.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
 import 'kakao_login_button.dart';
 
-class LoginForm extends StatefulWidget {
-  @override
-  _LoginFormState createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
+class LoginForm extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>(); // 글로벌 키
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  LoginForm({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _buildLogo(),
-          _buildEmailField(),
-          _buildPasswordField(),
-          SizedBox(height: gap_xx),
-          _buildLoginButton(),
-          SizedBox(height: gap_xx),
-          _buildKakaoLoginButton(),
-        ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SingleChildScrollView(
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildLogo(),
+            _buildEmailField(),
+            _buildPasswordField(),
+            SizedBox(height: gap_xx),
+            _buildLoginButton(ref),
+            SizedBox(height: gap_xx),
+            _buildKakaoLoginButton(),
+            SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildLogo() {
-    return Padding(
-      padding: const EdgeInsets.only(top: gap_xx, bottom: gap_m),
-      child: Text(
-        "여어떻노.",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 43,
-          fontWeight: FontWeight.w900,
-          color: Colors.redAccent,
-          fontFamily: 'Jalnan2TTF',
-        ),
-      ),
-    );
+    return LoginLogo();
   }
 
   Widget _buildEmailField() {
@@ -82,14 +71,22 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Widget _buildLoginButton() {
+  Widget _buildLoginButton(WidgetRef ref) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            Navigator.pushReplacementNamed(
-                context, Move.homePage);
+            // 이메일과 비밀번호 가져오기
+            String email = _emailController.text;
+            String password = _passwordController.text;
+
+            // 로그인 요청 DTO 생성
+            LoginReqDTO loginReqDTO = LoginReqDTO(email: email, password: password);
+
+            // 로그인 메서드 호출
+            final sessionStore = ref.read(sessionProvider);
+            sessionStore.login(loginReqDTO);
           }
         },
         child: Text(
@@ -107,32 +104,28 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-
   Widget _buildKakaoLoginButton() {
     return KakaoLoginButton();
   }
+}
 
-  Future<void> signInWithKakao() async {
-    try {
-      await UserApi.instance.loginWithKakaoAccount();
-    } catch (error) {
-      print('카카오 로그인 실패 $error');
-    }
-  }
-
-  Future<void> logout() async {
-    try {
-      await UserApi.instance.logout();
-      print('로그아웃 성공, SDK에서 토큰 삭제');
-    } catch (error) {
-      print('로그아웃 실패, SDK에서 토큰 삭제 $error');
-    }
-  }
+class LoginLogo extends StatelessWidget {
+  const LoginLogo({Key? key}) : super(key: key);
 
   @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: gap_xx, bottom: gap_m),
+      child: Text(
+        "여어떻노.",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 43,
+          fontWeight: FontWeight.w900,
+          color: Colors.redAccent,
+          fontFamily: 'Jalnan2TTF',
+        ),
+      ),
+    );
   }
 }
