@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
+import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/data/models/book.dart';
 import 'package:yogi_project/ui/pages/book/book_list_page.dart';
 
 class BookList extends StatelessWidget {
@@ -12,6 +13,7 @@ class BookList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Book> domesticbookList = [
       Book(
+        roomId:1,
         stayName: '스카이베이호텔 경포',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
@@ -21,10 +23,9 @@ class BookList extends StatelessWidget {
         price: 300000,
         bookName: '설동훈',
         bookTel: '010-1234-5678',
-        way: '카드결제',
-        payAt: DateTime.parse('2024-04-20'), // 문자열을 DateTime으로 변환
       ),
       Book(
+        roomId:1,
         stayName: '스카이베이호텔 경포',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
@@ -34,10 +35,8 @@ class BookList extends StatelessWidget {
         price: 300000,
         bookName: '설동훈',
         bookTel: '010-1234-5678',
-        way: '카드결제',
-        payAt: DateTime.parse('2024-04-20'), // 문자열을 DateTime으로 변환
       ),
     ];
-    return BookListPage(bookList: domesticbookList, appBarText: '예약내역');
+    return BookListPage(bookList: domesticbookList, appBarText: '예약내역', payData: payData);
   }
 }

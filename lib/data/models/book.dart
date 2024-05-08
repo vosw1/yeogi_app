@@ -1,7 +1,6 @@
-import 'package:yogi_project/data/models/book.dart';
-
-class BookSaveReqDTO {
-  final String roomId; // 룸 이미지 제목
+class Book {
+  final int roomId;
+  final String stayName; // 숙소 이름
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
   final String location; // 위치
@@ -11,8 +10,9 @@ class BookSaveReqDTO {
   final String bookName; // 예약자 이름
   final String bookTel; // 예약자 전화번호
 
-  BookSaveReqDTO({
+  Book({
     required this.roomId,
+    required this.stayName,
     required this.roomImgTitle,
     required this.roomName,
     required this.location,
@@ -23,9 +23,10 @@ class BookSaveReqDTO {
     required this.bookTel,
   });
 
-  factory BookSaveReqDTO.fromJson(Map<String, dynamic> json) {
-    return BookSaveReqDTO(
+  factory Book.fromJson(Map<String, dynamic> json) {
+    return Book(
       roomId: json['roomId'],
+      stayName: json['stayName'],
       roomImgTitle: json['roomImgTitle'],
       roomName: json['roomName'],
       location: json['location'],
@@ -40,6 +41,7 @@ class BookSaveReqDTO {
   Map<String, dynamic> toJson() {
     return {
       'roomId': roomId,
+      'stayName': stayName,
       'roomImgTitle': roomImgTitle,
       'roomName': roomName,
       'location': location,

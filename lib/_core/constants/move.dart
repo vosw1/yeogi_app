@@ -105,6 +105,7 @@ final Stay stayData = Stay(
 );
 
 final Room roomData = Room(
+    roomId:'1',
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
     price: 142000,
@@ -119,14 +120,9 @@ final Room roomData = Room(
     notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인');
 
 final Payment payData = Payment(
-  roomImgTitle: '',
-  roomName: '',
-  location: '',
-  checkInDate: '',
-  checkOutDate: '',
-  personCount: '',
-  price: 10000,
-  cancellationAndRefundPolicy: '',
+  payAt: DateTime.parse('2024-04-20'),
+  way: '카드결제',
+
 );
 
 final List<EventTitleBannerData> eventTitleBannerDataList = [
@@ -206,7 +202,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.roomDetailPage: (context) => RoomDetailPage(roomData: roomData),
     // 룸 상세보기 페이지
 
-    Move.bookPage: (context) => BookPage(roomData: roomData),
+    Move.bookPage: (context) => BookPage(roomData: roomData, stayData: stayData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지

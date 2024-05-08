@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -125,9 +126,8 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              BookPage(roomData: widget.roomData)),
+
+                      MaterialPageRoute(builder: (context) => BookPage(roomData: widget.roomData, stayData: stayData)),
                     );
                   },
                   style: ElevatedButton.styleFrom(

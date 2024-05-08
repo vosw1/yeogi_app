@@ -1,4 +1,5 @@
 class Room {
+  final String roomId;
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
   final String roomInfo; // 룸 정보
@@ -12,6 +13,7 @@ class Room {
   final String notice; // 여어떻노 공지
 
   Room({
+    required this.roomId,
     required this.roomImgTitle,
     required this.roomName,
     required this.roomInfo,

@@ -3,17 +3,20 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
+import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/models/payment.dart';
 import 'book_detail_page.dart';
 
 class BookListPage extends StatelessWidget {
   final List<Book> bookList;
   final String appBarText;
+  final Payment payData;
 
   const BookListPage({
     Key? key,
     required this.bookList,
     required this.appBarText,
+    required this.payData,
   }) : super(key: key);
 
   @override
@@ -38,7 +41,7 @@ class BookListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookDetailPage(book: book, roomData: roomData),
+                  builder: (context) => BookDetailPage(bookData: book, roomData: roomData, payData: payData,),
                 ),
               );
             },

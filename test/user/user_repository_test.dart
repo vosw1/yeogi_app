@@ -19,5 +19,5 @@ Future<void> fetchJoinTest() async {
   final response = await UserRepository().fetchJoin(requestDTO);
 
   // Log response
-  print("Join Response: $response");
+  print("Join Response: ${response}");
 }
