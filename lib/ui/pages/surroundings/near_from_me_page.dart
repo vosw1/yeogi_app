@@ -57,6 +57,23 @@ class _NearFromMePageState extends State<NearFromMePage> {
     final Marker marker = Marker(
       markerId: markerId,
       position: coordinate,
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('마커 정보'),
+            content: Text('위도: ${coordinate.latitude}, 경도: ${coordinate.longitude}'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('닫기'),
+              ),
+            ],
+          ),
+        );
+      },
     );
 
     setState(() {
