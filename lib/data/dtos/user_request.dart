@@ -3,7 +3,6 @@ class JoinReqDTO {
   final String password;
   final String email;
   final String phone;
-  final String address;
   final String birth;
 
   JoinReqDTO({
@@ -11,7 +10,6 @@ class JoinReqDTO {
     required this.password,
     required this.email,
     required this.phone,
-    required this.address,
     required this.birth,
   });
 
@@ -20,7 +18,6 @@ class JoinReqDTO {
     "password": password,
     "email": email,
     "phone": phone,
-    "address": address,
     "birth": birth,
   };
 }

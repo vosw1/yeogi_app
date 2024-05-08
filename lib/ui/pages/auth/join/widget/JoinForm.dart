@@ -6,7 +6,6 @@ import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/address/library_daum_post_code_page.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/duplicate_email.check.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
 
@@ -56,16 +55,6 @@ class _JoinFormState extends State<JoinForm> {
             labelText: '이름',
             validator: validateName,
             hintText: "이름을 입력하세요",
-          ),
-          SizedBox(height: gap_m),
-          JoinTextFormField(
-            controller: _addressController,
-            labelText: '주소',
-            validator: validateAddress,
-            hintText: "주소를 입력하세요",
-            onAddressSearch: () {
-              _navigateToAddressSearch(context);
-            },
           ),
           SizedBox(height: gap_m),
           JoinTextFormField(
@@ -182,7 +171,7 @@ class _JoinFormState extends State<JoinForm> {
                 String birth = _ageController.text;
 
                 JoinReqDTO joinReqDTO = JoinReqDTO(
-                    password: password, email: email, name: name, phone: phone, address: address, birth: birth);
+                    password: password, email: email, name: name, phone: phone, birth: birth);
 
                 SessionStore store = SessionStore(); // Change this to the appropriate way to get the SessionStore instance
 
@@ -205,18 +194,6 @@ class _JoinFormState extends State<JoinForm> {
     );
   }
 
-  void _navigateToAddressSearch(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LibraryDaumPostcodePage()),
-    ).then((selectedAddress) {
-      if (selectedAddress != null) {
-        setState(() {
-          _addressController.text = selectedAddress.toString();
-        });
-      }
-    });
-  }
 
   void _showPopup(BuildContext context, int index) {
     AlertDialog? alertDialog;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/address/JoinForm.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/JoinForm.dart';
 
 class JoinPage extends StatelessWidget {
   @override
