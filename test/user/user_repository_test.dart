@@ -11,6 +11,7 @@ Future<void> fetchJoinTest() async {
     email: "12343@nate.com",
     password: "1234",
     name: "박기동",
+    address: "가야동",
     phone: "01012231234",
     birth: "1991-12-12",
   );
