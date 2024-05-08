@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/book.dart';
 
 class BookSaveReqDTO {
-  final String stayName; // 숙소 이름
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
   final String location; // 위치
@@ -13,7 +12,6 @@ class BookSaveReqDTO {
   final String bookTel; // 예약자 전화번호
 
   BookSaveReqDTO({
-    required this.stayName,
     required this.roomImgTitle,
     required this.roomName,
     required this.location,
@@ -26,7 +24,6 @@ class BookSaveReqDTO {
 
   factory BookSaveReqDTO.fromJson(Book book) {
     return BookSaveReqDTO(
-      stayName: book.stayName,
       roomImgTitle: book.roomImgTitle,
       roomName: book.roomName,
       location: book.location,
@@ -40,7 +37,6 @@ class BookSaveReqDTO {
 
   Map<String, dynamic> toJson() {
     return {
-      'stayName': stayName,
       'roomImgTitle': roomImgTitle,
       'roomName': roomName,
       'location': location,

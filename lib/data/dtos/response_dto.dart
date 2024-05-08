@@ -1,6 +1,6 @@
 class ResponseDTO {
   bool success;
-  int status;
+  int? status;
   String? errorMessage;
   dynamic response;
 

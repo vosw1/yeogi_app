@@ -201,7 +201,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.roomDetailPage: (context) => RoomDetailPage(roomData: roomData),
     // 룸 상세보기 페이지
 
-    Move.bookPage: (context) => BookPage(roomData: roomData),
+    Move.bookPage: (context) => BookPage(roomData: roomData, stayData: stayData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
