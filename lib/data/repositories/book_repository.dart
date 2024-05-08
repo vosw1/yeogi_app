@@ -6,22 +6,29 @@ import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/book.dart';
 
 class BookRepository {
-  Future<ResponseDTO> fetchBookSave(
-      BookSaveReqDTO reqDTO, String accessToken) async {
-    Response response = await dio.post("/api/book/{roomId}",
-        options: Options(headers: {"Authorization": "${accessToken}"}),
-        data: reqDTO.toJson());
+  Future<ResponseDTO> fetchBookList(String accessToken) async {
+    final response = await dio.get(
+      "/api/book",
+      options: Options(headers: {"Authorization": "${accessToken}"}),
+    );
 
-    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+    Future<ResponseDTO> fetchBookSave(BookSaveReqDTO reqDTO,
+        String accessToken) async {
+      Response response = await dio.post("/api/book/{roomId}",
+          options: Options(headers: {"Authorization": "${accessToken}"}),
+          data: reqDTO.toJson());
 
-    Logger().d(responseDTO.response);
-    print('데이터 확인 : ${responseDTO.response}');
-    Logger().d(responseDTO.response.runtimeType);
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.success) {
-      responseDTO.response = Book.fromJson(responseDTO.response);
+      Logger().d(responseDTO.response);
+      print('데이터 확인 : ${responseDTO.response}');
       Logger().d(responseDTO.response.runtimeType);
+
+      if (responseDTO.success) {
+        responseDTO.response = Book.fromJson(responseDTO.response);
+        Logger().d(responseDTO.response.runtimeType);
+      }
+      return responseDTO;
     }
-    return responseDTO;
   }
 }
