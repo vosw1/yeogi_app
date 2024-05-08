@@ -30,7 +30,7 @@ class _MainHolderState extends State<MainHolder> {
         children: [
           HomePage(),
           SearchPage(),
-          NearFromMePage(), // 수정된 경로를 사용합니다.
+          NearFromMePage(),
           ScrapListPage(),
           MyPage(userData: userData, stayData: stayData, eventMyPageBannerData: eventMyPageBannerDataList ),
         ],

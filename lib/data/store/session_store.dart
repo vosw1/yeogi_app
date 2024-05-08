@@ -58,7 +58,7 @@ class SessionStore extends SessionUser {
 
       // 비지니스 로직
       if (responseDTO.success) {
-        Navigator.pushNamed(mContext!, Move.mainHolder);
+        Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
       } else {
         ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")),

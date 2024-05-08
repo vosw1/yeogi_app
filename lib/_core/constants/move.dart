@@ -7,6 +7,7 @@ import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
+import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/book/book_page.dart';
@@ -34,7 +35,7 @@ class Move {
   static String loginPage = "/users/login";
   static String joinPage = "/users/join";
   static String homePage = "/home";
-  static String mainHolder = "/home";
+  static String mainHolder = "/main";
   static String searchPage = "/search";
   static String scrapPage = "/scrap";
   static String myPage = "/my";
@@ -186,6 +187,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.joinPage: (context) => JoinPage(),
     // 회원가입 페이지
     Move.homePage: (context) => HomePage(),
+    // 홈 페이지
+    Move.mainHolder: (context) => MainHolder(),
     // 홈 페이지
     Move.searchPage: (context) => SearchPage(),
     // 검색 페이지
