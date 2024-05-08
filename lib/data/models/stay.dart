@@ -14,7 +14,7 @@ class Stay {
     required this.stayInfo,
     required this.location,
     required this.notice,
-    this.reviews, // 리뷰가 null일 수 있음을 나타내기 위해 물음표 추가
+    this.reviews,
   });
 
   // Convert Stay object to JSON
@@ -26,7 +26,20 @@ class Stay {
       "location": location,
       "notice": notice,
       "reviews": reviews?.map((review) => review?.toJson()).toList(),
-      // 리뷰 목록을 JSON으로 변환
     };
+  }
+
+  // Convert JSON data to Stay object
+  factory Stay.fromJson(Map<String, dynamic> json) {
+    return Stay(
+      stayImgTitle: json['stayImgTitle'],
+      stayName: json['stayName'],
+      stayInfo: json['stayInfo'],
+      location: json['location'],
+      notice: json['notice'],
+      reviews: (json['reviews'] as List<dynamic>?)
+          ?.map((reviewJson) => Review.fromJson(reviewJson))
+          .toList(),
+    );
   }
 }

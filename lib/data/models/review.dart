@@ -24,4 +24,17 @@ class Review {
       // 대댓글 목록을 JSON으로 변환
     };
   }
+
+  // JSON 데이터를 Review 객체로 변환
+  factory Review.fromJson(Map<String, dynamic> json) {
+    return Review(
+      rating: json['rating'],
+      comment: json['comment'],
+      userName: json['userName'],
+      userImgTitle: json['userImgTitle'],
+      replies: (json['replies'] as List<dynamic>?)
+          ?.map((replyJson) => Review.fromJson(replyJson))
+          .toList() ?? [],
+    );
+  }
 }

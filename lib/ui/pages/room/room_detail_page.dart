@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/book_detail_page.dart';
 import 'package:yogi_project/ui/pages/book/book_page.dart';
@@ -64,7 +65,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height: gap_m),
-                                Text('체크인', style: TextStyle(fontSize: gap_m)),
+                                Text('이용날짜', style: TextStyle(fontSize: gap_m)),
                                 SizedBox(height: gap_xs),
                                 GestureDetector(
                                   onTap: () => _selectDate(context, isCheckIn: true),
@@ -76,34 +77,14 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                                     ),
                                     child: Row(
                                       children: [
-                                        Text(formatDate(_checkInDate)),
                                         SizedBox(width: gap_xs),
                                         Icon(Icons.calendar_today),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: gap_m),
-                                Text('체크아웃', style: TextStyle(fontSize: gap_m)),
-                                SizedBox(height: gap_xs),
-                                GestureDetector(
-                                  onTap: () => _selectDate(context, isCheckIn: false),
-                                  child: Container(
-                                    padding: EdgeInsets.all(gap_s),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(gap_s),
-                                      border: Border.all(color: Colors.black), // Changed border color
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Text(formatDate(_checkOutDate)),
                                         SizedBox(width: gap_xs),
-                                        Icon(Icons.calendar_today),
+                                        Text(
+                                          '${formatDate(_checkInDate)}  ~  ${formatDate(_checkOutDate)}',
+                                          style: h6(),
+                                        ),
+                                        SizedBox(width: gap_s),
                                       ],
                                     ),
                                   ),
