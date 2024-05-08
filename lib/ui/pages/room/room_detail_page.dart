@@ -15,16 +15,16 @@ class RoomDetailPage extends StatefulWidget {
 }
 
 class _RoomDetailPageState extends State<RoomDetailPage> {
-  late DateTime _checkInDate;
-  late DateTime _checkOutDate;
+  late DateTime _selectedStartDate;
+  late DateTime _selectedEndDate;
   int _numberOfNights = 1;
 
   @override
   void initState() {
     super.initState();
-    _checkInDate = DateTime.now(); // 현재 날짜로 초기화
-    _checkOutDate = DateTime.now().add(Duration(days: 1)); // 다음 날짜로 초기화
-    _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
+    _selectedStartDate = DateTime.now();
+    _selectedEndDate = DateTime.now().add(Duration(days: 1));
+    _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
   }
 
   @override
@@ -44,7 +44,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                     padding: EdgeInsets.all(gap_m),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(gap_s),
-                      border: Border.all(color: Colors.grey), // Changed border color
+                      border: Border.all(color: Colors.grey),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,23 +68,23 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                                 Text('이용날짜', style: TextStyle(fontSize: gap_m)),
                                 SizedBox(height: gap_xs),
                                 GestureDetector(
-                                  onTap: () => _selectDate(context, isCheckIn: true),
+                                  onTap: _selectDateRange,
                                   child: Container(
                                     padding: EdgeInsets.all(gap_s),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(gap_s),
-                                      border: Border.all(color: Colors.black), // Changed border color
+                                      border: Border.all(color: Colors.black, width: 2.0),
                                     ),
                                     child: Row(
                                       children: [
-                                        SizedBox(width: gap_xs),
+                                        SizedBox(width: gap_xx),
                                         Icon(Icons.calendar_today),
-                                        SizedBox(width: gap_xs),
+                                        SizedBox(width: gap_s),
                                         Text(
-                                          '${formatDate(_checkInDate)}  ~  ${formatDate(_checkOutDate)}',
+                                          '${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)}',
                                           style: h6(),
                                         ),
-                                        SizedBox(width: gap_s),
+                                        SizedBox(width: gap_xs),
                                       ],
                                     ),
                                   ),
@@ -94,20 +94,21 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                           ],
                         ),
                         SizedBox(height: gap_m),
-                        Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
+                        Text(
+                            '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
                             style: TextStyle(fontSize: gap_m)),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('기본정보\n\n${widget.roomData.roomInfo}'), // Fixed roomData access
+                        Text('기본정보\n\n${widget.roomData.roomInfo}'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('편의시설\n\n${widget.roomData.amenities}'), // Fixed roomData access
+                        Text('편의시설\n\n${widget.roomData.amenities}'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('공지\n\n${widget.roomData.notice}'), // Fixed roomData access
+                        Text('공지\n\n${widget.roomData.notice}'),
                       ],
                     ),
                   ),
@@ -122,10 +123,11 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigate to BookDetailPage
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => BookPage(roomData: widget.roomData)),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              BookPage(roomData: widget.roomData)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -145,34 +147,20 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
     );
   }
 
-  String _addCommas(int price) {
-    String priceString = price.toString();
-    String formattedPrice = '';
-    for (int i = priceString.length - 1; i >= 0; i--) {
-      formattedPrice = priceString[i] + formattedPrice;
-      if ((priceString.length - i) % 3 == 0 && i != 0) {
-        formattedPrice = ',' + formattedPrice;
-      }
-    }
-    return formattedPrice;
-  }
-
-  Future<void> _selectDate(BuildContext context,
-      {required bool isCheckIn}) async {
-    final DateTime? pickedDate = await showDatePicker(
+  Future<void> _selectDateRange() async {
+    final DateTimeRange? pickedDateRange = await showDateRangePicker(
       context: context,
-      initialDate: isCheckIn ? _checkInDate : _checkOutDate,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
+      initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
     );
-    if (pickedDate != null) {
+
+    if (pickedDateRange != null) {
       setState(() {
-        if (isCheckIn) {
-          _checkInDate = pickedDate;
-        } else {
-          _checkOutDate = pickedDate;
-        }
-        _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
+        _selectedStartDate = pickedDateRange.start;
+        _selectedEndDate = pickedDateRange.end;
+        // Recalculate number of nights
+        _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
       });
     }
   }
