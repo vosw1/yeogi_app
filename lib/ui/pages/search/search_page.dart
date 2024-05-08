@@ -21,11 +21,6 @@ class _SearchPageState extends State<SearchPage> {
 
   String _searchText = '';
 
-  String _formatDate(DateTime? date) {
-    if (date == null) return '';
-    return '${date.year}-${_addLeadingZero(date.month)}-${_addLeadingZero(date.day)}';
-  }
-
   String _addLeadingZero(int number) {
     if (number < 10) {
       return '0$number';
@@ -73,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        SizedBox(height: gap_s),
+        SizedBox(height: gap_m),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: gap_m),
           child: Row(
@@ -120,79 +115,6 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: gap_m),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: () async {
-                    final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: _checkInDate ?? DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2101),
-                    );
-                    if (picked != null && picked != _checkInDate) {
-                      setState(() {
-                        _checkInDate = picked;
-                      });
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.date_range, color: Colors.redAccent, size: 24),
-                      SizedBox(width: gap_xx),
-                      Text(
-                        _checkInDate != null
-                            ? ' 체크인 날짜\n ${_formatDate(_checkInDate)}'
-                            : '체크인 날짜',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: gap_m),
-              Expanded(
-                child: TextButton(
-                  onPressed: () async {
-                    final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: _checkOutDate ?? DateTime.now(),
-                      firstDate: _checkOutDate ?? DateTime.now(),
-                      lastDate: DateTime(2101),
-                    );
-                    if (picked != null && picked != _checkOutDate) {
-                      setState(() {
-                        _checkOutDate = picked;
-                      });
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.date_range, color: Colors.redAccent, size: 24),
-                      SizedBox(width: gap_xx),
-                      Text(
-                        _checkOutDate != null
-                            ? ' 체크아웃 날짜\n ${_formatDate(_checkOutDate)}'
-                            : ' 체크아웃 날짜',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: gap_s),
         SearchResultList(stayData: stayData, searchResultList: [],),
       ],
     );

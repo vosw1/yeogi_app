@@ -11,14 +11,7 @@ class MapSample extends StatefulWidget {
 
 class MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
-  LatLng _currentPosition = LatLng(37.42796133580664, -122.085749655962); // 초기 위치를 기본 값으로 설정
-
-  static final CameraPosition _kLake = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
-  );
+  LatLng _currentPosition = LatLng(35.15958250100625, 129.06019165022786); // 초기 위치를 부산 근처의 좌표로 설정
 
   @override
   void initState() {
@@ -27,11 +20,16 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> _getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      _currentPosition = LatLng(position.latitude, position.longitude);
-    });
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      setState(() {
+        _currentPosition = LatLng(position.latitude, position.longitude);
+      });
+    } catch (e) {
+      print('위치 가져오기 오류: $e');
+    }
   }
 
   @override
@@ -57,6 +55,11 @@ class MapSampleState extends State<MapSample> {
 
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: _currentPosition,
+        zoom: 19.0,
+      ),
+    ));
   }
 }
