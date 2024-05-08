@@ -194,7 +194,6 @@ class _JoinFormState extends State<JoinForm> {
     );
   }
 
-
   void _showPopup(BuildContext context, int index) {
     AlertDialog? alertDialog;
 

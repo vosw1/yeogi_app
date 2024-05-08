@@ -13,6 +13,7 @@ class SessionUser {
   User? user;
   String? accessToken;
   bool isLogin = false;
+  bool isJoin = false;
   int? selectedPostId;
 
   SessionUser();
@@ -32,15 +33,27 @@ class SessionStore extends SessionUser {
     }
   }
 
+  void joinCheck(String path) {
+    if (isJoin) {
+      Navigator.pushNamed(mContext!, path);
+    } else {
+      Navigator.pushNamed(mContext!, Move.joinPage);
+    }
+  }
+
   Future<void> join(JoinReqDTO joinReqDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
 
     // 비지니스 로직
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
+      // 회원가입 성공
+      this.user = User.fromJson(responseDTO.response); // 회원 정보 저장
+      this.isJoin = true;
       Navigator.pushNamed(mContext!, Move.mainHolder);
     } else {
+      // 회원가입 실패
       ScaffoldMessenger.of(mContext!).showSnackBar(
-        SnackBar(content: Text("회원가입 실패 : ${responseDTO.errorMessage}")),
+        SnackBar(content: Text("회원가입 실패: ${responseDTO.errorMessage}")),
       );
     }
   }
