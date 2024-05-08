@@ -35,9 +35,8 @@ class SessionStore extends SessionUser {
     }
   }
 
-  Future<void> login(LoginReqDTO loginReqDTO) async {
-    var (responseDTO, accessToken) =
-    await UserRepository().fetchLogin(loginReqDTO);
+  Future<bool> login(LoginReqDTO loginReqDTO) async {
+    var (responseDTO, accessToken) = await UserRepository().fetchLogin(loginReqDTO);
 
     if (responseDTO.success) {
       await secureStorage.write(key: "accessToken", value: accessToken);
@@ -46,10 +45,11 @@ class SessionStore extends SessionUser {
       this.accessToken = accessToken;
       this.isLogin = true;
 
-      Navigator.pushNamed(mContext!, Move.homePage);
+      return true; // 로그인 성공을 반환
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")));
+      return false; // 로그인 실패를 반환
     }
   }
 

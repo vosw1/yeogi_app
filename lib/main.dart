@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
+import 'package:yogi_project/ui/pages/home/home_page.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       home: MainHolder(),
       routes: {
         '/login': (context) => LoginPage(),
-        '/home' : (context) => MainHolder(),
+        '/home' : (context) => HomePage(),
       },
     );
   }
