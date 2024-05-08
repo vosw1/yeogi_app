@@ -5,6 +5,7 @@ import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
+import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
 import 'kakao_login_button.dart';
 
@@ -77,7 +78,7 @@ class LoginForm extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
       child: ElevatedButton(
-        onPressed: () async {
+        onPressed: () {
           if (_formKey.currentState!.validate()) {
             // 이메일과 비밀번호 가져오기
             String email = _emailController.text;
@@ -89,10 +90,9 @@ class LoginForm extends ConsumerWidget {
 
             // 로그인 메서드 호출
             final sessionStore = ref.read(sessionProvider);
-            await sessionStore.login(loginReqDTO);
+            sessionStore.login(loginReqDTO);
 
-            // 로그인 성공 여부는 sessionStore.login의 반환 값으로 판단하므로 loginSuccess 변수 사용하지 않음
-            Navigator.pushNamed(context, Move.homePage);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainHolder()), (route) => false);
           }
         },
         child: Text(
