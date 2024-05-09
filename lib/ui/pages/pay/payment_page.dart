@@ -58,37 +58,6 @@ class PaymentPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 150),
-            // Divider(
-            //   color: Colors.grey[100],
-            //   thickness: 10.0,
-            // ),
-            // // SizedBox(height: gap_s),
-            // Padding(
-            //   padding: const EdgeInsets.only(right: gap_m, left: gap_m, bottom: gap_s),
-            //   child: Container(
-            //     alignment: Alignment.center,
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(gap_s),
-            //     ),
-            //     child: ElevatedButton(
-            //       onPressed: () {
-            //         // 전체 가격 결제 로직 추가
-            //       },
-            //       style: ElevatedButton.styleFrom(
-            //         backgroundColor: Colors.redAccent,
-            //         padding: EdgeInsets.symmetric(
-            //           vertical: gap_s / 2,
-            //           horizontal: gap_m * 2,
-            //         ),
-            //       ),
-            //       child: Text(
-            //         '예약 완료',
-            //         style: subtitle1(mColor: Colors.white),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(height: gap_m),
             SizedBox(height: gap_xs),
             Container(
               color: Colors.grey.shade100,

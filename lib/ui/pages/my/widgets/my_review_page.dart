@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/my_review.dart';
-import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/review_writing_dialog.dart';
 
 class MyReviewPage extends StatelessWidget {
   @override

@@ -4,7 +4,7 @@ import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/reservaion_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/reservation.dart';
-import 'package:yogi_project/ui/pages/book/widgets/reservation_list_model.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/reservation_list_model.dart';
 
 class ReservationRepository {
   // 예약하기

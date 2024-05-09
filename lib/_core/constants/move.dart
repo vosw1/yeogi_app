@@ -10,9 +10,9 @@ import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
-import 'package:yogi_project/ui/pages/book/reservation_page.dart';
-import 'package:yogi_project/ui/pages/book/widgets/reservaion_list.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_page.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/reservaion_list.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
@@ -27,8 +27,6 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart'
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list.dart';
-
-// 이하 내용은 동일
 
 // URL 설정
 class Move {

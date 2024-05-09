@@ -5,7 +5,7 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/review_writing_dialog.dart';
 
 class ReservationDetailPage extends StatefulWidget {
   final Reservation reservations;

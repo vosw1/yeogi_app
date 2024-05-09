@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/reservation.dart';
-import 'package:yogi_project/ui/pages/book/reservation_list_page.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_list_page.dart';
 
 class ReservationList extends StatelessWidget {
   final List<Reservation> domesticbookList;
