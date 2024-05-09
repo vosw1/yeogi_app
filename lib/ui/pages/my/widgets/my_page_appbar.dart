@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/user.dart';
-import 'package:yogi_project/ui/pages/event/event_my_page_banner_page.dart';
+import 'package:yogi_project/ui/pages/my/event/event_my_page_banner_page.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_update.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_review_page.dart';
 import 'my_page_body_icon.dart';
