@@ -6,7 +6,7 @@ import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_appbar.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_book_menu_holder.dart';
-import 'package:yogi_project/ui/pages/my/widgets/my_page_faq_menu_holder.dart';
+import 'package:yogi_project/ui/pages/my/service_center/my_page_faq_menu_holder.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_header_banner.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_login_button.dart';
 

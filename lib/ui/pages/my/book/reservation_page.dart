@@ -10,8 +10,7 @@ import 'package:yogi_project/ui/pages/my/book/widgets/privacy_polocy_dialog.dart
 import 'package:yogi_project/ui/pages/my/book/widgets/reservation_text_form_field.dart';
 import 'package:yogi_project/ui/pages/my/book/widgets/third_party_providing_dialog.dart';
 import 'package:yogi_project/ui/pages/my/book/widgets/usage_rules_dialog.dart';
-import 'package:yogi_project/ui/pages/pay/payment_page.dart';
-
+import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
 class ReservationPage extends StatefulWidget {
   final Room rooms;
 

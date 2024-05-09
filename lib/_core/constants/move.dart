@@ -14,7 +14,7 @@ import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
-import 'package:yogi_project/ui/pages/pay/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
 import 'package:yogi_project/ui/pages/stay/room/room_detail_page.dart';
@@ -28,7 +28,7 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.da
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list.dart';
 
-// URL 설정
+// navigator로 이동하는 url 설정
 class Move {
   static String loginPage = "/users/login";
   static String joinPage = "/users/join";
