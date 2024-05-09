@@ -46,7 +46,6 @@ dependencies:
   cupertino_icons: ^1.0.6
   font_awesome_flutter: ^10.7.0
   flutter_native_splash: ^2.4.0
-
   google_maps_flutter: ^2.2.8
   map_launcher: ^3.3.0
   flutter_svg: ^2.0.9
@@ -56,6 +55,8 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   daum_postcode_search: ^0.0.2
   flutter_inappwebview: ^5.8.0
+  flutter_google_places: ^0.3.0
+
 
 dev_dependencies:
   flutter_test:

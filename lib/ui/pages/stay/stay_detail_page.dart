@@ -20,6 +20,7 @@ class StayDetailPage extends StatefulWidget {
 class _StayDetailPageState extends State<StayDetailPage> {
   final ScrollController _scrollController = ScrollController();
   bool isFavorite = false;
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +54,38 @@ class _StayDetailPageState extends State<StayDetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(gap_s),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(gap_s),
-                  child: Image.asset(
-                    'assets/images/${widget.stayData.stayImgTitle}',
-                    fit: BoxFit.cover,
+              // 페이지 뷰와 페이지 인디케이터
+              Stack(
+                children: [
+                  SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: PageView.builder(
+                      itemCount: widget.stayData.stayImgTitle.length,
+                      onPageChanged: (int page) {
+                        setState(() {
+                          _currentPage = page;
+                        });
+                      },
+                      itemBuilder: (context, index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(gap_s),
+                          child: Image.asset(
+                            'assets/images/${widget.stayData.stayImgTitle}',
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
+                  Positioned(
+                    right: 16,
+                    bottom: 16,
+                    child: Text(
+                      '${_currentPage + 1}/${widget.stayData.stayImgTitle.length}',
+                      ),
+                    ),
+                ],
               ),
               SizedBox(height: gap_m),
               // Review section

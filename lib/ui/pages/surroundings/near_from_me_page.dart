@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:yogi_project/_core/constants/size.dart';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -85,11 +84,11 @@ class _NearFromMePageState extends State<NearFromMePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_m),
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: gap_l),
+            SizedBox(height: 16.0),
             TextField(
               onChanged: (value) {
                 setState(() {
@@ -111,7 +110,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 ),
               ),
             ),
-            SizedBox(height: gap_xs),
+            SizedBox(height: 8.0),
             ElevatedButton.icon(
               onPressed: () {
                 _goToCurrentPosition(); // 내 위치로 이동하는 함수 호출
@@ -123,10 +122,10 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 foregroundColor: Colors.white,
               ),
             ),
-            SizedBox(height: gap_xs),
+            SizedBox(height: 8.0),
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(gap_s),
+                borderRadius: BorderRadius.circular(8),
                 child: GoogleMap(
                   initialCameraPosition: _currentPosition != null
                       ? CameraPosition(target: _currentPosition!, zoom: 12)
@@ -137,10 +136,13 @@ class _NearFromMePageState extends State<NearFromMePage> {
                   markers: markers,
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
+                  onTap: (coordinate) {
+                    _addMarker(coordinate); // 새로운 마커 추가
+                  },
                 ),
               ),
             ),
-            SizedBox(height: gap_m),
+            SizedBox(height: 16.0),
             Text('결과 ${searchResults.length}건'),
             Divider(),
             Expanded(
@@ -178,12 +180,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
     }
   }
 
-  // 위치 권한을 요청하는 함수
-  Future<void> _requestPermission() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      // 사용자가 위치 권한을 거부한 경우
-      // 여기에 사용자에게 권한을 다시 요청하는 로직을 추가할 수 있습니다.
-    }
+  // 마커 추가 함수
+  void _addMarker(LatLng coordinate) {
+    addMarker(coordinate);
   }
 }

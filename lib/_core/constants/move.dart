@@ -109,7 +109,7 @@ final Room roomData = Room(
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
     price: 142000,
-    discountedPrice: 130000,
+    specialPrice: 130000,
     checkInDate: '2024-04-30',
     checkOutDate: '2024-05-01',
     checkInTime: '15:00',
