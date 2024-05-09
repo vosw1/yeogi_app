@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:yogi_project/_core/constants/size.dart';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -12,20 +11,17 @@ class NearFromMePage extends StatefulWidget {
 }
 
 class _NearFromMePageState extends State<NearFromMePage> {
-  String _searchText = '';
-  List<String> searchResults = [];
-  late Completer<GoogleMapController> _controllerCompleter;
+  late GoogleMapController _controller;
   LatLng? _currentPosition;
-  final Set<Marker> markers = {};
+  Set<Marker> _markers = {};
+  TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _controllerCompleter = Completer<GoogleMapController>();
-    _getCurrentLocation(); // 앱이 시작할 때 현재 위치 가져오기
+    _getCurrentLocation();
   }
 
-  // 위치 가져오기
   Future<void> _getCurrentLocation() async {
     try {
       LocationPermission permission = await Geolocator.requestPermission();
@@ -35,24 +31,77 @@ class _NearFromMePageState extends State<NearFromMePage> {
         );
         setState(() {
           _currentPosition = LatLng(position.latitude, position.longitude);
-          if (_currentPosition != null) {
-            addMarker(_currentPosition!); // 현재 위치에 마커 추가
-            _goToCurrentPosition(); // 현재 위치로 지도 이동
-          }
         });
       } else {
-        // 위치 권한이 거부된 경우
-        // 여기에 사용자에게 권한을 다시 요청하는 로직을 추가할 수 있습니다.
+        // Handle case when location permission is denied
       }
     } catch (e) {
-      print('위치 가져오기 오류: $e');
-      // 위치 가져오기에 실패한 경우에 대한 처리 추가
+      print('Error getting current location: $e');
+      // Handle error getting current location
     }
   }
 
-  void addMarker(LatLng coordinate) {
-    final int id = Random().nextInt(100); // 랜덤한 ID 생성
-    final MarkerId markerId = MarkerId(id.toString()); // 마커 ID 생성
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Nearby Places'),
+      ),
+      body: Column(
+        children: [
+          _buildSearchBar(),
+          Expanded(
+            child: _currentPosition == null
+                ? Center(
+              child: CircularProgressIndicator(),
+            )
+                : GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: _currentPosition!,
+                zoom: 15,
+              ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller = controller;
+                _searchNearbyPlaces(_currentPosition!);
+              },
+              markers: _markers,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: TextField(
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: 'Search nearby places',
+          suffixIcon: IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              _searchNearbyPlaces(_currentPosition!);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _searchNearbyPlaces(LatLng currentPosition) {
+    String searchText = _searchController.text;
+    // Implement nearby places search logic here using searchText
+    // You can use the Geocoding API or any other service to find nearby places
+    // and add markers to the map accordingly
+    // For demonstration purposes, let's add a random nearby place marker
+    _addMarker(LatLng(currentPosition.latitude + 0.001, currentPosition.longitude + 0.001));
+  }
+
+  void _addMarker(LatLng coordinate) {
+    final int id = Random().nextInt(100);
+    final MarkerId markerId = MarkerId(id.toString());
 
     final Marker marker = Marker(
       markerId: markerId,
@@ -61,14 +110,14 @@ class _NearFromMePageState extends State<NearFromMePage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('마커 정보'),
-            content: Text('위도: ${coordinate.latitude}, 경도: ${coordinate.longitude}'),
+            title: Text('Place Info'),
+            content: Text('Add your place information here'), // Add your place information here
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('닫기'),
+                child: Text('Close'),
               ),
             ],
           ),
@@ -77,113 +126,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
     );
 
     setState(() {
-      markers.add(marker); // 마커 추가
+      _markers.add(marker);
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_m),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: gap_l),
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  _searchText = value;
-                });
-              },
-              decoration: InputDecoration(
-                hintText: '주변 숙소를 찾아보세요',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    setState(() {
-                      searchResults = [];
-                    });
-                  },
-                ),
-              ),
-            ),
-            SizedBox(height: gap_xs),
-            ElevatedButton.icon(
-              onPressed: () {
-                _goToCurrentPosition(); // 내 위치로 이동하는 함수 호출
-              },
-              icon: Icon(Icons.location_on),
-              label: Text('내 위치에서 찾아보기'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
-                foregroundColor: Colors.white,
-              ),
-            ),
-            SizedBox(height: gap_xs),
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(gap_s),
-                child: GoogleMap(
-                  initialCameraPosition: _currentPosition != null
-                      ? CameraPosition(target: _currentPosition!, zoom: 12)
-                      : CameraPosition(target: LatLng(35.1796, 129.0756), zoom: 12), // 부산을 기본 위치로 설정
-                  onMapCreated: (controller) async {
-                    _controllerCompleter.complete(controller);
-                  },
-                  markers: markers,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                ),
-              ),
-            ),
-            SizedBox(height: gap_m),
-            Text('결과 ${searchResults.length}건'),
-            Divider(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(searchResults[index]),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // 현재 위치로 지도 이동하는 함수
-  Future<void> _goToCurrentPosition() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.medium,
-      );
-      if (position != null) {
-        setState(() {
-          _currentPosition = LatLng(position.latitude, position.longitude);
-        });
-        final GoogleMapController controller = await _controllerCompleter.future;
-        controller.animateCamera(CameraUpdate.newLatLng(_currentPosition!));
-      }
-    } catch (e) {
-      print('위치 가져오기 오류: $e');
-      // 위치 가져오기에 실패한 경우에 대한 처리 추가
-    }
-  }
-
-  // 위치 권한을 요청하는 함수
-  Future<void> _requestPermission() async {
-    LocationPermission permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      // 사용자가 위치 권한을 거부한 경우
-      // 여기에 사용자에게 권한을 다시 요청하는 로직을 추가할 수 있습니다.
-    }
   }
 }
