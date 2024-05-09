@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../data/models/stay.dart';
+import '../../../../../data/models/stay.dart';
 
 class SaleStayPage extends StatelessWidget {
   final Stay stayData;

@@ -6,21 +6,21 @@ import '../../data/models/stay.dart';
 import '../../ui/pages/auth/join/join_page.dart';
 import '../../ui/pages/pay/payment_page.dart';
 import '../../ui/pages/room/room_page.dart';
-import '../../ui/pages/stay/camping_stay_page/camping_stay_page.dart';
-import '../../ui/pages/stay/domestic_stay_page/domestic_stay_page.dart';
-import '../../ui/pages/stay/guest_house_page/guest_house_stay_page.dart';
-import '../../ui/pages/stay/home_and_billa_dtay_page/home_and_billa_stay_page.dart';
-import '../../ui/pages/stay/hotel_stay_page/hotel_stay_page.dart';
-import '../../ui/pages/stay/motel_stay_page/motel_stay_page.dart';
-import '../../ui/pages/stay/overseas_stay_page/overseas_stay_page.dart';
-import '../../ui/pages/stay/pansion_stay_page/pension_stay_page.dart';
-import '../../ui/pages/stay/sale_stay_page/sale_stay_page.dart';
 import '../../ui/pages/book/book_page.dart';
 import '../../ui/pages/home/home_page.dart';
 import '../../ui/pages/auth/login/login_page.dart';
 import '../../ui/pages/my/my_page.dart';
 import '../../ui/pages/scrap/scarp_page.dart';
 import '../../ui/pages/search/search_page.dart';
+import '../../ui/pages/stay/pages/camping_stay_page.dart';
+import '../../ui/pages/stay/pages/domestic_stay_page.dart';
+import '../../ui/pages/stay/pages/guest_house_stay_page.dart';
+import '../../ui/pages/stay/pages/home_and_billa_stay_page.dart';
+import '../../ui/pages/stay/pages/hotel_stay_page.dart';
+import '../../ui/pages/stay/pages/motel_stay_page.dart';
+import '../../ui/pages/stay/pages/overseas_stay_page.dart';
+import '../../ui/pages/stay/pages/pension_stay_page.dart';
+import '../../ui/pages/stay/pages/sale_stay_page.dart';
 import '../../ui/pages/stay/stay_page.dart';
 import '../../ui/pages/stay/stay_page.dart';
 
@@ -50,7 +50,7 @@ class Move {
 // Sample data for stay and room
 final Stay stayData = Stay(
   stayName: 'Sample Stay',
-  stayImgTitle: 'sample_stay.jpg',
+  stayImgTitle: 'user/avarta.png',
   location: 'Sample Location',
   stayInfo: '',
   notice: '',
@@ -61,7 +61,7 @@ final Stay stayData = Stay(
 
 final Room roomData = Room(
   roomName: 'Sample Room',
-  roomImgTitle: 'sample_room.jpg',
+  roomImgTitle: 'hotel/hotel1.png',
   personCount: "2",
   price: 100,
   checkInDate: '2024-04-30',
@@ -100,7 +100,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.saleStayPage: (context) => SaleStayPage(stayData: stayData), // 특가 숙소 페이지
     Move.hotelStayPage: (context) => const HotelStayPage(), // 호텔 숙소 페이지
     Move.motelStayPage: (context) => const ModelStayPage(), // 모텔 숙소 페이지
-    Move.pansionStayPage: (context) => const PansionStayPage(), // 펜션 숙소 페이지
+    Move.pansionStayPage: (context) => const PensionStayPage(), // 펜션 숙소 페이지
     Move.homeAndBillaStayPage: (context) => const HomeAndBillaStayPage(), // 홈&빌라 숙소 페이지
     Move.campingStayPage: (context) => const CampingStayPage(), // 캠핑 숙소 페이지
     Move.guestHouseStayPage: (context) => const GuestHouseStayPage(), // 게하 숙소 페이지
