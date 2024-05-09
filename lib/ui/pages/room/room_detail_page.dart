@@ -127,7 +127,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                     Navigator.push(
                       context,
 
-                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms, stays: stays)),
+                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms)),
                     );
                   },
                   style: ElevatedButton.styleFrom(

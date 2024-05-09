@@ -105,7 +105,8 @@ final Stay stays = Stay(
 );
 
 final Room rooms = Room(
-    roomId:'1',
+    roomId:1,
+    personCount:'2',
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
     price: 142000,
@@ -202,7 +203,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.roomDetailPage: (context) => RoomDetailPage(rooms: rooms),
     // 룸 상세보기 페이지
 
-    Move.reservationPage: (context) => ReservationPage(rooms: rooms, stays: stays),
+    Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지

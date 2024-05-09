@@ -8,7 +8,6 @@ import 'package:yogi_project/ui/pages/pay/widgets/total_payment.dart';
 
 class PaymentPage extends StatelessWidget {
 
-
   const PaymentPage({Key? key}) : super(key: key);
 
   @override

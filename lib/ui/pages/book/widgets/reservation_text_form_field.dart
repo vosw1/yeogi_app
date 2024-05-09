@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
-class ReservaionTextFormField extends StatelessWidget {
+class ReservationTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final String hintText;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
 
-  const ReservaionTextFormField({
+  const ReservationTextFormField({
     required this.controller,
     required this.labelText,
     required this.hintText,
