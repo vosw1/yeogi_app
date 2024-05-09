@@ -8,7 +8,7 @@ import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/book/widgets/reservaion_text_form_field.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 import 'package:yogi_project/data/dtos/book_request.dart';
-import 'package:yogi_project/data/repositories/book_repository.dart';
+import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
 class ReservationPage extends StatefulWidget {
   final Room roomData;

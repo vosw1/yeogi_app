@@ -3,20 +3,20 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/models/Reservation.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'reservation_detail_page.dart';
 
 class ReservationListPage extends StatelessWidget {
   final List<Reservation> reservationList;
   final String appBarText;
-  final Payment payData;
+  final Payment pays;
 
   const ReservationListPage({
     Key? key,
     required this.reservationList,
     required this.appBarText,
-    required this.payData,
+    required this.pays,
   }) : super(key: key);
 
 
@@ -42,7 +42,11 @@ class ReservationListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ReservationDetailPage(payData: payData, reservationData: reservationData, roomData: roomData),
+                  builder: (context) => ReservationDetailPage(
+                    reservationData: book, // reservationData 매개변수에 예약 데이터 전달
+                    roomData: roomData, // roomData 매개변수에 객실 데이터 전달
+                    pays : pays, // payData 매개변수에 결제 데이터 전달
+                  ),
                 ),
               );
             },

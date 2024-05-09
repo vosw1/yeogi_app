@@ -1,6 +1,6 @@
 import 'package:yogi_project/data/dtos/book_request.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
-import 'package:yogi_project/data/repositories/book_repository.dart';
+import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/data/repositories/user_repository.dart';
 
 void main() async {

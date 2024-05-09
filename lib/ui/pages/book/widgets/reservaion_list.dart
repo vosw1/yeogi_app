@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/models/Reservation.dart';
 import 'package:yogi_project/ui/pages/book/reservation_list_page.dart';
 
 class ReservationList extends StatelessWidget {
@@ -13,6 +13,7 @@ class ReservationList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Reservation> domesticbookList = [
       Reservation(
+        id:'1',
         roomId:'1',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
@@ -24,6 +25,7 @@ class ReservationList extends StatelessWidget {
         reservationTel: '010-1111-1111',
       ),
       Reservation(
+        id:'3',
         roomId:'2',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
@@ -35,6 +37,6 @@ class ReservationList extends StatelessWidget {
         reservationTel: '010-1111-1111',
       ),
     ];
-    return ReservationListPage(reservationList: domesticbookList, appBarText: '예약내역', payData: payData);
+    return ReservationListPage(reservationList: domesticbookList, appBarText: '예약내역', pays: pays);
   }
 }

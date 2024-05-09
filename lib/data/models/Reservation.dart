@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Reservation {
+  final String id;
   final String reservationName; // 예약자 대표 이름
   final String reservationTel; // 예약자 대표 연락처
   final DateTime checkInDate; // 입실 날짜
@@ -12,6 +13,7 @@ class Reservation {
   final int price; // 가격
 
   Reservation({
+    required this.id,
     required this.reservationName,
     required this.reservationTel,
     required this.checkInDate,
@@ -25,6 +27,7 @@ class Reservation {
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
+      id: json['id'],
       reservationName: json['reservationName'],
       reservationTel: json['reservationTel'],
       checkInDate: DateTime.parse(json['checkInDate']),
@@ -39,6 +42,7 @@ class Reservation {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'reservationName': reservationName,
       'reservationTel': reservationTel,
       'checkInDate': checkInDate.toIso8601String(),

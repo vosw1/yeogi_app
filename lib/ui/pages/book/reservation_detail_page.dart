@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/models/Reservation.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
@@ -10,9 +10,9 @@ import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
 class ReservationDetailPage extends StatefulWidget {
   final Reservation reservationData;
   final Room roomData;
-  final Payment payData;
+  final Payment pays;
 
-  const ReservationDetailPage({Key? key, required this.reservationData, required this.roomData, required this.payData});
+  const ReservationDetailPage({Key? key, required this.reservationData, required this.roomData, required this.pays});
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();
@@ -194,14 +194,14 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
         Row(
           children: [
             Text('결제일자 : ', style: subtitle1()),
-            Text('${formatDate(widget.payData.payAt)}', style: subtitle1()),
+            Text('${formatDate(widget.pays.payAt)}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('결제수단 : ', style: subtitle1()),
-            Text('${widget.payData.way}', style: subtitle1()),
+            Text('${widget.pays.way}', style: subtitle1()),
           ],
         ),
       ],
