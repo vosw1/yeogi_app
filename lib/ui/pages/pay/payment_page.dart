@@ -57,7 +57,7 @@ class PaymentPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: gap_s),
+            SizedBox(height: 150),
             // Divider(
             //   color: Colors.grey[100],
             //   thickness: 10.0,
