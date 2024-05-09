@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/notification.dart';
-import 'package:yogi_project/ui/pages/book/book_detail_page.dart';
+import 'package:yogi_project/ui/pages/book/reservation_detail_page.dart';
 
 class NotificationListItem extends StatelessWidget {
   final MyNotification notification;

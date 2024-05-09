@@ -5,22 +5,22 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/book/widgets/book_text_form_field.dart';
+import 'package:yogi_project/ui/pages/book/widgets/reservaion_text_form_field.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 import 'package:yogi_project/data/dtos/book_request.dart';
-import 'package:yogi_project/data/repositories/book_repository.dart';
+import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
-class BookPage extends StatefulWidget {
+class ReservationPage extends StatefulWidget {
   final Room roomData;
   final Stay stayData;
 
-  BookPage({required this.roomData, required this.stayData});
+  ReservationPage({required this.roomData, required this.stayData});
 
   @override
   _BookPageState createState() => _BookPageState();
 }
 
-class _BookPageState extends State<BookPage> {
+class _BookPageState extends State<ReservationPage> {
   bool _isChecked = false;
   List<bool> _subCheckboxValues = [false, false, false, false];
   TextEditingController _nameController = TextEditingController();
@@ -83,7 +83,8 @@ class _BookPageState extends State<BookPage> {
                           Text('퇴실: ${widget.roomData.checkOutTime}'),
                           SizedBox(height: gap_s),
                           Text(
-                              '결제금액 : ${NumberFormat('#,###').format(widget.roomData.price)} 원'),
+                              '결제금액 : ${NumberFormat('#,###').format(
+                                  widget.roomData.price)} 원'),
                         ],
                       ),
                     ),
@@ -112,14 +113,14 @@ class _BookPageState extends State<BookPage> {
                   style: h5(),
                 ),
                 SizedBox(height: gap_s),
-                BookTextFormField(
+                ReservaionTextFormField(
                   controller: _nameController,
                   labelText: '이름',
                   hintText: "이름을 입력하세요",
                   validator: validateName,
                 ),
                 SizedBox(height: gap_s),
-                BookTextFormField(
+                ReservaionTextFormField(
                   controller: _phoneNumberController,
                   labelText: '전화번호',
                   hintText: '000-0000-0000',
@@ -154,7 +155,10 @@ class _BookPageState extends State<BookPage> {
       ),
       persistentFooterButtons: [
         Container(
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
           padding: EdgeInsets.symmetric(horizontal: gap_m),
           child: ElevatedButton(
             onPressed: () {
@@ -207,15 +211,16 @@ class _BookPageState extends State<BookPage> {
   void _handleBooking() {
     if (_formKey.currentState!.validate()) {
       // 사용자 입력값 받기 + 요청 DTO 만들기
-      BookSaveReqDTO reqDTO = BookSaveReqDTO(
+      ReservationSaveReqDTO reqDTO = ReservationSaveReqDTO(
+        roomId: widget.roomData.roomId,
         roomImgTitle: widget.roomData.roomImgTitle,
         roomName: widget.roomData.roomName,
         location: widget.stayData.location,
         checkInDate: DateTime.parse(widget.roomData.checkInDate),
         checkOutDate: DateTime.parse(widget.roomData.checkOutDate),
         price: widget.roomData.price,
-        bookName: _nameController.text.trim(),
-        bookTel: _phoneNumberController.text.trim(),
+        reservationName: _nameController.text.trim(),
+        reservationTel: _phoneNumberController.text.trim(),
       );
 
       // 예약 요청 보내기
@@ -223,10 +228,10 @@ class _BookPageState extends State<BookPage> {
     }
   }
 
-  Future<void> _bookRoom(BookSaveReqDTO reqDTO) async {
+  Future<void> _bookRoom(ReservationSaveReqDTO reqDTO) async {
     try {
       // 예약 요청 보내기
-      final responseDTO = await BookRepository().fetchBookSave(reqDTO, '');
+      final responseDTO = await ReservationRepository().fetchReservationSave(reqDTO, 'your_access_token_here');
 
       // 예약 성공 여부 확인
       if (responseDTO.success) {

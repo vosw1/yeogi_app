@@ -10,8 +10,8 @@ import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
-import 'package:yogi_project/ui/pages/book/book_page.dart';
-import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
+import 'package:yogi_project/ui/pages/book/reservation_page.dart';
+import 'package:yogi_project/ui/pages/book/widgets/reservaion_list.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
@@ -51,7 +51,7 @@ class Move {
   static String homeAndBillaStayList = "/homeAndBilla";
   static String campingStayList = "/camping";
   static String guestHouseStayList = "/guestHouse";
-  static String bookPage = "/book/{roomId}";
+  static String reservationPage = "/reservation/{roomId}";
   static String paymetPage = "/pay";
   static String eventPage = "/event";
 }
@@ -105,6 +105,7 @@ final Stay stayData = Stay(
 );
 
 final Room roomData = Room(
+    roomId:'1',
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
     price: 142000,
@@ -118,7 +119,7 @@ final Room roomData = Room(
         'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
     notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인');
 
-final Payment payData = Payment(
+final Payment pays = Payment(
   payAt: DateTime.parse('2024-04-20'),
   way: '카드결제',
 
@@ -201,11 +202,11 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.roomDetailPage: (context) => RoomDetailPage(roomData: roomData),
     // 룸 상세보기 페이지
 
-    Move.bookPage: (context) => BookPage(roomData: roomData, stayData: stayData),
+    Move.reservationPage: (context) => ReservationPage(roomData: roomData, stayData: stayData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
-    Move.bookList: (context) => BookList(domesticbookList: []),
+    Move.bookList: (context) => ReservationList(domesticbookList: []),
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

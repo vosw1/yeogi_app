@@ -3,21 +3,22 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/book.dart';
+import 'package:yogi_project/data/models/Reservation.dart';
 import 'package:yogi_project/data/models/payment.dart';
-import 'book_detail_page.dart';
+import 'reservation_detail_page.dart';
 
-class BookListPage extends StatelessWidget {
-  final List<Book> bookList;
+class ReservationListPage extends StatelessWidget {
+  final List<Reservation> reservationList;
   final String appBarText;
-  final Payment payData;
+  final Payment pays;
 
-  const BookListPage({
+  const ReservationListPage({
     Key? key,
-    required this.bookList,
+    required this.reservationList,
     required this.appBarText,
-    required this.payData,
+    required this.pays,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,9 @@ class BookListPage extends StatelessWidget {
         title: Text(appBarText),
       ),
       body: ListView.builder(
-        itemCount: bookList.length,
+        itemCount: reservationList.length,
         itemBuilder: (context, index) {
-          final book = bookList[index];
+          final book = reservationList[index];
 
           // Calculate the duration of stay
           final checkIn = book.checkInDate;
@@ -41,7 +42,11 @@ class BookListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookDetailPage(bookData: book, roomData: roomData, payData: payData,),
+                  builder: (context) => ReservationDetailPage(
+                    reservationData: book, // reservationData 매개변수에 예약 데이터 전달
+                    roomData: roomData, // roomData 매개변수에 객실 데이터 전달
+                    pays : pays, // payData 매개변수에 결제 데이터 전달
+                  ),
                 ),
               );
             },
@@ -63,13 +68,6 @@ class BookListPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          book.stayName,
-                          style: h6(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: gap_xs),
                         Text(
                           book.location,
                           style: subtitle1(),
