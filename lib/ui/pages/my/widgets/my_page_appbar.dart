@@ -24,16 +24,16 @@ class MyPageAppBar extends StatelessWidget {
         spacing: 15,
         runSpacing: 30,
         children: [
-          MyPageBodyIcon(
-            iconData: FontAwesomeIcons.idBadge,
-            title: "정보 수정",
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyPageUpdate(user: user)),
-              );
-            },
-          ),
+          // MyPageBodyIcon(
+          //   iconData: FontAwesomeIcons.idBadge,
+          //   title: "정보 수정",
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       //MaterialPageRoute(builder: (context) => MyPageUpdate(user: user)),
+          //     );
+          //   },
+          // ),
           MyPageBodyIcon(
             iconData: FontAwesomeIcons.gift,
             title: "이벤트",

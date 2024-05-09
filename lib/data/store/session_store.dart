@@ -47,7 +47,7 @@ class SessionStore extends SessionUser {
     // 비지니스 로직
     if (responseDTO.status == 200) {
       // 회원가입 성공
-      this.user = User.fromJson(responseDTO.response); // 회원 정보 저장
+      this.user = User.fromJson(responseDTO.body); // 회원 정보 저장
       this.isJoin = true;
       Navigator.pushNamed(mContext!, Move.mainHolder);
     } else {
@@ -62,15 +62,15 @@ class SessionStore extends SessionUser {
     var (responseDTO, accessToken) =
         await UserRepository().fetchLogin(loginReqDTO);
 
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       await secureStorage.write(key: "accessToken", value: accessToken);
 
-      this.user = responseDTO.response;
+      this.user = responseDTO.body;
       this.accessToken = accessToken;
       this.isLogin = true;
 
       // 비지니스 로직
-      if (responseDTO.success) {
+      if (responseDTO.status == 200) {
         Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
       } else {
         ScaffoldMessenger.of(mContext!).showSnackBar(

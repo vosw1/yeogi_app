@@ -65,7 +65,7 @@ class MyPageLogin extends StatelessWidget {
             );
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MyPage(users: users, stays: stays, eventMyPageBannerData: eventMyPageBannerDataList,)),
+              MaterialPageRoute(builder: (context) => MyPage(users: users, eventMyPageBannerData: eventMyPageBannerDataList,)),
             );
           },
           child: Text('Go to My Page'),

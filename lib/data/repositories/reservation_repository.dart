@@ -8,21 +8,22 @@ import 'package:yogi_project/ui/pages/my/book/widgets/reservation_list_model.dar
 
 class ReservationRepository {
   // 예약하기
-  Future<ResponseDTO> fetchReservationSave(ReservationSaveReqDTO reqDTO, String accessToken) async {
+  Future<ResponseDTO> fetchReservationSave(
+      ReservationSaveReqDTO reqDTO, String accessToken) async {
     Response response = await dio.post(
         "/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
         options: Options(headers: {"Authorization": "Bearer $accessToken"}),
         data: reqDTO.toJson());
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-    Logger().d(responseDTO.response);
+    Logger().d(responseDTO.body);
     print("HTTP Status Code: ${response.statusCode}");
     print("Response Data: ${response.data}");
-    Logger().d(responseDTO.response.runtimeType);
+    Logger().d(responseDTO.body.runtimeType);
 
-    if (responseDTO.success) {
-      responseDTO.response = Reservation.fromJson(responseDTO.response);
-      Logger().d(responseDTO.response.runtimeType);
+    if (responseDTO.status == 200) {
+      responseDTO.body = Reservation.fromJson(responseDTO.body);
+      Logger().d(responseDTO.body.runtimeType);
     }
     return responseDTO;
   }
@@ -50,13 +51,14 @@ class ReservationRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.success && responseDTO.response != null) {
-      List<dynamic> temp = responseDTO.response as List<dynamic>; // 안전하게 캐스팅
-      List<Reservation> reservations = temp.map((e) => Reservation.fromJson(e)).toList();
-      ReservationListModel reservationListModel = ReservationListModel(reservations: reservations);
-      responseDTO.response = reservationListModel;
+    if (responseDTO.status == 200 && responseDTO.body != null) {
+      List<Reservation> reservations =
+          responseDTO.body.map((item) => Reservation.fromJson(item)).toList();
+      for (var reservation in reservations) {
+        print(reservation.toString());
+      }
     } else {
-      print("Failed to load reservations or no reservations found.");
+      print("예약내역 조회하기 실패");
     }
     return responseDTO;
   }

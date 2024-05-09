@@ -32,7 +32,7 @@ class _MainHolderState extends State<MainHolder> {
           SearchPage(),
           NearFromMePage(),
           ScrapListPage(),
-          MyPage(users: users, stays: stays, eventMyPageBannerData: eventMyPageBannerDataList ),
+          MyPage(users: users, eventMyPageBannerData: eventMyPageBannerDataList ),
         ],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(

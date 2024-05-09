@@ -9,12 +9,9 @@ import 'reservation_detail_page.dart';
 
 class ReservationList extends StatelessWidget {
   final List<Reservation> reservationList;
-  final Payment pays;
-
   const ReservationList({
     Key? key,
     required this.reservationList,
-    required this.pays,
   }) : super(key: key);
 
 

@@ -46,7 +46,7 @@ class UserRepository {
     }
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-    if (responseDTO.success && accessToken != null) {
+    if ((responseDTO.status == 200) && accessToken != null) {
       return (responseDTO, accessToken);
     } else {
       return (responseDTO, "");

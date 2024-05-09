@@ -12,11 +12,11 @@ class RoomRepository{
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.success) {
-      List<dynamic> temp = responseDTO.response["rooms"];
+    if (responseDTO.status == 200) {
+      List<dynamic> temp = responseDTO.body["rooms"];
       List<Room> rooms = temp.map((e) => Room.fromJson(e)).toList();
 
-      responseDTO.response = rooms; // 객실 목록을 responseDTO에 할당
+      responseDTO.body = rooms; // 객실 목록을 responseDTO에 할당
     }
 
     return responseDTO;

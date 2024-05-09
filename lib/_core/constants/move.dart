@@ -191,7 +191,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 내 주변 페이지
     Move.myPage: (context) => MyPage(
           users: users,
-      stays: stays,
           eventMyPageBannerData: eventMyPageBannerDataList,
         ),
     // 마이 페이지
@@ -205,7 +204,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
-    Move.bookList: (context) => ReservationList(reservationList: [], pays: pays),
+    Move.bookList: (context) => ReservationList(reservationList: []),
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

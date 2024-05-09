@@ -12,11 +12,11 @@ class StayRepository{
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.success) {
-      List<dynamic> temp = responseDTO.response["stays"];
+    if (responseDTO.status == 200) {
+      List<dynamic> temp = responseDTO.body["stays"];
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
-      responseDTO.response = stays; // 숙소 목록을 responseDTO에 할당
+      responseDTO.body = stays; // 숙소 목록을 responseDTO에 할당
     }
 
     return responseDTO;
