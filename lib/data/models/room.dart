@@ -24,4 +24,21 @@ class Room {
     required this.discountedPrice,
     required this.notice,
   });
+
+  factory Room.fromJson(Map<String, dynamic> json) {
+    return Room(
+      roomImgTitle: json["roomImgTitle"],
+      roomName: json["roomName"],
+      roomInfo: json["roomInfo"],
+      amenities: json["amenities"],
+      checkInDate: json["checkInDate"],
+      checkOutDate: json["checkOutDate"],
+      checkInTime: json["checkInTime"],
+      checkOutTime: json["checkOutTime"],
+      price: int.parse(json["price"]),
+      discountedPrice: int.parse(json["discountedPrice"]),
+      notice: json["notice"],
+    );
+  }
+//
 }
