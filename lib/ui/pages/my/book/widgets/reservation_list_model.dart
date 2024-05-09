@@ -43,7 +43,7 @@ class ReservationListViewModel extends StateNotifier<ReservationListModel?> {
       );
 
       ResponseDTO responseDTO =
-      await ReservationRepository().fetchReservationList(jwt);
+      (await ReservationRepository().fetchReservationList(jwt)) as ResponseDTO;
 
       if (responseDTO.status == 200) {
         List<dynamic> reservationData = responseDTO.body['reservations'];

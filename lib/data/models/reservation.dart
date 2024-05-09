@@ -1,4 +1,5 @@
 class Reservation {
+  final String userId;
   final String reservationId;
   final String reservationName;
   final String reservationTel;
@@ -9,8 +10,10 @@ class Reservation {
   final String roomName;
   final String roomImgTitle;
   final int price;
+  final DateTime createdAt;
 
   Reservation({
+    required this.userId,
     required this.reservationId,
     required this.reservationName,
     required this.reservationTel,
@@ -21,11 +24,13 @@ class Reservation {
     required this.roomName,
     required this.roomImgTitle,
     required this.price,
+    required this.createdAt,
   });
 
   @override
   String toString() {
     return 'Reservation('
+        'userId: $userId, '
         'reservationId: $reservationId, '
         'reservationName: $reservationName, '
         'reservationTel: $reservationTel, '
@@ -35,25 +40,26 @@ class Reservation {
         'stayAddress: $stayAddress, '
         'roomName: $roomName, '
         'roomImgTitle: $roomImgTitle, '
+        'createdAt: $createdAt, '
         'price: $price)';
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
+      userId: json['userId'].toString(),
       reservationId: json['reservationId'].toString(),
-      reservationName: json['stayName'] ?? "Default Name",
+      reservationName: json['reservationName'] ?? "Default Name",
       // Providing a default value if null
       reservationTel: json['reservationTel'] ?? "Default Tel",
-      checkInDate:
-          DateTime.parse(json['checkInDate'] + ' ' + json['checkInTime']),
-      checkOutDate:
-          DateTime.parse(json['checkOutDate'] + ' ' + json['checkOutTime']),
+      checkInDate: json['checkInDate'] != null ? DateTime.parse(json['checkInDate'] + ' ' + json['checkInTime']) : DateTime.now(),
+      checkOutDate: json['checkOutDate'] != null ? DateTime.parse(json['checkOutDate'] + ' ' + json['checkOutTime']) : DateTime.now(),
       roomId: json['roomId'].toString(),
       stayAddress: json['stayAddress'] ?? "Default Address",
       roomName: json['roomName'] ?? "Default Room Name",
-      roomImgTitle: json['roomName'],
+      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : DateTime.now(),
+      roomImgTitle: json['roomImgTitle'] ?? json['roomName'] ?? "Default Room Image Title",
       // Assuming roomImgTitle is same as roomName if not provided
-      price: json['price'],
+      price: json['price'] ?? 0,
     );
   }
 }
