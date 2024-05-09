@@ -105,6 +105,7 @@ final Stay stayData = Stay(
 );
 
 final Room roomData = Room(
+    roomId:'1',
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
     price: 142000,

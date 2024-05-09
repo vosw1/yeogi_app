@@ -1,51 +1,53 @@
-class Book {
-  final String stayName; // 숙소 이름
-  final String roomImgTitle; // 룸 이미지 제목
-  final String roomName; // 룸 이름
-  final String location; // 위치
-  final DateTime checkInDate; // 체크인 날짜와 시간
-  final DateTime checkOutDate; // 체크아웃 날짜와 시간
-  final int price; // 가격
-  final String bookName; // 예약자 이름
-  final String bookTel; // 예약자 전화번호
+import 'package:flutter/material.dart';
 
-  Book({
-    required this.stayName,
-    required this.roomImgTitle,
-    required this.roomName,
-    required this.location,
+class Reservation {
+  final String reservationName; // 예약자 대표 이름
+  final String reservationTel; // 예약자 대표 연락처
+  final DateTime checkInDate; // 입실 날짜
+  final DateTime checkOutDate; // 퇴실 날짜
+  final String roomId; // 예약한 객실 번호
+  final String location; // 위치
+  final String roomName; // 룸 이름
+  final String roomImgTitle; // 룸 이미지 제목
+  final int price; // 가격
+
+  Reservation({
+    required this.reservationName,
+    required this.reservationTel,
     required this.checkInDate,
     required this.checkOutDate,
+    required this.roomId,
+    required this.location,
+    required this.roomName,
+    required this.roomImgTitle,
     required this.price,
-    required this.bookName,
-    required this.bookTel,
   });
 
-  factory Book.fromJson(Map<String, dynamic> json) {
-    return Book(
-      stayName: json['stayName'],
-      roomImgTitle: json['roomImgTitle'],
-      roomName: json['roomName'],
-      location: json['location'],
+  factory Reservation.fromJson(Map<String, dynamic> json) {
+    return Reservation(
+      reservationName: json['reservationName'],
+      reservationTel: json['reservationTel'],
       checkInDate: DateTime.parse(json['checkInDate']),
       checkOutDate: DateTime.parse(json['checkOutDate']),
+      roomId: json['roomId'],
+      location: json['location'],
+      roomName: json['roomName'],
+      roomImgTitle: json['roomImgTitle'],
       price: json['price'],
-      bookName: json['bookName'],
-      bookTel: json['bookTel'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'stayName': stayName,
-      'roomImgTitle': roomImgTitle,
-      'roomName': roomName,
-      'location': location,
+      'reservationName': reservationName,
+      'reservationTel': reservationTel,
       'checkInDate': checkInDate.toIso8601String(),
       'checkOutDate': checkOutDate.toIso8601String(),
+      'roomId': roomId,
+      'location': location,
+      'roomName': roomName,
+      'roomImgTitle': roomImgTitle,
       'price': price,
-      'bookName': bookName,
-      'bookTel': bookTel,
     };
   }
 }

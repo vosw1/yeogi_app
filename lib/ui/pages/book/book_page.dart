@@ -83,7 +83,8 @@ class _BookPageState extends State<BookPage> {
                           Text('퇴실: ${widget.roomData.checkOutTime}'),
                           SizedBox(height: gap_s),
                           Text(
-                              '결제금액 : ${NumberFormat('#,###').format(widget.roomData.price)} 원'),
+                              '결제금액 : ${NumberFormat('#,###').format(
+                                  widget.roomData.price)} 원'),
                         ],
                       ),
                     ),
@@ -154,7 +155,10 @@ class _BookPageState extends State<BookPage> {
       ),
       persistentFooterButtons: [
         Container(
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
           padding: EdgeInsets.symmetric(horizontal: gap_m),
           child: ElevatedButton(
             onPressed: () {
@@ -207,15 +211,16 @@ class _BookPageState extends State<BookPage> {
   void _handleBooking() {
     if (_formKey.currentState!.validate()) {
       // 사용자 입력값 받기 + 요청 DTO 만들기
-      BookSaveReqDTO reqDTO = BookSaveReqDTO(
+      ReservationSaveReqDTO reqDTO = ReservationSaveReqDTO(
+        roomId: widget.roomData.roomId,
         roomImgTitle: widget.roomData.roomImgTitle,
         roomName: widget.roomData.roomName,
         location: widget.stayData.location,
         checkInDate: DateTime.parse(widget.roomData.checkInDate),
         checkOutDate: DateTime.parse(widget.roomData.checkOutDate),
         price: widget.roomData.price,
-        bookName: _nameController.text.trim(),
-        bookTel: _phoneNumberController.text.trim(),
+        reservationName: _nameController.text.trim(),
+        reservationTel: _phoneNumberController.text.trim(),
       );
 
       // 예약 요청 보내기
@@ -223,10 +228,10 @@ class _BookPageState extends State<BookPage> {
     }
   }
 
-  Future<void> _bookRoom(BookSaveReqDTO reqDTO) async {
+  Future<void> _bookRoom(ReservationSaveReqDTO reqDTO) async {
     try {
       // 예약 요청 보내기
-      final responseDTO = await BookRepository().fetchBookSave(reqDTO, '');
+      final responseDTO = await ReservationRepository().fetchReservationSave(reqDTO, 'your_access_token_here');
 
       // 예약 성공 여부 확인
       if (responseDTO.success) {

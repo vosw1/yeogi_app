@@ -8,16 +8,17 @@ import 'package:yogi_project/data/models/payment.dart';
 import 'book_detail_page.dart';
 
 class BookListPage extends StatelessWidget {
-  final List<Book> bookList;
+  final List<Reservation> reservationList;
   final String appBarText;
   final Payment payData;
 
   const BookListPage({
     Key? key,
-    required this.bookList,
+    required this.reservationList,
     required this.appBarText,
     required this.payData,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,9 @@ class BookListPage extends StatelessWidget {
         title: Text(appBarText),
       ),
       body: ListView.builder(
-        itemCount: bookList.length,
+        itemCount: reservationList.length,
         itemBuilder: (context, index) {
-          final book = bookList[index];
+          final book = reservationList[index];
 
           // Calculate the duration of stay
           final checkIn = book.checkInDate;
@@ -41,7 +42,7 @@ class BookListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookDetailPage(bookData: book, roomData: roomData, payData: payData,),
+                  builder: (context) => ReservationDetailPage(payData: payData, reservationData: reservationData, roomData: roomData,),
                 ),
               );
             },
@@ -63,13 +64,6 @@ class BookListPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          book.stayName,
-                          style: h6(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: gap_xs),
                         Text(
                           book.location,
                           style: subtitle1(),
