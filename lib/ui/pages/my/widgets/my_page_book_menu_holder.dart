@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/reservaion_list.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/reservaion_data_list.dart';
 
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
@@ -25,7 +27,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ReservationList(domesticbookList: []), // 수정된 생성자에 전체 목록 전달
+                builder: (context) => ReservationList(reservationList: [], pays: pays,), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },

@@ -11,8 +11,8 @@ import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_page.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/reservaion_list.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
@@ -205,7 +205,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
-    Move.bookList: (context) => ReservationList(domesticbookList: []),
+    Move.bookList: (context) => ReservationList(reservationList: [], pays: pays),
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

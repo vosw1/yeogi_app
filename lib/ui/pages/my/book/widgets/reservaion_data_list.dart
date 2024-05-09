@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_list_page.dart';
 
-class ReservationList extends StatelessWidget {
+class ReservationDataList extends StatelessWidget {
   final List<Reservation> domesticbookList;
 
-  const ReservationList({Key? key, required this.domesticbookList})
+  const ReservationDataList({Key? key, required this.domesticbookList})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Reservation> domesticbookList = [
+    List<Reservation> reservationList = [
       Reservation(
         id:'1',
         roomId:'1',
@@ -37,6 +36,6 @@ class ReservationList extends StatelessWidget {
         reservationTel: '010-1111-1111',
       ),
     ];
-    return ReservationListPage(reservationList: domesticbookList, appBarText: '예약내역', pays: pays);
+    return ReservationListPage();
   }
 }

@@ -1,6 +1,4 @@
 // 결제 기본 틀
-import 'dart:ffi';
-
 class Payment {
   final String way; // 결제 방법
   final DateTime payAt; // 결제 일자
