@@ -66,7 +66,7 @@ class SearchResultItem extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => StayDetailPage(stayData: stayData, roomData: roomData),
+                        builder: (context) => StayDetailPage(stays: stays, rooms: rooms),
                       ),
                     );
                   },

@@ -44,7 +44,7 @@ class ReservationListPage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => ReservationDetailPage(
                     reservationData: book, // reservationData 매개변수에 예약 데이터 전달
-                    roomData: roomData, // roomData 매개변수에 객실 데이터 전달
+                    rooms: rooms, // roomData 매개변수에 객실 데이터 전달
                     pays : pays, // payData 매개변수에 결제 데이터 전달
                   ),
                 ),

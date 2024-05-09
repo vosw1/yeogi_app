@@ -7,9 +7,9 @@ import 'package:yogi_project/ui/pages/book/reservation_detail_page.dart';
 import 'package:yogi_project/ui/pages/book/reservation_page.dart';
 
 class RoomDetailPage extends StatefulWidget {
-  final Room roomData;
+  final Room rooms;
 
-  const RoomDetailPage({required this.roomData});
+  const RoomDetailPage({required this.rooms});
 
   @override
   _RoomDetailPageState createState() => _RoomDetailPageState();
@@ -32,7 +32,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.roomData.roomName}'),
+        title: Text('${widget.rooms.roomName}'),
       ),
       body: Column(
         children: [
@@ -53,7 +53,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(gap_s),
                           child: Image.asset(
-                            'assets/images/${widget.roomData.roomImgTitle}',
+                            'assets/images/${widget.rooms.roomImgTitle}',
                             width: double.infinity,
                             height: 200,
                             fit: BoxFit.cover,
@@ -101,15 +101,15 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('기본정보\n\n${widget.roomData.roomInfo}'),
+                        Text('기본정보\n\n${widget.rooms.roomInfo}'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('편의시설\n\n${widget.roomData.amenities}'),
+                        Text('편의시설\n\n${widget.rooms.amenities}'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('공지\n\n${widget.roomData.notice}'),
+                        Text('공지\n\n${widget.rooms.notice}'),
                       ],
                     ),
                   ),
@@ -127,7 +127,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                     Navigator.push(
                       context,
 
-                      MaterialPageRoute(builder: (context) => ReservationPage(roomData: widget.roomData, stayData: stayData)),
+                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms, stays: stays)),
                     );
                   },
                   style: ElevatedButton.styleFrom(

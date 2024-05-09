@@ -115,7 +115,7 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        SearchResultList(stayData: stayData, searchResultList: [],),
+        SearchResultList(stays: stays, searchResultList: [],),
       ],
     );
   }

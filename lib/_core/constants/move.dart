@@ -51,12 +51,12 @@ class Move {
   static String homeAndBillaStayList = "/homeAndBilla";
   static String campingStayList = "/camping";
   static String guestHouseStayList = "/guestHouse";
-  static String reservationPage = "/reservation/{roomId}";
+  static String reservationPage = "/api/my-reservations";
   static String paymetPage = "/pay";
   static String eventPage = "/event";
 }
 
-final User userData = User(
+final User users = User(
   id: 1,
   username: '홍길동',
   email: '123@nate.com',
@@ -66,7 +66,7 @@ final User userData = User(
 );
 
 // Sample data for stay and room
-final Stay stayData = Stay(
+final Stay stays = Stay(
   stayImgTitle: "overseas/overseas1.png",
   stayName: "두짓타니 괌 리조트",
   stayInfo:
@@ -104,7 +104,7 @@ final Stay stayData = Stay(
   ],
 );
 
-final Room roomData = Room(
+final Room rooms = Room(
     roomId:'1',
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
@@ -191,18 +191,18 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.scrapPage: (context) => ScrapListPage(),
     // 내 주변 페이지
     Move.myPage: (context) => MyPage(
-          userData: userData,
-          stayData: stayData,
+          users: users,
+      stays: stays,
           eventMyPageBannerData: eventMyPageBannerDataList,
         ),
     // 마이 페이지
     Move.stayDetailPage: (context) =>
-        StayDetailPage(stayData: stayData, roomData: roomData),
+        StayDetailPage(stays: stays, rooms: rooms),
     // 기업(숙서) 페이지
-    Move.roomDetailPage: (context) => RoomDetailPage(roomData: roomData),
+    Move.roomDetailPage: (context) => RoomDetailPage(rooms: rooms),
     // 룸 상세보기 페이지
 
-    Move.reservationPage: (context) => ReservationPage(roomData: roomData, stayData: stayData),
+    Move.reservationPage: (context) => ReservationPage(rooms: rooms, stays: stays),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지

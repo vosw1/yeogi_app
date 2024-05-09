@@ -8,10 +8,10 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
 
 class StayDetailPage extends StatefulWidget {
-  final Stay stayData;
-  final Room roomData;
+  final Stay stays;
+  final Room rooms;
 
-  StayDetailPage({required this.stayData, required this.roomData});
+  StayDetailPage({required this.stays, required this.rooms});
 
   @override
   _StayDetailPageState createState() => _StayDetailPageState();
@@ -26,7 +26,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '${widget.stayData.stayName}',
+          '${widget.stays.stayName}',
           style: TextStyle(fontSize: 20),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -62,14 +62,14 @@ class _StayDetailPageState extends State<StayDetailPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(gap_s),
                   child: Image.asset(
-                    'assets/images/${widget.stayData.stayImgTitle}',
+                    'assets/images/${widget.stays.stayImgTitle}',
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               SizedBox(height: gap_m),
               // Review section
-              ReviewSection(reviews: widget.stayData.reviews ?? []),
+              ReviewSection(reviews: widget.stays.reviews ?? []),
               SizedBox(height: gap_xx),
               // 편의 시설 섹션
               AmenitySection(),
@@ -80,13 +80,13 @@ class _StayDetailPageState extends State<StayDetailPage> {
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: gap_m),
-              RoomInfoWidget(roomData: widget.roomData),
+              RoomInfoWidget(roomData: widget.rooms),
               SizedBox(height: gap_s),
-              RoomInfoWidget(roomData: widget.roomData),
+              RoomInfoWidget(roomData: widget.rooms),
               SizedBox(height: gap_s),
-              RoomInfoWidget(roomData: widget.roomData),
+              RoomInfoWidget(roomData: widget.rooms),
               SizedBox(height: gap_s),
-              RoomInfoWidget(roomData: widget.roomData),
+              RoomInfoWidget(roomData: widget.rooms),
               SizedBox(height: gap_s),
               Divider(),
               SizedBox(height: gap_s),
@@ -97,7 +97,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-                widget.stayData.stayInfo,
+                widget.stays.stayInfo,
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: gap_xx),
@@ -109,7 +109,7 @@ class _StayDetailPageState extends State<StayDetailPage> {
               ),
               SizedBox(height: gap_m),
               Text(
-                widget.stayData.notice,
+                widget.stays.notice,
                 style: TextStyle(fontSize: 16),
               ),
               Divider(),

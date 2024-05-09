@@ -4,9 +4,9 @@ import 'package:yogi_project/ui/pages/book/widgets/reservaion_list.dart';
 
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
-  final Stay stayData;
+  final Stay stays;
 
-  MyPageBookMenuHolder({required this.stayData});
+  MyPageBookMenuHolder({required this.stays});
 
   @override
   Widget build(BuildContext context) {

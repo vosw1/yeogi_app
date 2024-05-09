@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
+import 'package:yogi_project/data/dtos/reservaion_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/Reservation.dart';
 import 'package:yogi_project/ui/pages/book/widgets/reservation_list_model.dart';
@@ -36,7 +36,7 @@ class ReservationRepository {
 
   Future<ResponseDTO> fetchReservationList(String accessToken) async {
     final response = await dio.get(
-      "/api/reservation",
+      "/api/my-reservations",
       options: Options(headers: {"Authorization": "${accessToken}"}),
     );
 
@@ -46,10 +46,9 @@ class ReservationRepository {
       List<dynamic> temp = responseDTO.response["reservations"];
       List<Reservation> reservations = temp.map((e) => Reservation.fromJson(e)).toList();
 
-      ReservationListModel postListModel = ReservationListModel(reservations: reservations);
-      responseDTO.response = postListModel;
+      ReservationListModel reservaionListModel = ReservationListModel(reservations: reservations);
+      responseDTO.response = reservaionListModel;
     }
-
     return responseDTO;
   }
 }

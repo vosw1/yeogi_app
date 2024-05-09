@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -78,7 +79,7 @@ class RoomInfoWidget extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RoomDetailPage(roomData: roomData),
+                      builder: (context) => RoomDetailPage(rooms: rooms),
                     ),
                   );
                 },

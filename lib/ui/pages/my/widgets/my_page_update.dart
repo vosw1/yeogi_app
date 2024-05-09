@@ -93,7 +93,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MyPage(
-                            userData: User(
+                            users: User(
                               username: _nameController.text,
                               id: 1,
                               email: '',
@@ -101,7 +101,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                               createdAt: null,
                               updatedAt: null,
                             ),
-                            stayData: Stay(
+                            stays: Stay(
                               stayName: '★당일특가★ 하이원리조트 마운틴콘도',
                               stayImgTitle: 'hotel/hotel1.png',
                               location: '강원 정선군 고한읍 고한리 438',

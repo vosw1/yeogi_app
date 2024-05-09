@@ -1,33 +1,17 @@
-import 'package:yogi_project/data/dtos/book_request.dart';
-import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
-import 'package:yogi_project/data/repositories/user_repository.dart';
 
 void main() async {
-  await fetchBookSaveTest();
+  await fetchReservationList_test();
 }
 
-Future<void> fetchBookSaveTest() async {
-  // given
-  ReservationSaveReqDTO requestDTO = ReservationSaveReqDTO(
-    roomId: '1',
-    location: '부산광역시 진구',
-    roomName: 'Deluxe',
-    roomImgTitle: 'room1.png',
-    price: 142000,
-    checkInDate: DateTime.parse("2024-06-12"), // 문자열을 DateTime 객체로 변환
-    checkOutDate: DateTime.parse("2024-06-14"), // 문자열을 DateTime 객체로 변환
-    reservationName: "설동훈",
-    reservationTel: "11111111111",
-  );
-  // accessToken 추가
-  String accessToken =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2NzQ5ODk0LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.BehDpuP-M26tLrPE7m_s_2lE_7WExfSWQKD_c2wMxtl7yOTAfj1Fwe7puRznj5AcwgO50oq4VNfYfYK5oN8Jaw';
+Future<void> fetchReservationList_test() async {
+  final responseDTO = await ReservationRepository().fetchReservationList(
+      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2NzU1NDY5LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.cbxwKD7KIGymVHvF7iGLy_vBRqvdSG1lZkl8cyBSf8Qb16vCPrLYMjE4w8nvPPZgqIiIezN3hcGBjXJDbWdeRQ");
 
-  // Send join request with accessToken
-  final response = await ReservationRepository()
-      .fetchReservationSave(requestDTO, accessToken);
-
-  // Log response
-  print("BookSave Response: $response");
+  if (responseDTO.success) {
+    print("예약 목록 가져오기 성공:");
+    print(responseDTO.response);
+  } else {
+    print("예약 목록 가져오기 실패: ${responseDTO.errorMessage}");
+  }
 }

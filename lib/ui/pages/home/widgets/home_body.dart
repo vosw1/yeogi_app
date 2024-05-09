@@ -6,12 +6,12 @@ import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 class HomeBody extends StatelessWidget {
   final String title;
-  final List<Stay> stayData;
+  final List<Stay> stays;
 
   const HomeBody({
     Key? key,
     required this.title,
-    required this.stayData,
+    required this.stays,
   }) : super(key: key);
 
   @override
@@ -34,13 +34,13 @@ class HomeBody extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: List.generate(
-              stayData.length,
+              stays.length,
                   (index) => GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => StayDetailPage(stayData: stayData[index], roomData: roomData,),
+                      builder: (context) => StayDetailPage(stays: stays[index], rooms: rooms,),
                     ),
                   );
                 },
@@ -55,7 +55,7 @@ class HomeBody extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => StayDetailPage(stayData: stayData[index], roomData: roomData,),
+                              builder: (context) => StayDetailPage(stays: stays[index], rooms: rooms,),
                             ),
                           );
                         },
@@ -66,7 +66,7 @@ class HomeBody extends StatelessWidget {
                             borderRadius: BorderRadius.circular(gap_s),
                             image: DecorationImage(
                               image: AssetImage(
-                                  'assets/images/${stayData[index].stayImgTitle}'),
+                                  'assets/images/${stays[index].stayImgTitle}'),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -81,7 +81,7 @@ class HomeBody extends StatelessWidget {
                           color: Colors.white,
                         ),
                         child: Text(
-                          stayData[index].stayName,
+                          stays[index].stayName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),

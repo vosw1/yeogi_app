@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 import 'package:yogi_project/_core/constants/size.dart';
@@ -23,7 +24,7 @@ abstract class RoomListPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RoomDetailPage(roomData: room),
+                    builder: (context) => RoomDetailPage(rooms: rooms),
                   ),
                 );
               },

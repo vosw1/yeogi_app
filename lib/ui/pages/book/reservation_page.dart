@@ -7,14 +7,14 @@ import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/book/widgets/reservaion_text_form_field.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
-import 'package:yogi_project/data/dtos/book_request.dart';
+import 'package:yogi_project/data/dtos/reservaion_request.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
 class ReservationPage extends StatefulWidget {
-  final Room roomData;
-  final Stay stayData;
+  final Room rooms;
+  final Stay stays;
 
-  ReservationPage({required this.roomData, required this.stayData});
+  ReservationPage({required this.rooms, required this.stays});
 
   @override
   _BookPageState createState() => _BookPageState();
@@ -58,7 +58,7 @@ class _BookPageState extends State<ReservationPage> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                              "assets/images/${widget.roomData.roomImgTitle}"),
+                              "assets/images/${widget.rooms.roomImgTitle}"),
                         ),
                       ),
                     ),
@@ -71,20 +71,19 @@ class _BookPageState extends State<ReservationPage> {
                           Container(
                             constraints: BoxConstraints(minHeight: 40),
                             child: Text(
-                              '${widget.roomData.roomName}',
+                              '${widget.rooms.roomName}',
                               style: h5(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Text('체크인: ${widget.roomData.checkInDate}'),
-                          Text('입실: ${widget.roomData.checkInTime}'),
-                          Text('체크아웃: ${widget.roomData.checkOutDate}'),
-                          Text('퇴실: ${widget.roomData.checkOutTime}'),
+                          Text('체크인: ${widget.rooms.checkInDate}'),
+                          Text('입실: ${widget.rooms.checkInTime}'),
+                          Text('체크아웃: ${widget.rooms.checkOutDate}'),
+                          Text('퇴실: ${widget.rooms.checkOutTime}'),
                           SizedBox(height: gap_s),
                           Text(
-                              '결제금액 : ${NumberFormat('#,###').format(
-                                  widget.roomData.price)} 원'),
+                              '결제금액 : ${NumberFormat('#,###').format(widget.rooms.price)} 원'),
                         ],
                       ),
                     ),
@@ -155,10 +154,7 @@ class _BookPageState extends State<ReservationPage> {
       ),
       persistentFooterButtons: [
         Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(horizontal: gap_m),
           child: ElevatedButton(
             onPressed: () {
@@ -212,13 +208,13 @@ class _BookPageState extends State<ReservationPage> {
     if (_formKey.currentState!.validate()) {
       // 사용자 입력값 받기 + 요청 DTO 만들기
       ReservationSaveReqDTO reqDTO = ReservationSaveReqDTO(
-        roomId: widget.roomData.roomId,
-        roomImgTitle: widget.roomData.roomImgTitle,
-        roomName: widget.roomData.roomName,
-        location: widget.stayData.location,
-        checkInDate: DateTime.parse(widget.roomData.checkInDate),
-        checkOutDate: DateTime.parse(widget.roomData.checkOutDate),
-        price: widget.roomData.price,
+        roomId: widget.rooms.roomId,
+        roomImgTitle: widget.rooms.roomImgTitle,
+        roomName: widget.rooms.roomName,
+        location: widget.stays.location,
+        checkInDate: DateTime.parse(widget.rooms.checkInDate),
+        checkOutDate: DateTime.parse(widget.rooms.checkOutDate),
+        price: widget.rooms.price,
         reservationName: _nameController.text.trim(),
         reservationTel: _phoneNumberController.text.trim(),
       );
@@ -229,39 +225,19 @@ class _BookPageState extends State<ReservationPage> {
   }
 
   Future<void> _bookRoom(ReservationSaveReqDTO reqDTO) async {
-    try {
-      // 예약 요청 보내기
-      final responseDTO = await ReservationRepository().fetchReservationSave(reqDTO, 'your_access_token_here');
+    // 예약 요청 보내기
+    final responseDTO = await ReservationRepository()
+        .fetchReservationSave(reqDTO, 'your_access_token_here');
 
-      // 예약 성공 여부 확인
-      if (responseDTO.success) {
-        // 예약 성공 시 처리
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PaymentPage()),
-        );
-      } else {
-        // 예약 실패 시 처리
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Error'),
-              content: Text('예약을 처리하는 중 오류가 발생했습니다.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('확인'),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (e) {
-      // 네트워크 오류 등 처리 중 예외 발생 시 처리
+    // 예약 성공 여부 확인
+    if (responseDTO.success) {
+      // 예약 성공 시 처리
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PaymentPage()),
+      );
+    } else {
+      // 예약 실패 시 처리
       showDialog(
         context: context,
         builder: (BuildContext context) {

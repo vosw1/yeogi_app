@@ -9,10 +9,10 @@ import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
 
 class ReservationDetailPage extends StatefulWidget {
   final Reservation reservationData;
-  final Room roomData;
+  final Room rooms;
   final Payment pays;
 
-  const ReservationDetailPage({Key? key, required this.reservationData, required this.roomData, required this.pays});
+  const ReservationDetailPage({Key? key, required this.reservationData, required this.rooms, required this.pays});
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();

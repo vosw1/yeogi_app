@@ -486,15 +486,15 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: gap_m),
             HomeBody(
               title: "특가 숙소",
-              stayData: saleStayList, // 특가 숙소 리스트 전달
+              stays: saleStayList, // 특가 숙소 리스트 전달
             ),
             HomeBody(
               title: "국내 숙소",
-              stayData: dometicesStayItemList, // 국내 숙소 리스트 전달
+              stays: dometicesStayItemList, // 국내 숙소 리스트 전달
             ),
             HomeBody(
               title: "해외 숙소",
-              stayData: overseasStayItemList, // 해외 숙소 리스트 전달
+              stays: overseasStayItemList, // 해외 숙소 리스트 전달
             ),
           ],
         ),

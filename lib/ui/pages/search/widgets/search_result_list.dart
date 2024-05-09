@@ -5,7 +5,7 @@ import 'package:yogi_project/ui/pages/search/widgets/search_result_item.dart';
 class SearchResultList extends StatelessWidget {
   final List<Stay> searchResultList;
 
-  const SearchResultList({required this.searchResultList, required Stay stayData});
+  const SearchResultList({required this.searchResultList, required Stay stays});
 
   @override
   Widget build(BuildContext context) {
