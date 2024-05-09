@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/data/models/Reservation.dart';
+import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/book/reservation_list_page.dart';
 
 class OverseasBookList extends StatelessWidget {
@@ -17,7 +17,7 @@ class OverseasBookList extends StatelessWidget {
         roomId:'1',
         roomImgTitle: 'overseas/overseas1.png',
         roomName: 'Mountain View King',
-        location: '1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913',
+        stayAddress: '1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913',
         checkInDate: DateTime(2024, 5, 1, 18, 0),
         // 체크인 날짜와 시간
         checkOutDate: DateTime(2024, 5, 6, 12, 0),
@@ -31,7 +31,7 @@ class OverseasBookList extends StatelessWidget {
         roomId:'2',
         roomImgTitle: 'overseas/overseas1.png',
         roomName: 'Mountain View King',
-        location: '1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913',
+        stayAddress: '1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913',
         checkInDate: DateTime(2024, 5, 1, 18, 0),
         // 체크인 날짜와 시간
         checkOutDate: DateTime(2024, 5, 6, 12, 0),

@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/Reservation.dart';
+import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'reservation_detail_page.dart';
 
@@ -43,7 +43,7 @@ class ReservationListPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ReservationDetailPage(
-                    reservationData: book, // reservationData 매개변수에 예약 데이터 전달
+                    reservations: book, // reservationData 매개변수에 예약 데이터 전달
                     rooms: rooms, // roomData 매개변수에 객실 데이터 전달
                     pays : pays, // payData 매개변수에 결제 데이터 전달
                   ),
@@ -69,7 +69,7 @@ class ReservationListPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          book.location,
+                          book.stayAddress,
                           style: subtitle1(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

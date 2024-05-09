@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/data/models/Reservation.dart';
+import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/book/reservation_list_page.dart';
 
 class ReservationList extends StatelessWidget {
@@ -17,7 +17,7 @@ class ReservationList extends StatelessWidget {
         roomId:'1',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
-        location: '강원 강릉시 강문동 258-4',
+        stayAddress: '강원 강릉시 강문동 258-4',
         checkInDate: DateTime(2024, 5, 1, 18, 0), // 체크인 날짜와 시간
         checkOutDate: DateTime(2024, 5, 6, 12, 0), // 체크아웃 날짜와 시간
         price: 300000,
@@ -29,7 +29,7 @@ class ReservationList extends StatelessWidget {
         roomId:'2',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
-        location: '강원 강릉시 강문동 258-4',
+        stayAddress: '강원 강릉시 강문동 258-4',
         checkInDate: DateTime(2024, 5, 1, 18, 0), // 체크인 날짜와 시간
         checkOutDate: DateTime(2024, 5, 6, 12, 0), // 체크아웃 날짜와 시간
         price: 300000,

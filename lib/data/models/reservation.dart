@@ -7,7 +7,7 @@ class Reservation {
   final DateTime checkInDate; // 입실 날짜
   final DateTime checkOutDate; // 퇴실 날짜
   final String roomId; // 예약한 객실 번호
-  final String location; // 위치
+  final String stayAddress; // 위치
   final String roomName; // 룸 이름
   final String roomImgTitle; // 룸 이미지 제목
   final int price; // 가격
@@ -19,7 +19,7 @@ class Reservation {
     required this.checkInDate,
     required this.checkOutDate,
     required this.roomId,
-    required this.location,
+    required this.stayAddress,
     required this.roomName,
     required this.roomImgTitle,
     required this.price,
@@ -33,7 +33,7 @@ class Reservation {
       checkInDate: DateTime.parse(json['checkInDate']),
       checkOutDate: DateTime.parse(json['checkOutDate']),
       roomId: json['roomId'],
-      location: json['location'],
+      stayAddress: json['stayAddress'],
       roomName: json['roomName'],
       roomImgTitle: json['roomImgTitle'],
       price: json['price'],
@@ -48,7 +48,7 @@ class Reservation {
       'checkInDate': checkInDate.toIso8601String(),
       'checkOutDate': checkOutDate.toIso8601String(),
       'roomId': roomId,
-      'location': location,
+      'stayAddress': stayAddress,
       'roomName': roomName,
       'roomImgTitle': roomImgTitle,
       'price': price,

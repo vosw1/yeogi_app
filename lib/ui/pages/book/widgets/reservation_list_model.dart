@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
-import 'package:yogi_project/data/models/Reservation.dart';
+import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/main.dart';
