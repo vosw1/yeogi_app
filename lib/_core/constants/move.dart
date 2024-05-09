@@ -10,8 +10,8 @@ import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
-import 'package:yogi_project/ui/pages/book/book_page.dart';
-import 'package:yogi_project/ui/pages/book/widgets/book_list.dart';
+import 'package:yogi_project/ui/pages/book/reservation_page.dart';
+import 'package:yogi_project/ui/pages/book/widgets/reservaion_list.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
@@ -51,7 +51,7 @@ class Move {
   static String homeAndBillaStayList = "/homeAndBilla";
   static String campingStayList = "/camping";
   static String guestHouseStayList = "/guestHouse";
-  static String bookPage = "/book/{roomId}";
+  static String reservationPage = "/reservation/{roomId}";
   static String paymetPage = "/pay";
   static String eventPage = "/event";
 }
@@ -202,11 +202,11 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.roomDetailPage: (context) => RoomDetailPage(roomData: roomData),
     // 룸 상세보기 페이지
 
-    Move.bookPage: (context) => BookPage(roomData: roomData, stayData: stayData),
+    Move.reservationPage: (context) => ReservationPage(roomData: roomData, stayData: stayData),
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
-    Move.bookList: (context) => BookList(domesticbookList: []),
+    Move.bookList: (context) => ReservationList(domesticbookList: []),
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

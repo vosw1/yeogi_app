@@ -5,14 +5,14 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/book.dart';
 import 'package:yogi_project/data/models/payment.dart';
-import 'book_detail_page.dart';
+import 'reservation_detail_page.dart';
 
-class BookListPage extends StatelessWidget {
+class ReservationListPage extends StatelessWidget {
   final List<Reservation> reservationList;
   final String appBarText;
   final Payment payData;
 
-  const BookListPage({
+  const ReservationListPage({
     Key? key,
     required this.reservationList,
     required this.appBarText,
@@ -42,7 +42,7 @@ class BookListPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ReservationDetailPage(payData: payData, reservationData: reservationData, roomData: roomData,),
+                  builder: (context) => ReservationDetailPage(payData: payData, reservationData: reservationData, roomData: roomData),
                 ),
               );
             },

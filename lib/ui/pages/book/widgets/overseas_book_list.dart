@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/book.dart';
-import 'package:yogi_project/ui/pages/book/book_list_page.dart';
+import 'package:yogi_project/ui/pages/book/reservation_list_page.dart';
 
 class OverseasBookList extends StatelessWidget {
   final List<Reservation> overseasbookList;
@@ -39,6 +39,6 @@ class OverseasBookList extends StatelessWidget {
         reservationTel: '010-1111-1111',
       ),
     ];
-    return BookListPage(reservationList: overseasbookList, appBarText: '해외 예약내역', payData: payData,);
+    return ReservationListPage(reservationList: overseasbookList, appBarText: '해외 예약내역', payData: payData,);
   }
 }

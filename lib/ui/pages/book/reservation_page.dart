@@ -5,22 +5,22 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/book/widgets/book_text_form_field.dart';
+import 'package:yogi_project/ui/pages/book/widgets/reservaion_text_form_field.dart';
 import 'package:yogi_project/ui/pages/pay/payment_page.dart';
 import 'package:yogi_project/data/dtos/book_request.dart';
 import 'package:yogi_project/data/repositories/book_repository.dart';
 
-class BookPage extends StatefulWidget {
+class ReservationPage extends StatefulWidget {
   final Room roomData;
   final Stay stayData;
 
-  BookPage({required this.roomData, required this.stayData});
+  ReservationPage({required this.roomData, required this.stayData});
 
   @override
   _BookPageState createState() => _BookPageState();
 }
 
-class _BookPageState extends State<BookPage> {
+class _BookPageState extends State<ReservationPage> {
   bool _isChecked = false;
   List<bool> _subCheckboxValues = [false, false, false, false];
   TextEditingController _nameController = TextEditingController();
@@ -113,14 +113,14 @@ class _BookPageState extends State<BookPage> {
                   style: h5(),
                 ),
                 SizedBox(height: gap_s),
-                BookTextFormField(
+                ReservaionTextFormField(
                   controller: _nameController,
                   labelText: '이름',
                   hintText: "이름을 입력하세요",
                   validator: validateName,
                 ),
                 SizedBox(height: gap_s),
-                BookTextFormField(
+                ReservaionTextFormField(
                   controller: _phoneNumberController,
                   labelText: '전화번호',
                   hintText: '000-0000-0000',

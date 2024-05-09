@@ -8,7 +8,7 @@ import 'package:yogi_project/data/models/book.dart';
 class ReservationRepository {
   Future<ResponseDTO> fetchReservationSave(ReservationSaveReqDTO reqDTO, String accessToken) async {
     Response response = await dio.post(
-        "/api/book/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
+        "/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
         options: Options(headers: {"Authorization": "Bearer $accessToken"}),
         data: reqDTO.toJson());
 
