@@ -13,7 +13,7 @@ class ReservationDataList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Reservation> reservationList = [
       Reservation(
-        id:'1',
+        reservationId:'1',
         roomId:'1',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
@@ -25,7 +25,7 @@ class ReservationDataList extends StatelessWidget {
         reservationTel: '010-1111-1111',
       ),
       Reservation(
-        id:'3',
+        reservationId:'3',
         roomId:'2',
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
