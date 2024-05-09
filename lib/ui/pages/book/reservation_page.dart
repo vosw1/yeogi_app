@@ -106,7 +106,7 @@ class _ReservationPageState extends State<ReservationPage> {
                 "예약자 정보",
                 style: h5(),
               ),
-              SizedBox(height: gap_s),
+              SizedBox(height: gap_m),
               ReservationTextFormField(
                 controller: _nameController,
                 labelText: '이름',
@@ -121,7 +121,7 @@ class _ReservationPageState extends State<ReservationPage> {
                 keyboardType: TextInputType.phone,
                 validator: validatePhoneNumber,
               ),
-              SizedBox(height: gap_s),
+              SizedBox(height: gap_xs),
               Divider(),
               SizedBox(height: gap_s),
               _buildExpandableCheckbox(
