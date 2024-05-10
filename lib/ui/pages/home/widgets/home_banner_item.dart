@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
-import 'package:yogi_project/data/models/home_banner.dart';
 
 class HomeBannerItem extends StatelessWidget {
   final EventTitleBannerData bannerData; // EventTitleBannerData 타입으로 변경

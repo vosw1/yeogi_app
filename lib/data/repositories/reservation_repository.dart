@@ -44,7 +44,7 @@ class ReservationRepository {
   Future<ResponseDTO> fetchReservationList(String accessToken) async {
     final response = await dio.get(
       "/api/my-reservations",
-      options: Options(headers: {"Authorization": "${accessToken}"}),
+      options: Options(headers: {"Authorization": "$accessToken"}),
     );
     print("HTTP Status Code: ${response.statusCode}");
     print("Response Data: ${response.data}");
@@ -52,8 +52,10 @@ class ReservationRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200 && responseDTO.body != null) {
-      List<Reservation> reservations =
-          responseDTO.body.map((item) => Reservation.fromJson(item)).toList();
+      List<Reservation> reservations = (responseDTO.body as List<dynamic>)
+          .map((item) => Reservation.fromJson(item as Map<String, dynamic>))
+          .toList();
+      responseDTO.body = reservations;  // Update the body to be the list of reservations
       for (var reservation in reservations) {
         print(reservation.toString());
       }
@@ -62,4 +64,5 @@ class ReservationRepository {
     }
     return responseDTO;
   }
+
 }

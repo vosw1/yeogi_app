@@ -1,57 +1,53 @@
-import 'package:flutter/material.dart';
-
 class Reservation {
-  final String id;
-  final String reservationName; // 예약자 대표 이름
-  final String reservationTel; // 예약자 대표 연락처
-  final DateTime checkInDate; // 입실 날짜
-  final DateTime checkOutDate; // 퇴실 날짜
-  final String roomId; // 예약한 객실 번호
-  final String stayAddress; // 위치
-  final String roomName; // 룸 이름
-  final String roomImgTitle; // 룸 이미지 제목
-  final int price; // 가격
+  final int reservationId;
+  final int userId;
+  final String stayName;
+  final String stayAddress;
+  final double price;
+  final int roomId;
+  final String roomName;
+  final int date;  // 변경: DateTime에서 int로
+  final DateTime checkInDate;
+  final DateTime checkOutDate;
+  final String roomImgTitle;
+  final String reservationName;
+  final String reservationTel;
 
   Reservation({
-    required this.id,
-    required this.reservationName,
-    required this.reservationTel,
+    required this.reservationId,
+    required this.userId,
+    required this.stayName,
+    required this.stayAddress,
+    required this.price,
+    required this.roomId,
+    required this.roomName,
+    required this.date,  // 변경: 타입 수정
     required this.checkInDate,
     required this.checkOutDate,
-    required this.roomId,
-    required this.stayAddress,
-    required this.roomName,
-    required this.roomImgTitle,
-    required this.price,
+    this.roomImgTitle = '',
+    this.reservationName = '',
+    this.reservationTel = '',
   });
+  @override
+  String toString() {
+    return 'Reservation(reservationId: $reservationId, userId: $userId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, roomName: $roomName, date: $date, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel)';
+  }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
-      id: json['id'],
-      reservationName: json['reservationName'],
-      reservationTel: json['reservationTel'],
+      reservationId: json['reservationId'],
+      userId: json['userId'],
+      stayName: json['stayName'] ?? 'Unknown',
+      stayAddress: json['stayAddress'] ?? 'Unknown',
+      price: json['price']?.toDouble() ?? 0.0,
+      roomId: json['roomId'],
+      roomName: json['roomName'] ?? 'Unknown',
+      date: json['date'],  // 변경: DateTime.parse 제거
       checkInDate: DateTime.parse(json['checkInDate']),
       checkOutDate: DateTime.parse(json['checkOutDate']),
-      roomId: json['roomId'],
-      stayAddress: json['stayAddress'],
-      roomName: json['roomName'],
-      roomImgTitle: json['roomImgTitle'],
-      price: json['price'],
+      roomImgTitle: json['roomImgTitle'] ?? '',
+      reservationName: json['reservationName'] ?? '',
+      reservationTel: json['reservationTel'] ?? '',
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'reservationName': reservationName,
-      'reservationTel': reservationTel,
-      'checkInDate': checkInDate.toIso8601String(),
-      'checkOutDate': checkOutDate.toIso8601String(),
-      'roomId': roomId,
-      'stayAddress': stayAddress,
-      'roomName': roomName,
-      'roomImgTitle': roomImgTitle,
-      'price': price,
-    };
   }
 }

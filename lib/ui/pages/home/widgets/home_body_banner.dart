@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
-import 'package:yogi_project/data/models/home_banner.dart';
 import 'home_banner_item.dart';
 
 class HomeBodyBanner extends StatefulWidget {
