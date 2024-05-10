@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
-
+import 'package:yogi_project/_core/constants/move.dart';
+import 'package:yogi_project/ui/pages/my/book/my_reservation_page.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
 
@@ -21,8 +21,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ReservationList(
-                      reservationList: []), // 수정된 생성자에 전체 목록 전달
+                    MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners,), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },

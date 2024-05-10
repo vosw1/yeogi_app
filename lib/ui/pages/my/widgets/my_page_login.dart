@@ -17,7 +17,7 @@ class MyPageLogin extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             final User userData = User(
-              username: '홍길동',
+              name: '홍길동',
               id: 1,
               email: '',
               password: '',

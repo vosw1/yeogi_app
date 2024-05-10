@@ -4,10 +4,10 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_list_page.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_list_page.dart';
 
 import 'home_header_appbar_item.dart';
@@ -56,7 +56,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OverseasStayList()),
+                  MaterialPageRoute(builder: (context) => OverseaStayListPage()),
                  );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
@@ -66,7 +66,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HotelStayList()),
+                  MaterialPageRoute(builder: (context) => HotelStayListPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.hotel, text: '호텔'),
@@ -91,7 +91,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PensionStayList()),
+                  MaterialPageRoute(builder: (context) => PensionStayListPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.umbrellaBeach, text: '펜션'),

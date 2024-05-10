@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
-class SaleStayListPage extends ConsumerWidget {
+class HotelStayListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SaleStayListModel? model = ref.watch(saleStayListProvider);
+    HotelStayListModel? model = ref.watch(hotelStayListProvider);
 
     if(model == null){
       return Center(
@@ -19,7 +22,7 @@ class SaleStayListPage extends ConsumerWidget {
     }else{
       return Scaffold(
         appBar: AppBar(
-          title: Text('특가'),
+          title: Text('호텔'),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),

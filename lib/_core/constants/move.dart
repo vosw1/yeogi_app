@@ -3,6 +3,7 @@ import 'package:yogi_project/data/models/reply.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/payment.dart';
+import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
@@ -11,7 +12,7 @@ import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
-import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
+import 'package:yogi_project/ui/pages/my/book/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
@@ -22,10 +23,7 @@ import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
@@ -38,7 +36,7 @@ class Move {
   static String myPage = "/my";
   static String stayDetailPage = "/stay";
   static String roomDetailPage = "/room";
-  static String bookList = "/my-reservations";
+  static String myReservationPage = "/api/my-reservations";
   static String overseasBookList = "/book/overseas";
   static String overseasStayList = "/Overseas";
   static String saleStayList = "/sale";
@@ -55,11 +53,23 @@ class Move {
 
 final User users = User(
   id: 1,
-  username: '홍길동',
+  name: '홍길동',
   email: '123@nate.com',
   password: '1234',
   createdAt: null,
   updatedAt: null,
+);
+
+final Reservation reservations = Reservation(
+  reservationId: 1,
+  userId: 1,
+  stayName: "호텔 블루 하버",
+  stayAddress: "부산시 해운대구 좌동순환로 99 (좌동)",
+  price: 150000,
+  roomId: 1,
+  roomName: "스위트룸",
+  checkInDate: DateTime.parse("2024-06-20"), // 문자열을 DateTime 객체로 변환
+  checkOutDate: DateTime.parse("2024-06-22"),
 );
 
 // Sample data for stay and room
@@ -203,17 +213,17 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
-    Move.bookList: (context) => ReservationList(reservationList: []),
+    Move.myReservationPage: (context) => MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
     // 국내 숙소 예약확인 페이지
-    Move.overseasStayList: (context) => OverseasStayList(),
+    // Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지
     // Move.saleStayList: (context) => SaleStayList(),
     // 특가 숙소 페이지
-    Move.hotelStayList: (context) => const HotelStayList(),
+    // Move.hotelStayList: (context) => const HotelStayList(),
     // 호텔 숙소 페이지
     Move.motelStayList: (context) => const MotelStayList(),
     // 모텔 숙소 페이지
-    Move.pensionStayList: (context) => const PensionStayList(),
+    // Move.pensionStayList: (context) => const PensionStayList(),
     // 펜션 숙소 페이지
     Move.homeAndBillaStayList: (context) => const HomeAndBillaStayList(),
     // 홈&빌라 숙소 페이지
