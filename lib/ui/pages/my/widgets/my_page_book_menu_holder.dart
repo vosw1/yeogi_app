@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/data/models/reservation.dart';
-import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
 
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
-  MyPageBookMenuHolder(List<Reservation> reservations);
-
 
   @override
   Widget build(BuildContext context) {

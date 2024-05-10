@@ -27,80 +27,69 @@ class ReservationListViewModel extends StateNotifier<ReservationListModel?> {
 
   ReservationListViewModel(this.mContext, this.ref,
       {ReservationListModel? state})
-      : super(state);
+      : super(state ?? ReservationListModel(reservations: []));  // 초기 상태를 비어 있는 목록으로 설정
+
+  // JWT 토큰 가져오기
+  String? _getJwtToken() {
+    SessionStore sessionStore = ref.read(sessionProvider);
+    return sessionStore.accessToken;
+  }
 
   // 예약 목록 가져오기
   Future<void> fetchReservationList() async {
+    Logger logger = Logger();
+    String? jwt = _getJwtToken();
+    if (jwt == null) {
+      logger.e("Access token is null");
+      return;
+    }
+
+    ScaffoldMessenger.of(mContext).showSnackBar(
+      SnackBar(content: Text('예약 목록을 가져오는 중...')),
+    );
+
     try {
-      // 로딩 상태를 나타내는 값을 null 대신에 지정
-      state = null;
-
-      SessionStore sessionStore = ref.read(sessionProvider);
-      String jwt = sessionStore.accessToken!;
-
-      ScaffoldMessenger.of(mContext).showSnackBar(
-        SnackBar(content: Text('예약 목록을 가져오는 중...')),
-      );
-
-      ResponseDTO responseDTO =
-      await ReservationRepository().fetchReservationList(jwt);
-
-      if (responseDTO.status == 200) {
+      ResponseDTO responseDTO = await ReservationRepository().fetchReservationList(jwt);
+      if (responseDTO.status == 200 && responseDTO.body != null) {
         List<dynamic> reservationData = responseDTO.body['reservations'];
-        List<Reservation> reservations =
-        reservationData.map((data) => Reservation.fromJson(data)).toList();
+        List<Reservation> reservations = reservationData.map((data) => Reservation.fromJson(data)).toList();
         state = ReservationListModel(reservations: reservations);
       } else {
         ScaffoldMessenger.of(mContext).showSnackBar(
-          SnackBar(
-              content: Text("예약 목록을 가져오는 데 실패했습니다: ${responseDTO.errorMessage}")),
+          SnackBar(content: Text("예약 목록을 가져오는 데 실패했습니다: ${responseDTO.errorMessage}")),
         );
       }
     } catch (e) {
-      Logger().e("Failed to fetch reservation list: $e");
+      logger.e("Failed to fetch reservation list: $e");
     }
   }
 
   // 예약 삭제
-  Future<void> deleteReservation(
-      int reservationId) async {
+  Future<void> deleteReservation(int reservationId) async {
+    Logger logger = Logger();
+    String? jwt = _getJwtToken();
+    if (jwt == null) {
+      logger.e("Access token is null");
+      return;
+    }
+
     try {
-      SessionStore sessionStore = ref.read(sessionProvider);
-      String jwt = sessionStore.accessToken!;
-
-      ResponseDTO responseDTO =
-      await ReservationRepository().deleteReservation(reservationId, jwt);
-
-      if ((responseDTO.status == 200) && responseDTO.body != null) {
-        // API 응답 데이터를 리스트로 변환
+      ResponseDTO responseDTO = await ReservationRepository().deleteReservation(reservationId, jwt);
+      if (responseDTO.status == 200 && responseDTO.body != null) {
         List<dynamic> temp = responseDTO.body as List<dynamic>;
-        print('API 응답 데이터를 리스트로 변환');
-        // 예약 목록 데이터로 변환
-        List<Reservation> reservations =
-        temp.map((e) => Reservation.fromJson(e)).toList();
-        print('예약 목록 데이터로 변환');
-        // 예약 목록 데이터를 ReservationListModel으로 감싸기
-        ReservationListModel reservationListModel =
-        ReservationListModel(reservations: reservations);
-        print('예약 목록 데이터를 ReservationListModel으로 감싸기');
-        // ResponseDTO에 예약 목록 데이터 설정
-        responseDTO.body = reservationListModel;
-        print('ResponseDTO에 예약 목록 데이터 설정');
+        List<Reservation> reservations = temp.map((e) => Reservation.fromJson(e)).toList();
+        state = ReservationListModel(reservations: reservations);
       } else {
-        print("Failed to load reservations or no reservations found.");
+        logger.e("Failed to load reservations or no reservations found.");
       }
     } catch (e) {
-      Logger().e("Failed to delete reservation: $e");
+      logger.e("Failed to delete reservation: $e");
     }
   }
 }
 
 // 예약 목록 관리자
 final reservationListProvider = StateNotifierProvider<ReservationListViewModel, ReservationListModel?>((ref) {
-  final BuildContext mContext = navigatorKey.currentContext!;
-  final viewModel = ReservationListViewModel(mContext, ref);
-  viewModel.fetchReservationList();
-  return viewModel;
+  BuildContext mContext = navigatorKey.currentContext!;
+  return ReservationListViewModel(mContext, ref);
 });
-
-

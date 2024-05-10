@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/user.dart';
@@ -24,16 +25,16 @@ class MyPageAppBar extends StatelessWidget {
         spacing: 15,
         runSpacing: 30,
         children: [
-          // MyPageBodyIcon(
-          //   iconData: FontAwesomeIcons.idBadge,
-          //   title: "정보 수정",
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       //MaterialPageRoute(builder: (context) => MyPageUpdate(user: user)),
-          //     );
-          //   },
-          // ),
+          MyPageBodyIcon(
+            iconData: FontAwesomeIcons.idBadge,
+            title: "정보 수정",
+            onTap: () {
+              Navigator.push(
+                context,
+               MaterialPageRoute(builder: (context) => MyPageUpdate(users: users,)),
+              );
+            },
+          ),
           MyPageBodyIcon(
             iconData: FontAwesomeIcons.gift,
             title: "이벤트",

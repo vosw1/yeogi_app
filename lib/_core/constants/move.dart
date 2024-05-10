@@ -147,7 +147,7 @@ final List<EventTitleBannerData> eventTitleBannerDataList = [
   ),
 ];
 
-final List<EventMyPageBannerData> eventMyPageBannerDataList = [
+final List<EventMyPageBannerData> eventMyPageBanners = [
   EventMyPageBannerData(
     imageTitle: '신규 회원 할인 이벤트',
     bannerTitle: '',
@@ -191,7 +191,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 내 주변 페이지
     Move.myPage: (context) => MyPage(
           users: users,
-          eventMyPageBannerData: eventMyPageBannerDataList,
+          stays: stays,
         ),
     // 마이 페이지
     Move.stayDetailPage: (context) =>
