@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/ui/pages/my/book/my_reservation_page.dart';
+import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
 

@@ -5,12 +5,12 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/age_confirmation_dialog.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/privacy_polocy_dialog.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/reservation_text_form_field.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/third_party_providing_dialog.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/usage_rules_dialog.dart';
 import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/age_confirmation_dialog.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/privacy_polocy_dialog.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_text_form_field.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/third_party_providing_dialog.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/usage_rules_dialog.dart';
 class ReservationPage extends StatefulWidget {
   final Room rooms;
 

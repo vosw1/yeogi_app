@@ -5,8 +5,8 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/user.dart';
-import 'package:yogi_project/ui/pages/my/book/reservation_detail_page.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/reservation_list_model.dart';
+import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
 class MyReservationPage extends ConsumerWidget {
   final User users;
