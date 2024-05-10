@@ -7,7 +7,6 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
 class OverseaStayListPage extends ConsumerWidget {
   @override
@@ -57,7 +56,7 @@ class OverseaStayListPage extends ConsumerWidget {
               child: Container(
                 height: 120, // 사진의 높이
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(gap_s),
                   image: DecorationImage(
                     image: AssetImage("assets/images/camping/camping1.png"), // 이미지 경로
                     fit: BoxFit.cover,

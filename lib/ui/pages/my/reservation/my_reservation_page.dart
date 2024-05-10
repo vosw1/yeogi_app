@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
@@ -84,8 +85,50 @@ class MyReservationPage extends ConsumerWidget {
                 );
               },
               child: Container(
-                height: 120, // 사진의 높이
-              child: Text('오예'),
+                padding: const EdgeInsets.only(top: gap_xs, left: gap_xs, right: gap_xs),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 120,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(gap_s),
+                        child: Image.asset(
+                          "assets/images/${reservation.roomImgTitle}",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: gap_s),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            reservation.stayName,
+                            style: h6(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: gap_xs),
+                          Text(
+                            reservation.stayAddress,
+                            style: subtitle1(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: gap_xs),
+                          Text(
+                            '${DateFormat('yyyy-MM-dd HH:mm').format(reservation.checkInDate)} | ${DateFormat('yyyy-MM-dd HH:mm').format(reservation.checkOutDate)}',
+                            style: TextStyle(fontSize: gap_s),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
