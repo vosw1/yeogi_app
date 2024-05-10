@@ -13,7 +13,6 @@ import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/book/my_reservation_page.dart';
-import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';

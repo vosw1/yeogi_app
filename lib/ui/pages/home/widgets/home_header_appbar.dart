@@ -6,6 +6,7 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_list_page.dart';
@@ -56,7 +57,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OverseasStayList()),
+                  MaterialPageRoute(builder: (context) => OverseaStayListPage()),
                  );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.planeDeparture, text: '해외'),
