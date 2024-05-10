@@ -9,8 +9,6 @@ void main() {
   });
 }
 
-
-
 Future<void> fetchReservationListTest() async {
   final responseDTO = await ReservationRepository().fetchReservationList(
       Token);
@@ -22,23 +20,4 @@ Future<void> fetchReservationListTest() async {
     print("예약 목록 가져오기 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
   }
 }
-
-
-
-
-
-Future<void> deleteReservationTest(int payId) async {
-  final responseDTO = await ReservationRepository().deleteReservation(
-      payId,Token
-
-  );
-
-  if (responseDTO.status == 200) {
-    print("예약 삭제 성공:");
-    print(responseDTO.body);
-  } else {
-    print("예약 삭제 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
-  }
-}
-
 

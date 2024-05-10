@@ -5,7 +5,7 @@ import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/stay_list_page.dart'; // Import the Reply class
 
 class ScrapListPage extends StayListPage {
-  const ScrapListPage({Key? key}) : super(key: key, appBarTitle: '찜한 숙소');
+  const ScrapListPage() : super(appBarTitle: '찜한 숙소');
 
   @override
   List<Stay> getStayDataList() {
