@@ -85,13 +85,7 @@ class MyReservationPage extends ConsumerWidget {
               },
               child: Container(
                 height: 120, // 사진의 높이
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage("camping/camping1.png"), // 이미지 경로
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              child: Text('오예'),
               ),
             ),
           ),

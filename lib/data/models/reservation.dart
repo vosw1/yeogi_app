@@ -33,16 +33,22 @@ class Reservation {
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
+    // 'price' 값을 JSON 데이터에서 직접 가져오고 문자열로 변환 후 숫자로 파싱
+    int price = int.tryParse(json['price'].toString()) ?? 0;
+
     return Reservation(
       reservationId: json['reservationId'] ?? 0,
       userId: json['userId'] ?? 0,
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
-      price: json['price'] ?? 0,
+      price: price, // 문자열로부터 변환된 가격 사용
       roomId: json['roomId'] ?? 0,
       roomName: json['roomName'] ?? 'Unknown',
       checkInDate: DateTime.parse(json['checkInDate'] + ' ' + json['checkInTime']),
       checkOutDate: DateTime.parse(json['checkOutDate'] + ' ' + json['checkOutTime']),
+      roomImgTitle: json['roomImgTitle'] ?? '',
+      reservationName: json['reservationName'] ?? '',
+      reservationTel: json['reservationTel'] ?? '',
     );
   }
 }

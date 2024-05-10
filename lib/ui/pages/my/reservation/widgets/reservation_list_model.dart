@@ -19,10 +19,16 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
     print("통신 시작");
     ResponseDTO responseDTO = await ReservationRepository()
         .fetchReservationList(sessionStore.accessToken!);
-    state = (responseDTO.body as List)
-        .map((item) => Reservation.fromJson(item))
-        .toList();
-    print("state: ${state}");
+
+    if (responseDTO.status == 200) {
+      print("예약 목록 가져오기 성공:");
+      print(responseDTO.body);
+
+      // 예약 목록을 상태로 설정
+      state = List<Reservation>.from(responseDTO.body);
+    } else {
+      print("예약 목록 가져오기 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
+    }
   }
 }
 
