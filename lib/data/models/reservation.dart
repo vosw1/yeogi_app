@@ -35,19 +35,16 @@ class Reservation {
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
-      reservationId: json['reservationId'],
-      userId: json['userId'],
+      reservationId: json['reservationId'] ?? 0, // null 체크
+      userId: json['userId'] ?? 0, // null 체크
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
       price: json['price']?.toDouble() ?? 0.0,
-      roomId: json['roomId'],
+      roomId: json['roomId'] ?? 0, // null 체크
       roomName: json['roomName'] ?? 'Unknown',
-      date: json['date'],  // 변경: DateTime.parse 제거
-      checkInDate: DateTime.parse(json['checkInDate']),
-      checkOutDate: DateTime.parse(json['checkOutDate']),
-      roomImgTitle: json['roomImgTitle'] ?? '',
-      reservationName: json['reservationName'] ?? '',
-      reservationTel: json['reservationTel'] ?? '',
+      date: json['date'] ?? 0, // null 체크
+      checkInDate: DateTime.parse(json['checkInDate'] ?? DateTime.now().toString()), // null 체크
+      checkOutDate: DateTime.parse(json['checkOutDate'] ?? DateTime.now().toString()), // null 체크
     );
   }
 }
