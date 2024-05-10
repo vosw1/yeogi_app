@@ -26,7 +26,6 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart'
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
@@ -208,7 +207,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지
-    Move.saleStayList: (context) => SaleStayList(),
+    // Move.saleStayList: (context) => SaleStayList(),
     // 특가 숙소 페이지
     Move.hotelStayList: (context) => const HotelStayList(),
     // 호텔 숙소 페이지
