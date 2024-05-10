@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart'; // 홈 페이지의 경로
 import 'package:yogi_project/ui/pages/search/search_page.dart';
 import 'package:yogi_project/ui/pages/surroundings/near_from_me_page.dart';
 
-import 'home/widgets/bottom_navigation_bar.dart'; // 주변 페이지의 경로
+import 'home/widgets/bottom_navigation_bar.dart';
+import 'my/my_page.dart'; // 주변 페이지의 경로
 
 class MainHolder extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _MainHolderState extends State<MainHolder> {
           SearchPage(),
           NearFromMePage(),
           ScrapListPage(),
-          MyPage(users: users, eventMyPageBannerData: eventMyPageBannerDataList ),
+          MyPage(users: users, stays: stays,),
         ],
       ),
       bottomNavigationBar: HomeBottomNavigationBar(

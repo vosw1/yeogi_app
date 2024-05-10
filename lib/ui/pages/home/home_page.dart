@@ -470,7 +470,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
+        child:Column(
           children: [
             SizedBox(height: gap_xm),
             // 상단 로고, 벨 아이콘 + 상단 아이콘
@@ -504,3 +504,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+

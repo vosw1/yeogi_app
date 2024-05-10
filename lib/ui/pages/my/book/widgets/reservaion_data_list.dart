@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
 
@@ -13,9 +12,9 @@ class ReservationDataList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Reservation> reservationList = [
       Reservation(
-        userId: '1',
-        reservationId:'1',
-        roomId:'1',
+        reservationId:1,
+        userId:1,
+        roomId:1,
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
         stayAddress: '강원 강릉시 강문동 258-4',
@@ -24,12 +23,13 @@ class ReservationDataList extends StatelessWidget {
         price: 300000,
         reservationName: '설동훈',
         reservationTel: '010-1111-1111',
-          createdAt:DateTime.parse("2024-06-16")
+        stayName: '',
+        date: 5,
       ),
       Reservation(
-        userId: '1',
-        reservationId:'3',
-        roomId:'2',
+        reservationId:3,
+        userId:3,
+        roomId:2,
         roomImgTitle: 'hotel/hotel4.png',
         roomName: '디럭스 더블 (레이크뷰)',
         stayAddress: '강원 강릉시 강문동 258-4',
@@ -38,7 +38,8 @@ class ReservationDataList extends StatelessWidget {
         price: 300000,
         reservationName: '설동훈',
         reservationTel: '010-1111-1111',
-          createdAt:DateTime.parse("2024-06-16")
+        stayName: '',
+        date:5,
       ),
     ];
     return ReservationList(reservationList: []);

@@ -42,20 +42,27 @@ class ReservationRepository {
 
   // 예약 내역 확인하기
   Future<ResponseDTO> fetchReservationList(String accessToken) async {
-    try {
-      final response = await dio.get(
-        "/api/my-reservations",
-        options: Options(headers: {"Authorization": accessToken}),
-      );
-      if (response.statusCode == 200) {
-        List<Reservation> reservations = (response.data['body'] as List)
-            .map((item) => Reservation.fromJson(item)).toList();
-        return ResponseDTO(status: 200, body: reservations);
-      } else {
-        return ResponseDTO(status: response.statusCode, errorMessage: 'Error fetching reservations');
+    final response = await dio.get(
+      "/api/my-reservations",
+      options: Options(headers: {"Authorization": "$accessToken"}),
+    );
+    print("HTTP Status Code: ${response.statusCode}");
+    print("Response Data: ${response.data}");
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    if (responseDTO.status == 200 && responseDTO.body != null) {
+      List<Reservation> reservations = (responseDTO.body as List<dynamic>)
+          .map((item) => Reservation.fromJson(item as Map<String, dynamic>))
+          .toList();
+      responseDTO.body = reservations;  // Update the body to be the list of reservations
+      for (var reservation in reservations) {
+        print(reservation.toString());
       }
-    } catch (e) {
-      return ResponseDTO(status: 500, errorMessage: e.toString());
+    } else {
+      print("예약내역 조회하기 실패");
     }
+    return responseDTO;
   }
+
 }

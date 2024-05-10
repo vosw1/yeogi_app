@@ -1,31 +1,22 @@
-import 'package:yogi_project/data/dtos/reservaion_request.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
-void main() async {
-  await fetchReservationSaveTest();
+void main() {
+  test('Delete reservation test', () async {
+    await deleteReservationTest(9);
+  });
 }
 
-Future<void> fetchReservationSaveTest() async {
-  // given
-  ReservationSaveReqDTO requestDTO = ReservationSaveReqDTO(
-    roomId: '1',
-    location: '부산광역시 진구',
-    roomName: 'Deluxe',
-    roomImgTitle: 'room1.png',
-    price: 142000,
-    checkInDate: DateTime.parse("2024-06-21"), // 문자열을 DateTime 객체로 변환
-    checkOutDate: DateTime.parse("2024-06-22"), // 문자열을 DateTime 객체로 변환
-    reservationName: "설동훈",
-    reservationTel: "11111111111",
+Future<void> deleteReservationTest(int payId) async {
+  final responseDTO = await ReservationRepository().deleteReservation(
+      payId,
+      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2ODM1ODc2LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.vwiYh1k90M2cBYUunv2w_iFpx7uhxYrmnmVxiVQdnPhpp4PX4lT-XPJCI16QDfdSFDKZrUcc-gj9ya-dBGKCjQ"
   );
-  // accessToken 추가
-  String accessToken =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2Nzc0NTc0LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.EuUOAo3CwFsy-Z_hTnEPYh_Ms8-8wM2O_V2bKGyl2nvWZ_-PzkspmukGfyHNfYlukoq2r4aA_mKWSX9Z5GBmTg';
 
-  // Send join request with accessToken
-  final response = await ReservationRepository()
-      .fetchReservationSave(requestDTO, accessToken);
-
-  // Log response
-  print("BookSave Response: $response");
+  if (responseDTO.status == 200) {
+    print("예약 삭제 성공:");
+    print(responseDTO.body);
+  } else {
+    print("예약 삭제 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
+  }
 }
