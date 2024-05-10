@@ -1,16 +1,30 @@
 class ResponseDTO {
   int? status;
   String? errorMessage;
-  dynamic response;
+  dynamic body;
 
   ResponseDTO({
     required this.status,
     this.errorMessage,
-    this.response,
+    this.body,
   });
 
+  @override
+  String toString() {
+    return 'ResponseDTO(status: $status, message: $errorMessage, body: $body)';
+  }
+
+
   ResponseDTO.fromJson(Map<String, dynamic> json)
-      : status = json["status"] ?? 0, // 값이 없으면 기본값으로 0 설정
-        errorMessage = json["msg"] ?? '',
-        response = json["body"];
+      : status = json['status'] as int?,
+        errorMessage = json['errorMessage'] as String?,
+        body = _parseListData(json['body']);
+
+  static dynamic _parseListData(dynamic data) {
+    if (data is List) {
+      return data.map((item) => Map<String, dynamic>.from(item)).toList();
+    } else {
+      return data;
+    }
+  }
 }

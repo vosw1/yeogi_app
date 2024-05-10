@@ -23,7 +23,7 @@ class SaleStayListViewModel extends StateNotifier<SaleStayListModel?> {
     ResponseDTO responseDTO = await StayRepository().fetchSaleStayList();
     // 상태값 갱신 (새로 new해서 넣어줘야 한다)
     // 여기는 리스트로 받아서 이렇게 설정
-    state = responseDTO.response;
+    state = responseDTO.body;
   }
 }
 

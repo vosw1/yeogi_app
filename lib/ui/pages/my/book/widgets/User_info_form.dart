@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
-import 'package:yogi_project/ui/pages/book/widgets/reservation_text_form_field.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/reservation_text_form_field.dart';
 
 class UserInfoForm extends StatelessWidget {
   final TextEditingController nameController;

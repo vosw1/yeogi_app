@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/event/event_title_banner_item.dart';
+
+import 'event_title_banner_item.dart';
 
 class EventTitleBannerPage extends StatelessWidget {
   final List<EventTitleBannerData> eventTitleBannerDataList;

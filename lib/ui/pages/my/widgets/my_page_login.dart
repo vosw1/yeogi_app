@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/reply.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
@@ -65,7 +65,7 @@ class MyPageLogin extends StatelessWidget {
             );
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MyPage(users: users, stays: stays, eventMyPageBannerData: eventMyPageBannerDataList,)),
+              MaterialPageRoute(builder: (context) => MyPage(users: users, stays: stays,)),
             );
           },
           child: Text('Go to My Page'),

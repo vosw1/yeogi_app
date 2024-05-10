@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/reply.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';
@@ -470,7 +470,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
+        child:Column(
           children: [
             SizedBox(height: gap_xm),
             // 상단 로고, 벨 아이콘 + 상단 아이콘
@@ -504,3 +504,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+

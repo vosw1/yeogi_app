@@ -32,7 +32,7 @@ class StayListViewModel extends StateNotifier<StayListModel?> {
         await StayRepository().fetchStaySearchList();
 
     if (responseDTO.status == 200) {
-      StayListModel nextModel = responseDTO.response;
+      StayListModel nextModel = responseDTO.body;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
           SnackBar(content: Text("게시물 보기 실패 : ${responseDTO.errorMessage}")));

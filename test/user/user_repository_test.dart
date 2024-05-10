@@ -2,19 +2,22 @@ import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/repositories/user_repository.dart';
 
 void main() async {
-    await fetchLoginTest();
+  await fetchJoinTest();
 }
 
-Future<void> fetchLoginTest() async {
+Future<void> fetchJoinTest() async {
   // given
-  LoginReqDTO requestDTO = LoginReqDTO(
-    email: "ssar@nate.com",
+  JoinReqDTO requestDTO = JoinReqDTO(
+    email: "12343@nate.com",
     password: "1234",
+    name: "박기동",
+    phone: "01012231234",
+    birth: "1991-12-12",
   );
 
   // Send join request
-  final response = await UserRepository().fetchLogin(requestDTO);
+  final response = await UserRepository().fetchJoin(requestDTO);
 
   // Log response
-  print("Login Response: $response");
+  print("Join Response: $response");
 }

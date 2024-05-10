@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
+import 'package:yogi_project/ui/pages/stay/room/room_detail_page.dart';
 
 class RoomInfoWidget extends StatelessWidget {
   final Room roomData;

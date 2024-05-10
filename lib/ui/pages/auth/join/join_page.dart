@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/JoinForm.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/join_body.dart';
 
 class JoinPage extends StatelessWidget {
   @override
@@ -12,9 +12,10 @@ class JoinPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(gap_m),
-          child: JoinForm(), // JoinForm 위젯 사용
+          child: JoinBody(), // JoinForm 위젯 사용
         ),
       ),
     );
   }
 }
+

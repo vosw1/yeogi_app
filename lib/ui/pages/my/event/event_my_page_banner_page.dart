@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
-import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/event/event_my_page_banner_item.dart';
-import 'package:yogi_project/ui/pages/event/event_title_banner_item.dart';
+
+import 'event_my_page_banner_item.dart';
 
 class EventMyPageBannerPage extends StatelessWidget {
   final List<EventMyPageBannerData> eventMyPageBannerDataList;

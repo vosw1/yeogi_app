@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/Reply.dart';
+import 'package:yogi_project/data/models/reply.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/payment.dart';
@@ -10,14 +10,14 @@ import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
-import 'package:yogi_project/ui/pages/book/reservation_page.dart';
-import 'package:yogi_project/ui/pages/book/widgets/reservaion_list.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
-import 'package:yogi_project/ui/pages/pay/payment_page.dart';
-import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
+import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
+import 'package:yogi_project/ui/pages/stay/room/room_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
@@ -27,9 +27,7 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart'
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 
-// 이하 내용은 동일
-
-// URL 설정
+// navigator로 이동하는 url 설정
 class Move {
   static String loginPage = "/users/login";
   static String joinPage = "/users/join";
@@ -148,7 +146,7 @@ final List<EventTitleBannerData> eventTitleBannerDataList = [
   ),
 ];
 
-final List<EventMyPageBannerData> eventMyPageBannerDataList = [
+final List<EventMyPageBannerData> eventMyPageBanners = [
   EventMyPageBannerData(
     imageTitle: '신규 회원 할인 이벤트',
     bannerTitle: '',
@@ -192,8 +190,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 내 주변 페이지
     Move.myPage: (context) => MyPage(
           users: users,
-      stays: stays,
-          eventMyPageBannerData: eventMyPageBannerDataList,
+          stays: stays,
         ),
     // 마이 페이지
     Move.stayDetailPage: (context) =>
@@ -206,7 +203,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 예약 페이지
     Move.paymetPage: (context) => const PaymentPage(),
     // 결제 페이지
-    Move.bookList: (context) => ReservationList(domesticbookList: []),
+    Move.bookList: (context) => ReservationList(reservationList: []),
     // 국내 숙소 예약확인 페이지
     Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

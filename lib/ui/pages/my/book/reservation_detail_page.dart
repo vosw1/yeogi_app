@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/Reservation.dart';
+import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/payment.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/book/widgets/review_writing_dialog.dart';
+import 'package:yogi_project/ui/pages/my/book/widgets/review_writing_dialog.dart';
 
 class ReservationDetailPage extends StatefulWidget {
-  final Reservation reservationData;
+  final Reservation reservations;
   final Room rooms;
   final Payment pays;
 
-  const ReservationDetailPage({Key? key, required this.reservationData, required this.rooms, required this.pays});
+  const ReservationDetailPage({Key? key, required this.reservations, required this.rooms, required this.pays});
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();
@@ -26,8 +26,8 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
   @override
   void initState() {
     super.initState();
-    _checkInDate = widget.reservationData.checkInDate;
-    _checkOutDate = widget.reservationData.checkOutDate ?? DateTime.now();
+    _checkInDate = widget.reservations.checkInDate;
+    _checkOutDate = widget.reservations.checkOutDate ?? DateTime.now();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
   }
 
@@ -53,16 +53,16 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets/images/${widget.reservationData.roomImgTitle}',
+                      'assets/images/${widget.reservations.roomImgTitle}',
                       width: double.infinity,
                       height: 150,
                       fit: BoxFit.cover,
                     ),
                   ),
                   SizedBox(height: gap_s),
-                  Text('${widget.reservationData.roomName}',
+                  Text('${widget.reservations.roomName}',
                       style: TextStyle(fontSize: gap_m)),
-                  Text('${widget.reservationData.location}'),
+                  Text('${widget.reservations.stayAddress}'),
                   SizedBox(height: gap_s),
                   Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_s),
@@ -173,21 +173,21 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
         Row(
           children: [
             Text('예약자 : ', style: subtitle1()),
-            Text('${widget.reservationData.reservationName}', style: subtitle1()),
+            Text('${widget.reservations.reservationName}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),
         Row(
           children: [
             Text('전화번호 : ', style: subtitle1()),
-            Text('${widget.reservationData.reservationTel}', style: subtitle1()),
+            Text('${widget.reservations.reservationTel}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_s),
         Row(
           children: [
             Text('결제금액 : ', style: subtitle1()),
-            Text('${NumberFormat('#,###').format(widget.reservationData.price)} 원'),
+            Text('${NumberFormat('#,###').format(widget.reservations.price)} 원'),
           ],
         ),
         SizedBox(height: gap_xs),

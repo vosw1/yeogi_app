@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/book/widgets/reservaion_list.dart';
+import 'package:yogi_project/ui/pages/my/book/reservation_list.dart';
 
 // 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
-  final Stay stays;
-
-  MyPageBookMenuHolder({required this.stays});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +10,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
       children: <Widget>[
         ListTile( // 예약내역 타이틀
           title: Text('예약내역'),
-          onTap: () {
-          },
+          onTap: () {},
         ),
         ListTile( // 국내숙소 리스트
           title: Text('숙소'),
@@ -25,7 +20,9 @@ class MyPageBookMenuHolder extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ReservationList(domesticbookList: []), // 수정된 생성자에 전체 목록 전달
+                builder: (context) =>
+                    ReservationList(
+                      reservationList: []), // 수정된 생성자에 전체 목록 전달
               ),
             );
           },

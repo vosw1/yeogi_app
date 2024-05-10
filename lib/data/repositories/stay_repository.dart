@@ -15,10 +15,10 @@ class StayRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
-      List<dynamic> temp = responseDTO.response;
+      List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
-      responseDTO.response = stays; // 숙소 목록을 responseDTO에 할당
+      responseDTO.body = stays; // 숙소 목록을 responseDTO에 할당
     }
 
     return responseDTO;
@@ -34,14 +34,14 @@ class StayRepository {
 
     Logger().d(response.data);
     Logger().d(response.runtimeType);
-    Logger().d(responseDTO.response);
+    Logger().d(responseDTO.body);
 
     if (responseDTO.status == 200) {
-      List<dynamic> temp = responseDTO.response;
+      List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
       SaleStayListModel stayListModel = SaleStayListModel(stays);
-      responseDTO.response = stayListModel; // 숙소 목록을 responseDTO에 할당
+      responseDTO.body = stayListModel; // 숙소 목록을 responseDTO에 할당
     }
 
     return responseDTO;
@@ -56,11 +56,11 @@ class StayRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
-      List<dynamic> temp = responseDTO.response;
+      List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
 
-      responseDTO.response = stays; // 숙소 목록을 responseDTO에 할당
+      responseDTO.body = stays; // 숙소 목록을 responseDTO에 할당
     }
 
     return responseDTO;
