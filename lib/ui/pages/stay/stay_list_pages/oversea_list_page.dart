@@ -6,12 +6,13 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
-class SaleStayListPage extends ConsumerWidget {
+class OverseaStayListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SaleStayListModel? model = ref.watch(saleStayListProvider);
+    OverseaStayListModel? model = ref.watch(overseaStayListProvider);
 
     if(model == null){
       return Center(
@@ -20,7 +21,7 @@ class SaleStayListPage extends ConsumerWidget {
     }else{
       return Scaffold(
         appBar: AppBar(
-          title: Text('특가'),
+          title: Text('해외'),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
