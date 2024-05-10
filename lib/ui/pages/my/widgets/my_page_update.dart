@@ -28,7 +28,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
   void initState() {
     super.initState();
     // User 데이터를 사용하여 필드 초기화
-    _nameController.text = widget.users.username;
+    _nameController.text = widget.users.name!;
     // 다른 필드들도 위와 같이 초기화
   }
 
@@ -91,7 +91,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                       MaterialPageRoute(
                         builder: (context) => MyPage(
                           users: User(
-                            username: _nameController.text,
+                            name: _nameController.text,
                             password: _passwordController.text, id: 1, email: '', createdAt: null, updatedAt: null,
                           ),
                           stays: Stay(
