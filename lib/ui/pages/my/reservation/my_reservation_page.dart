@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/user.dart';
@@ -19,14 +20,29 @@ class MyReservationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ReservationListModel? model = ref.watch(reservationListProvider);
-    if (model == null) {
+    List<Reservation> reservations = ref.watch(reservationListProvider);
+
+    if (reservations == null) {
       return Container(
         child: Center(
           child: CircularProgressIndicator(),
         ),
       );
+    } else if (reservations.isEmpty) {
+      // 예약 내역이 없는 경우
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('예약내역'),
+        ),
+        body: Center(
+          child: Text(
+            '예약 내역이 없습니다',
+            style: h5(),
+          ),
+        ),
+      );
     } else {
+      // 예약 내역이 있는 경우
       return Scaffold(
         appBar: AppBar(
           title: Text('예약내역'),
@@ -34,9 +50,9 @@ class MyReservationPage extends ConsumerWidget {
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
           child: ListView.builder(
-            itemCount: model.reservation.length,
+            itemCount: reservations.length,
             itemBuilder: (context, index) {
-              final Reservation reservation = model.reservation[index];
+              final Reservation reservation = reservations[index];
               return buildListItem(context, reservation);
             },
           ),
@@ -59,9 +75,10 @@ class MyReservationPage extends ConsumerWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ReservationDetailPage(
+                      // Pass any required parameters to ReservationDetailPage
+                      reservations: reservation,
                       rooms: rooms,
                       pays: pays,
-                      reservations: reservations,
                     ),
                   ),
                 );

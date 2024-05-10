@@ -58,7 +58,7 @@ class ReservationRepository {
 
       responseDTO.body = reservations;  // Update the body to be the list of reservations
       for (var reservation in reservations) {
-        print(reservation.toString());
+        print('데이터 확인 : ${reservation.toString()}');
       }
     } else {
       print("예약내역 조회하기 실패");
