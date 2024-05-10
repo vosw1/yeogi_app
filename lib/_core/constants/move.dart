@@ -24,7 +24,6 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dar
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
@@ -224,7 +223,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 호텔 숙소 페이지
     Move.motelStayList: (context) => const MotelStayList(),
     // 모텔 숙소 페이지
-    Move.pensionStayList: (context) => const PensionStayList(),
+    // Move.pensionStayList: (context) => const PensionStayList(),
     // 펜션 숙소 페이지
     Move.homeAndBillaStayList: (context) => const HomeAndBillaStayList(),
     // 홈&빌라 숙소 페이지
