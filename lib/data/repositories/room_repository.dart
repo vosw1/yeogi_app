@@ -34,13 +34,15 @@ class RoomRepository{
 
       print(response.data);
 
-      if (response.statusCode == 200) {
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      if (responseDTO.status == 200) {
         // 성공적으로 데이터를 받은 경우
-        // 받은 데이터를 JSON 형식으로 파싱합니다.
+        // 받은 데이터를 JSON 형식으로 파싱
         final jsonData = response.data as Map<String, dynamic>;
         // Room 객체로 변환합니다.
         final room = Room.fromJson(jsonData);
-        // ResponseDTO 객체를 생성하여 데이터를 담습니다.
+        // ResponseDTO 객체를 생성하여 데이터를 담음.
         final responseDTO = ResponseDTO(
           status: 200,
           errorMessage: null,
