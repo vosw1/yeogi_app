@@ -5,7 +5,8 @@ void main() async {
   // await fetchSaleStayList_test(); // 특가 숙소 리스트
   // await fetchHotelStayList_test(); // 호텔 숙소 리스트
   // await fetchOverseaStayList_test(); // 해외 숙소 리스트
-  await fetchPensionStayList_test(); // 해외 숙소 리스트
+  // await fetchPensionStayList_test(); // 해외 숙소 리스트
+  await fetchMotelStayList_test(); // 모텔 숙소 리스트
   // await fetchHomeStayList_test(); // 홈 페이지 리스트
 }
 
@@ -32,6 +33,11 @@ Future<void> fetchOverseaStayList_test() async {
 // 펜션 숙소 리스트
 Future<void> fetchPensionStayList_test() async {
   await StayRepository().fetchPensionStayList();
+}
+
+// 펜션 숙소 리스트
+Future<void> fetchMotelStayList_test() async {
+  await StayRepository().fetchMotelStayList();
 }
 
 // 홈 페이지 리스트
