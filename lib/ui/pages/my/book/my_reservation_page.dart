@@ -17,6 +17,7 @@ class MyReservationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(reservationListProvider);
+
     ReservationListViewModel viewModel =
     ref.read(reservationListProvider.notifier);
 

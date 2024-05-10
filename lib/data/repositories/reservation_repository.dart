@@ -46,15 +46,18 @@ class ReservationRepository {
       "/api/my-reservations",
       options: Options(headers: {"Authorization": "$accessToken"}),
     );
+
     print("HTTP Status Code: ${response.statusCode}");
     print("Response Data: ${response.data}");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.status == 200 && responseDTO.body != null) {
+    if (responseDTO.status == 200) {
+
       List<Reservation> reservations = (responseDTO.body as List<dynamic>)
           .map((item) => Reservation.fromJson(item as Map<String, dynamic>))
           .toList();
+
       responseDTO.body = reservations;  // Update the body to be the list of reservations
       for (var reservation in reservations) {
         print(reservation.toString());

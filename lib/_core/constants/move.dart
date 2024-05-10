@@ -56,7 +56,7 @@ class Move {
 
 final User users = User(
   id: 1,
-  username: '홍길동',
+  name: '홍길동',
   email: '123@nate.com',
   password: '1234',
   createdAt: null,
