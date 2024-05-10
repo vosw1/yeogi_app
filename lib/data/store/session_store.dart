@@ -62,7 +62,7 @@ class SessionStore extends SessionUser {
     var (responseDTO, accessToken) =
         await UserRepository().fetchLogin(loginReqDTO);
 
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       await secureStorage.write(key: "accessToken", value: accessToken);
 
       this.user = responseDTO.response;
@@ -70,7 +70,7 @@ class SessionStore extends SessionUser {
       this.isLogin = true;
 
       // 비지니스 로직
-      if (responseDTO.success) {
+      if (responseDTO.status == 200) {
         Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
       } else {
         ScaffoldMessenger.of(mContext!).showSnackBar(

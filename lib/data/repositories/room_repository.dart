@@ -12,7 +12,7 @@ class RoomRepository{
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.response["rooms"];
       List<Room> rooms = temp.map((e) => Room.fromJson(e)).toList();
 

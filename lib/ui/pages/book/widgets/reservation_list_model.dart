@@ -36,7 +36,7 @@ class ReservationListViewModel extends StateNotifier<ReservationListModel?> {
 
       ResponseDTO responseDTO = await ReservationRepository().fetchReservationList(jwt);
 
-      if (responseDTO.success) {
+      if (responseDTO.status == 200) {
         List<dynamic> reservationData = responseDTO.response['reservations'];
         List<Reservation> reservations = reservationData.map((data) => Reservation.fromJson(data)).toList();
         state = ReservationListModel(reservations: reservations);
@@ -58,7 +58,7 @@ class ReservationListViewModel extends StateNotifier<ReservationListModel?> {
 
       ResponseDTO responseDTO = await ReservationRepository().deleteReservation(reservationId, jwt);
 
-      if (responseDTO.success) {
+      if (responseDTO.status == 200) {
         // 성공적으로 삭제되었으므로 해당 예약 제거
         state = state!.copyWith(reservations: state!.reservations.where((reservation) => reservation.id != reservationId).toList());
       } else {

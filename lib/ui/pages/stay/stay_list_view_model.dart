@@ -24,15 +24,14 @@ class StayListViewModel extends StateNotifier<StayListModel?> {
   StayListViewModel(super.state, this.ref);
 
   // 로드함수 (1, 2)
-
   Future<void> notifyInit(int page) async {
     SessionStore sessionStore = ref.read(sessionProvider);
     String jwt = sessionStore.accessToken!;
 
     ResponseDTO responseDTO =
-        await StayRepository().fetchStayList(jwt, page: page);
+        await StayRepository().fetchStaySearchList();
 
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       StayListModel nextModel = responseDTO.response;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -47,7 +46,7 @@ class StayListViewModel extends StateNotifier<StayListModel?> {
 //     ResponseDTO responseDTO =
 //         await StayRepository().saveStay(reqDTO, sessionUser.accessToken!);
 //
-//     if (responseDTO.success) {
+//     if (responseDTO.status == 200) {
 //       Stay newPost = responseDTO.response;
 //
 //       Navigator.pop(mContext!);

@@ -8,7 +8,8 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart'
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_list_page.dart';
+
 import 'home_header_appbar_item.dart';
 
 // 홈 페이지에 앱바 (아이콘 + 텍스트)
@@ -45,7 +46,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SaleStayList()),
+                  MaterialPageRoute(builder: (context) => SaleStayListPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.gift, text: '특가'),

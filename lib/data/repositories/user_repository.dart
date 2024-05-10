@@ -22,7 +22,7 @@ class UserRepository {
     Logger().d(response.data!);
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
     print('데이터 확인 : ${loginReqDTO.toJson()}');
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       // response가 User 객체인지 확인 후 변환
       if (responseDTO.response is Map<String, dynamic>) {
         responseDTO.response = User.fromJson(responseDTO.response);

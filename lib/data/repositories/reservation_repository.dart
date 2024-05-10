@@ -18,7 +18,7 @@ class ReservationRepository {
     print('데이터 확인 : ${responseDTO.response}');
     Logger().d(responseDTO.response.runtimeType);
 
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       responseDTO.response = Reservation.fromJson(responseDTO.response);
       Logger().d(responseDTO.response.runtimeType);
     }
@@ -42,7 +42,7 @@ class ReservationRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.success) {
+    if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.response["reservations"];
       List<Reservation> reservations = temp.map((e) => Reservation.fromJson(e)).toList();
 
