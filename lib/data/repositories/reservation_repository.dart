@@ -4,7 +4,6 @@ import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/reservaion_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/reservation.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/reservation_list_model.dart';
 
 class ReservationRepository {
   // 예약하기
@@ -46,15 +45,17 @@ class ReservationRepository {
       "/api/my-reservations",
       options: Options(headers: {"Authorization": "$accessToken"}),
     );
+
     print("HTTP Status Code: ${response.statusCode}");
     print("Response Data: ${response.data}");
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    if (responseDTO.status == 200 && responseDTO.body != null) {
+    if (responseDTO.status == 200) {
       List<Reservation> reservations = (responseDTO.body as List<dynamic>)
           .map((item) => Reservation.fromJson(item as Map<String, dynamic>))
           .toList();
+
       responseDTO.body = reservations;  // Update the body to be the list of reservations
       for (var reservation in reservations) {
         print(reservation.toString());
