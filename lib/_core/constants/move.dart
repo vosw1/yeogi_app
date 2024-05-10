@@ -23,9 +23,7 @@ import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/overseas_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list.dart';
 
 // navigator로 이동하는 url 설정
@@ -218,11 +216,11 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 결제 페이지
     Move.myReservationPage: (context) => MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
     // 국내 숙소 예약확인 페이지
-    Move.overseasStayList: (context) => OverseasStayList(),
+    // Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지
     // Move.saleStayList: (context) => SaleStayList(),
     // 특가 숙소 페이지
-    Move.hotelStayList: (context) => const HotelStayList(),
+    // Move.hotelStayList: (context) => const HotelStayList(),
     // 호텔 숙소 페이지
     Move.motelStayList: (context) => const MotelStayList(),
     // 모텔 숙소 페이지
