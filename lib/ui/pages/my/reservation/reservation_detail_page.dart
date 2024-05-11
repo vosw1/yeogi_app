@@ -47,7 +47,6 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
   @override
   void initState() {
     super.initState();
-    // Example initialization (replace with actual data)
     _checkInDate = DateTime.now();
     _checkOutDate = DateTime.now().add(Duration(days: 5));
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
@@ -113,9 +112,10 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
       children: [
         Text('예약자: ${reservations.reservationName}'),
         Text('전화번호: ${reservations.reservationTel}'),
-        Text('결제금액: ${NumberFormat('#,###').format(reservations.price)} 원'),
-        Text('결제일자: ${formatDate(DateTime.now())}'),
+        Text('결제금액: ${NumberFormat('#,###').format(pays.amount)} 원'),
+        Text('결제일자: ${formatDate(widget.pays.createdAt)}'),
         Text('결제수단: Credit Card'),
+        Text('결제상황: 결제 완료'),
       ],
     );
   }
@@ -169,7 +169,7 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
                       .read(reservationListProvider.notifier)
                       .payUpdate(widget.pays.payId);
                   setState(() {
-                    isCanceled = true; // Reflect cancellation in the state
+                    isCanceled = true;
                   });
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content:
@@ -207,5 +207,6 @@ void _showReviewWritingDialog(BuildContext context) {
 }
 
 String formatDate(DateTime dateTime) {
-  return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
+  return DateFormat('yyyy-MM-dd').format(dateTime);
 }
+

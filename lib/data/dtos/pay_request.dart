@@ -34,7 +34,7 @@ class PaySaveReqDTO {
       'reservationId': reservationId,
       'amount': amount,
       'way': way,
-      'state': state,
+      'state': 'state',
       'paytAt': payAt.toIso8601String(),
     };
   }
