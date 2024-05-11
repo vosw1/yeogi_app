@@ -7,18 +7,22 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart'; // 파일명 오타 수정
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/argreement_section.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservaion_info_form.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/room_info.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 
-class ReservationPage extends ConsumerWidget { // StatefulWidget에서 ConsumerWidget으로 변경
+class ReservationPage extends ConsumerWidget {
+  // StatefulWidget에서 ConsumerWidget으로 변경
   final Room rooms;
+
   ReservationPage({required this.rooms});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) { // ConsumerWidget에 맞게 매개변수 변경
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ConsumerWidget에 맞게 매개변수 변경
     final _nameController = TextEditingController();
     final _phoneNumberController = TextEditingController();
 
@@ -59,7 +63,13 @@ class ReservationPage extends ConsumerWidget { // StatefulWidget에서 ConsumerW
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: gap_m),
                 child: ElevatedButton(
-                  onPressed: () => _attemptReservation(context, ref, _nameController, _phoneNumberController, rooms, stays /* you need to add the Stay object or remove it from the function parameters */),
+                  onPressed: () => _attemptReservation(
+                      context,
+                      ref,
+                      _nameController,
+                      _phoneNumberController,
+                      rooms,
+                      stays /* you need to add the Stay object or remove it from the function parameters */),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -77,21 +87,42 @@ class ReservationPage extends ConsumerWidget { // StatefulWidget에서 ConsumerW
     );
   }
 
-  void _attemptReservation(BuildContext context, WidgetRef ref, TextEditingController nameController, TextEditingController phoneController, Room rooms, Stay stays) {
-    if ([true, true, true, true].every((val) => val)) { // Assuming all conditions are met
+  void _attemptReservation(
+      BuildContext context,
+      WidgetRef ref,
+      TextEditingController nameController,
+      TextEditingController phoneController,
+      Room rooms,
+      Stay stays) {
+    if ([true, true, true, true].every((val) => val)) {
+      // Assuming all conditions are met
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: rooms.roomId.toString(),
         stayAdress: stays.address ?? 'defaultAddress',
         roomName: rooms.roomName ?? 'defaultRoomName',
         roomImgTitle: rooms.roomImgTitle ?? 'defaultImgTitle',
-        price: (rooms.price ?? 0).toInt(),  // Ensuring conversion to double
-        checkInDate: DateTime.parse(rooms.checkInDate ?? DateTime.now().toString()),
-        checkOutDate: DateTime.parse(rooms.checkOutDate ?? DateTime.now().toString()),
-        reservationName: nameController.text.isNotEmpty ? nameController.text : 'Default Name',
-        reservationTel: phoneController.text.isNotEmpty ? phoneController.text : 'Default Tel',
+        price: (rooms.price ?? 0).toInt(),
+        // Ensuring conversion to double
+        checkInDate:
+            DateTime.parse(rooms.checkInDate ?? DateTime.now().toString()),
+        checkOutDate:
+            DateTime.parse(rooms.checkOutDate ?? DateTime.now().toString()),
+        reservationName: nameController.text.isNotEmpty
+            ? nameController.text
+            : 'Default Name',
+        reservationTel: phoneController.text.isNotEmpty
+            ? phoneController.text
+            : 'Default Tel',
       );
 
       ref.read(reservationListProvider.notifier).notifyAdd(dto);
+      // 예약 정보가 성공적으로 추가된 후 결제 페이지로 네비게이션
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                PaymentPage()), // PaymentPage는 결제 페이지의 클래스입니다.
+      );
     } else {
       showDialog(
         context: context,
