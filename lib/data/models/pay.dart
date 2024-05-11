@@ -1,13 +1,13 @@
-class Payment {
-  final int paymentId;
+class Pay {
+  final int payId;
   final int reservationId;
   final int amount;
   final String way;
   final String state;
   final DateTime createdAt;
 
-  Payment({
-    required this.paymentId,
+  Pay({
+    required this.payId,
     required this.reservationId,
     required this.amount,
     required this.way,
@@ -15,9 +15,9 @@ class Payment {
     required this.createdAt,
   });
 
-  factory Payment.fromJson(Map<String, dynamic> json) {
-    return Payment(
-      paymentId: json['id'],
+  factory Pay.fromJson(Map<String, dynamic> json) {
+    return Pay(
+      PayId: json['PayId'],
       reservationId: json['reservationId'],
       amount: json['amount'],
       way: json['way'],
@@ -28,7 +28,7 @@ class Payment {
 
   Map<String, dynamic> toJson() {
     return {
-      'paymentId': paymentId,
+      'payId': payId,
       'reservationId': reservationId,
       'amount': amount,
       'way': way,

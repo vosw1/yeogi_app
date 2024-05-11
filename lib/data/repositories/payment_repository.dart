@@ -1,10 +1,7 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:yogi_project/data/dtos/payment_request.dart';
+import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
-import 'package:yogi_project/data/models/payment.dart';
 
 class PaymentRepository {
   final Dio dio;
@@ -12,11 +9,11 @@ class PaymentRepository {
 
   PaymentRepository(this.dio, this.logger);
 
-  // 결제하기
-  Future<ResponseDTO> fetchPaymentSave(PaymentSaveReqDTO reqDTO, String accessToken) async {
+  // Saves payment details to the server
+  Future<ResponseDTO> fetchPaymentSave(PaySaveReqDTO reqDTO, String accessToken) async {
     try {
-      Response response = await dio.put(
-          "/api/reservation/${reqDTO.paymentId}", // 동적 paymentId를 URL에 포함
+      Response response = await dio.post(
+          "/api/reservation/payment/${reqDTO.payId}",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}),
           data: reqDTO.toJson());
 
@@ -25,32 +22,33 @@ class PaymentRepository {
       logger.d("Response Data: ${response.data}");
 
       if (responseDTO.status == 200) {
-        responseDTO.body = Payment.fromJson(responseDTO.body);
+        logger.d("Reservation saved successfully.");
       }
       return responseDTO;
     } catch (e) {
-      logger.e("An error occurred during payment save: $e");
-      throw Exception('Failed to save payment');
+      logger.e("Error in saving reservation: $e");
+      throw Exception('Failed to save reservation');
     }
   }
 
-  // 결제 상태를 환불로 변경하기
-  Future<ResponseDTO> updatePaymentStatusToRefund(int payId, String accessToken) async {
+  // Deletes or updates a reservation to 'refund' status
+  Future<ResponseDTO> deleteReservation(int payId, String accessToken) async {
     try {
-      Response response = await dio.put("/api/reservation/refund/${payId}",
-          options: Options(headers: {"Authorization": "Bearer $accessToken"}));
+      Response response = await dio.put(
+          "/api/reservation/refund/$payId",
+          options: Options(headers: {"Authorization": "${accessToken}"}));
 
-      if (response.statusCode == 200) {
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        logger.d("HTTP Status Code: ${response.statusCode}");
-        logger.d("Response Data: ${response.data}");
-        return responseDTO;
-      } else {
-        throw Exception('Server responded with error code: ${response.statusCode}');
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      logger.d("HTTP Status Code: ${response.statusCode}");
+      logger.d("Response Data: ${response.data}");
+
+      if (response.statusCode != 200) {
+        logger.d("Failed to refund reservation.");
       }
+      return responseDTO;
     } catch (e) {
-      logger.e('An error occurred during updating payment status to refund: $e');
-      throw Exception('Failed to update payment status to refund');
+      logger.e("Error in deleteReservation: $e");
+      throw Exception('Failed to update reservation to refund');
     }
   }
 }

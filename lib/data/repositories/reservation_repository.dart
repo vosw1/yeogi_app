@@ -54,7 +54,8 @@ class ReservationRepository {
       List<dynamic> temp = responseDTO.body as List<dynamic>;
       List<Reservation> reservations =
           temp.map((e) => Reservation.fromJson(e)).toList();
-      responseDTO.body = reservations; // Update the body to be the list of reservations
+      responseDTO.body =
+          reservations; // Update the body to be the list of reservations
 
       for (var reservation in reservations) {
         print('데이터 확인 : ${reservation.toString()}');

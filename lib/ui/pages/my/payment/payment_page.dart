@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/ui/pages/my/pay/widgets/total_payment.dart';
+import 'package:yogi_project/ui/pages/my/payment/widgets/total_payment.dart';
 
 
 class PaymentPage extends StatelessWidget {

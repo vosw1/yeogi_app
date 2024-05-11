@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/reservation.dart';
-import 'package:yogi_project/data/models/payment.dart';
+import 'package:yogi_project/data/models/pay.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/review_writing_dialog.dart';
 
 class ReservationDetailPage extends StatefulWidget {
   final Reservation reservations;
   final Room rooms;
-  final Payment pays;
+  final Pay pays;
 
   const ReservationDetailPage({Key? key, required this.reservations, required this.rooms, required this.pays});
 

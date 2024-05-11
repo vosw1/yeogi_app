@@ -7,7 +7,7 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart'; // 파일명 오타 수정
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/payment/payment_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/argreement_section.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservaion_info_form.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
@@ -97,7 +97,7 @@ class ReservationPage extends ConsumerWidget {
     if ([true, true, true, true].every((val) => val)) {
       // Assuming all conditions are met
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
-        roomId: rooms.roomId.toString(),
+        roomId: rooms.roomId,
         stayAdress: stays.address ?? 'defaultAddress',
         roomName: rooms.roomName ?? 'defaultRoomName',
         roomImgTitle: rooms.roomImgTitle ?? 'defaultImgTitle',
