@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_list_page.dart';
@@ -111,7 +111,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CampingStayList()),
+                  MaterialPageRoute(builder: (context) => CampingStayListPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.mountainCity, text: '캠핑'),
