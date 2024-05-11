@@ -194,7 +194,7 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
         Row(
           children: [
             Text('결제일자 : ', style: subtitle1()),
-            Text('${formatDate(widget.pays.payAt)}', style: subtitle1()),
+            Text('${formatDate(widget.pays.createdAt)}', style: subtitle1()),
           ],
         ),
         SizedBox(height: gap_xs),

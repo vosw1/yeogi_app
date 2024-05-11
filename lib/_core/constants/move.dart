@@ -43,7 +43,7 @@ class Move {
   static String campingStayList = "/camping";
   static String guestHouseStayList = "/guestHouse";
   static String reservationPage = "/api/my-reservations";
-  static String paymetPage = "/pay";
+  static String paymentPage = "/payment";
   static String eventPage = "/event";
 }
 
@@ -124,8 +124,8 @@ final Room rooms = Room(
     notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인');
 
 final Payment pays = Payment(
-  payAt: DateTime.parse('2024-04-20'),
-  way: '카드결제',
+  createdAt: DateTime.parse('2024-04-20'),
+  way: '카드결제', paymentId: 1, reservationId: 1, amount: 100000, state: 'COMPLETION',
 
 );
 
@@ -207,7 +207,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지
-    Move.paymetPage: (context) => const PaymentPage(),
+    Move.paymentPage: (context) => const PaymentPage(),
     // 결제 페이지
     Move.myReservationPage: (context) => MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
     // 국내 숙소 예약확인 페이지
