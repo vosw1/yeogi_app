@@ -1,62 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/reply.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/home/home_page_view_model.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body_banner.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_header.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends ConsumerWidget {
   final ScrollController _scrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context) {
-    // 특가 숙소 리스트
-    List<Stay> saleStayList = [
-      Stay(
-        stayImgTitle: "hotel/hotel1.png",
-        stayName: "★당일특가★ 하이원리조트 마운틴콘도",
-        stayInfo:
-            "복층 구조의 넓고 여유로운 공간, 고급 대리석과 원목 마루로 마감한 격조높은 인테리어가 차원이 다른 편안함을 드립니다\n최고의 부대시설을 갖춘 마운틴 콘도에서 내 집처럼 편안한 휴식을 취해 보세요",
-        location: "강원 정선군 고한읍 고한리 438",
-        notice:
-            "리조트 시설 확인 및 운영여부, 운영시간, 기타문의 등 하이원리조트 대표번호 (1588-7789) 문의 부탁 드립니다\n객실 이미지는 대표 객실이며, 체크인 시 배정받는 동에 따라 객실 이미지와 상이할 수 있습니다",
-      ),
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    HomePageListModel? model = ref.watch(homePageStayListProvider);
 
-    // 국내 숙소 리스트
-    List<Stay> dometicesStayItemList = [
-      Stay(
-        stayImgTitle: "hotel/hotel2.png",
-        stayName: "★당일특가★ 하이원리조트 마운틴콘도",
-        stayInfo:
-            "복층 구조의 넓고 여유로운 공간, 고급 대리석과 원목 마루로 마감한 격조높은 인테리어가 차원이 다른 편안함을 드립니다\n최고의 부대시설을 갖춘 마운틴 콘도에서 내 집처럼 편안한 휴식을 취해 보세요",
-        location: "강원 정선군 고한읍 고한리 438",
-        notice:
-            "리조트 시설 확인 및 운영여부, 운영시간, 기타문의 등 하이원리조트 대표번호 (1588-7789) 문의 부탁 드립니다\n객실 이미지는 대표 객실이며, 체크인 시 배정받는 동에 따라 객실 이미지와 상이할 수 있습니다",
-      ),
-    ];
-    // 해외 숙소 리스트
-    List<Stay> overseasStayItemList = [
-      Stay(
-        stayImgTitle: "camping/camping1.png",
-        stayName: "영흥도 코코로망스 카라반",
-        stayInfo:
-            "도심에서 가깝고, 바다가 보이는 코코로망스입니다\n다양한 부대시설을 구비하였으며 카라반 및 캠핑이 가능합니다",
-        location: "인천 옹진군 영흥면 내리 1651-4",
-        notice: "...",
-      ),
-    ];
+    final List<Stay> saleStayList = model?.saleStayList ?? [];
+    final List<Stay> domesticStayList = model?.domesticStayList ?? [];
+    final List<Stay> overseaStayList = model?.overseaStayList ?? [];
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -81,11 +45,11 @@ class _HomePageState extends State<HomePage> {
             ),
             HomeBody(
               title: "국내 숙소",
-              stays: dometicesStayItemList, // 국내 숙소 리스트 전달
+              stays: domesticStayList, // 국내 숙소 리스트 전달
             ),
             HomeBody(
               title: "해외 숙소",
-              stays: overseasStayItemList, // 해외 숙소 리스트 전달
+              stays: overseaStayList, // 해외 숙소 리스트 전달
             ),
           ],
         ),

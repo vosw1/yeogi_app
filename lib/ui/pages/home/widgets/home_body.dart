@@ -66,7 +66,7 @@ class HomeBody extends StatelessWidget {
                             borderRadius: BorderRadius.circular(gap_s),
                             image: DecorationImage(
                               image: AssetImage(
-                                  'assets/images/${stays[index].stayImgTitle}'),
+                                  "assets/${stays[index].imagePath}"),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -81,7 +81,7 @@ class HomeBody extends StatelessWidget {
                           color: Colors.white,
                         ),
                         child: Text(
-                          stays[index].stayName,
+                          stays[index].name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),

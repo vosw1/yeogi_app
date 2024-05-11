@@ -62,7 +62,7 @@ class CampingStayListPage extends ConsumerWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage("assets/images/camping/camping1.png"), // 이미지 경로
+                    image: AssetImage("assets/${stay.imagePath}"), // 이미지 경로
                     fit: BoxFit.cover,
                   ),
                 ),

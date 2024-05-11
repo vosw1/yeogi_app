@@ -6,28 +6,40 @@ import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/repositories/stay_repository.dart';
 import 'package:yogi_project/main.dart';
 
-class SaleStayListModel {
-  List<Stay> stay;
+class HomePageListModel {
+  List<Stay> saleStayList;
+  List<Stay> domesticStayList;
+  List<Stay> overseaStayList;
 
-  SaleStayListModel(this.stay);
+  HomePageListModel({
+    required this.saleStayList,
+    required this.domesticStayList,
+    required this.overseaStayList,
+  });
 }
 
-class SaleStayListViewModel extends StateNotifier<SaleStayListModel?> {
+class HomePageListViewModel extends StateNotifier<HomePageListModel?> {
   final mContext = navigatorKey.currentContext;
   Ref ref;
 
-  SaleStayListViewModel(super.state, this.ref);
+  HomePageListViewModel(super.state, this.ref);
 
   Future<void> notifyInit() async {
-    // 통신하기
-    ResponseDTO responseDTO = await StayRepository().fetchHomeStayList();
-    // 상태값 갱신 (새로 new해서 넣어줘야 한다)
-    // 여기는 리스트로 받아서 이렇게 설정
-    state = responseDTO.body;
+    // 특가 숙소 가져오기
+    ResponseDTO saleResponse = await StayRepository().fetchHomeStayList("sale");
+    // 국내 숙소 가져오기
+    ResponseDTO domesticResponse = await StayRepository().fetchHomeStayList("domestic");
+    // 해외 숙소 가져오기
+    ResponseDTO overseaResponse = await StayRepository().fetchHomeStayList("oversea");
+
+    state = HomePageListModel(
+      saleStayList: saleResponse.body,
+      domesticStayList: domesticResponse.body,
+      overseaStayList: overseaResponse.body,
+    );
   }
 }
 
-final saleStayListProvider =
-StateNotifierProvider<SaleStayListViewModel, SaleStayListModel?>((ref) {
-  return SaleStayListViewModel(null, ref)..notifyInit();
+final homePageStayListProvider = StateNotifierProvider<HomePageListViewModel, HomePageListModel?>((ref) {
+  return HomePageListViewModel(null, ref)..notifyInit();
 });
