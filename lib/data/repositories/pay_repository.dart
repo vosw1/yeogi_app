@@ -10,11 +10,11 @@ class PayRepository {
   PayRepository(this.dio, this.logger);
 
   // 결제하기
-  Future<ResponseDTO> fetchPaySave(PaySaveReqDTO reqDTO, String accessToken) async {
+  Future<ResponseDTO> fetchPaySave(
+      PaySaveReqDTO reqDTO, String accessToken) async {
     try {
       print("결제 시작");
-      Response response = await dio.post(
-          "/api/reservation/pay/${reqDTO.payId}",
+      Response response = await dio.post("/api/reservation/pay/${reqDTO.payId}",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}),
           data: reqDTO.toJson());
 
@@ -35,21 +35,11 @@ class PayRepository {
   // 결제 환불요청하기
   Future<ResponseDTO> fetchPayUpdate(int payId, String accessToken) async {
     try {
-      Response response = await dio.put(
-          "/api/reservation/refund/$payId",
+      Response response = await dio.put("/api/reservation/refund/$payId",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}));
-
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      logger.d("HTTP Status Code: ${response.statusCode}");
-      logger.d("Response Data: ${response.data}");
-
-      if (response.statusCode != 200) {
-        logger.d("Failed to refund reservation.");
-        // Depending on the API, you might want to handle specific status codes here.
-      }
-      return responseDTO;
+      return ResponseDTO.fromJson(response.data);
     } catch (e) {
-      logger.e("Error in refundReservation: $e");
+      logger.e("Error in fetchPayUpdate: $e");
       throw Exception('Failed to update reservation to refund');
     }
   }
