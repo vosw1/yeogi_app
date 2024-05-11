@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
-import 'package:yogi_project/data/repositories/payment_repository.dart';
+import 'package:yogi_project/data/repositories/pay_repository.dart';
 import 'package:logger/logger.dart';
 
 void main() async {
@@ -15,13 +15,13 @@ void main() async {
   final logger = Logger();
 
   // Repository 인스턴스 생성
-  final paymentRepository = PaymentRepository(dio, logger);
+  final payRepository = PayRepository(dio, logger);
 
   // 테스트 실행
-  await fetchPayUpdateTest(paymentRepository);
+  await fetchPayUpdateTest(payRepository);
 }
 
-Future<void> fetchPayUpdateTest(PaymentRepository paymentRepository) async {
+Future<void> fetchPayUpdateTest(PayRepository PayRepository) async {
   // 테스트에 사용될 DTO 생성
   final requestDTO = PaySaveReqDTO(
     payId: 1,  // 실제 존재하는 paymentId를 사용해야 함
@@ -36,9 +36,9 @@ Future<void> fetchPayUpdateTest(PaymentRepository paymentRepository) async {
   final accessToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2OTU5Njg1LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.5xYn8esbFIgPkbtoteBFNGleVB257fCY-TzeASjmvZ9nWzrRVGel_HxPnI7wR_TdXow8UmXkZbB_Fz0j0njqAA';
 
   try {
-    final response = await paymentRepository.fetchPaySave(requestDTO, accessToken);
+    final response = await PayRepository.fetchPaySave(requestDTO, accessToken);
     print("Payment Save Response: ${response.status}");
   } catch (e) {
-    print("Error during payment save: $e");
+    print("Error during pay save: $e");
   }
 }

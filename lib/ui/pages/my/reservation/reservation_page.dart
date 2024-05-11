@@ -7,7 +7,7 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart'; // 파일명 오타 수정
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/my/payment/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/argreement_section.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservaion_info_form.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
@@ -15,7 +15,6 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/room_info.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 
 class ReservationPage extends ConsumerWidget {
-  // StatefulWidget에서 ConsumerWidget으로 변경
   final Room rooms;
 
   ReservationPage({required this.rooms});
@@ -115,13 +114,13 @@ class ReservationPage extends ConsumerWidget {
             : 'Default Tel',
       );
 
-      ref.read(reservationListProvider.notifier).notifyAdd(dto);
+      ref.read(reservationListProvider.notifier).reservationSave(dto);
       // 예약 정보가 성공적으로 추가된 후 결제 페이지로 네비게이션
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                PaymentPage()), // PaymentPage는 결제 페이지의 클래스입니다.
+                PayPage()), // PaymentPage는 결제 페이지의 클래스입니다.
       );
     } else {
       showDialog(

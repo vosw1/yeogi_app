@@ -13,7 +13,7 @@ import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
-import 'package:yogi_project/ui/pages/my/payment/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
@@ -43,7 +43,7 @@ class Move {
   static String campingStayList = "/camping";
   static String guestHouseStayList = "/guestHouse";
   static String reservationPage = "/api/my-reservations";
-  static String paymentPage = "/payment";
+  static String paymentPage = "/pay";
   static String eventPage = "/event";
 }
 
@@ -207,7 +207,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지
-    Move.paymentPage: (context) => const PaymentPage(),
+    Move.paymentPage: (context) => const PayPage(),
     // 결제 페이지
     Move.myReservationPage: (context) => MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
     // 국내 숙소 예약확인 페이지

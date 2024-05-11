@@ -17,7 +17,7 @@ class Pay {
 
   factory Pay.fromJson(Map<String, dynamic> json) {
     return Pay(
-      PayId: json['PayId'],
+      payId: json['payId'],
       reservationId: json['reservationId'],
       amount: json['amount'],
       way: json['way'],

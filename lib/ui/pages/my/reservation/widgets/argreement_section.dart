@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/my/payment/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 
 class AgreementSection extends StatefulWidget {
   final void Function(bool) onAllChecked;
@@ -134,7 +134,7 @@ class _AgreementSectionState extends State<AgreementSection> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PaymentPage()),
+        MaterialPageRoute(builder: (context) => PayPage()),
       );
     }
   }

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/ui/pages/my/payment/widgets/total_payment.dart';
+import 'package:yogi_project/ui/pages/my/pay/widgets/total_pay.dart';
 
 
-class PaymentPage extends StatelessWidget {
+class PayPage extends ConsumerWidget {
 
-  const PaymentPage({Key? key}) : super(key: key);
+  const PayPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text('결제 페이지'),
