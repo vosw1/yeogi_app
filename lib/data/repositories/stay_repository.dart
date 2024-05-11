@@ -76,10 +76,6 @@ class StayRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    Logger().d(response.data);
-    Logger().d(response.runtimeType);
-    Logger().d(responseDTO.body);
-
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
@@ -98,10 +94,6 @@ class StayRepository {
     );
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
-    Logger().d(response.data);
-    Logger().d(response.runtimeType);
-    Logger().d(responseDTO.body);
 
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
@@ -122,10 +114,6 @@ class StayRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    Logger().d(response.data);
-    Logger().d(response.runtimeType);
-    Logger().d(responseDTO.body);
-
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
@@ -144,10 +132,6 @@ class StayRepository {
     );
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
-    Logger().d(response.data);
-    Logger().d(response.runtimeType);
-    Logger().d(responseDTO.body);
 
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
@@ -168,10 +152,6 @@ class StayRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    Logger().d(response.data);
-    Logger().d(response.runtimeType);
-    Logger().d(responseDTO.body);
-
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
@@ -190,6 +170,10 @@ class StayRepository {
     );
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    Logger().d(response.data);
+    Logger().d(response.runtimeType);
+    Logger().d(responseDTO.body);
 
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
