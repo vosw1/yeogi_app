@@ -3,6 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
@@ -129,6 +130,29 @@ class StayRepository {
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
       MotelStayListModel stayListModel = MotelStayListModel(stays);
+      responseDTO.body = stayListModel; // 숙소 목록을 responseDTO에 할당
+    }
+
+    return responseDTO;
+  }
+
+  // 홈&빌라 숙소 리스트
+  Future<ResponseDTO> fetchHomeAndVillaStayList() async {
+    final response = await dio.get(
+      "/stays/home-and-villa",
+    );
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    Logger().d(response.data);
+    Logger().d(response.runtimeType);
+    Logger().d(responseDTO.body);
+
+    if (responseDTO.status == 200) {
+      List<dynamic> temp = responseDTO.body;
+      List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
+
+      HomeAndVillaStayListModel stayListModel = HomeAndVillaStayListModel(stays);
       responseDTO.body = stayListModel; // 숙소 목록을 responseDTO에 할당
     }
 

@@ -6,14 +6,15 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
-class MotelStayListPage extends ConsumerWidget {
+class HomeAndVillaStayListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    MotelStayListModel? model = ref.watch(motelStayListProvider);
+    HomeAndVillaStayListModel? model = ref.watch(homeAndVillaStayListProvider);
 
     if(model == null){
       return Center(
@@ -22,7 +23,7 @@ class MotelStayListPage extends ConsumerWidget {
     }else{
       return Scaffold(
         appBar: AppBar(
-          title: Text('모텔'),
+          title: Text('홈&빌라'),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
@@ -58,7 +59,7 @@ class MotelStayListPage extends ConsumerWidget {
               child: Container(
                 height: 120, // 사진의 높이
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(gap_s),
+                  borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     image: AssetImage("assets/images/camping/camping1.png"), // 이미지 경로
                     fit: BoxFit.cover,

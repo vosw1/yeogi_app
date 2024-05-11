@@ -9,7 +9,7 @@ Future<void> fetchReservationSaveTest() async {
   // given
   ReservationSaveReqDTO requestDTO = ReservationSaveReqDTO(
     roomId: '1',
-    location: '부산광역시 진구',
+    stayAdress: '부산광역시 진구',
     roomName: 'Deluxe',
     roomImgTitle: 'room1.png',
     price: 142000,
