@@ -1,33 +1,55 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/pay.dart';
 import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/data/repositories/pay_repository.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/review_writing_dialog.dart';
+
+final payRepositoryProvider = Provider<PayRepository>((ref) {
+  final dio = ref.read(dioProvider);
+  final logger = ref.read(loggerProvider);
+  return PayRepository(dio, logger);
+});
+
+final dioProvider = Provider<Dio>((ref) => Dio());
+final loggerProvider = Provider<Logger>((ref) => Logger());
 
 class ReservationDetailPage extends StatefulWidget {
   final Reservation reservations;
   final Room rooms;
   final Pay pays;
+  final bool isCanceled = false;
 
-  const ReservationDetailPage({Key? key, required this.reservations, required this.rooms, required this.pays});
+  const ReservationDetailPage({
+    Key? key,
+    required this.reservations,
+    required this.rooms,
+    required this.pays,
+  }) : super(key: key);
 
   @override
-  _BookDetailPageState createState() => _BookDetailPageState();
+  _ReservationDetailPageState createState() => _ReservationDetailPageState();
 }
 
-class _BookDetailPageState extends State<ReservationDetailPage> {
+class _ReservationDetailPageState extends State<ReservationDetailPage> {
   late DateTime _checkInDate;
   late DateTime _checkOutDate;
   int _numberOfNights = 1;
+  bool isCanceled = false;
 
   @override
   void initState() {
     super.initState();
-    _checkInDate = widget.reservations.checkInDate;
-    _checkOutDate = widget.reservations.checkOutDate ?? DateTime.now();
+    // Example initialization (replace with actual data)
+    _checkInDate = DateTime.now();
+    _checkOutDate = DateTime.now().add(Duration(days: 5));
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
   }
 
@@ -35,133 +57,52 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('예약하기'),
+        title: Text('예약내역'),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_m),
-        child: ListView(
-          children: [
-            Container(
-              padding: EdgeInsets.all(gap_m),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(gap_s),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(gap_s),
-                    child: Image.asset(
-                      'assets/images/${widget.reservations.roomImgTitle}',
-                      width: double.infinity,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(height: gap_s),
-                  Text('${widget.reservations.roomName}',
-                      style: TextStyle(fontSize: gap_m)),
-                  Text('${widget.reservations.stayAddress}'),
-                  SizedBox(height: gap_s),
-                  Text('숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_s),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('체크인', style: TextStyle(fontSize: gap_m)),
-                          SizedBox(height: gap_xs),
-                          GestureDetector(
-                            onTap: () => _selectDate(context, isCheckIn: true),
-                            child: Container(
-                              padding: EdgeInsets.all(gap_s),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(gap_s),
-                                border: Border.all(color: Colors.grey.shade300),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(formatDate(_checkInDate)),
-                                  SizedBox(width: gap_xs),
-                                  Icon(Icons.calendar_today),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('체크아웃', style: TextStyle(fontSize: gap_m)),
-                          SizedBox(height: gap_xs),
-                          GestureDetector(
-                            onTap: () => _selectDate(context, isCheckIn: false),
-                            child: Container(
-                              padding: EdgeInsets.all(gap_s),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(gap_s),
-                                border: Border.all(color: Colors.grey.shade300),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(formatDate(_checkOutDate)),
-                                  SizedBox(width: gap_xs),
-                                  Icon(Icons.calendar_today),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: gap_s),
-                  Divider(),
-                  SizedBox(height: gap_s),
-                  Text('예약 정보', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_m),
-                  _buildReservationInfo(),
-                ],
-              ),
+      body: Consumer(
+        builder: (context, ref, child) {
+          final payRepository = ref.watch(payRepositoryProvider);
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: gap_m),
+            child: ListView(
+              children: [
+                reservationDetailWidget(),
+                actionButtons(context, ref),
+              ],
             ),
-            SizedBox(height: gap_m),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _showCancelConfirmationDialog(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.redAccent,
-                      side: BorderSide.none, // 테두리 없음
-                    ),
-                    child: Text('예약 취소'),
-                  ),
-                  SizedBox(width: gap_m),
-                  ElevatedButton(
-                    onPressed: () {
-                      _showReviewWritingDialog(context); // 리뷰 작성 다이얼로그 표시
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.redAccent,
-                      side: BorderSide.none, // 테두리 없음
-                    ),
-                    child: Text('리뷰 작성'),
-                  ),
-                ],
-              ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget reservationDetailWidget() {
+    return Container(
+      padding: EdgeInsets.all(gap_m),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(gap_s),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(gap_s),
+            child: Image.asset(
+              'assets/images/room.jpg', // Placeholder image path
+              width: double.infinity,
+              height: 150,
+              fit: BoxFit.cover,
             ),
-            SizedBox(height: gap_m),
-          ],
-        ),
+          ),
+          SizedBox(height: gap_s),
+          Text('Room Name', style: TextStyle(fontSize: gap_m)),
+          Text('Address'),
+          SizedBox(height: gap_s),
+          Text('숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
+              style: TextStyle(fontSize: gap_m)),
+          _buildReservationInfo(),
+        ],
       ),
     );
   }
@@ -170,65 +111,49 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text('예약자 : ', style: subtitle1()),
-            Text('${widget.reservations.reservationName}', style: subtitle1()),
-          ],
-        ),
-        SizedBox(height: gap_xs),
-        Row(
-          children: [
-            Text('전화번호 : ', style: subtitle1()),
-            Text('${widget.reservations.reservationTel}', style: subtitle1()),
-          ],
-        ),
-        SizedBox(height: gap_s),
-        Row(
-          children: [
-            Text('결제금액 : ', style: subtitle1()),
-            Text('${NumberFormat('#,###').format(widget.reservations.price)} 원'),
-          ],
-        ),
-        SizedBox(height: gap_xs),
-        Row(
-          children: [
-            Text('결제일자 : ', style: subtitle1()),
-            Text('${formatDate(widget.pays.createdAt)}', style: subtitle1()),
-          ],
-        ),
-        SizedBox(height: gap_xs),
-        Row(
-          children: [
-            Text('결제수단 : ', style: subtitle1()),
-            Text('${widget.pays.way}', style: subtitle1()),
-          ],
-        ),
+        Text('예약자: ${reservations.reservationName}'),
+        Text('전화번호: ${reservations.reservationTel}'),
+        Text('결제금액: ${NumberFormat('#,###').format(reservations.price)} 원'),
+        Text('결제일자: ${formatDate(DateTime.now())}'),
+        Text('결제수단: Credit Card'),
       ],
     );
   }
 
-  Future<void> _selectDate(BuildContext context,
-      {required bool isCheckIn}) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: isCheckIn ? _checkInDate : _checkOutDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
+  Widget actionButtons(BuildContext context, WidgetRef ref) {
+    final payRepository = ref.read(payRepositoryProvider);
+
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (!isCanceled)
+            ElevatedButton(
+              onPressed: () => _showCancelConfirmationDialog(context, ref),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.redAccent,
+                side: BorderSide.none,
+              ),
+              child: Text('예약 취소'),
+            ),
+          SizedBox(width: gap_m),
+          if (!isCanceled)
+            ElevatedButton(
+              onPressed: () => _showReviewWritingDialog(context),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.redAccent,
+                side: BorderSide.none,
+              ),
+              child: Text('리뷰 작성'),
+            ),
+        ],
+      ),
     );
-    if (pickedDate != null) {
-      setState(() {
-        if (isCheckIn) {
-          _checkInDate = pickedDate;
-        } else {
-          _checkOutDate = pickedDate;
-        }
-        _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
-      });
-    }
   }
 
-  void _showCancelConfirmationDialog(BuildContext context) {
+  void _showCancelConfirmationDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -236,43 +161,49 @@ class _BookDetailPageState extends State<ReservationDetailPage> {
           title: Text('예약 취소'),
           content: Text('이 예약을 취소하시겠습니까?'),
           actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    // todo : 추후 서버랑 통신해서 해결하기
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => 이동할 페이지,
-                    //   ),
-                    // );
-                  },
-                  child: Text('예'),
-                ),
-                SizedBox(width: gap_s),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('아니요'),
-                ),
-              ],
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                try {
+                  ref
+                      .read(reservationListProvider.notifier)
+                      .payUpdate(widget.pays.payId);
+                  setState(() {
+                    isCanceled = true; // Reflect cancellation in the state
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content:
+                        Text('Reservation canceled and refunded successfully.'),
+                    backgroundColor: Colors.green,
+                  ));
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content:
+                        Text('Failed to cancel reservation: ${e.toString()}'),
+                    backgroundColor: Colors.red,
+                  ));
+                }
+              },
+              child: Text('예'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('아니요'),
             ),
           ],
         );
       },
     );
   }
+}
 
-  void _showReviewWritingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return ReviewWritingDialog(); // ReviewWritingDialog를 호출하여 표시
-      },
-    );
-  }
+void _showReviewWritingDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return ReviewWritingDialog();
+    },
+  );
 }
 
 String formatDate(DateTime dateTime) {

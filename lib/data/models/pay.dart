@@ -17,11 +17,11 @@ class Pay {
 
   factory Pay.fromJson(Map<String, dynamic> json) {
     return Pay(
-      payId: json['payId'],
+      payId: json['payId'] ,
       reservationId: json['reservationId'],
       amount: json['amount'],
-      way: json['way'],
-      state: json['state'],
+      way: json['way'] ?? 'Credit Card',
+      state: json['state'] ?? 'COMPLETION',
       createdAt: DateTime.parse(json['createdAt']),
     );
   }

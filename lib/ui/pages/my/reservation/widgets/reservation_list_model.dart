@@ -11,13 +11,29 @@ import 'package:yogi_project/data/repositories/pay_repository.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/main.dart';
+import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
 
 class ReservationListViewModel extends StateNotifier<List<Reservation>> {
-  final mContext = navigatorKey.currentContext;
   final Ref ref;
   final logger = Logger();
 
   ReservationListViewModel(mContext, this.ref) : super([]);
+
+  // 결제 환불하기(예약취소)
+  Future<void> payUpdate(int payId) async {
+    try {
+      String accessToken = ref.read(sessionProvider).accessToken!;
+      PayRepository payRepository = ref.read(payRepositoryProvider);
+      ResponseDTO responseDTO = await payRepository.fetchPayUpdate(payId, accessToken);
+      if (responseDTO.status == 200) {
+        logger.d("Refund processed successfully.");
+      } else {
+        logger.e("Failed to process refund: ${responseDTO.errorMessage}");
+      }
+    } catch (e) {
+      logger.e("Error in processing refund: $e");
+    }
+  }
 
   // 결제하기
   Future<void> paySave(PaySaveReqDTO reqDTO) async {

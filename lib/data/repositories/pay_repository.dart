@@ -9,9 +9,10 @@ class PayRepository {
 
   PayRepository(this.dio, this.logger);
 
-  // Saves pay details to the server
+  // 결제하기
   Future<ResponseDTO> fetchPaySave(PaySaveReqDTO reqDTO, String accessToken) async {
     try {
+      print("결제 시작");
       Response response = await dio.post(
           "/api/reservation/pay/${reqDTO.payId}",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}),
@@ -31,7 +32,7 @@ class PayRepository {
     }
   }
 
-  // Deletes or updates a reservation to 'refund' status
+  // 결제 환불요청하기
   Future<ResponseDTO> fetchPayUpdate(int payId, String accessToken) async {
     try {
       Response response = await dio.put(
