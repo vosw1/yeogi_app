@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_billa_stay_list.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_list_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_list_page.dart';
@@ -101,7 +101,7 @@ class HeaderAppbarItemList extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeAndBillaStayList()),
+                  MaterialPageRoute(builder: (context) => HomeAndVillaStayListPage()),
                 );
               },
               child: HeadAppBarItem(iconData: FontAwesomeIcons.house, text: '홈&빌라'),
