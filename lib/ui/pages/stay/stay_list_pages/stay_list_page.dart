@@ -53,7 +53,7 @@ abstract class StayListPage extends StatelessWidget {
               child: Container(
                 height: 120, // 사진의 높이
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(gap_s),
                   image: DecorationImage(
                     image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
                     fit: BoxFit.cover,

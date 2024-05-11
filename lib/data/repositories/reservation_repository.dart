@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
-import 'package:yogi_project/data/dtos/reservaion_request.dart';
+import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 
@@ -39,7 +39,6 @@ class ReservationRepository {
     return responseDTO;
   }
 
-  // 예약 내역 확인하기
   Future<ResponseDTO> fetchReservationList(String accessToken) async {
     final response = await dio.get(
       "/api/my-reservations",
@@ -52,18 +51,17 @@ class ReservationRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
-      List<Reservation> reservations = (responseDTO.body as List<dynamic>)
-          .map((item) => Reservation.fromJson(item as Map<String, dynamic>))
-          .toList();
+      List<dynamic> temp = responseDTO.body as List<dynamic>;
+      List<Reservation> reservations =
+          temp.map((e) => Reservation.fromJson(e)).toList();
+      responseDTO.body = reservations; // Update the body to be the list of reservations
 
-      responseDTO.body = reservations;  // Update the body to be the list of reservations
       for (var reservation in reservations) {
-        print(reservation.toString());
+        print('데이터 확인 : ${reservation.toString()}');
       }
     } else {
       print("예약내역 조회하기 실패");
     }
     return responseDTO;
   }
-
 }

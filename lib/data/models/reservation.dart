@@ -33,16 +33,38 @@ class Reservation {
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
+    // 'price' 값을 JSON 데이터에서 가져오기
+    final dynamic priceData = json['price'];
+    // priceData가 null이면 0으로 설정
+    final int price = priceData != null ? int.tryParse(priceData.toString()) ?? 0 : 0;
+
+    // checkInDate 및 checkOutDate를 파싱하기 전에 값이 null인지 확인
+    final String? checkInDateString = json['checkInDate'];
+    final String? checkInTimeString = json['checkInTime'];
+    final String? checkOutDateString = json['checkOutDate'];
+    final String? checkOutTimeString = json['checkOutTime'];
+
+    final DateTime checkInDate = checkInDateString != null && checkInTimeString != null
+        ? DateTime.parse(checkInDateString + ' ' + checkInTimeString)
+        : DateTime.now(); // 널 값이면 기본값으로 설정
+
+    final DateTime checkOutDate = checkOutDateString != null && checkOutTimeString != null
+        ? DateTime.parse(checkOutDateString + ' ' + checkOutTimeString)
+        : DateTime.now(); // 널 값이면 기본값으로 설정
+
     return Reservation(
       reservationId: json['reservationId'] ?? 0,
       userId: json['userId'] ?? 0,
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
-      price: json['price'] ?? 0,
+      price: price,
       roomId: json['roomId'] ?? 0,
       roomName: json['roomName'] ?? 'Unknown',
-      checkInDate: DateTime.parse(json['checkInDate'] + ' ' + json['checkInTime']),
-      checkOutDate: DateTime.parse(json['checkOutDate'] + ' ' + json['checkOutTime']),
+      checkInDate: checkInDate,
+      checkOutDate: checkOutDate,
+      roomImgTitle: json['roomImgTitle'] ?? '',
+      reservationName: json['reservationName'] ?? '',
+      reservationTel: json['reservationTel'] ?? '',
     );
   }
 }

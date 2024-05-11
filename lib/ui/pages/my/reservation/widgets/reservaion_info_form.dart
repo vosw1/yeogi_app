@@ -1,14 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
-import 'package:yogi_project/ui/pages/my/book/widgets/reservation_text_form_field.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_text_form_field.dart';
 
-class UserInfoForm extends StatelessWidget {
+class ReservationInfoForm extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController phoneNumberController;
 
-  UserInfoForm({required this.nameController, required this.phoneNumberController});
+  const ReservationInfoForm({
+    Key? key,
+    required this.nameController,
+    required this.phoneNumberController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

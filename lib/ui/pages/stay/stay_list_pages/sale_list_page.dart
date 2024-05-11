@@ -55,7 +55,7 @@ class SaleStayListPage extends ConsumerWidget {
               child: Container(
                 height: 120, // 사진의 높이
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(gap_s),
                   image: DecorationImage(
                     image: AssetImage("assets/images/camping/camping1.png"), // 이미지 경로
                     fit: BoxFit.cover,
