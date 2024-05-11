@@ -1,36 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
+import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
-abstract class StayListPage extends StatelessWidget {
-  const StayListPage({Key? key, required this.appBarTitle}) : super(key: key);
-
-  final String appBarTitle;
-  List<Stay> getStayDataList();
-
+class GuestHouseStayListPage extends ConsumerWidget {
   @override
-  build(BuildContext context) async {
-    List<Stay> stayDataList = getStayDataList();
-    List<Stay> stays = await stayDataList;
+  Widget build(BuildContext context, WidgetRef ref) {
+    GuestHouseStayListModel? model = ref.watch(guestHouseStayListProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(appBarTitle),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: gap_m),
-        child: ListView.builder(
-          itemCount: stays.length,
-          itemBuilder: (context, index) {
-            final Stay stay = stays[index];
-            return buildListItem(context, stay);
-          },
+    if(model == null){
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }else{
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('게스트 하우스'),
         ),
-      ),
-    );
+        body: Padding(
+          padding: const EdgeInsets.only(bottom: gap_m),
+          child: ListView.builder(
+            itemCount: model.stay.length,
+            itemBuilder: (context, index) {
+              final Stay stay = model.stay[index];
+              return buildListItem(context, stay);
+            },
+          ),
+        ),
+      );
+    }
   }
 
   Widget buildListItem(BuildContext context, Stay stay) {
@@ -46,16 +54,16 @@ abstract class StayListPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StayDetailPage(stays: stays, rooms: rooms,),
+                    builder: (context) => StayDetailPage(stays: stay, rooms: rooms,),
                   ),
                 );
               },
               child: Container(
                 height: 120, // 사진의 높이
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(gap_s),
+                  borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage("assets/images/${stay.stayImgTitle}"), // 이미지 경로
+                    image: AssetImage("assets/images/camping/camping1.png"), // 이미지 경로
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -71,7 +79,7 @@ abstract class StayListPage extends StatelessWidget {
                 Container(
                   width: double.infinity, // 화면 너비에 맞추기 위해 사용
                   child: Text(
-                    stay.stayName,
+                    stay.name,
                     style: h5(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -79,13 +87,13 @@ abstract class StayListPage extends StatelessWidget {
                 ),
                 SizedBox(height: 4), // 텍스트 사이 간격
                 Text(
-                  stay.location, // 숙소 위치
+                  stay.address, // 숙소 위치
                   style: subtitle1(),maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 4), // 텍스트 사이 간격
                 Text(
-                  stay.stayInfo, // 숙소 정보
+                  stay.intro, // 숙소 정보
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.grey),
