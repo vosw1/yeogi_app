@@ -138,7 +138,8 @@ class StayRepository {
       List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
-      HomeAndVillaStayListModel stayListModel = HomeAndVillaStayListModel(stays);
+      HomeAndVillaStayListModel stayListModel =
+          HomeAndVillaStayListModel(stays);
       responseDTO.body = stayListModel; // 숙소 목록을 responseDTO에 할당
     }
 
@@ -184,19 +185,33 @@ class StayRepository {
   }
 
   // 메인 페이지
-  Future<ResponseDTO> fetchHomeStayList() async {
+  Future<ResponseDTO> fetchHomeStayList(String type) async {
     final response = await dio.get(
       "/home",
     );
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
+    Logger().d(responseDTO.body);
+
     if (responseDTO.status == 200) {
-      List<dynamic> temp = responseDTO.body;
+      List<dynamic> temp;
+      if (type == "sale") {
+        // 특가
+        temp = responseDTO.body["specialprices"];
+      } else if (type == "domestic") {
+        // 국내
+        temp = responseDTO.body["domestics"];
+      } else if (type == "oversea") {
+        // 해외
+        temp = responseDTO.body["overseas"];
+      } else {
+        temp = responseDTO.body;
+      }
+
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
-
-      responseDTO.body = stays; // 숙소 목록을 responseDTO에 할당
+      responseDTO.body = stays;
     }
 
     return responseDTO;
