@@ -4,7 +4,7 @@ class ReservationSaveReqDTO {
   final String roomId; // 룸 ID
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
-  final String location; // 위치
+  final String stayAdress; // 위치
   final DateTime checkInDate; // 체크인 날짜와 시간
   final DateTime checkOutDate; // 체크아웃 날짜와 시간
   final int price; // 가격
@@ -15,7 +15,7 @@ class ReservationSaveReqDTO {
     required this.roomId,
     required this.roomImgTitle,
     required this.roomName,
-    required this.location,
+    required this.stayAdress,
     required this.checkInDate,
     required this.checkOutDate,
     required this.price,
@@ -28,7 +28,7 @@ class ReservationSaveReqDTO {
       roomId: json['roomId'],
       roomImgTitle: json['roomImgTitle'],
       roomName: json['roomName'],
-      location: json['location'],
+      stayAdress: json['stayAdress'],
       checkInDate: DateTime.parse(json['checkInDate']),
       checkOutDate: DateTime.parse(json['checkOutDate']),
       price: json['price'],
@@ -42,7 +42,7 @@ class ReservationSaveReqDTO {
       'roomId': roomId,
       'roomImgTitle': roomImgTitle,
       'roomName': roomName,
-      'location': location,
+      'stayAdress': stayAdress,
       'checkInDate': checkInDate.toIso8601String(),
       'checkOutDate': checkOutDate.toIso8601String(),
       'price': price,

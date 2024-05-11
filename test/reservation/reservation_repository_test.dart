@@ -1,4 +1,4 @@
-import 'package:yogi_project/data/dtos/reservaion_request.dart';
+import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
 void main() async {

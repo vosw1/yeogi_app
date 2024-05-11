@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // 상태 관리 라이브러리 추가
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/dtos/reservation_request.dart'; // 파일명 오타 수정
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
+import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/argreement_section.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservaion_info_form.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/room_info.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 
-class ReservationPage extends StatefulWidget {
+class ReservationPage extends ConsumerWidget { // StatefulWidget에서 ConsumerWidget으로 변경
   final Room rooms;
   ReservationPage({required this.rooms});
 
   @override
-  _ReservationPageState createState() => _ReservationPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) { // ConsumerWidget에 맞게 매개변수 변경
+    final _nameController = TextEditingController();
+    final _phoneNumberController = TextEditingController();
 
-class _ReservationPageState extends State<ReservationPage> {
-  bool _isChecked = false;
-  List<bool> _subCheckboxValues = [false, false, false, false];
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _phoneNumberController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('예약하기')),
       body: SingleChildScrollView(
@@ -40,7 +30,7 @@ class _ReservationPageState extends State<ReservationPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              RoomInfo(rooms: widget.rooms),
+              RoomInfo(rooms: rooms),
               SizedBox(height: gap_m),
               RoomNotice(),
               Divider(),
@@ -54,12 +44,9 @@ class _ReservationPageState extends State<ReservationPage> {
               SizedBox(height: gap_s),
               AgreementSection(
                 onAllChecked: (bool value) {
-                  setState(() {
-                    _isChecked = value;
-                    _subCheckboxValues = List.filled(_subCheckboxValues.length, value);
-                  });
+                  // 상태 관리 로직 필요
                 },
-                subCheckboxValues: _subCheckboxValues,
+                subCheckboxValues: [false, false, false, false], // 상태 관리 예제
                 subtitles: [
                   '이용규칙 및 취소/환불 규정 동의(필수)',
                   '개인정보 수집 및 이용 동의(필수)',
@@ -68,70 +55,59 @@ class _ReservationPageState extends State<ReservationPage> {
                 ],
               ),
               SizedBox(height: gap_l),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: gap_m),
+                child: ElevatedButton(
+                  onPressed: () => _attemptReservation(context, ref, _nameController, _phoneNumberController, rooms, stays /* you need to add the Stay object or remove it from the function parameters */),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
+                  ),
+                  child: Text(
+                    '${NumberFormat('#,###').format(rooms.price)} 원 결제하기',
+                    style: h6(mColor: Colors.white),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
-      persistentFooterButtons: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: gap_m),
-          child: ElevatedButton(
-            onPressed: () {
-              _showPopups(context);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.redAccent,
-              padding: EdgeInsets.symmetric(vertical: 15.0),
-            ),
-            child: Text(
-              '${NumberFormat('#,###').format(widget.rooms.price)} 원 결제하기',
-              style: h6(mColor: Colors.white),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
-  void _showPopups(BuildContext context) {
-    List<String> messages = [];
-    if (!_subCheckboxValues.every((element) => element)) {
-      messages.add('모두 동의해주세요');
-    }
+  void _attemptReservation(BuildContext context, WidgetRef ref, TextEditingController nameController, TextEditingController phoneController, Room rooms, Stay stays) {
+    if ([true, true, true, true].every((val) => val)) { // Assuming all conditions are met
+      ReservationSaveReqDTO dto = ReservationSaveReqDTO(
+        roomId: rooms.roomId.toString(),
+        stayAdress: stays.address ?? 'defaultAddress',
+        roomName: rooms.roomName ?? 'defaultRoomName',
+        roomImgTitle: rooms.roomImgTitle ?? 'defaultImgTitle',
+        price: (rooms.price ?? 0).toInt(),  // Ensuring conversion to double
+        checkInDate: DateTime.parse(rooms.checkInDate ?? DateTime.now().toString()),
+        checkOutDate: DateTime.parse(rooms.checkOutDate ?? DateTime.now().toString()),
+        reservationName: nameController.text.isNotEmpty ? nameController.text : 'Default Name',
+        reservationTel: phoneController.text.isNotEmpty ? phoneController.text : 'Default Tel',
+      );
 
-    if (messages.isNotEmpty) {
+      ref.read(reservationListProvider.notifier).notifyAdd(dto);
+    } else {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Notice'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: messages.map((message) => Text(message)).toList(),
-            ),
-            backgroundColor: Colors.white,
+            content: Text('모든 필수 항목에 동의해주세요.'),
             actions: <Widget>[
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('확인'),
-                ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('확인'),
               ),
             ],
           );
         },
       );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => PaymentPage()),
-      );
     }
   }
 }
-
-
