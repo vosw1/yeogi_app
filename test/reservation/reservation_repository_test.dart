@@ -1,31 +1,44 @@
-import 'package:yogi_project/data/dtos/reservation_request.dart';
-import 'package:yogi_project/data/repositories/reservation_repository.dart';
+import 'package:dio/dio.dart';
+import 'package:yogi_project/data/dtos/pay_request.dart';
+import 'package:yogi_project/data/repositories/pay_repository.dart';
+import 'package:logger/logger.dart';
 
 void main() async {
-  await fetchReservationSaveTest();
+  // Dio 인스턴스 생성 및 설정
+  final dio = Dio(BaseOptions(
+    baseUrl: "http://192.168.219.110:8080",  // API 서버의 기본 주소
+    contentType: "application/json; charset=utf-8",
+    validateStatus: (_) => true,
+  ));
+
+  // Logger 인스턴스 생성
+  final logger = Logger();
+
+  // Repository 인스턴스 생성
+  final paymentRepository = PayRepository(dio, logger);
+
+  // 테스트 실행
+  await fetchPaySaveTest(paymentRepository);
 }
 
-Future<void> fetchReservationSaveTest() async {
-  // given
-  ReservationSaveReqDTO requestDTO = ReservationSaveReqDTO(
-    roomId: 1,
-    stayAdress: '부산광역시 진구',
-    roomName: 'Deluxe',
-    roomImgTitle: 'room1.png',
-    price: 142000,
-    checkInDate: DateTime.parse("2024-06-24"), // 문자열을 DateTime 객체로 변환
-    checkOutDate: DateTime.parse("2024-06-26"), // 문자열을 DateTime 객체로 변환
-    reservationName: "설동훈",
-    reservationTel: "11111111111",
+Future<void> fetchPaySaveTest(PayRepository payRepository) async {
+  // 테스트에 사용될 DTO 생성
+  final requestDTO = PaySaveReqDTO(
+    payId: 1,  // 실제 존재하는 paymentId를 사용해야 함
+    reservationId: 1,
+    amount: 1000,
+    way: "Credit Card",
+    state: "COMPLETION",
+    payAt: DateTime.now(),
   );
-  // accessToken 추가
-  String accessToken =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2Nzc0NTc0LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.EuUOAo3CwFsy-Z_hTnEPYh_Ms8-8wM2O_V2bKGyl2nvWZ_-PzkspmukGfyHNfYlukoq2r4aA_mKWSX9Z5GBmTg';
 
-  // Send join request with accessToken
-  final response = await ReservationRepository()
-      .fetchReservationSave(requestDTO, accessToken);
+  // API 호출을 위한 accessToken 설정
+  final accessToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2OTU5Njg1LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.5xYn8esbFIgPkbtoteBFNGleVB257fCY-TzeASjmvZ9nWzrRVGel_HxPnI7wR_TdXow8UmXkZbB_Fz0j0njqAA';
 
-  // Log response
-  print("BookSave Response: $response");
+  try {
+    final response = await payRepository.fetchPaySave(requestDTO, accessToken);
+    print("Payment Save Response: ${response.status}");
+  } catch (e) {
+    print("Error during payment save: $e");
+  }
 }

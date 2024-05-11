@@ -3,17 +3,17 @@ import 'package:logger/logger.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 
-class PaymentRepository {
+class PayRepository {
   final Dio dio;
   final Logger logger;
 
-  PaymentRepository(this.dio, this.logger);
+  PayRepository(this.dio, this.logger);
 
-  // Saves payment details to the server
+  // Saves pay details to the server
   Future<ResponseDTO> fetchPaySave(PaySaveReqDTO reqDTO, String accessToken) async {
     try {
       Response response = await dio.post(
-          "/api/reservation/payment/${reqDTO.payId}",
+          "/api/reservation/pay/${reqDTO.payId}",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}),
           data: reqDTO.toJson());
 
