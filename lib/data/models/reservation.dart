@@ -4,7 +4,6 @@ class Reservation {
   final String stayName;
   final String stayAddress;
   final int price;
-  final int payId;
   final int roomId;
   final String roomName;
   final DateTime checkInDate;
@@ -19,7 +18,6 @@ class Reservation {
     required this.stayName,
     required this.stayAddress,
     required this.price,
-    required this.payId,
     required this.roomId,
     required this.roomName,
     required this.checkInDate,
@@ -31,7 +29,7 @@ class Reservation {
 
   @override
   String toString() {
-    return 'Reservation(reservationId: $reservationId, userId: $userId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, payId: $payId, roomName: $roomName, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel)';
+    return 'Reservation(reservationId: $reservationId, userId: $userId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, roomName: $roomName, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel)';
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
@@ -60,7 +58,6 @@ class Reservation {
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
       price: price,
-      payId: json['payId'] ?? 0,
       roomId: json['roomId'] ?? 0,
       roomName: json['roomName'] ?? 'Unknown',
       checkInDate: checkInDate,

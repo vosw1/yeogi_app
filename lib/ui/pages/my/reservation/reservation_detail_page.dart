@@ -166,10 +166,11 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
         return AlertDialog(
           title: Text('예약 취소'),
           content: Text('이 예약을 취소하시겠습니까?'),
+          actionsAlignment: MainAxisAlignment.center, // 버튼들을 중앙에 배치
           actions: <Widget>[
             TextButton(
               onPressed: () async {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // 다이얼로그 닫기
                 try {
                   await ref
                       .read(reservationListProvider.notifier)
