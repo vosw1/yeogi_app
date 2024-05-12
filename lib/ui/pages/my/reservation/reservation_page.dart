@@ -17,14 +17,22 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 
 class ReservationPage extends ConsumerWidget {
   final Room rooms;
+  String? selectedPaymentMethod;
+
+  List<String> paymentMethods = [
+    '체크카드',
+    '신용카드',
+    '계좌이체',
+    '모바일결제'
+  ];
 
   ReservationPage({required this.rooms});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ConsumerWidget에 맞게 매개변수 변경
     final _nameController = TextEditingController();
     final _phoneNumberController = TextEditingController();
+    final selectedPaymentMethod = ref.watch(reservationListProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text('예약하기')),
@@ -45,12 +53,23 @@ class ReservationPage extends ConsumerWidget {
               ),
               SizedBox(height: gap_xs),
               Divider(),
+              SizedBox(height: gap_xs),
+              DropdownButtonFormField(
+                decoration: InputDecoration(labelText: '결제 방법'),
+                value: selectedPaymentMethod,
+                items: paymentMethods.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(), onChanged: (Object? value) {  },
+              ),
+              SizedBox(height: gap_xs),
+              Divider(),
               SizedBox(height: gap_s),
               AgreementSection(
-                onAllChecked: (bool value) {
-                  // 상태 관리 로직 필요
-                },
-                subCheckboxValues: [false, false, false, false], // 상태 관리 예제
+                onAllChecked: (bool value) {},
+                subCheckboxValues: [false, false, false, false],
                 subtitles: [
                   '이용규칙 및 취소/환불 규정 동의(필수)',
                   '개인정보 수집 및 이용 동의(필수)',
@@ -64,12 +83,7 @@ class ReservationPage extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: gap_m),
                 child: ElevatedButton(
                   onPressed: () => _attemptReservation(
-                      context,
-                      ref,
-                      _nameController,
-                      _phoneNumberController,
-                      rooms,
-                      stays /* you need to add the Stay object or remove it from the function parameters */),
+                      context, ref, _nameController, _phoneNumberController, rooms, stays),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -87,7 +101,7 @@ class ReservationPage extends ConsumerWidget {
     );
   }
 
-  void _attemptReservation(
+    void _attemptReservation(
       BuildContext context,
       WidgetRef ref,
       TextEditingController nameController,
@@ -95,7 +109,6 @@ class ReservationPage extends ConsumerWidget {
       Room rooms,
       Stay stays) {
     if ([true, true, true, true].every((val) => val)) {
-      // Assuming all conditions are met
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: rooms.roomId,
         stayAdress: stays.address ?? 'defaultAddress',
