@@ -9,6 +9,7 @@ import 'package:yogi_project/data/dtos/reservation_request.dart'; // 파일명 �
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
+import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/argreement_section.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservaion_info_form.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
@@ -134,7 +135,8 @@ class ReservationPage extends ConsumerWidget {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                PayPage()), // PaymentPage는 결제 페이지의 클래스입니다.
+               // PayPage()), // PaymentPage는 결제 페이지의 클래스입니다.
+      MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners,)),
       );
     } else {
       showDialog(

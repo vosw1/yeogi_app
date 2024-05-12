@@ -101,6 +101,59 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
           SizedBox(height: gap_s),
           Text('숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
               style: TextStyle(fontSize: gap_m)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('체크인', style: TextStyle(fontSize: gap_m)),
+                  SizedBox(height: gap_xs),
+                  GestureDetector(
+                    onTap: () => _selectDate(context, isCheckIn: true),
+                    child: Container(
+                      padding: EdgeInsets.all(gap_s),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(gap_s),
+                        border: Border.all(color: Colors.grey.shade300),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(formatDate(_checkInDate)),
+                          SizedBox(width: gap_xs),
+                          Icon(Icons.calendar_today),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('체크아웃', style: TextStyle(fontSize: gap_m)),
+                  SizedBox(height: gap_xs),
+                  GestureDetector(
+                    onTap: () => _selectDate(context, isCheckIn: false),
+                    child: Container(
+                      padding: EdgeInsets.all(gap_s),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(gap_s),
+                        border: Border.all(color: Colors.grey.shade300),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(formatDate(_checkOutDate)),
+                          SizedBox(width: gap_xs),
+                          Icon(Icons.calendar_today),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
           _buildReservationInfo(),
         ],
       ),
@@ -158,6 +211,26 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
       ),
     );
   }
+
+  Future<void> _selectDate(BuildContext context, {required bool isCheckIn}) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: isCheckIn ? _checkInDate : _checkOutDate,
+      firstDate: DateTime(2021, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != (isCheckIn ? _checkInDate : _checkOutDate)) {
+      setState(() {
+        if (isCheckIn) {
+          _checkInDate = picked;
+        } else {
+          _checkOutDate = picked;
+        }
+        _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
+      });
+    }
+  }
+
 
   void _showCancelConfirmationDialog(BuildContext context, WidgetRef ref) {
     showDialog(
