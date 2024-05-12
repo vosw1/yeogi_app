@@ -22,7 +22,8 @@ class MyPageLogin extends StatelessWidget {
               email: '',
               password: '',
               createdAt: null,
-              updatedAt: null,
+              updatedAt: null, 
+              userImgTitle: '',
 
             );
             final Stay stayData = Stay(

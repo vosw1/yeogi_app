@@ -76,9 +76,7 @@ class MyReservationPage extends ConsumerWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ReservationDetailPage(
-                      // Pass any required parameters to ReservationDetailPage
                       reservations: reservation,
-                      rooms: rooms,
                       pays: pays,
                     ),
                   ),

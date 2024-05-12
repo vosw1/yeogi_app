@@ -52,6 +52,7 @@ final User users = User(
   name: '홍길동',
   email: '123@nate.com',
   password: '1234',
+  userImgTitle: 'user1.png',
   createdAt: null,
   updatedAt: null,
 );
@@ -64,7 +65,8 @@ final Reservation reservations = Reservation(
   price: 150000,
   roomId: 1,
   roomName: "스위트룸",
-  checkInDate: DateTime.parse("2024-06-20"), // 문자열을 DateTime 객체로 변환
+  checkInDate: DateTime.parse("2024-06-20"),
+  // 문자열을 DateTime 객체로 변환
   checkOutDate: DateTime.parse("2024-06-22"),
 );
 
@@ -108,8 +110,8 @@ final Stay stays = Stay(
 );
 
 final Room rooms = Room(
-    roomId:1,
-    personCount:'2',
+    roomId: 1,
+    personCount: '2',
     roomName: '슈페리어 더블',
     roomImgTitle: 'hotel/hotelRoom1.png',
     price: 142000,
@@ -125,8 +127,11 @@ final Room rooms = Room(
 
 final Pay pays = Pay(
   createdAt: DateTime.parse('2024-04-20'),
-  way: '카드결제', payId: 8, reservationId: 1, amount: 100000, state: 'COMPLETION',
-
+  way: '카드결제',
+  payId: 8,
+  reservationId: 1,
+  amount: 100000,
+  state: 'COMPLETION',
 );
 
 final List<EventTitleBannerData> eventTitleBannerDataList = [
@@ -209,7 +214,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 예약 페이지
     Move.paymentPage: (context) => const PayPage(),
     // 결제 페이지
-    Move.myReservationPage: (context) => MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
+    Move.myReservationPage: (context) =>
+        MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
     // 국내 숙소 예약확인 페이지
     // Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

@@ -3,7 +3,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 
 // 마이페이지 회원가입/로그인 버튼
 class MyPageLoginButton extends StatelessWidget {
-  const MyPageLoginButton({super.key});
+  const MyPageLoginButton({super.key, required Null Function() onTap});
 
   @override
   Widget build(BuildContext context) {

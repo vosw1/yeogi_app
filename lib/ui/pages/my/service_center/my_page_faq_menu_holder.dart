@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 // 고객센터 메뉴 유형 enum
 enum MenuType {
@@ -49,14 +50,14 @@ class MyPageFaqMenuHolder extends StatelessWidget {
         if (index == 0) {
           return ListTile(
             title: Text(
-              '고객센터',
+              '고객센터',style: h5(),
             ),
           );
         } else {
           final menuItem = myPageMenu[index - 1];
           return ListTile(
             leading: Icon(menuItem.iconData),
-            title: Text(menuItem.title),
+            title: Text(menuItem.title, style: h5(),),
             trailing: (index == 2 || index == 3)
                 ? Row(
               mainAxisSize: MainAxisSize.min,
@@ -72,6 +73,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
                     style: TextStyle(fontSize: 12),
                   ),
                 ),
+                SizedBox(width: gap_s,),
                 Icon(Icons.arrow_forward_ios),
               ],
             )
