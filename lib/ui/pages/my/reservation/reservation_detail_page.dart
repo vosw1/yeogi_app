@@ -56,7 +56,8 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('예약내역'),
+        // 삼항 연산자를 사용하여 조건에 따라 다른 텍스트를 표시
+        title: Text(isCanceled ? '취소된 예약' : '예약내역'),
       ),
       body: Consumer(
         builder: (context, ref, child) {
@@ -124,30 +125,35 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
     final payRepository = ref.read(payRepositoryProvider);
 
     return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
           if (!isCanceled)
-            ElevatedButton(
-              onPressed: () => _showCancelConfirmationDialog(context, ref),
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.redAccent,
-                side: BorderSide.none,
-              ),
-              child: Text('예약 취소'),
-            ),
-          SizedBox(width: gap_m),
-          if (!isCanceled)
-            ElevatedButton(
-              onPressed: () => _showReviewWritingDialog(context),
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.redAccent,
-                side: BorderSide.none,
-              ),
-              child: Text('리뷰 작성'),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: gap_m),
+                ElevatedButton(
+                  onPressed: () => _showCancelConfirmationDialog(context, ref),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.redAccent,
+                    side: BorderSide.none,
+                  ),
+                  child: Text('예약 취소'),
+                ),
+                SizedBox(width: gap_m),
+                SizedBox(height: gap_m),
+                ElevatedButton(
+                  onPressed: () => _showReviewWritingDialog(context),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.redAccent,
+                    side: BorderSide.none,
+                  ),
+                  child: Text('리뷰 작성'),
+                ),
+              ],
+            )
         ],
       ),
     );
@@ -165,21 +171,20 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
               onPressed: () async {
                 Navigator.of(context).pop();
                 try {
-                  ref
+                  await ref
                       .read(reservationListProvider.notifier)
                       .payUpdate(widget.pays.payId);
                   setState(() {
-                    isCanceled = true;
+                    isCanceled = true; // 상태를 업데이트합니다.
                   });
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content:
-                        Text('Reservation canceled and refunded successfully.'),
+                    content: Text('Reservation canceled and refunded successfully.'),
                     backgroundColor: Colors.green,
                   ));
+                  Navigator.of(context).pop(); // 현재 페이지를 종료하고 이전 페이지로 돌아갑니다.
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content:
-                        Text('Failed to cancel reservation: ${e.toString()}'),
+                    content: Text('Failed to cancel reservation: ${e.toString()}'),
                     backgroundColor: Colors.red,
                   ));
                 }
@@ -209,4 +214,3 @@ void _showReviewWritingDialog(BuildContext context) {
 String formatDate(DateTime dateTime) {
   return DateFormat('yyyy-MM-dd').format(dateTime);
 }
-
