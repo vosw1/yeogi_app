@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/reply.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
-import 'package:yogi_project/data/models/payment.dart';
+import 'package:yogi_project/data/models/pay.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -13,7 +13,7 @@ import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
-import 'package:yogi_project/ui/pages/my/pay/payment_page.dart';
+import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
@@ -43,7 +43,7 @@ class Move {
   static String campingStayList = "/camping";
   static String guestHouseStayList = "/guestHouse";
   static String reservationPage = "/api/my-reservations";
-  static String paymetPage = "/pay";
+  static String paymentPage = "/pay";
   static String eventPage = "/event";
 }
 
@@ -123,9 +123,9 @@ final Room rooms = Room(
         'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
     notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인');
 
-final Payment pays = Payment(
-  payAt: DateTime.parse('2024-04-20'),
-  way: '카드결제',
+final Pay pays = Pay(
+  createdAt: DateTime.parse('2024-04-20'),
+  way: '카드결제', payId: 8, reservationId: 1, amount: 100000, state: 'COMPLETION',
 
 );
 
@@ -207,7 +207,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지
-    Move.paymetPage: (context) => const PaymentPage(),
+    Move.paymentPage: (context) => const PayPage(),
     // 결제 페이지
     Move.myReservationPage: (context) => MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
     // 국내 숙소 예약확인 페이지

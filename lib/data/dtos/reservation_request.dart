@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ReservationSaveReqDTO {
-  final String roomId; // 룸 ID
+  final int roomId; // 룸 ID
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
   final String stayAdress; // 위치

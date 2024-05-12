@@ -1,30 +1,28 @@
-import 'package:flutter/material.dart';
-
-class PaySaveReqDTO {
+class Pay {
   final int payId;
   final int reservationId;
   final int amount;
   final String way;
   final String state;
-  final DateTime payAt;
+  final DateTime createdAt;
 
-  PaySaveReqDTO({
+  Pay({
     required this.payId,
     required this.reservationId,
     required this.amount,
     required this.way,
     required this.state,
-    required this.payAt,
+    required this.createdAt,
   });
 
-  factory PaySaveReqDTO.fromJson(Map<String, dynamic> json) {
-    return PaySaveReqDTO(
-      payId: json['payId'] ?? "",
+  factory Pay.fromJson(Map<String, dynamic> json) {
+    return Pay(
+      payId: json['payId'] ,
       reservationId: json['reservationId'],
       amount: json['amount'],
-      way: json['way'],
-      state: json['state'],
-      payAt: DateTime.parse(json['createdAt']),
+      way: json['way'] ?? 'Credit Card',
+      state: json['state'] ?? 'COMPLETION',
+      createdAt: DateTime.parse(json['createdAt']),
     );
   }
 
@@ -34,8 +32,8 @@ class PaySaveReqDTO {
       'reservationId': reservationId,
       'amount': amount,
       'way': way,
-      'state': 'state',
-      'paytAt': payAt.toIso8601String(),
+      'state': state,
+      'createdAt': createdAt.toIso8601String(),
     };
   }
 }

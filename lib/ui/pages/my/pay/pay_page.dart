@@ -1,16 +1,49 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/ui/pages/my/pay/widgets/total_payment.dart';
+import 'package:yogi_project/data/dtos/pay_request.dart';
+import 'package:yogi_project/data/repositories/pay_repository.dart';
+import 'package:yogi_project/data/store/session_store.dart';
+import 'package:yogi_project/ui/pages/my/pay/widgets/total_pay.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
-
-class PaymentPage extends StatelessWidget {
-
-  const PaymentPage({Key? key}) : super(key: key);
+class PayPage extends ConsumerWidget {
+  const PayPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sessionStore = ref.read(sessionProvider);
+    final payRepositoryProvider = Provider((ref) => PayRepository(Dio(), Logger()));
+    final payRepository = ref.read(payRepositoryProvider);
+
+    void handlePayment() async {
+      // 임시로 결제 정보 생성, 실제로는 사용자 입력을 받아야 합니다.
+      PaySaveReqDTO payInfo = PaySaveReqDTO(
+        payId: 1,
+        reservationId: 1,
+        amount: 10000,
+        way: "Credit Card",
+        state: "COMPLETE",
+        payAt: DateTime.now(),
+      );
+
+      try {
+        var response = await payRepository.fetchPaySave(payInfo, sessionStore.accessToken!);
+        if (response.status == 200) {
+          Get.snackbar("Success", "Payment successful.");
+          Get.to(() => TotalPayment());
+        } else {
+          Get.snackbar("Error", "Failed to process payment: ${response.errorMessage}");
+        }
+      } catch (e) {
+        Get.snackbar("Error", "An error occurred: $e");
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('결제 페이지'),
@@ -41,7 +74,7 @@ class PaymentPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(gap_s),
                 ),
                 child: ElevatedButton(
-                  onPressed: () => Get.to(TotalPayment()),
+                  onPressed: handlePayment,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(

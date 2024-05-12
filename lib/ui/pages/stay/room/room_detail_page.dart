@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
+
 class RoomDetailPage extends StatefulWidget {
   final Room rooms;
 
@@ -124,7 +126,6 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-
                       MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms)),
                     );
                   },
@@ -161,5 +162,9 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
         _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
       });
     }
+  }
+
+  String formatDate(DateTime dateTime) {
+    return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
   }
 }

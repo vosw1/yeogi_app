@@ -9,7 +9,7 @@ class ReservationRepository {
   // 예약하기
   Future<ResponseDTO> fetchReservationSave(
       ReservationSaveReqDTO reqDTO, String accessToken) async {
-    Response response = await dio.post(
+    Response response = await dio.put(
         "/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
         options: Options(headers: {"Authorization": "Bearer $accessToken"}),
         data: reqDTO.toJson());
@@ -54,7 +54,8 @@ class ReservationRepository {
       List<dynamic> temp = responseDTO.body as List<dynamic>;
       List<Reservation> reservations =
           temp.map((e) => Reservation.fromJson(e)).toList();
-      responseDTO.body = reservations; // Update the body to be the list of reservations
+      responseDTO.body =
+          reservations; // Update the body to be the list of reservations
 
       for (var reservation in reservations) {
         print('데이터 확인 : ${reservation.toString()}');
