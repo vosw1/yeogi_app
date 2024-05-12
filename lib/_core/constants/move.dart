@@ -199,8 +199,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
           stays: stays,
         ),
     // 마이 페이지
-    Move.stayDetailPage: (context) =>
-        StayDetailPage(stays: stays, rooms: rooms),
+    // Move.stayDetailPage: (context) =>
+    //     StayDetailPage(stays: stays, rooms: rooms),
     // 기업(숙서) 페이지
     Move.roomDetailPage: (context) => RoomDetailPage(rooms: rooms),
     // 룸 상세보기 페이지

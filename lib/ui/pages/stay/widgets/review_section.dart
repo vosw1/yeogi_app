@@ -35,7 +35,7 @@ class ReviewSection extends StatelessWidget {
             itemCount: reviews.length,
             itemBuilder: (context, index) {
               final review = reviews[index];
-              final starRating = review.rating / 5.0 * 5.0;
+              final starRating = review.reviewScore / 5.0 * 5.0;
               return GestureDetector(
                 onTap: () {
                   _showReviewPopup(context, index);
@@ -46,10 +46,10 @@ class ReviewSection extends StatelessWidget {
                     SizedBox(height: gap_xx),
                     ReviewWidget(
                       stars: starRating,
-                      comment: review.comment,
+                      comment: review.reviewContent,
                       userName: review.userName,
                       userImgTitle: review.userImgTitle,
-                      rating: review.rating, // 추가된 부분
+                      rating: review.reviewScore, // 추가된 부분
                     ),
                   ],
                 ),

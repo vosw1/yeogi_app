@@ -7,7 +7,7 @@ class ReviewWidget extends StatelessWidget {
   final String comment;
   final String userName;
   final String userImgTitle;
-  final double rating;
+  final rating;
 
   ReviewWidget({
     required this.stars,

@@ -27,7 +27,7 @@ class SaleStayListPage extends ConsumerWidget {
             itemCount: model.stay.length,
             itemBuilder: (context, index) {
               final Stay stay = model.stay[index];
-              return buildListItem(context, stay);
+              return buildListItem(context, stay, model.stay[index].stayId);
             },
           ),
         ),
@@ -35,7 +35,7 @@ class SaleStayListPage extends ConsumerWidget {
     }
   }
 
-  Widget buildListItem(BuildContext context, Stay stay) {
+  Widget buildListItem(BuildContext context, Stay stay, int stayId) {
     return Padding(
       padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
       child: Row(
@@ -48,7 +48,7 @@ class SaleStayListPage extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StayDetailPage(stays: stay, rooms: rooms,),
+                    builder: (context) => StayDetailPage(stayId: stayId),
                   ),
                 );
               },
@@ -57,7 +57,7 @@ class SaleStayListPage extends ConsumerWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(gap_s),
                   image: DecorationImage(
-                    image: AssetImage("assets/${stay.imagePath}"), // 이미지 경로
+                    image: AssetImage("assets${stay.imagePath}"), // 이미지 경로
                     fit: BoxFit.cover,
                   ),
                 ),
