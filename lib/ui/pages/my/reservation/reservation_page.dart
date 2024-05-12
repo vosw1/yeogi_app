@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'; // 상태 관리 라이
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart'; // 파일명 오타 수정
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
@@ -114,7 +115,7 @@ class ReservationPage extends ConsumerWidget {
             : 'Default Tel',
       );
 
-      ref.read(reservationListProvider.notifier).reservationSave(dto);
+      ref.read(reservationListProvider.notifier).reservationSave(dto, PaySaveReqDTO as PaySaveReqDTO);
       // 예약 정보가 성공적으로 추가된 후 결제 페이지로 네비게이션
       Navigator.push(
         context,

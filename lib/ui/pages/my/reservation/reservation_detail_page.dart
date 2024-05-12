@@ -113,7 +113,7 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
       children: [
         Text('예약자: ${reservations.reservationName}'),
         Text('전화번호: ${reservations.reservationTel}'),
-        Text('결제금액: ${NumberFormat('#,###').format(pays.amount)} 원'),
+        Text('결제금액: ${NumberFormat('#,###').format(reservations.price)} 원'),
         Text('결제일자: ${formatDate(widget.pays.createdAt)}'),
         Text('결제수단: Credit Card'),
         Text('결제상황: 결제 완료'),

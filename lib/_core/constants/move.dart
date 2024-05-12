@@ -125,7 +125,7 @@ final Room rooms = Room(
 
 final Pay pays = Pay(
   createdAt: DateTime.parse('2024-04-20'),
-  way: '카드결제', payId: 8, reservationId: 1, amount: 100000, state: 'COMPLETION',
+  way: '카드결제', payId: 8, reservationId: 1, state: 'COMPLETION',
 
 );
 

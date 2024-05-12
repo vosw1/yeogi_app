@@ -1,16 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
-import 'package:yogi_project/data/models/pay.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/repositories/pay_repository.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/data/store/session_store.dart';
-import 'package:yogi_project/main.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
 
 class ReservationListViewModel extends StateNotifier<List<Reservation>> {
@@ -57,14 +54,14 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
   }
 
   // 예약하기
-  Future<void> reservationSave(ReservationSaveReqDTO reqDTO) async {
+  Future<void> reservationSave(ReservationSaveReqDTO resreqDTO, PaySaveReqDTO payReqDto) async {
     // JWT 토큰 가져오기
     SessionStore sessionStore = ref.read(sessionProvider);
     print("예약 요청 시작");
 
     // 예약 정보 서버로 전송
     ResponseDTO responseDTO = await ReservationRepository()
-        .fetchReservationSave(reqDTO, sessionStore.accessToken!);
+        .fetchReservationSave(resreqDTO, sessionStore.accessToken!, payReqDto);
 
     if (responseDTO.status == 200) {
       // 성공적으로 예약이 추가된 경우
