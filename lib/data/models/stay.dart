@@ -9,18 +9,21 @@ class Stay {
   final stayAddress; // 숙소 주소
   final category; // 숙소 분류
   final location; // 위치
-  final notice; // 이용공지 (서버/information)
+  final notice; // 이용 공지 (서버/information)
   final state; // 숙소 삭제 여부
   final createdAt; // 생성 일자
   final reviews; // 리뷰 리스트
 
-  // 세일 숙소 리스트
+  // 숙소 리스트
   final stayId;
   final imageName;
   final imagePath;
   final name;
   final address;
   final intro;
+
+  // 숙소 상세 보기
+  final information;
 
   Stay({
     this.id,
@@ -36,13 +39,16 @@ class Stay {
     this.createdAt,
     this.reviews,
 
-    // 세일 숙소 리스트
+    // 숙소 리스트
     this.stayId,
     this.imageName,
     this.imagePath,
     this.name,
     this.address,
     this.intro,
+
+    // 숙소 상세 보기
+    this.information,
   });
 
   // Convert Stay object to JSON
@@ -61,13 +67,16 @@ class Stay {
       "createdAt": createdAt ?? "",
       "reviews": reviews?.map((review) => review?.toJson()).toList() ?? "",
 
-      // 세일 숙소 리스트
+      // 숙소 리스트
       "stayId": stayId ?? "",
       "imageName": imageName ?? "",
       "imagePath": imagePath ?? "",
       "name": name ?? "",
       "address": address ?? "",
       "intro": intro ?? "",
+
+      // 숙소 상세 보기
+      "information": information ?? "",
     };
   }
 
@@ -90,13 +99,16 @@ class Stay {
           .toList() ??
           "",
 
-      // 세일 숙소 리스트
+      // 숙소 리스트
       stayId: json['stayId'] ?? "",
       imageName: json['imageName'] ?? "",
       imagePath: json['imagePath'] ?? "",
       name: json['name'] ?? "",
       address: json['address'] ?? "",
       intro: json['intro'] ?? "",
+
+      // 숙소 상세 보기
+      information: json['information'] ?? "",
     );
   }
 }

@@ -84,25 +84,25 @@ class _ReviewPopupState extends State<ReviewPopup> {
           children: [
             for (int i = 0; i < 5; i++)
               Icon(
-                i < review.rating ? Icons.star : Icons.star_border,
+                i < review.reviewScore ? Icons.star : Icons.star_border,
                 color: Colors.redAccent,
               ),
             SizedBox(width: 8),
-            Text('${review.rating.toStringAsFixed(1)} 점'),
+            Text('${review.reviewScore.toStringAsFixed(1)} 점'),
           ],
         ),
         SizedBox(height: gap_s),
         SingleChildScrollView(
-          child: Text(review.comment),
+          child: Text(review.reviewContent),
         ),
         SizedBox(height: gap_s),
         Divider(),
         // 대댓글 표시
         ListView.builder(
           shrinkWrap: true,
-          itemCount: review.replies.length,
+          itemCount: review.reviewChildrenList.length,
           itemBuilder: (context, index) {
-            final subComment = review.replies[index];
+            final subComment = review.reviewChildrenList[index];
             return Padding(
               padding: const EdgeInsets.all(gap_s),
               child: Row(
@@ -113,7 +113,7 @@ class _ReviewPopupState extends State<ReviewPopup> {
                   SizedBox(width: 8),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: Text(subComment.comment),
+                      child: Text(subComment.reviewContent),
                     ),
                   ),
                 ],

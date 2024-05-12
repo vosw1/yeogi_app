@@ -48,7 +48,8 @@ class ScrapListPage  extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StayDetailPage(stays: stays, rooms: rooms,),
+                    // TODO: 수정 필요
+                    builder: (context) => StayDetailPage(stayId: 0),
                   ),
                 );
               },

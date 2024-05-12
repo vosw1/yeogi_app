@@ -8,11 +8,11 @@ import 'package:yogi_project/ui/pages/stay/room/room_detail_page.dart';
 
 class RoomInfoWidget extends StatelessWidget {
   final Room roomData;
-
-  const RoomInfoWidget({required this.roomData});
+  final int roomId;
+  const RoomInfoWidget({required this.roomData, required this.roomId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(gap_s),
@@ -32,7 +32,7 @@ class RoomInfoWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(gap_s),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/${roomData.roomImgTitle}'),
+                  image: AssetImage('assets${roomData.roomImagePath}'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -61,7 +61,7 @@ class RoomInfoWidget extends StatelessWidget {
                   SizedBox(height: gap_s),
                   // 가격 표시
                   Text(
-                    '${NumberFormat('#,###').format(roomData.price)}원',
+                    '${NumberFormat('#,###').format(roomData.roomPrice)}원',
                     style: subtitle1().copyWith(color: Colors.grey),
                   ),
                 ],

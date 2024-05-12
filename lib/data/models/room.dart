@@ -13,6 +13,13 @@ class Room {
   final int? specialPrice; // 할인된 가격 (null일 수 있음)
   final String notice; // 여어떻노 공지
 
+  // 숙소 상세 보기
+  final roomTier;
+  final roomPrice;
+  final roomSpecialState;
+  final roomSpecialPrice;
+  final roomImagePath;
+
   Room({
     required this.roomId,
     required this.roomImgTitle,
@@ -27,23 +34,37 @@ class Room {
     required this.price,
     required this.specialPrice,
     required this.notice,
+
+    // 숙소 상세 보기
+    this.roomTier,
+    this.roomPrice,
+    this.roomSpecialState,
+    this.roomSpecialPrice,
+    this.roomImagePath,
   });
 
   factory Room.fromJson(Map<String, dynamic> json) {
     return Room(
-      roomId: json["roomId"],
-      roomImgTitle: json["roomImgTitle"],
-      roomName: json["roomName"],
-      roomInfo: json["roomInfo"],
-      personCount: json["personCount"],
-      amenities: json["amenities"],
-      checkInDate: json["checkInDate"],
-      checkOutDate: json["checkOutDate"],
-      checkInTime: json["checkInTime"],
-      checkOutTime: json["checkOutTime"],
-      price: int.parse(json["price"]),
-      specialPrice: int.parse(json["specialPrice"]),
-      notice: json["notice"],
+      roomId: json["roomId"] ?? "",
+      roomImgTitle: json["roomImgTitle"] ?? "",
+      roomName: json["roomName"] ?? "",
+      roomInfo: json["roomInfo"] ?? "",
+      personCount: json["personCount"] ?? "",
+      amenities: json["amenities"] ?? "",
+      checkInDate: json["checkInDate"] ?? "",
+      checkOutDate: json["checkOutDate"] ?? "",
+      checkInTime: json["checkInTime"] ?? "",
+      checkOutTime: json["checkOutTime"] ?? "",
+      price: json["price"] != null ? int.parse(json["price"]) : 0,
+      specialPrice: json["specialPrice"] != null ? int.parse(json["specialPrice"]) : 0,
+      notice: json["notice"] ?? "",
+
+      // 숙소 상세 보기
+      roomTier: json["roomTier"] ?? "",
+      roomPrice: json["roomPrice"] ?? "",
+      roomSpecialState: json["roomSpecialState"] ?? "",
+      roomSpecialPrice: json["roomSpecialPrice"] ?? "",
+      roomImagePath: json["roomImagePath"] ?? "",
     );
   }
 

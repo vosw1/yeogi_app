@@ -40,7 +40,7 @@ class HomeBody extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => StayDetailPage(stays: stays[index], rooms: rooms,),
+                      builder: (context) => StayDetailPage(stayId: stays[index].id),
                     ),
                   );
                 },
@@ -55,7 +55,7 @@ class HomeBody extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => StayDetailPage(stays: stays[index], rooms: rooms,),
+                              builder: (context) => StayDetailPage(stayId: index),
                             ),
                           );
                         },
@@ -66,7 +66,7 @@ class HomeBody extends StatelessWidget {
                             borderRadius: BorderRadius.circular(gap_s),
                             image: DecorationImage(
                               image: AssetImage(
-                                  "assets/${stays[index].imagePath}"),
+                                  "assets${stays[index].imagePath}"),
                               fit: BoxFit.cover,
                             ),
                           ),

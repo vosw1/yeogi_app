@@ -2,7 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
+import 'package:yogi_project/data/models/option.dart';
+import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/data/models/stay_image.dart';
+import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_stay_list_view_model.dart';
@@ -11,6 +15,8 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/motel_stay_list_view_
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/pension_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
+
+import '../models/review.dart';
 
 class StayRepository {
   // 숙소 검색
@@ -212,6 +218,51 @@ class StayRepository {
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
       responseDTO.body = stays;
+    }
+
+    return responseDTO;
+  }
+
+  // 숙소 상세 보기
+  Future<ResponseDTO> fetchStayDetail(int stayId) async {
+    final response = await dio.get(
+      "/stays/$stayId",
+    );
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    Logger().d(responseDTO.body);
+    Logger().d(responseDTO.runtimeType);
+
+    if (responseDTO.status == 200) {
+      // 숙소 파싱
+      final stayContents = responseDTO.body['stayContents'];
+      Stay stay = Stay.fromJson(stayContents['stay']);
+
+      // 방 파싱
+      List<dynamic> roomTemp = responseDTO.body['roomContents'];
+      List<Room> rooms = roomTemp.map((e) => Room.fromJson(e)).toList();
+
+      // 숙소 이미지
+      List<dynamic> stayImageTemp = responseDTO.body['stayContents']['stayImageList'];
+      List<StayImage> stayImages = stayImageTemp.map((e) => StayImage.fromJson(e)).toList();
+
+      // 숙소 리뷰 리스트
+      List<dynamic> reviewTemp = responseDTO.body['stayContents']['reviewList'];
+      List<Review> stayReviews = reviewTemp.map((e) => Review.fromJson(e)).toList();
+
+      // 숙소 옵션 리스트
+      List<dynamic> optionTemp = responseDTO.body['stayContents']['optionList'];
+      List<Option> stayOptions = optionTemp.map((e) => Option.fromJson(e)).toList();
+
+      responseDTO.body = StayDetailModel(
+        stay: stay,
+        rooms: rooms,
+        reviews: stayReviews,
+        stayImages: stayImages,
+        options: stayOptions,
+      );
+      Logger().d(responseDTO.body);
     }
 
     return responseDTO;

@@ -4,7 +4,7 @@ class ResponseDTO {
   dynamic body;
 
   ResponseDTO({
-    required this.status,
+    this.status,
     this.errorMessage,
     this.body,
   });
