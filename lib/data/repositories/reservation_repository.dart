@@ -6,11 +6,35 @@ import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 
 class ReservationRepository {
+  // 예약 상세 보기
+  Future<ResponseDTO> fetchReservationDetail(int reservationId, String accessToken) async {
+    final response = await dio.get(
+      "/api/my-reservations/$reservationId",
+      options: Options(headers: {"Authorization": "$accessToken"}),
+    );
+
+    print("HTTP Status Code: ${response.statusCode}");
+    print("Response Data: ${response.data}");
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    if (responseDTO.status == 200) {
+      // 직접 Map에서 예약 데이터를 파싱합니다.
+      Reservation reservation = Reservation.fromJson(responseDTO.body as Map<String, dynamic>);
+      responseDTO.body = reservation; // Update the body to be the single reservation object
+
+      print('데이터 확인 : ${reservation.toString()}');
+    } else {
+      print("예약 상세보기 실패");
+    }
+    return responseDTO;
+  }
+
   // 예약하기
-  Future<ResponseDTO> fetchReservationSave(
-      ReservationSaveReqDTO reqDTO, String accessToken) async {
-    Response response = await dio.put(
-        "/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
+  Future<ResponseDTO> fetchReservationSave(ReservationSaveReqDTO reqDTO,
+      String accessToken) async {
+    final response =
+    await dio.put("/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
         options: Options(headers: {"Authorization": "Bearer $accessToken"}),
         data: reqDTO.toJson());
 
@@ -27,7 +51,7 @@ class ReservationRepository {
     return responseDTO;
   }
 
-  // 예약 삭제하기
+// 예약 삭제하기
   Future<ResponseDTO> deleteReservation(int payId, String accessToken) async {
     var response = await dio.put("/api/reservation/refund/${payId}",
         options: Options(headers: {"Authorization": "${accessToken}"}));
@@ -39,6 +63,7 @@ class ReservationRepository {
     return responseDTO;
   }
 
+// 예약 내역 조회하기
   Future<ResponseDTO> fetchReservationList(String accessToken) async {
     final response = await dio.get(
       "/api/my-reservations",
@@ -53,7 +78,7 @@ class ReservationRepository {
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body as List<dynamic>;
       List<Reservation> reservations =
-          temp.map((e) => Reservation.fromJson(e)).toList();
+      temp.map((e) => Reservation.fromJson(e)).toList();
       responseDTO.body =
           reservations; // Update the body to be the list of reservations
 
