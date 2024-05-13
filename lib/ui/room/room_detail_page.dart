@@ -23,7 +23,7 @@ class RoomDetailPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${model?.roomOption.imageName}'),
+        title: Text('디럭스 룸'),
       ),
       body: Column(
         children: [
@@ -92,15 +92,16 @@ class RoomDetailPage extends ConsumerWidget {
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('기본정보\n\n${model?.roomOption.information}'),
+                        Text('기본정보\n\n 기준2인 · 최대2\n더블베드 1개\n객실+욕실 / 12.74평'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('편의시설\n\n${model?.roomOption.options}'),
+                        Text('편의시설\n\n TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
+    ),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('공지\n\n${model?.roomOption.tier}'),
+                        Text('공지\n\n 스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인'),
                       ],
                     ),
                   ),
