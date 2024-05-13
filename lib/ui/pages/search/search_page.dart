@@ -17,7 +17,10 @@ class _SearchPageState extends State<SearchPage> {
   String? _selectedPersonCount = '인원';
   String? _selectedUsePrice = '희망가격';
   String? _selectedRegion = '지역';
-  String? _searchText = '지역, 숙소를 검색하세요';
+  String? _searchText = '';
+
+  SearchStayDTO defaultData =
+      SearchStayDTO(stayName: '', roomPrice: 0, person: 0, stayAddress: '');
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,6 @@ class _SearchPageState extends State<SearchPage> {
             },
             decoration: InputDecoration(
               hintText: '지역, 숙소를 검색하세요',
-              counterText: _searchText,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(gap_s),
               ),
@@ -70,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
                 onSelected: (String value) {
                   setState(() {
-                    _selectedRegion = value;
+                    _selectedRegion = value ?? '';
                     if (widget.reqDTO != null) {
                       widget.reqDTO!.stayAddress = value;
                     }
@@ -89,7 +91,8 @@ class _SearchPageState extends State<SearchPage> {
                     _selectedPersonCount = value;
                     if (widget.reqDTO != null) {
                       widget.reqDTO!.person = int.parse(
-                          value.replaceAll('명', '').replaceAll('+', ''));
+                              value.replaceAll('명', '').replaceAll('+', '')) ??
+                          0;
                     }
                   });
                 },
@@ -112,7 +115,7 @@ class _SearchPageState extends State<SearchPage> {
                         widget.reqDTO!.roomPrice = 100000;
                       } else if (value == '15만원 이하') {
                         widget.reqDTO!.roomPrice = 150000;
-                      } else if (value == '20만원 이하'){
+                      } else if (value == '20만원 이하') {
                         widget.reqDTO!.roomPrice = 200000;
                       } else {
                         widget.reqDTO!.roomPrice = 1000000;
@@ -132,10 +135,61 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _startSearch() {
-    // 검색 결과를 SearchResultList 위젯에 전달
     print("검색 버튼 누름");
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => SearchResultList(searchResultList: widget.reqDTO),
+
+    // 사용자가 입력한 값을 저장할 변수들
+    String? searchText = _searchText;
+    String? selectedRegion = _selectedRegion;
+    String? selectedPersonCount = _selectedPersonCount;
+    String? selectedUsePrice = '';
+
+    if (_selectedPersonCount == "인원") {
+      selectedPersonCount = "0명";
+    } else {
+      selectedPersonCount = _selectedPersonCount;
+    }
+
+    // 사용자가 입력한 값을 기반으로 searchResultList 생성
+    SearchStayDTO searchResultList = SearchStayDTO(
+      stayName: searchText ?? defaultData.stayName,
+      stayAddress: selectedRegion ?? defaultData.stayAddress,
+      roomPrice: _calculateRoomPrice(selectedUsePrice),
+      person: _calculatePerson(selectedPersonCount),
+    );
+
+    // 결과 확인을 위한 출력
+    print(searchResultList.stayName);
+    print(searchResultList.stayAddress);
+    print(searchResultList.roomPrice);
+    print(searchResultList.person);
+    print(searchResultList.runtimeType);
+
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => SearchResultList(reqDTO: searchResultList),
     ));
+  }
+
+// 선택된 가격대에 따라 roomPrice 계산
+  int _calculateRoomPrice(String? selectedUsePrice) {
+    switch (selectedUsePrice) {
+      case '5만원 이하':
+        return 50000;
+      case '10만원 이하':
+        return 100000;
+      case '15만원 이하':
+        return 150000;
+      case '20만원 이하':
+        return 200000;
+      default:
+        return 1000000; // 기본값
+    }
+  }
+
+  // 선택된 인원에 따라 person 계산
+  int? _calculatePerson(String? selectedPersonCount) {
+    if (selectedPersonCount == null) return defaultData.person;
+    if (selectedPersonCount == '4명+') return 4;
+    return int.parse(selectedPersonCount.replaceAll('명', '')) ??
+        defaultData.person;
   }
 }

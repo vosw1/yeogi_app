@@ -7,13 +7,13 @@ import 'package:yogi_project/ui/pages/search/search_view_model.dart';
 import 'package:yogi_project/ui/pages/search/widgets/search_result_item.dart';
 
 class SearchResultList extends ConsumerWidget {
-  final SearchStayDTO? searchResultList;
+  final SearchStayDTO reqDTO;
 
-  const SearchResultList({this.searchResultList});
+  const SearchResultList({required this.reqDTO});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SearchStayModel? model = ref.watch(searchStayProvider(searchResultList!));
+    SearchStayModel? model = ref.watch(searchStayProvider(reqDTO));
 
     if (model == null) {
       return Center(
