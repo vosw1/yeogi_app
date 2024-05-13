@@ -7,7 +7,7 @@ class RoomOption {
   int salePrice;
   String saleState;
   Information information;
-  List<Option> options;
+  List<RoomDetailOption> options;
 
   RoomOption({
     required this.id,
@@ -29,14 +29,14 @@ class RoomOption {
 
   factory RoomOption.fromJson(Map<String, dynamic> json) => RoomOption(
     id: json["id"],
-    imageName: json["imageName"],
-    imagePath: json["imagePath"],
+    imageName: json["imageName"] ?? 'room1.jpg',
+    imagePath: json["imagePath"] ?? '',
     tier: json["tier"],
     price: json["price"],
     salePrice: json["salePrice"],
     saleState: json["saleState"],
     information: Information.fromJson(json["information"]),
-    options: List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
+    options: List<RoomDetailOption>.from(json["options"].map((x) => RoomDetailOption.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -48,7 +48,7 @@ class RoomOption {
     "salePrice": salePrice,
     "saleState": saleState,
     "information": information.toJson(),
-    "options": List<dynamic>.from(options.map((x) => x.toJson())),
+    "Options": List<dynamic>.from(options.map((x) => x.toJson())),
   };
 }
 
@@ -81,11 +81,11 @@ class Information {
   };
 }
 
-class Option {
+class RoomDetailOption {
   String name;
   String iconName;
 
-  Option({
+  RoomDetailOption({
     required this.name,
     required this.iconName,
   });
@@ -95,7 +95,7 @@ class Option {
     return 'Option{name: $name, iconName: $iconName}';
   }
 
-  factory Option.fromJson(Map<String, dynamic> json) => Option(
+  factory RoomDetailOption.fromJson(Map<String, dynamic> json) => RoomDetailOption(
     name: json["name"],
     iconName: json["iconName"],
   );

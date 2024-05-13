@@ -25,11 +25,10 @@ class RoomRepository {
   }
 
 
-  Future<ResponseDTO> fetchRoomDetail(String accessToken, int roomId,
+  Future<ResponseDTO> fetchRoomDetail(int roomId,
       {int page = 0}) async {
     final response = await dio.get(
       "/room/detail/$roomId",
-      options: Options(headers: {"Authorization": accessToken}),
     );
 
     print("HTTP 연결 상태: ${response.statusCode}");

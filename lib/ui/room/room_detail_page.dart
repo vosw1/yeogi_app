@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
+import 'package:yogi_project/main.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
+import 'package:yogi_project/ui/room/room_detail_view_model.dart';
 
-class RoomDetailPage extends StatefulWidget {
+class RoomDetailPage extends ConsumerWidget {
   final Room rooms;
 
   const RoomDetailPage({required this.rooms});
 
   @override
-  _RoomDetailPageState createState() => _RoomDetailPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    int roomId = rooms.roomId;
+    RoomDetailModel? model = ref.watch(roomDetailProvider(roomId));
+    late DateTime _selectedStartDate = DateTime.now();
+    late DateTime _selectedEndDate = DateTime.now().add(Duration(days: 1));
+    int _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
 
-class _RoomDetailPageState extends State<RoomDetailPage> {
-  late DateTime _selectedStartDate;
-  late DateTime _selectedEndDate;
-  int _numberOfNights = 1;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedStartDate = DateTime.now();
-    _selectedEndDate = DateTime.now().add(Duration(days: 1));
-    _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.rooms.roomName}'),
+        title: Text('${model?.roomOption.imageName}'),
       ),
       body: Column(
         children: [
@@ -53,7 +44,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(gap_s),
                           child: Image.asset(
-                            'assets/images/${widget.rooms.roomImgTitle}',
+                            'assets/images/${model?.roomOption.imageName}',
                             width: double.infinity,
                             height: 200,
                             fit: BoxFit.cover,
@@ -69,7 +60,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                                 Text('이용날짜', style: TextStyle(fontSize: gap_m)),
                                 SizedBox(height: gap_xs),
                                 GestureDetector(
-                                  onTap: _selectDateRange,
+                                  onTap: () => _selectDateRange(ref),
                                   child: Container(
                                     padding: EdgeInsets.all(gap_s),
                                     decoration: BoxDecoration(
@@ -96,20 +87,20 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                         ),
                         SizedBox(height: gap_m),
                         Text(
-                            '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
+                            '숙박기간 : ${_numberOfNights+1} 박 ${_numberOfNights + 2} 일',
                             style: TextStyle(fontSize: gap_m)),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('기본정보\n\n${widget.rooms.roomInfo}'),
+                        Text('기본정보\n\n${model?.roomOption.information}'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('편의시설\n\n${widget.rooms.amenities}'),
+                        Text('편의시설\n\n${model?.roomOption.options}'),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('공지\n\n${widget.rooms.notice}'),
+                        Text('공지\n\n${model?.roomOption.tier}'),
                       ],
                     ),
                   ),
@@ -126,7 +117,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms)),
+                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: rooms)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -146,23 +137,26 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
     );
   }
 
-  Future<void> _selectDateRange() async {
+  Future<void> _selectDateRange(WidgetRef ref) async {
+    late DateTime _selectedStartDate = DateTime.now();
+    late DateTime _selectedEndDate = DateTime.now().add(Duration(days: 1));
+    int _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+
     final DateTimeRange? pickedDateRange = await showDateRangePicker(
-      context: context,
+      context: ref.read(navigatorKey as ProviderListenable).currentContext!,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
       initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
     );
 
     if (pickedDateRange != null) {
-      setState(() {
-        _selectedStartDate = pickedDateRange.start;
-        _selectedEndDate = pickedDateRange.end;
-        // Recalculate number of nights
-        _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
-      });
+      _selectedStartDate = pickedDateRange.start;
+      _selectedEndDate = pickedDateRange.end;
+      // Recalculate number of nights
+      _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
     }
   }
+
 
   String formatDate(DateTime dateTime) {
     return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';

@@ -5,6 +5,5 @@ void main() async {
 }
 
 Future<void> fetchRoomDetail_test() async {
-  await RoomRepository().fetchRoomDetail(
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpbWdVcmwiOiIvaW1hZ2VzLzEuanBnIiwic3ViIjoibWV0YWNvZGluZyIsImlkIjoxLCJleHAiOjE3MTQ2OTU4MjYsInVzZXJuYW1lIjoic3NhciJ9.HW89ytooDsjNCs1aofKvIrZOYCnJmhW0PkQUAXai0SwcztF3DB62d8DreLBf2RV9z807t-6PoqGA9EaMHYi1Ww",3 );
-}
+  await RoomRepository().fetchRoomDetail(1);
+      }
