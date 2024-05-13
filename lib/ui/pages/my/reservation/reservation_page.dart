@@ -67,8 +67,7 @@ class ReservationPage extends ConsumerWidget {
                       ref,
                       _nameController,
                       _phoneNumberController,
-                      rooms,
-                      stays /* you need to add the Stay object or remove it from the function parameters */),
+                      rooms),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -91,13 +90,11 @@ class ReservationPage extends ConsumerWidget {
       WidgetRef ref,
       TextEditingController nameController,
       TextEditingController phoneController,
-      Room rooms,
-      Stay stays) {
+      Room rooms,) {
     if ([true, true, true, true].every((val) => val)) {
       // Assuming all conditions are met
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: rooms.roomId,
-        stayAdress: stays.address ?? 'defaultAddress',
         roomName: rooms.roomName ?? 'defaultRoomName',
         roomImgTitle: rooms.roomImgTitle ?? 'defaultImgTitle',
         price: (rooms.price ?? 0).toInt(),
@@ -112,6 +109,7 @@ class ReservationPage extends ConsumerWidget {
         reservationTel: phoneController.text.isNotEmpty
             ? phoneController.text
             : 'Default Tel',
+        stayAdress: '',
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);

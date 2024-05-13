@@ -12,15 +12,12 @@ class Room {
   final int price; // 가격
   final int? specialPrice; // 할인된 가격 (null일 수 있음)
   final String notice; // 여어떻노 공지
-
   // 숙소 상세 보기
   final roomTier;
   final roomPrice;
   final roomSpecialState;
   final roomSpecialPrice;
   final roomImagePath;
-
-
   Room({
     required this.roomId,
     required this.roomImgTitle,
@@ -35,7 +32,6 @@ class Room {
     required this.price,
     required this.specialPrice,
     required this.notice,
-
     // 숙소 상세 보기
     this.roomTier,
     this.roomPrice,
@@ -43,13 +39,10 @@ class Room {
     this.roomSpecialPrice,
     this.roomImagePath,
   });
-
   @override
   String toString() {
     return 'Room(roomId: $roomId, roomImgTitle: $roomImgTitle, roomName: $roomName, roomInfo: $roomInfo, personCount: $personCount, amenities: $amenities, checkInDate: $checkInDate, checkOutDate: $checkOutDate, checkInTime: $checkInTime, checkOutTime: $checkOutTime, price: $price, specialPrice: $specialPrice, notice: $notice, roomTier: $roomTier, roomPrice: $roomPrice, roomSpecialState: $roomSpecialState, roomSpecialPrice: $roomSpecialPrice, roomImagePath: $roomImagePath)';
   }
-
-
   factory Room.fromJson(Map<String, dynamic> json) {
 
     // 'roomId' 값을 JSON 데이터에서 가져오기
@@ -69,7 +62,6 @@ class Room {
     // specialPriceData가 null이면 null로 설정
     final int? specialPrice =
     specialPriceData != null ? int.tryParse(specialPriceData.toString()) : null;
-
     return Room(
       roomId: roomId,
       roomImgTitle: json["roomImgTitle"] ?? "",
@@ -94,4 +86,3 @@ class Room {
     );
   }
 }
-

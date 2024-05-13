@@ -70,7 +70,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
                   ),
                   child: Text(
                     '오전 9시 ~ 오전 6시',
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 10),
                   ),
                 ),
                 SizedBox(width: gap_s,),
