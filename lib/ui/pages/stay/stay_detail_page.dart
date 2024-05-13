@@ -25,7 +25,7 @@ class StayDetailPage extends ConsumerWidget {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            '${model!.stay.stayName}',
+            '${model.stay.stayName}',
             style: TextStyle(fontSize: 20),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
