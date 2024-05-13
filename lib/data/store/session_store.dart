@@ -25,6 +25,16 @@ class SessionStore extends SessionUser {
 
   SessionStore();
 
+  // 로그아웃
+  Future<void> logout() async {
+    super.user = null;
+    super.accessToken = null;
+    super.isLogin = false;
+
+    await secureStorage.delete(key: "accessToken");
+    Navigator.popAndPushNamed(mContext!, Move.loginPage);
+  }
+
   void loginCheck(String path) {
     if (isLogin) {
       Navigator.pushNamed(mContext!, path);
