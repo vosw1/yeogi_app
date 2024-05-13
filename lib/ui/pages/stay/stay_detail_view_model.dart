@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/option.dart';
 import 'package:yogi_project/data/models/review.dart';
@@ -33,6 +34,10 @@ class StayDetailViewModel extends StateNotifier<StayDetailModel?> {
   Future<void> notifyInit(int stayId) async {
     // 통신하기
     ResponseDTO responseDTO = await StayRepository().fetchStayDetail(stayId);
+
+    Logger().d(stayId);
+    Logger().d(responseDTO.body);
+    Logger().d(responseDTO.body.runtimeType);
 
     StayDetailModel? model = responseDTO.body;
     state = model;
