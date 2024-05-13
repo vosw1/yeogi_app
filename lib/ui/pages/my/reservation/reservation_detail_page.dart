@@ -31,14 +31,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     _checkInDate = widget.reservations.checkInDate;
     _checkOutDate = widget.reservations.checkOutDate;
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
-    isCanceled = widget.isCanceled; // 초기 상태 설정
+    isCanceled = widget.reservations.state != 'REFUND'; // 초기 상태 설정
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.reservations.state != 'REFUND'
+        title: Text(isCanceled
             ? '${widget.reservations.stayName} (취소완료)'
             : '${widget.reservations.stayName} (예약완료)'),
       ),
@@ -153,7 +153,10 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             ),
             SizedBox(height: gap_m),
             Center(
-              child: isCanceled ? SizedBox() : Row(
+              child: isCanceled ? Text(
+                '취소된 예약입니다',
+                style: h5(mColor: Colors.redAccent),
+              ) : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
