@@ -60,7 +60,7 @@ class ReservationRepository {
   }
 
 // 예약 삭제하기
-  Future<ResponseDTO> deleteReservation(int payId, String accessToken) async {
+  Future<ResponseDTO> fetchdeleteReservation(int payId, String accessToken) async {
     var response = await dio.put("/api/reservation/refund/${payId}",
         options: Options(headers: {"Authorization": "${accessToken}"}));
 

@@ -47,21 +47,17 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
     }
   }
 
+
   // 결제 환불하기(예약취소)
   Future<void> payUpdate(int payId) async {
-    try {
-      String accessToken = ref.read(sessionProvider).accessToken!;
-      PayRepository payRepository = ref
-          .read(reservationListProvider as ProviderListenable<PayRepository>);
-      ResponseDTO responseDTO =
-          await payRepository.fetchPayUpdate(payId, accessToken);
-      if (responseDTO.status == 200) {
-        logger.d("Refund processed successfully.");
-      } else {
-        logger.e("Failed to process refund: ${responseDTO.errorMessage}");
-      }
-    } catch (e) {
-      logger.e("Error in processing refund: $e");
+    String accessToken = ref.read(sessionProvider).accessToken!;
+
+    ResponseDTO responseDTO =
+        await ReservationRepository().fetchdeleteReservation(payId, accessToken);
+    if (responseDTO.status == 200) {
+      logger.d("Refund processed successfully.");
+    } else {
+      logger.e("Failed to process refund: ${responseDTO.errorMessage}");
     }
   }
 
