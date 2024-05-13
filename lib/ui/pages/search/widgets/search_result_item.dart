@@ -6,9 +6,9 @@ import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 class SearchResultItem extends StatelessWidget {
-  final Stay stayData;
+  final Stay stay;
 
-  const SearchResultItem({required this.stayData});
+  const SearchResultItem({required this.stay});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class SearchResultItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(gap_s),
                   image: DecorationImage(
-                    image: AssetImage('assets/images/${stayData.stayImgTitle}'),
+                    image: AssetImage('assets${stay.imagePath}'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -45,12 +45,12 @@ class SearchResultItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      stayData.stayName,
+                      stay.name,
                       style: subtitle1(),
                     ),
                     SizedBox(height: gap_s),
                     Text(
-                      stayData.stayInfo,
+                      stay.intro,
                       style: subtitle1(),
                     ),
                   ],
