@@ -51,3 +51,17 @@ class StayUpdateReqDTO {
     };
   }
 }
+
+class SearchStayDTO {
+  String? stayName;
+  int? person;
+  String? stayAddress;
+  int? roomPrice;
+
+  SearchStayDTO({
+    this.stayName,
+    this.person,
+    this.stayAddress,
+    this.roomPrice,
+  });
+}

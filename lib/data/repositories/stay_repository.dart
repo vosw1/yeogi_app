@@ -6,6 +6,7 @@ import 'package:yogi_project/data/models/option.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/stay_image.dart';
+import 'package:yogi_project/ui/pages/search/search_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/camping_stay_list_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/guest_house_stay_list_view_model.dart';
@@ -19,19 +20,49 @@ import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_m
 import '../models/review.dart';
 
 class StayRepository {
-  // 숙소 검색
-  Future<ResponseDTO> fetchStaySearchList() async {
+
+  // 숙소 검색 (room 이 있어야 검색이 됨)
+  Future<ResponseDTO> fetchStaySearchList({String? stayName, int? person, String? stayAddress, int? roomPrice}) async {
+    // 숙소 검색 파라미터 저장
+    Map<String, dynamic> queryParam = {};
+
+    // 숙소 이름을 검색한 경우 저장
+    if(stayName != null){
+      queryParam['stayName'] = stayName;
+    }
+
+    // 인원 수를 검색한 경우 저장
+    if(person != null){
+      queryParam['person'] = person;
+    }
+
+    // 숙소 이름을 검색한 경우 저장
+    if(stayAddress != null){
+      queryParam['stayAddress'] = stayAddress;
+    }
+
+    // 숙소 이름을 검색한 경우 저장
+    if(roomPrice != null){
+      queryParam['roomPrice'] = roomPrice;
+    }
+
+    // 검색 파라미터 저장
     final response = await dio.get(
       "/stay/search",
+      queryParameters: queryParam,
     );
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    Logger().d(responseDTO.body);
+    Logger().d(responseDTO.runtimeType);
 
     if (responseDTO.status == 200) {
       List<dynamic> temp = responseDTO.body;
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
-      responseDTO.body = stays; // 숙소 목록을 responseDTO에 할당
+      SearchStayModel stayListModel = SearchStayModel(stays);
+      responseDTO.body = stayListModel; // 숙소 목록을 responseDTO에 할당
     }
 
     return responseDTO;
@@ -231,9 +262,6 @@ class StayRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-    Logger().d(responseDTO.body);
-    Logger().d(responseDTO.runtimeType);
-
     if (responseDTO.status == 200) {
       // 숙소 파싱
       final stayContents = responseDTO.body['stayContents'];
@@ -262,7 +290,6 @@ class StayRepository {
         stayImages: stayImages,
         options: stayOptions,
       );
-      Logger().d(responseDTO.body);
     }
 
     return responseDTO;
