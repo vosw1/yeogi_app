@@ -62,9 +62,9 @@ class Reservation {
       roomName: json['roomName'] ?? 'Unknown',
       checkInDate: checkInDate,
       checkOutDate: checkOutDate,
-      roomImgTitle: json['roomImgTitle'] ?? '',
-      reservationName: json['reservationName'] ?? '',
-      reservationTel: json['reservationTel'] ?? '',
+      roomImgTitle: json['roomImgTitle'] ?? 'room1.jpg',
+      reservationName: json['reservationName'],
+      reservationTel: json['reservationTel'],
     );
   }
 }

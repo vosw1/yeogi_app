@@ -5,13 +5,12 @@ final Token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwic
 
 void main() {
   test('Delete reservation test', () async {
-    await fetchReservationDetailTest();
+    await fetchReservationDetail();
   });
 }
 
-Future<void> fetchReservationDetailTest() async {
-  final responseDTO = await ReservationRepository().fetchReservationDetail(1,
-      Token);
+Future<void> fetchReservationDetail() async {
+  final responseDTO = await ReservationRepository().fetchReservationList(Token);
 
   if (responseDTO.status == 200) {
     print("예약 목록 가져오기 성공:");

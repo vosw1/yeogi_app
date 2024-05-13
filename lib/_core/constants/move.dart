@@ -125,15 +125,6 @@ final Room rooms = Room(
         'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
     notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인');
 
-final Pay pays = Pay(
-  createdAt: DateTime.parse('2024-04-20'),
-  way: '카드결제',
-  payId: 8,
-  reservationId: 1,
-  amount: 100000,
-  state: 'COMPLETION',
-);
-
 final List<EventTitleBannerData> eventTitleBannerDataList = [
   EventTitleBannerData(
     imageTitle: 'event/event_title/eventTitle1.png',

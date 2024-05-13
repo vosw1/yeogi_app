@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/pay.dart';
@@ -32,7 +33,6 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +52,9 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${widget.reservations.stayName}', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_xs),
+                  Text('${widget.reservations.stayName}',
+                      style: TextStyle(fontSize: gap_m)),
+                  SizedBox(height: gap_m),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
@@ -67,9 +68,11 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
                   Text('${widget.reservations.roomName}',
                       style: TextStyle(fontSize: gap_m)),
                   Text(widget.reservations.stayAddress),
-                  SizedBox(height: gap_m),
-                  Text('숙박기간 : ${_numberOfNights+1} 박 ${_numberOfNights + 2} 일', style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_m),
+                  SizedBox(height: gap_s),
+                  Text(
+                      '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
+                      style: TextStyle(fontSize: gap_m)),
+                  SizedBox(height: gap_s),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -128,15 +131,19 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
                   SizedBox(height: gap_m),
                   Text('예약 정보', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_m),
-                Text('예약자: ${widget.reservations.reservationName}'),
-                Text('전화번호: ${widget.reservations.reservationTel}'),
-                SizedBox(height: 8),
-                Text('결제금액: \$${widget.reservations.price}',
-                style: subtitle1()),
+                  Text('예약자: ${widget.reservations.reservationName}'),
                   SizedBox(height: gap_xs),
-                  Text('결제일자 : ${formatDate(widget.pays.createdAt)}', style: subtitle1()),
+                  Text('전화번호: ${widget.reservations.reservationTel}'),
+                  SizedBox(height: 8),
+                  Text(
+                      '결제금액: ${NumberFormat('#,###').format(widget.pays.amount)} 원',
+                      style: subtitle1()),
                   SizedBox(height: gap_xs),
-                  Text('결제수단 : ${widget.pays.way}', style: subtitle1()), // 결제수단 수정
+                  Text('결제일자 : ${formatDate(widget.pays.createdAt)}',
+                      style: subtitle1()),
+                  SizedBox(height: gap_xs),
+                  Text('결제수단 : ${widget.pays.way}', style: subtitle1()),
+                  // 결제수단 수정
                 ],
               ),
             ),

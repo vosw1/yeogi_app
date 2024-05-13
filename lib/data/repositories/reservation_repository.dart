@@ -3,13 +3,15 @@ import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
+import 'package:yogi_project/data/models/pay.dart';
 import 'package:yogi_project/data/models/reservation.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
 class ReservationRepository {
-  // 예약 상세 보기
+  // 예약 내역보기
   Future<ResponseDTO> fetchReservationDetail(int reservationId, String accessToken) async {
     final response = await dio.get(
-      "/api/my-reservations/$reservationId",
+      "/api/my-reservations/${reservationId}",
       options: Options(headers: {"Authorization": "$accessToken"}),
     );
 
@@ -19,14 +21,20 @@ class ReservationRepository {
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
-      // 직접 Map에서 예약 데이터를 파싱합니다.
-      Reservation reservation = Reservation.fromJson(responseDTO.body as Map<String, dynamic>);
-      responseDTO.body = reservation; // Update the body to be the single reservation object
+      // 예약 파싱
+      final reservationContents = responseDTO.body['reservationContents'];
+      Reservation reservation = Reservation.fromJson(reservationContents['reservation']);
 
-      print('데이터 확인 : ${reservation.toString()}');
-    } else {
-      print("예약 상세보기 실패");
+      // 결제 파싱
+      final payContents = responseDTO.body['payContents'];
+      Pay pay = Pay.fromJson(payContents['pay']);
+      
+      responseDTO.body = ReservationDetailModel(
+        reservation: reservation, pay: pay,
+      );
+      Logger().d(responseDTO.body);
     }
+
     return responseDTO;
   }
 
