@@ -38,9 +38,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(isCanceled
-            ? '${widget.reservations.stayName} (취소완료)'
-            : '${widget.reservations.stayName} (예약완료)'),
+        title: Text('$widget.reservations.stayName'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: gap_m),
