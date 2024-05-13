@@ -48,8 +48,7 @@ class DuplimentEmailCheck extends StatelessWidget {
 
   // 이메일 중복 확인 함수 (가짜 함수)
   bool _isEmailDuplicate(String? email) {
-    // 여기서는 가짜 함수로 구현하였으며, 실제로는 서버 또는 데이터베이스와 통신하여 확인해야 합니다.
-    // 이 예시에서는 임의로 'test@email.com'이 중복되었다고 가정합니다.
+   //todo : 이메일 중복체크 통신하기
     return email == 'test@email.com';
   }
 
@@ -106,7 +105,12 @@ class DuplimentEmailCheck extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('확인'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('확인'),
+                ],
+              ),
             ),
           ],
         );
