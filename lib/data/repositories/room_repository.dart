@@ -27,7 +27,7 @@ class RoomRepository {
   Future<ResponseDTO> fetchRoomDetail(String accessToken, int roomId,
       {int page = 0}) async {
     final response = await dio.get(
-      "/rooms/$roomId",
+      "/room/detail/$roomId",
       options: Options(headers: {"Authorization": accessToken}),
     );
 
