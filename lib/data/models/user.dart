@@ -3,6 +3,7 @@ class User {
   final String? name;
   final String email;
   final String password;
+  final String userImgTitle;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -11,6 +12,7 @@ class User {
     required this.name,
     required this.email,
     required this.password,
+    required this.userImgTitle,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -22,6 +24,7 @@ class User {
       'name': name,
       'email': email,
       'password': password,
+      'userImgTitle': userImgTitle,
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
     };
@@ -30,7 +33,7 @@ class User {
   // Converts the User object to a string representation
   @override
   String toString() {
-    return 'User{id: $id, name: $name, email: $email, createdAt: $createdAt, updatedAt: $updatedAt}';
+    return 'User{id: $id, name: $name, email: $email, userImgTitle:$userImgTitle, createdAt: $createdAt, updatedAt: $updatedAt}';
   }
 
   // Converts the response data to a User object
@@ -39,6 +42,7 @@ class User {
         name = json["name"] ?? null,
         email = json["email"] ?? "",
         password = json["password"] ?? "",
+        userImgTitle = json["userImgTitle"] ?? "user1.png",
         createdAt = json["createdAt"] != null ? DateTime.parse(json["createdAt"]) : null,
         updatedAt = json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : null;
 }

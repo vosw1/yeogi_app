@@ -92,7 +92,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                         builder: (context) => MyPage(
                           users: User(
                             name: _nameController.text,
-                            password: _passwordController.text, id: 1, email: '', createdAt: null, updatedAt: null,
+                            password: _passwordController.text, id: 1, email: '', createdAt: null, updatedAt: null, userImgTitle: '',
                           ),
                           stays: Stay(
                             stayName: '★당일특가★ 하이원리조트 마운틴콘도',

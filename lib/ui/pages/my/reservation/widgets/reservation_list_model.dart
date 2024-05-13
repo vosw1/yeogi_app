@@ -10,7 +10,6 @@ import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/repositories/pay_repository.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/data/store/session_store.dart';
-import 'package:yogi_project/main.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
 
 class ReservationListViewModel extends StateNotifier<List<Reservation>> {
@@ -19,11 +18,32 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
 
   ReservationListViewModel(mContext, this.ref) : super([]);
 
+  // 예약 상세하기
+  Future<void> reservationDetail() async {
+    // JWT 토큰 가져오기
+    SessionStore sessionStore = ref.read(sessionProvider);
+    // 통신하기
+    print("통신 시작");
+    ResponseDTO responseDTO = await ReservationRepository()
+        .fetchReservationList(sessionStore.accessToken!);
+
+    if (responseDTO.status == 200) {
+      print("예약 상세보기 성공:");
+      print(responseDTO.body);
+
+      // 예약 목록을 상태로 설정
+      state = List<Reservation>.from(responseDTO.body);
+    } else {
+      print(
+          "예약 상세보기 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
+    }
+  }
+
   // 결제 환불하기(예약취소)
   Future<void> payUpdate(int payId) async {
     try {
       String accessToken = ref.read(sessionProvider).accessToken!;
-      PayRepository payRepository = ref.read(payRepositoryProvider);
+      PayRepository payRepository = ref.read(reservationListProvider as ProviderListenable<PayRepository>);
       ResponseDTO responseDTO = await payRepository.fetchPayUpdate(payId, accessToken);
       if (responseDTO.status == 200) {
         logger.d("Refund processed successfully.");

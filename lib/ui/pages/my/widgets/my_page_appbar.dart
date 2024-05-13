@@ -21,7 +21,7 @@ class MyPageAppBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(gap_s),
       child: Wrap(
-        alignment: WrapAlignment.start,
+        alignment: WrapAlignment.spaceBetween,
         spacing: 15,
         runSpacing: 30,
         children: [
