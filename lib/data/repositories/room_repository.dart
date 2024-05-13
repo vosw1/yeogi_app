@@ -2,9 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
+import 'package:yogi_project/data/models/room_option.dart';
 import 'package:yogi_project/data/models/room.dart';
 
-class RoomRepository{
+class RoomRepository {
   Future<ResponseDTO> fetchRoomList(String accessToken, {int page = 0}) async {
     final response = await dio.get(
       "/stay",
@@ -24,49 +25,27 @@ class RoomRepository{
   }
 
 
-  Future<ResponseDTO> fetchRoomDetail(String accessToken, int roomId, {int page = 0}) async {
-    try {
-      final response = await dio.get(
-        "/rooms/$roomId",
-        options: Options(headers: {"Authorization": accessToken}),
-      );
-      Logger().d(response.data);
+  Future<ResponseDTO> fetchRoomDetail(String accessToken, int roomId,
+      {int page = 0}) async {
+    final response = await dio.get(
+      "/room/detail/$roomId",
+      options: Options(headers: {"Authorization": accessToken}),
+    );
 
-      print(response.data);
+    print("HTTP 연결 상태: ${response.statusCode}");
+    Logger().d(response.data);
 
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-      if (responseDTO.status == 200) {
-        // 성공적으로 데이터를 받은 경우
-        // 받은 데이터를 JSON 형식으로 파싱
-        final jsonData = response.data as Map<String, dynamic>;
-        // Room 객체로 변환합니다.
-        final room = Room.fromJson(jsonData);
-        // ResponseDTO 객체를 생성하여 데이터를 담음.
-        final responseDTO = ResponseDTO(
-          status: 200,
-          errorMessage: null,
-          body: room,
-        );
-        Logger().d(responseDTO.body);
-        Logger().d(responseDTO.runtimeType);
-        return responseDTO;
-      } else {
-        // 데이터를 받지 못한 경우
-        return ResponseDTO(
-          status: response.statusCode,
-          errorMessage: response.statusMessage,
-          body: null,
-        );
-      }
-    } catch (e) {
-      // 예외가 발생한 경우
-      return ResponseDTO(
-        status: null,
-        errorMessage: e.toString(),
-        body: null,
-      );
+    if (responseDTO.status == 200) {
+      // 직접 Map에서 예약 데이터를 파싱합니다.
+      RoomOption roomOption = RoomOption.fromJson(responseDTO.body);
+      responseDTO.body = roomOption;
+    } else {
+      print("룸 상세보기 실패");
     }
+    Logger().d(responseDTO.body);
+    return responseDTO;
   }
 }
 
