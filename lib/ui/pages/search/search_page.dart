@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
-import 'package:yogi_project/data/models/search.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/dtos/stay_request.dart';
 import 'package:yogi_project/ui/pages/search/widgets/custom_popup_menu_button.dart';
 import 'package:yogi_project/ui/pages/search/widgets/search_result_list.dart';
-import 'package:yogi_project/_core/constants/size.dart';
 
 class SearchPage extends StatefulWidget {
+  final SearchStayDTO? reqDTO;
+
+  SearchPage({this.reqDTO});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -13,34 +16,14 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   String? _selectedPersonCount = '인원';
   String? _selectedUsePrice = '희망가격';
-  String? _selectedRegion = '지역'; // 추가된 지역 변수
-  List<String> searchResults = [];
+  String? _selectedRegion = '지역';
+  String? _searchText = '';
 
-  DateTime? _checkInDate;
-  DateTime? _checkOutDate;
-
-  String _searchText = '';
-
-  String _addLeadingZero(int number) {
-    if (number < 10) {
-      return '0$number';
-    } else {
-      return number.toString();
-    }
-  }
+  SearchStayDTO defaultData =
+      SearchStayDTO(stayName: '', roomPrice: 0, person: 0, stayAddress: '');
 
   @override
   Widget build(BuildContext context) {
-    List<Search> searchResultList = [
-      Search(
-        stayImgTitle: "overseas/overseas1.png",
-        stayName: "두짓타니 괌 리조트",
-        stayInfo:
-        "본 숙소(두짓타니 괌 리조트)는 괌에 잠시 머물거나 본격 여행을 위해 방문하는 여행객들 사이에서 인기 있는 숙소입니다. 투숙객이 즐거운 시간을 보낼 수 있도록 다양한 시설과 특전을 제공합니다. 24시간 룸서비스, Wi-Fi (무료/전 객실), 24시간 경비 서비스, 일일 청소 서비스, 24시간 프런트 데스크 등 여러 가지를 즐길 수 있습니다. 객실은 최적의 편안함을 제공할 수 있도록 설계되어 있으며, 일부 객실에서 평면 TV, 리넨, 슬리퍼, 타월, 옷장 등을 이용할 수 있습니다. 관광 후 아늑한 객실에서 휴식을 취하거나 온수 욕조, 피트니스센터, 사우나, 실외 수영장, 스파 등을 즐길 수 있습니다. 본 숙소(두짓타니 괌 리조트)를 괌 여행의 근거지로 정해 본격적인 여행을 시작해 보세요.",
-        location: "1227 Pale San Vitores Road, Tumon, 투몬 베이, 괌, 괌, 96913",
-      ),
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -49,7 +32,7 @@ class _SearchPageState extends State<SearchPage> {
           child: TextField(
             onChanged: (value) {
               setState(() {
-                _searchText = value;
+                _searchText = value; // 입력된 값 저장
               });
             },
             decoration: InputDecoration(
@@ -60,9 +43,7 @@ class _SearchPageState extends State<SearchPage> {
               prefixIcon: IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () {
-                  setState(() {
-                    searchResults = [];
-                  });
+                  _startSearch(); // 검색 시작
                 },
               ),
             ),
@@ -75,11 +56,26 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               SizedBox(width: gap_xs),
               CustomPopupMenuButton(
-                initialValue: _selectedRegion, // 지역 선택 초기값 설정
-                items: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '경기', '강원', '경남', '제주'],
+                initialValue: _selectedRegion,
+                items: [
+                  '서울',
+                  '부산',
+                  '대구',
+                  '인천',
+                  '광주',
+                  '대전',
+                  '울산',
+                  '경기',
+                  '강원',
+                  '경남',
+                  '제주'
+                ],
                 onSelected: (String value) {
                   setState(() {
-                    _selectedRegion = value;
+                    _selectedRegion = value ?? '';
+                    if (widget.reqDTO != null) {
+                      widget.reqDTO!.stayAddress = value;
+                    }
                   });
                 },
                 buttonText: '$_selectedRegion',
@@ -93,6 +89,11 @@ class _SearchPageState extends State<SearchPage> {
                 onSelected: (String value) {
                   setState(() {
                     _selectedPersonCount = value;
+                    if (widget.reqDTO != null) {
+                      widget.reqDTO!.person = int.parse(
+                              value.replaceAll('명', '').replaceAll('+', '')) ??
+                          0;
+                    }
                   });
                 },
                 buttonText: '$_selectedPersonCount',
@@ -102,10 +103,24 @@ class _SearchPageState extends State<SearchPage> {
               SizedBox(width: gap_s),
               CustomPopupMenuButton(
                 initialValue: _selectedUsePrice,
-                items: ['5만원이하', '10만원이하', '10먄원이상'],
+                items: ['5만원 이하', '10만원 이하', '15만원 이하', '20만원 이하'],
                 onSelected: (String value) {
                   setState(() {
                     _selectedUsePrice = value;
+                    // 수정된 부분: 가격 범위에 따라 값을 설정하도록 변경
+                    if (widget.reqDTO != null) {
+                      if (value == '5만원 이하') {
+                        widget.reqDTO!.roomPrice = 50000;
+                      } else if (value == '10만원 이하') {
+                        widget.reqDTO!.roomPrice = 100000;
+                      } else if (value == '15만원 이하') {
+                        widget.reqDTO!.roomPrice = 150000;
+                      } else if (value == '20만원 이하') {
+                        widget.reqDTO!.roomPrice = 200000;
+                      } else {
+                        widget.reqDTO!.roomPrice = 1000000;
+                      }
+                    }
                   });
                 },
                 buttonText: '$_selectedUsePrice',
@@ -115,8 +130,66 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        SearchResultList(stays: stays, searchResultList: [],),
       ],
     );
+  }
+
+  void _startSearch() {
+    print("검색 버튼 누름");
+
+    // 사용자가 입력한 값을 저장할 변수들
+    String? searchText = _searchText;
+    String? selectedRegion = _selectedRegion;
+    String? selectedPersonCount = _selectedPersonCount;
+    String? selectedUsePrice = '';
+
+    if (_selectedPersonCount == "인원") {
+      selectedPersonCount = "0명";
+    } else {
+      selectedPersonCount = _selectedPersonCount;
+    }
+
+    // 사용자가 입력한 값을 기반으로 searchResultList 생성
+    SearchStayDTO searchResultList = SearchStayDTO(
+      stayName: searchText ?? defaultData.stayName,
+      stayAddress: selectedRegion ?? defaultData.stayAddress,
+      roomPrice: _calculateRoomPrice(selectedUsePrice),
+      person: _calculatePerson(selectedPersonCount),
+    );
+
+    // 결과 확인을 위한 출력
+    print(searchResultList.stayName);
+    print(searchResultList.stayAddress);
+    print(searchResultList.roomPrice);
+    print(searchResultList.person);
+    print(searchResultList.runtimeType);
+
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => SearchResultList(reqDTO: searchResultList),
+    ));
+  }
+
+// 선택된 가격대에 따라 roomPrice 계산
+  int _calculateRoomPrice(String? selectedUsePrice) {
+    switch (selectedUsePrice) {
+      case '5만원 이하':
+        return 50000;
+      case '10만원 이하':
+        return 100000;
+      case '15만원 이하':
+        return 150000;
+      case '20만원 이하':
+        return 200000;
+      default:
+        return 1000000; // 기본값
+    }
+  }
+
+  // 선택된 인원에 따라 person 계산
+  int? _calculatePerson(String? selectedPersonCount) {
+    if (selectedPersonCount == null) return defaultData.person;
+    if (selectedPersonCount == '4명+') return 4;
+    return int.parse(selectedPersonCount.replaceAll('명', '')) ??
+        defaultData.person;
   }
 }
