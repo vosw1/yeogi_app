@@ -77,13 +77,13 @@ class MyReservationPage extends ConsumerWidget {
                   MaterialPageRoute(
                     builder: (context) => ReservationDetailPage(
                       reservations: reservation,
-                      pays: pays,
                     ),
                   ),
                 );
               },
               child: Container(
-                padding: const EdgeInsets.only(top: gap_xs, left: gap_xs, right: gap_xs),
+                padding: const EdgeInsets.only(
+                    top: gap_xs, left: gap_xs, right: gap_xs),
                 child: Row(
                   children: [
                     Container(
@@ -117,7 +117,14 @@ class MyReservationPage extends ConsumerWidget {
                           ),
                           SizedBox(height: gap_xs),
                           Text(
-                            '${DateFormat('yyyy-MM-dd HH:mm').format(reservation.checkInDate)} | ${DateFormat('yyyy-MM-dd HH:mm').format(reservation.checkOutDate)}',
+                            '체크인 : ${DateFormat('yyyy-MM-dd HH:mm').format(reservation.checkInDate)}',
+                            style: TextStyle(fontSize: gap_s),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: gap_xs),
+                          Text(
+                            '체크아웃 : ${DateFormat('yyyy-MM-dd HH:mm').format(reservation.checkOutDate)}',
                             style: TextStyle(fontSize: gap_s),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

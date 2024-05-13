@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
@@ -10,7 +9,16 @@ import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/data/repositories/pay_repository.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/data/store/session_store.dart';
-import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
+
+class ReservationDetailModel {
+  Reservation reservation;
+  Pay pay;
+
+  ReservationDetailModel({
+    required this.reservation,
+    required this.pay,
+  });
+}
 
 class ReservationListViewModel extends StateNotifier<List<Reservation>> {
   final Ref ref;
@@ -18,7 +26,7 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
 
   ReservationListViewModel(mContext, this.ref) : super([]);
 
-  // 예약 상세하기
+  // 예약 내역보기
   Future<void> reservationDetail() async {
     // JWT 토큰 가져오기
     SessionStore sessionStore = ref.read(sessionProvider);
@@ -39,19 +47,17 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
     }
   }
 
+
   // 결제 환불하기(예약취소)
   Future<void> payUpdate(int payId) async {
-    try {
-      String accessToken = ref.read(sessionProvider).accessToken!;
-      PayRepository payRepository = ref.read(reservationListProvider as ProviderListenable<PayRepository>);
-      ResponseDTO responseDTO = await payRepository.fetchPayUpdate(payId, accessToken);
-      if (responseDTO.status == 200) {
-        logger.d("Refund processed successfully.");
-      } else {
-        logger.e("Failed to process refund: ${responseDTO.errorMessage}");
-      }
-    } catch (e) {
-      logger.e("Error in processing refund: $e");
+    String accessToken = ref.read(sessionProvider).accessToken!;
+
+    ResponseDTO responseDTO =
+        await ReservationRepository().fetchdeleteReservation(payId, accessToken);
+    if (responseDTO.status == 200) {
+      logger.d("Refund processed successfully.");
+    } else {
+      logger.e("Failed to process refund: ${responseDTO.errorMessage}");
     }
   }
 
