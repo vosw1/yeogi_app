@@ -16,7 +16,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
         ),
         ListTile( // 국내숙소 리스트
           leading: Icon(Icons.receipt_long, size: 30),
-          title: Text('숙소', style: h5()),
+          title: Text('숙소', style: h6()),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
             // 국내 숙소 탭 시 MyReservationPage로 이동, 사용자 정보와 이벤트 배너 목록 전달
