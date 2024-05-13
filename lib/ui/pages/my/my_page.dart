@@ -3,11 +3,13 @@ import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_appbar.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_header_banner.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_login_button.dart';
 import 'package:yogi_project/ui/pages/my/service_center/my_page_faq_menu_holder.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_book_menu_holder.dart';
+import 'package:yogi_project/ui/pages/my/widgets/my_page_logout_button.dart';
 
 class MyPage extends StatefulWidget {
   final Stay stays;
@@ -25,7 +27,6 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState() {
     super.initState();
-    // Initialize login status based on if user data is available
     _isLoggedIn = widget.users != null;
   }
 
@@ -47,35 +48,25 @@ class _MyPageState extends State<MyPage> {
             MyPageLoginButton(
               onTap: () {
                 setState(() {
-                  _isLoggedIn = true; // Simulate a login action
+                  _isLoggedIn = true;
                 });
               },
             ),
           if (_isLoggedIn)
-            Column(
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(widget.users!.userImgTitle), // Assuming the User model has an imageUrl field
-                ),
-                SizedBox(height: gap_s),
-                Text('${widget.users!.name} 님'), // Display the user's name.
-                SizedBox(height: gap_s),
-                TextButton(
-                  onPressed: _logOut,
-                  child: Text('로그아웃', style: TextStyle(color: Colors.white)),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                  ),
-                ),
-              ],
-            ),
+              MyPageLogoutButton(
+                onTap: () {
+                  setState(() {
+                    _isLoggedIn = false;
+                  });
+                },
+              ),
           Divider(
             color: Colors.grey[100],
             thickness: 10.0,
           ),
           // 자주쓰는 버튼(최근화면, 할인혜택, 리뷰, 알림창)
-          MyPageAppBar(user: users, eventMyPageBannerDataList: eventMyPageBanners),
+          MyPageAppBar(
+              user: users, eventMyPageBannerDataList: eventMyPageBanners),
           // 예약 메뉴
           Divider(color: Colors.grey[200], thickness: 10),
           MyPageBookMenuHolder(),

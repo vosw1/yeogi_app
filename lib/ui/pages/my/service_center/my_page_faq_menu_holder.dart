@@ -57,7 +57,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
           final menuItem = myPageMenu[index - 1];
           return ListTile(
             leading: Icon(menuItem.iconData),
-            title: Text(menuItem.title, style: h5(),),
+            title: Text(menuItem.title, style: h6(),),
             trailing: (index == 2 || index == 3)
                 ? Row(
               mainAxisSize: MainAxisSize.min,
