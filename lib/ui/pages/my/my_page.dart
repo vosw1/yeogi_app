@@ -13,7 +13,7 @@ import 'package:yogi_project/ui/pages/my/widgets/my_page_logout_button.dart';
 
 class MyPage extends StatefulWidget {
   final Stay stays;
-  final User? users; // Nullable to handle both logged-in and logged-out states
+  final User? users;
 
   MyPage({Key? key, this.users, required this.stays}) : super(key: key);
 
@@ -27,12 +27,13 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState() {
     super.initState();
-    _isLoggedIn = widget.users != null;
+    updateLoginStatus();
   }
 
-  void _logOut() {
+  void updateLoginStatus() {
+    var session = SessionStore();
     setState(() {
-      _isLoggedIn = false;
+      _isLoggedIn = session.accessToken != null; // Check if the token is NOT null for logged in
     });
   }
 
@@ -44,30 +45,12 @@ class _MyPageState extends State<MyPage> {
           SizedBox(height: gap_s),
           MyPageHeaderBanner(),
           SizedBox(height: gap_s),
-          if (!_isLoggedIn)
-            MyPageLoginButton(
-              onTap: () {
-                setState(() {
-                  _isLoggedIn = true;
-                });
-              },
-            ),
-          if (_isLoggedIn)
-              MyPageLogoutButton(
-                onTap: () {
-                  setState(() {
-                    _isLoggedIn = false;
-                  });
-                },
-              ),
-          Divider(
-            color: Colors.grey[100],
-            thickness: 10.0,
-          ),
-          // 자주쓰는 버튼(최근화면, 할인혜택, 리뷰, 알림창)
-          MyPageAppBar(
-              user: users, eventMyPageBannerDataList: eventMyPageBanners),
-          // 예약 메뉴
+          if (!_isLoggedIn) // Shows login button if NOT logged in
+            MyPageLoginButton(),
+          if (_isLoggedIn) // Shows logout button if logged in
+            MyPageLogoutButton(),
+          Divider(color: Colors.grey[100], thickness: 10.0),
+          MyPageAppBar(user: users, eventMyPageBannerDataList: eventMyPageBanners),
           Divider(color: Colors.grey[200], thickness: 10),
           MyPageBookMenuHolder(),
           Divider(color: Colors.grey[200], thickness: 10),
@@ -77,4 +60,5 @@ class _MyPageState extends State<MyPage> {
       ),
     );
   }
+
 }
