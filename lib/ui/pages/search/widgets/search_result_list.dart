@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/dtos/stay_request.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/ui/pages/search/search_view_model.dart';
 import 'package:yogi_project/ui/pages/search/widgets/search_result_item.dart';
 
-class SearchResultList extends StatelessWidget {
-  final List<Stay> searchResultList;
+class SearchResultList extends ConsumerWidget {
+  final SearchStayDTO reqDTO;
 
-  const SearchResultList({required this.searchResultList, required Stay stays});
+  const SearchResultList({required this.reqDTO});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+  Widget build(BuildContext context, WidgetRef ref) {
+    SearchStayModel? model = ref.watch(searchStayProvider(reqDTO));
+
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return Padding(
         padding: const EdgeInsets.all(gap_m),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '결과 ${searchResultList.length}건',
+              '결과 ${model.stay.length}건',
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -27,9 +36,9 @@ class SearchResultList extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(), // 스크롤 비활성화
-              itemCount: searchResultList.isEmpty ? 1 : searchResultList.length,
+              itemCount: model.stay.isEmpty ? 1 : model.stay.length,
               itemBuilder: (context, index) {
-                if (searchResultList.isEmpty) {
+                if (model.stay.isEmpty) {
                   return Center(
                     child: Text(
                       '검색 결과가 없습니다.',
@@ -37,14 +46,13 @@ class SearchResultList extends StatelessWidget {
                     ),
                   );
                 } else {
-                  final stayData = searchResultList[index];
-                  return SearchResultItem(stayData: stayData);
+                  return SearchResultItem(stay: model.stay[index]);
                 }
               },
             ),
           ],
         ),
-      ),
-    );
+      );
+    }
   }
 }

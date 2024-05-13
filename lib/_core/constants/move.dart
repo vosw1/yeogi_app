@@ -18,8 +18,8 @@ import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
-import 'package:yogi_project/ui/pages/stay/room/room_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/ui/room/room_detail_page.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
@@ -173,7 +173,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 홈 페이지
     Move.mainHolder: (context) => MainHolder(),
     // 홈 페이지
-    Move.searchPage: (context) => SearchPage(),
+    // Move.searchPage: (context) => SearchPage(),
     // 검색 페이지
     Move.scrapPage: (context) => ScrapListPage(),
     // 내 주변 페이지

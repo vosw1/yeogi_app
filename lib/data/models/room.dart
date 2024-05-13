@@ -1,5 +1,5 @@
 class Room {
-  final int  roomId;
+  final int roomId;
   final String roomImgTitle; // 룸 이미지 제목
   final String roomName; // 룸 이름
   final String roomInfo; // 룸 정보
@@ -19,6 +19,7 @@ class Room {
   final roomSpecialState;
   final roomSpecialPrice;
   final roomImagePath;
+
 
   Room({
     required this.roomId,
@@ -43,9 +44,34 @@ class Room {
     this.roomImagePath,
   });
 
+  @override
+  String toString() {
+    return 'Room(roomId: $roomId, roomImgTitle: $roomImgTitle, roomName: $roomName, roomInfo: $roomInfo, personCount: $personCount, amenities: $amenities, checkInDate: $checkInDate, checkOutDate: $checkOutDate, checkInTime: $checkInTime, checkOutTime: $checkOutTime, price: $price, specialPrice: $specialPrice, notice: $notice, roomTier: $roomTier, roomPrice: $roomPrice, roomSpecialState: $roomSpecialState, roomSpecialPrice: $roomSpecialPrice, roomImagePath: $roomImagePath)';
+  }
+
+
   factory Room.fromJson(Map<String, dynamic> json) {
+
+    // 'roomId' 값을 JSON 데이터에서 가져오기
+    final dynamic roomIdData = json['roomId'];
+    // roomIdData가 null이거나 int 타입이 아니면 기본값인 0으로 설정
+    final int roomId = roomIdData != null ? int.tryParse(roomIdData.toString()) ?? 1 : 1;
+
+
+    // 'price' 값을 JSON 데이터에서 가져오기
+    final dynamic priceData = json['price'];
+    // priceData가 null이면 0으로 설정
+    final int price =
+    priceData != null ? int.tryParse(priceData.toString()) ?? 0 : 0;
+
+    // 'specialPrice' 값을 JSON 데이터에서 가져오기
+    final dynamic specialPriceData = json['specialPrice'];
+    // specialPriceData가 null이면 null로 설정
+    final int? specialPrice =
+    specialPriceData != null ? int.tryParse(specialPriceData.toString()) : null;
+
     return Room(
-      roomId: json["roomId"] ?? "",
+      roomId: roomId,
       roomImgTitle: json["roomImgTitle"] ?? "",
       roomName: json["roomName"] ?? "",
       roomInfo: json["roomInfo"] ?? "",
@@ -55,8 +81,8 @@ class Room {
       checkOutDate: json["checkOutDate"] ?? "",
       checkInTime: json["checkInTime"] ?? "",
       checkOutTime: json["checkOutTime"] ?? "",
-      price: json["price"] != null ? int.parse(json["price"]) : 0,
-      specialPrice: json["specialPrice"] != null ? int.parse(json["specialPrice"]) : 0,
+      price: json["price"] ?? "",
+      specialPrice: specialPrice,
       notice: json["notice"] ?? "",
 
       // 숙소 상세 보기
@@ -67,5 +93,5 @@ class Room {
       roomImagePath: json["roomImagePath"] ?? "",
     );
   }
-
 }
+
