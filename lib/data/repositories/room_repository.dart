@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
+import 'package:yogi_project/data/models/room_option.dart';
 import 'package:yogi_project/data/models/room.dart';
 
 class RoomRepository {
@@ -32,24 +33,19 @@ class RoomRepository {
     );
 
     print("HTTP 연결 상태: ${response.statusCode}");
-    print("데이터: ${response.data}");
+    Logger().d(response.data);
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
     if (responseDTO.status == 200) {
       // 직접 Map에서 예약 데이터를 파싱합니다.
-      Room room = Room.fromJson(responseDTO.body as Map<String, dynamic>);
-      responseDTO.body = room; // Update the body to be the single reservation object
-
-      print('데이터 확인 : ${room.toString()}');
+      RoomOption roomOption = RoomOption.fromJson(responseDTO.body);
+      responseDTO.body = roomOption;
     } else {
-      print("예약 상세보기 실패");
+      print("룸 상세보기 실패");
     }
-
+    Logger().d(responseDTO.body);
     return responseDTO;
   }
-
-
-
 }
 

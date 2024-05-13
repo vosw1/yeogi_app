@@ -20,6 +20,7 @@ class Room {
   final roomSpecialPrice;
   final roomImagePath;
 
+
   Room({
     required this.roomId,
     required this.roomImgTitle,
@@ -54,7 +55,7 @@ class Room {
     // 'roomId' 값을 JSON 데이터에서 가져오기
     final dynamic roomIdData = json['roomId'];
     // roomIdData가 null이거나 int 타입이 아니면 기본값인 0으로 설정
-    final int roomId = roomIdData != null ? int.tryParse(roomIdData.toString()) ?? 0 : 0;
+    final int roomId = roomIdData != null ? int.tryParse(roomIdData.toString()) ?? 1 : 1;
 
 
     // 'price' 값을 JSON 데이터에서 가져오기
@@ -80,7 +81,7 @@ class Room {
       checkOutDate: json["checkOutDate"] ?? "",
       checkInTime: json["checkInTime"] ?? "",
       checkOutTime: json["checkOutTime"] ?? "",
-      price: price,
+      price: json["price"] ?? "",
       specialPrice: specialPrice,
       notice: json["notice"] ?? "",
 
@@ -93,3 +94,4 @@ class Room {
     );
   }
 }
+
