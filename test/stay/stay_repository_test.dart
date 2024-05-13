@@ -8,8 +8,8 @@ void main() async {
   // await fetchPensionStayList_test(); // 해외 숙소 리스트
   // await fetchMotelStayList_test(); // 모텔 숙소 리스트
   // await fetchHomeAndVillaStayList_test(); // 홈&빌라 숙소 리스트
-  // await fetchCampingStayList_test(); // 홈&빌라 숙소 리스트
-  // await fetchGuesthouseStayList_test(); // 게하 숙소 리스트
+  await fetchCampingStayList_test(); // 홈&빌라 숙소 리스트
+  await fetchGuesthouseStayList_test(); // 게하 숙소 리스트
   // await fetchHomeStayList_test(); // 홈 페이지 리스트
   // await fetchStayDetail_test(); // 숙소 상세 보기 리스트
 }

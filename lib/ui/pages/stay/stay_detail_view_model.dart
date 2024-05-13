@@ -36,6 +36,10 @@ class StayDetailViewModel extends StateNotifier<StayDetailModel?> {
     // 통신하기
     ResponseDTO responseDTO = await StayRepository().fetchStayDetail(stayId);
 
+    Logger().d(stayId);
+    Logger().d(responseDTO.body);
+    Logger().d(responseDTO.body.runtimeType);
+
     StayDetailModel? model = responseDTO.body;
     state = model;
   }

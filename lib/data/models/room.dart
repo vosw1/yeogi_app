@@ -53,19 +53,19 @@ class Room {
   factory Room.fromJson(Map<String, dynamic> json) {
 
     // 'roomId' 값을 JSON 데이터에서 가져오기
-    final dynamic roomIdData = json['roomId'];
+    final dynamic roomIdData = json['roomId'] ?? 0;
     // roomIdData가 null이거나 int 타입이 아니면 기본값인 0으로 설정
     final int roomId = roomIdData != null ? int.tryParse(roomIdData.toString()) ?? 1 : 1;
 
 
     // 'price' 값을 JSON 데이터에서 가져오기
-    final dynamic priceData = json['price'];
+    final dynamic priceData = json['price'] ?? 0;
     // priceData가 null이면 0으로 설정
     final int price =
     priceData != null ? int.tryParse(priceData.toString()) ?? 0 : 0;
 
     // 'specialPrice' 값을 JSON 데이터에서 가져오기
-    final dynamic specialPriceData = json['specialPrice'];
+    final dynamic specialPriceData = json['specialPrice'] ?? 0;
     // specialPriceData가 null이면 null로 설정
     final int? specialPrice =
     specialPriceData != null ? int.tryParse(specialPriceData.toString()) : null;
@@ -81,15 +81,15 @@ class Room {
       checkOutDate: json["checkOutDate"] ?? "",
       checkInTime: json["checkInTime"] ?? "",
       checkOutTime: json["checkOutTime"] ?? "",
-      price: json["price"] ?? "",
+      price: json["price"] ?? 0,
       specialPrice: specialPrice,
       notice: json["notice"] ?? "",
 
       // 숙소 상세 보기
       roomTier: json["roomTier"] ?? "",
-      roomPrice: json["roomPrice"] ?? "",
+      roomPrice: json["roomPrice"] ?? 0,
       roomSpecialState: json["roomSpecialState"] ?? "",
-      roomSpecialPrice: json["roomSpecialPrice"] ?? "",
+      roomSpecialPrice: json["roomSpecialPrice"] ?? 0,
       roomImagePath: json["roomImagePath"] ?? "",
     );
   }
