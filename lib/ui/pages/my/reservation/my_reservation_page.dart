@@ -77,7 +77,6 @@ class MyReservationPage extends ConsumerWidget {
                   MaterialPageRoute(
                     builder: (context) => ReservationDetailPage(
                       reservations: reservation,
-                      pays: pay,
                     ),
                   ),
                 );

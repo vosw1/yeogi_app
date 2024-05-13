@@ -7,13 +7,11 @@ import 'package:yogi_project/data/models/reservation.dart';
 
 class ReservationDetailPage extends StatefulWidget {
   final Reservation reservations;
-  final Pay pays;
   final bool isCanceled = false;
 
   const ReservationDetailPage({
     Key? key,
     required this.reservations,
-    required this.pays,
   }) : super(key: key);
 
   @override
@@ -37,7 +35,7 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isCanceled ? '취소된 예약' : '예약내역'),
+        title: Text(widget.isCanceled ? '${widget.reservations.stayName} (취소완료)' : '${widget.reservations.stayName} (예약완료)'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: gap_m),
@@ -52,9 +50,6 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${widget.reservations.stayName}',
-                      style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_m),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
@@ -131,18 +126,18 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
                   SizedBox(height: gap_m),
                   Text('예약 정보', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_m),
-                  Text('예약자: ${widget.reservations.reservationName}'),
+                  Text('예약자 : ${widget.reservations.reservationName}'),
                   SizedBox(height: gap_xs),
-                  Text('전화번호: ${widget.reservations.reservationTel}'),
+                  Text('전화번호 : ${formatPhoneNumber(widget.reservations.reservationTel)}'),
                   SizedBox(height: 8),
                   Text(
-                      '결제금액: ${NumberFormat('#,###').format(widget.pays.amount)} 원',
+                      '결제금액 : ${NumberFormat('#,###').format(widget.reservations.amount)} 원',
                       style: subtitle1()),
                   SizedBox(height: gap_xs),
-                  Text('결제일자 : ${formatDate(widget.pays.createdAt)}',
+                  Text('결제일자 : ${formatDate(widget.reservations.createdAt)}',
                       style: subtitle1()),
                   SizedBox(height: gap_xs),
-                  Text('결제수단 : ${widget.pays.way}', style: subtitle1()),
+                  Text('결제수단 : ${widget.reservations.way}', style: subtitle1()),
                   // 결제수단 수정
                 ],
               ),
@@ -274,4 +269,20 @@ class _ReservationDetailPageState extends State<ReservationDetailPage> {
 
 String formatDate(DateTime dateTime) {
   return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
+}
+
+String formatPhoneNumber(String phoneNumber) {
+  // 전화번호에서 숫자만 추출
+  String cleaned = phoneNumber.replaceAll(RegExp(r'\D'), '');
+
+  // 'XXX-XXXX-XXXX' 형식으로 포맷 변경
+  return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'), (match) {
+    return '${match[1]}-${match[2]}-${match[3]}';
+  });
+}
+
+void main() {
+  String phoneNumber = '01012344321';
+  String formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+  print(formattedPhoneNumber); // 출력: 010-1234-4321
 }

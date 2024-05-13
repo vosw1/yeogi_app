@@ -57,19 +57,6 @@ final User users = User(
   updatedAt: null,
 );
 
-final Reservation reservations = Reservation(
-  reservationId: 1,
-  userId: 1,
-  stayName: "호텔 블루 하버",
-  stayAddress: "부산시 해운대구 좌동순환로 99 (좌동)",
-  price: 150000,
-  roomId: 1,
-  roomName: "스위트룸",
-  checkInDate: DateTime.parse("2024-06-20"),
-  // 문자열을 DateTime 객체로 변환
-  checkOutDate: DateTime.parse("2024-06-22"),
-);
-
 // Sample data for stay and room
 final Stay stays = Stay(
   stayImgTitle: "overseas/overseas1.png",
