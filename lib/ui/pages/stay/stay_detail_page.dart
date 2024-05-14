@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
@@ -33,7 +34,7 @@ class StayDetailPage extends ConsumerWidget {
         appBar: AppBar(
           title: Text(
             '${model.stay.stayName}',
-            style: TextStyle(fontSize: 20),
+            style: h4(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

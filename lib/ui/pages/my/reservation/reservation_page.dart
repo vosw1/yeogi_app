@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
@@ -41,7 +42,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('예약하기')),
+      appBar: AppBar(title: Text('예약하기', style: h4(),)),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(gap_m),

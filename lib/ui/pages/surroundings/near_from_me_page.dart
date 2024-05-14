@@ -106,6 +106,15 @@ class _NearFromMePageState extends State<NearFromMePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('내 주변 검색하기'),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: gap_m, horizontal: gap_s),
         child: Column(

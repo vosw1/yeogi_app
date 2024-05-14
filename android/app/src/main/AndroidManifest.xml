@@ -19,18 +19,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA"/>
 
-        <!-- 카카오 SDK 설정 -->
-        <activity
-            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
-            android:exported="true">
-            <intent-filter android:label="flutter_web_auth">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <!-- 카카오 로그인 Redirect URI -->
-                <data android:scheme="kakaod457203018311325f80b3393e7aace85" android:host="oauth"/>
-            </intent-filter>
-        </activity>
+<!--        &lt;!&ndash; 카카오 SDK 설정 &ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter android:label="flutter_web_auth">-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+<!--                &lt;!&ndash; 카카오 로그인 Redirect URI &ndash;&gt;-->
+<!--                <data android:scheme="kakaod457203018311325f80b3393e7aace85" android:host="oauth"/>-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
 
         <!-- 메인 액티비티 설정 -->
         <activity

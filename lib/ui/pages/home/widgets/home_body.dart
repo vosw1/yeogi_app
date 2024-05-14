@@ -47,8 +47,8 @@ class HomeBody extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  width: 190,
-                  margin: EdgeInsets.symmetric(horizontal: gap_m),
+                  width: 220,
+                  margin: EdgeInsets.only(left: gap_m),
                   child: Column(
                     children: [
                       // Wrap the Container with GestureDetector for onTap functionality
@@ -63,7 +63,7 @@ class HomeBody extends StatelessWidget {
                           );
                         },
                         child: Container(
-                          width: 190,
+                          width: 220,
                           height: 140,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(gap_s),

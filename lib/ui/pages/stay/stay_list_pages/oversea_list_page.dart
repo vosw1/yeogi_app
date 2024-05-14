@@ -20,7 +20,7 @@ class OverseaStayListPage extends ConsumerWidget {
     }else{
       return Scaffold(
         appBar: AppBar(
-          title: Text('해외'),
+          title: Text('해외', style: h4(),),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
@@ -38,7 +38,7 @@ class OverseaStayListPage extends ConsumerWidget {
 
   Widget buildListItem(BuildContext context, Stay stay, int stayId) {
     return Padding(
-      padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+      padding: const EdgeInsets.only(top: gap_s, left: gap_m, right: gap_m),
       child: InkWell(
         onTap: () {
           Navigator.push(
