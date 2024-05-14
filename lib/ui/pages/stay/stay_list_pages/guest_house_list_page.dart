@@ -85,18 +85,28 @@ class GuestHouseStayListPage extends ConsumerWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                SizedBox(height: 4), // 텍스트 사이 간격
+                SizedBox(height: gap_xx), // 텍스트 사이 간격
                 Text(
                   stay.address, // 숙소 위치
-                  style: subtitle1(),maxLines: 1,
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 4), // 텍스트 사이 간격
+                SizedBox(height: gap_s), // 텍스트 사이 간격
                 Text(
                   stay.intro, // 숙소 정보
-                  maxLines: 3,
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.grey,
+                  ),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.grey),
                 ),
               ],
             ),
