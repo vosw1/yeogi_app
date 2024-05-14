@@ -1,4 +1,5 @@
 
+
 class RoomOption {
   int id;
   String imageName;
@@ -24,10 +25,10 @@ class RoomOption {
     required this.notice,
   });
 
-
   @override
   String toString() {
-    return 'RoomOption{id: $id, imageName: $imageName, imagePath: $imagePath, tier: $tier, price: $price, salePrice: $salePrice, saleState: $saleState, information: $information, options: $options, notice: $notice}';
+    return 'RoomOption'
+        '{id: $id, imageName: $imageName, imagePath: $imagePath, tier: $tier, price: $price, salePrice: $salePrice, saleState: $saleState, information: $information, options: $options, notice: $notice}';
   }
 
   factory RoomOption.fromJson(Map<String, dynamic> json) => RoomOption(
@@ -39,7 +40,8 @@ class RoomOption {
     salePrice: json["salePrice"],
     saleState: json["saleState"],
     information: Information.fromJson(json["information"]),
-    options: List<RoomDetailOption>.from(json["options"].map((x) => RoomDetailOption.fromJson(x))),
+    options: List<RoomDetailOption>.from(
+        json["options"].map((x) => RoomDetailOption.fromJson(x))),
     notice: json["notice"],
   );
 
@@ -57,6 +59,32 @@ class RoomOption {
   };
 }
 
+class RoomDetailOption {
+  String name;
+  String iconName;
+
+  RoomDetailOption({
+    required this.name,
+    required this.iconName,
+  });
+
+  @override
+  String toString() {
+    return '$name, $iconName';
+  }
+
+  factory RoomDetailOption.fromJson(Map<String, dynamic> json) =>
+      RoomDetailOption(
+        name: json["name"],
+        iconName: json["iconName"],
+      );
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "iconName": iconName,
+  };
+}
+
 class Information {
   int minPerson;
   int maxPerson;
@@ -70,7 +98,7 @@ class Information {
 
   @override
   String toString() {
-    return 'Information{minPerson: $minPerson, maxPerson: $maxPerson, moreinfo: $moreinfo}';
+    return '최소인원: $minPerson,\n최대인원: $maxPerson,\n조식제공: $moreinfo';
   }
 
   factory Information.fromJson(Map<String, dynamic> json) => Information(
@@ -86,27 +114,6 @@ class Information {
   };
 }
 
-class RoomDetailOption {
-  String name;
-  String iconName;
 
-  RoomDetailOption({
-    required this.name,
-    required this.iconName,
-  });
 
-  @override
-  String toString() {
-    return 'Option{name: $name, iconName: $iconName}';
-  }
 
-  factory RoomDetailOption.fromJson(Map<String, dynamic> json) => RoomDetailOption(
-    name: json["name"],
-    iconName: json["iconName"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "name": name,
-    "iconName": iconName,
-  };
-}
