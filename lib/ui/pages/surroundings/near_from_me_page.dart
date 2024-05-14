@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -25,7 +25,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
     super.initState();
     _controllerCompleter = Completer<GoogleMapController>();
     _getCurrentLocation();
-    _places = GoogleMapsPlaces(apiKey: 'YOUR_API_KEY');
+    _places =
+        GoogleMapsPlaces(apiKey: 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA');
   }
 
   Future<void> _getCurrentLocation() async {
@@ -69,7 +70,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
 
   Future<void> _showPlaceDetails(String placeId) async {
     try {
-      PlacesDetailsResponse response = await _places.getDetailsByPlaceId(placeId);
+      PlacesDetailsResponse response =
+          await _places.getDetailsByPlaceId(placeId);
       if (response.status == 'OK') {
         showDialog(
           context: context,
@@ -106,8 +108,17 @@ class _NearFromMePageState extends State<NearFromMePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('내 주변 검색하기', style: h4()),
+      ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: gap_m, horizontal: gap_s),
+        padding: EdgeInsets.symmetric(horizontal: gap_m),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -146,27 +157,36 @@ class _NearFromMePageState extends State<NearFromMePage> {
               ),
             ),
             SizedBox(height: 8),
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: GoogleMap(
-                  initialCameraPosition: _currentPosition != null
-                      ? CameraPosition(target: _currentPosition!, zoom: 12)
-                      : CameraPosition(target: LatLng(35.1796, 129.0756), zoom: 12),
-                  onMapCreated: (controller) async {
-                    _controllerCompleter.complete(controller);
-                  },
-                  markers: markers,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  onTap: (coordinate) {
-                    _searchNearbyPlaces(coordinate);
-                  },
+            Container(
+              height: 200,
+              child: Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: GoogleMap(
+                    initialCameraPosition: _currentPosition != null
+                        ? CameraPosition(target: _currentPosition!, zoom: 12)
+                        : CameraPosition(
+                            target: LatLng(35.1796, 129.0756), zoom: 12),
+                    onMapCreated: (controller) async {
+                      _controllerCompleter.complete(controller);
+                    },
+                    markers: markers,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: true,
+                    onTap: (coordinate) {
+                      _searchNearbyPlaces(coordinate);
+                    },
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: gap_s),
-            Text('결과 ${searchResults.length}건'),
+            SizedBox(height: gap_m),
+            Text(
+              '결과 ${searchResults.length}건',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
             Divider(),
             Expanded(
               child: ListView.builder(
@@ -193,7 +213,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
         setState(() {
           _currentPosition = LatLng(position.latitude, position.longitude);
         });
-        final GoogleMapController controller = await _controllerCompleter.future;
+        final GoogleMapController controller =
+            await _controllerCompleter.future;
         controller.animateCamera(CameraUpdate.newLatLng(_currentPosition!));
       }
     } catch (e) {
@@ -214,7 +235,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
           searchResults.clear();
           for (PlacesSearchResult result in response.results) {
             _addMarker(
-              LatLng(result.geometry!.location.lat, result.geometry!.location.lng),
+              LatLng(
+                  result.geometry!.location.lat, result.geometry!.location.lng),
               result.placeId!,
             );
             searchResults.add(result.name!);
