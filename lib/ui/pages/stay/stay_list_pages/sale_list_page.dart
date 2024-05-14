@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
@@ -12,11 +11,11 @@ class SaleStayListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SaleStayListModel? model = ref.watch(saleStayListProvider);
 
-    if(model == null){
+    if (model == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    }else{
+    } else {
       return Scaffold(
         appBar: AppBar(
           title: Text('특가'),
@@ -82,7 +81,8 @@ class SaleStayListPage extends ConsumerWidget {
                 SizedBox(height: 4), // 텍스트 사이 간격
                 Text(
                   stay.address, // 숙소 위치
-                  style: subtitle1(),maxLines: 1,
+                  style: subtitle1(),
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 4), // 텍스트 사이 간격

@@ -12,7 +12,7 @@ class AmenitySection extends StatelessWidget {
       children: [
         Text(
           '편의 시설',
-          style: h6(),
+          style: h5(),
         ),
         SizedBox(height: gap_m),
         Row(
@@ -25,7 +25,7 @@ class AmenitySection extends StatelessWidget {
             _buildAmenityIcon(Icons.kitchen, '냉장고'),
           ],
         ),
-        SizedBox(height: gap_s),
+        SizedBox(height: gap_m),
         Divider(),
         SizedBox(height: gap_s),
       ],

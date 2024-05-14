@@ -43,8 +43,9 @@ class ReservationSaveReqDTO {
       'roomImgTitle': roomImgTitle,
       'roomName': roomName,
       'stayAdress': stayAdress,
-      'checkInDate': checkInDate.toIso8601String(),
-      'checkOutDate': checkOutDate.toIso8601String(),
+      // 날짜 데이터를 UTC로 변환하여 ISO8601 문자열 포맷으로 저장
+      'checkInDate': checkInDate.toUtc().toIso8601String(),
+      'checkOutDate': checkOutDate.toUtc().toIso8601String(),
       'price': price,
       'reservationName': reservationName,
       'reservationTel': reservationTel,

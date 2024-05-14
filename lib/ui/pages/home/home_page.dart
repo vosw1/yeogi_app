@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/data/models/reply.dart';
-import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/home/home_page_view_model.dart';
 import 'package:yogi_project/ui/pages/home/widgets/home_body.dart';

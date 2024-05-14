@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
@@ -73,18 +72,23 @@ class StayDetailPage extends ConsumerWidget {
                   '객실 선택',
                   style: TextStyle(fontSize: 20),
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: model.rooms?.length,
                   itemBuilder: (context, index) {
-                    SizedBox(height: gap_s);
-                    return RoomInfoWidget(
-                      roomData: model.rooms![index],
-                      roomId: model.rooms![index].roomId,
+                    return Column(
+                      children: [
+                        if (index != 0) SizedBox(height: gap_s), // 첫 번째 요소를 제외하고 간격 추가
+                        RoomInfoWidget(
+                          roomData: model.rooms![index],
+                          roomId: model.rooms![index].roomId,
+                        ),
+                      ],
                     );
                   },
                 ),
+                SizedBox(height: gap_s),
                 Divider(),
                 SizedBox(height: gap_s),
                 // 숙소 소개 섹션
@@ -92,23 +96,24 @@ class StayDetailPage extends ConsumerWidget {
                   '숙소 소개',
                   style: TextStyle(fontSize: 20),
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 Text(
                   model.stay.intro, // 변경된 부분
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: gap_xx),
+                SizedBox(height: gap_s),
                 Divider(),
                 SizedBox(height: gap_s),
                 Text(
                   '이용 정보',
                   style: TextStyle(fontSize: 20),
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 Text(
                   model.stay.information, // 변경된 부분
                   style: TextStyle(fontSize: 16),
                 ),
+                SizedBox(height: gap_s),
                 Divider(),
                 SizedBox(height: gap_s),
                 // 취소 및 환불 규정 섹션
@@ -116,12 +121,12 @@ class StayDetailPage extends ConsumerWidget {
                   '취소 및 환불 정책',
                   style: TextStyle(fontSize: 20),
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 Text(
                   '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요',
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
               ],
             ),
           ),

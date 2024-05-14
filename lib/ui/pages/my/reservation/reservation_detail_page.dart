@@ -27,8 +27,9 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   @override
   void initState() {
     super.initState();
-    _checkInDate = widget.reservations.checkInDate;
-    _checkOutDate = widget.reservations.checkOutDate;
+    // UTC로 변환
+    _checkInDate = widget.reservations.checkInDate.toUtc();
+    _checkOutDate = widget.reservations.checkOutDate.toUtc();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
     isCanceled = widget.reservations.state == 'REFUND'; // 초기 상태 설정
   }
