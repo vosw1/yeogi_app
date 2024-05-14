@@ -88,12 +88,26 @@ class _ReviewPopupState extends State<ReviewPopup> {
                 color: Colors.redAccent,
               ),
             SizedBox(width: 8),
-            Text('${review.reviewScore.toStringAsFixed(1)} 점'),
+            Text(
+              '${review.reviewScore.toStringAsFixed(1)} 점',
+              style: TextStyle(
+                fontFamily: 'Pretendard',
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
           ],
         ),
         SizedBox(height: gap_s),
         SingleChildScrollView(
-          child: Text(review.reviewContent),
+          child: Text(
+            review.reviewContent,
+            style: TextStyle(
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
         ),
         SizedBox(height: gap_s),
         Divider(),
@@ -113,7 +127,14 @@ class _ReviewPopupState extends State<ReviewPopup> {
                   SizedBox(width: 8),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: Text(subComment.reviewContent),
+                      child: Text(
+                        subComment.reviewContent,
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -152,7 +173,7 @@ class _ReviewPopupState extends State<ReviewPopup> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         widget.reviews.length,
-            (index) => Container(
+        (index) => Container(
           margin: EdgeInsets.symmetric(horizontal: 4.0),
           width: 8.0,
           height: 8.0,
