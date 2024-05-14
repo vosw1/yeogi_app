@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 
-
 // 편의 시설 섹션 위젯
 class AmenitySection extends StatelessWidget {
   @override
@@ -12,7 +11,7 @@ class AmenitySection extends StatelessWidget {
       children: [
         Text(
           '편의 시설',
-          style: h6(),
+          style: h5(),
         ),
         SizedBox(height: gap_m),
         Row(
@@ -25,7 +24,7 @@ class AmenitySection extends StatelessWidget {
             _buildAmenityIcon(Icons.kitchen, '냉장고'),
           ],
         ),
-        SizedBox(height: gap_s),
+        SizedBox(height: gap_m),
         Divider(),
         SizedBox(height: gap_s),
       ],
@@ -39,7 +38,14 @@ class AmenitySection extends StatelessWidget {
         children: [
           Icon(iconData),
           SizedBox(height: gap_xs),
-          Text(text),
+          Text(
+            text,
+            style: TextStyle(
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
         ],
       ),
     );

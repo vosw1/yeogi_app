@@ -23,9 +23,11 @@ class ReviewSection extends StatelessWidget {
         reviews.isEmpty
             ? Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            '리뷰가 없습니다',
-            style: TextStyle(fontSize: 16),
+          child: Center(
+            child: Text(
+              '리뷰가 없습니다',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
         )
             : Container(

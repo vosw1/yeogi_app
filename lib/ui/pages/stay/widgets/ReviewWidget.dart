@@ -39,23 +39,35 @@ class ReviewWidget extends StatelessWidget {
             Row(
               children: [
                 Row(
-                    children: List.generate(
-                      5,
-                          (index) => Icon(
-                        index < stars ? Icons.star : Icons.star_border,
-                        color: Colors.redAccent,
-                        size: gap_m,
-                      ),
+                  children: List.generate(
+                    5,
+                    (index) => Icon(
+                      index < stars ? Icons.star : Icons.star_border,
+                      color: Colors.redAccent,
+                      size: gap_m,
                     ),
                   ),
+                ),
                 SizedBox(width: gap_xs), // 별 아이콘과 텍스트 사이의 간격 조정
-                Text('${rating.toStringAsFixed(1)} 점'),
+                Text(
+                  '${rating.toStringAsFixed(1)} 점',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
               ],
             ),
             SizedBox(height: gap_xs),
             // 코멘트 표시
             Text(
               comment,
+              style: TextStyle(
+                fontFamily: 'Pretendard',
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),

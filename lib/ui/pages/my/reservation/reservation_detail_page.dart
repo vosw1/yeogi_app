@@ -8,7 +8,6 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_mo
 
 class ReservationDetailPage extends ConsumerStatefulWidget {
   final Reservation reservations;
-  final bool isCanceled = false;
 
   const ReservationDetailPage({
     Key? key,
@@ -28,14 +27,17 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   @override
   void initState() {
     super.initState();
-    _checkInDate = widget.reservations.checkInDate;
-    _checkOutDate = widget.reservations.checkOutDate;
+    // UTC로 변환
+    _checkInDate = widget.reservations.checkInDate.toUtc();
+    _checkOutDate = widget.reservations.checkOutDate.toUtc();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
     isCanceled = widget.reservations.state == 'REFUND'; // 초기 상태 설정
   }
 
   @override
   Widget build(BuildContext context) {
+    bool showCancelButton = DateTime.now().isBefore(_checkInDate);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.reservations.stayName}'),
@@ -151,10 +153,13 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             ),
             SizedBox(height: gap_m),
             Center(
-              child: (isCanceled == true) ? Text(
+              child: isCanceled == true
+                  ? Text(
                 '취소된 예약입니다',
                 style: h5(mColor: Colors.redAccent),
-              ) : Row(
+              )
+                  : showCancelButton
+                  ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
@@ -181,6 +186,17 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     child: Text('리뷰 작성'),
                   ),
                 ],
+              )
+                  : ElevatedButton(
+                onPressed: () {
+                  _showReviewWritingDialog(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.redAccent,
+                  side: BorderSide.none, // 테두리 없음
+                ),
+                child: Text('리뷰 작성'),
               ),
             ),
             SizedBox(height: gap_m),
@@ -190,8 +206,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context,
-      {required bool isCheckIn}) async {
+  Future<void> _selectDate(BuildContext context, {required bool isCheckIn}) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: isCheckIn ? _checkInDate : _checkOutDate,
@@ -205,45 +220,43 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
         } else {
           _checkOutDate = pickedDate;
         }
-        _numberOfNights = _checkOutDate
-            .difference(_checkInDate)
-            .inDays;
+        _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
       });
     }
   }
 
   void _showCancelConfirmationDialog(BuildContext context, WidgetRef ref) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('예약 취소'),
-            content: Text('이 예약을 취소하시겠습니까?'),
-            actionsAlignment: MainAxisAlignment.center,  // 버튼들을 가운데 정렬
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () async {
-                    Navigator.of(context).pop(); // 다이얼로그 닫기
-                    await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                    if (widget.reservations.state == 'REFUND') {
-                      setState(() {
-                        isCanceled = true; // 상태 업데이트
-                      });
-                    }
-                  },
-                  child: Text('예')
-              ),
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('아니요')
-              ),
-            ],
-          );
-        }
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('예약 취소'),
+          content: Text('이 예약을 취소하시겠습니까?'),
+          actionsAlignment: MainAxisAlignment.center, // 버튼들을 가운데 정렬
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop(); // 다이얼로그 닫기
+                await ref
+                    .read(reservationListProvider.notifier)
+                    .payUpdate(widget.reservations.payId);
+                if (widget.reservations.state == 'REFUND') {
+                  setState(() {
+                    isCanceled = true; // 상태 업데이트
+                  });
+                }
+              },
+              child: Text('예'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('아니요'),
+            ),
+          ],
+        );
+      },
     );
   }
-
-
 
   void _showReviewWritingDialog(BuildContext context) {
     showDialog(
@@ -275,8 +288,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
 }
 
 String formatDate(DateTime dateTime) {
-  return '${dateTime.year}-${dateTime.month.toString().padLeft(
-      2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
+  return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
 }
 
 String formatPhoneNumber(String phoneNumber) {
@@ -284,10 +296,9 @@ String formatPhoneNumber(String phoneNumber) {
   String cleaned = phoneNumber.replaceAll(RegExp(r'\D'), '');
 
   // 'XXX-XXXX-XXXX' 형식으로 포맷 변경
-  return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'),
-          (match) {
-        return '${match[1]}-${match[2]}-${match[3]}';
-      });
+  return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'), (match) {
+    return '${match[1]}-${match[2]}-${match[3]}';
+  });
 }
 
 void main() {

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/store/session_store.dart';
-import 'package:yogi_project/ui/pages/my/my_page.dart';
 
 class MyPageLogoutButton extends ConsumerWidget {
   const MyPageLogoutButton({super.key});
@@ -18,9 +16,10 @@ class MyPageLogoutButton extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: gap_s, left: gap_s, right: gap_s),
               child: InkWell(
-                onTap: () async {
-                  // 로그아웃 로직 수행, 예를 들어 SessionStore의 logout을 호출
-                  await SessionStore().logout();
+                onTap: () {
+                  // SessionStore의 logout 메서드 호출
+                  SessionStore().logout();
+                  // 현재 페이지에 머무르므로 추가적인 네비게이션 코드는 필요 없음
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.07,

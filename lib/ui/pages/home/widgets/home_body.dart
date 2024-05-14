@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
@@ -25,7 +26,7 @@ class HomeBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(width: gap_m),
-              Text(title, style: TextStyle(fontSize: 20)),
+              Text(title, style: h4()),
             ],
           ),
         ),
@@ -35,12 +36,13 @@ class HomeBody extends StatelessWidget {
           child: Row(
             children: List.generate(
               stays.length,
-                  (index) => GestureDetector(
+              (index) => GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => StayDetailPage(stayId: stays[index].id),
+                      builder: (context) =>
+                          StayDetailPage(stayId: stays[index].id),
                     ),
                   );
                 },
@@ -55,7 +57,8 @@ class HomeBody extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => StayDetailPage(stayId: index),
+                              builder: (context) =>
+                                  StayDetailPage(stayId: index),
                             ),
                           );
                         },
@@ -65,14 +68,14 @@ class HomeBody extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(gap_s),
                             image: DecorationImage(
-                              image: AssetImage(
-                                  "assets${stays[index].imagePath}"),
+                              image:
+                                  AssetImage("assets${stays[index].imagePath}"),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: gap_m),
+                      SizedBox(height: gap_s),
                       Container(
                         width: 200,
                         height: 30,
@@ -82,7 +85,11 @@ class HomeBody extends StatelessWidget {
                         ),
                         child: Text(
                           stays[index].name,
-                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

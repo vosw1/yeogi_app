@@ -52,18 +52,31 @@ class RoomInfoWidget extends StatelessWidget {
                   SizedBox(height: gap_s),
                   Text(
                     '입실 : ${roomData.checkInTime}',
-                    style: subtitle2(),
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                   SizedBox(height: gap_xs),
                   Text(
                     '퇴실 : ${roomData.checkOutTime}',
-                    style: subtitle2(),
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                   SizedBox(height: gap_s),
                   // 가격 표시
                   Text(
                     '${NumberFormat('#,###').format(roomData.price)} 원',
-                    style: subtitle2(mColor: Colors.grey),
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.grey.shade600
+                    ),
                   ),
                 ],
               ),
