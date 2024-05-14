@@ -7,12 +7,16 @@ import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
+
 class StayDetailPage extends ConsumerWidget {
   int stayId;
+
   StayDetailPage({required this.stayId});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     StayDetailModel? model = ref.watch(stayDetailProvider(stayId));
+
     if (model == null) {
       return Center(
         child: CircularProgressIndicator(),
