@@ -17,10 +17,10 @@ import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
+import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 import 'package:yogi_project/ui/pages/search/search_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
-import 'package:yogi_project/ui/room/room_detail_page.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
