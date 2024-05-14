@@ -8,7 +8,6 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_mo
 
 class ReservationDetailPage extends ConsumerStatefulWidget {
   final Reservation reservations;
-  final bool isCanceled = false;
 
   const ReservationDetailPage({
     Key? key,
