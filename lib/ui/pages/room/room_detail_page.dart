@@ -34,7 +34,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('디럭스 룸'),
+        title: Text('디럭스 룸',style: h4(),),
       ),
       body: Column(
         children: [
@@ -61,14 +61,15 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(height:gap_m),
+                        SizedBox(height: gap_m),
                         GestureDetector(
                           onTap: _selectDateRange,
                           child: Container(
                             padding: EdgeInsets.all(gap_s),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(gap_s),
-                              border: Border.all(color: Colors.black, width: 2.0),
+                              border:
+                                  Border.all(color: Colors.black, width: 2.0),
                             ),
                             child: Row(
                               children: [
@@ -76,7 +77,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                 SizedBox(width: gap_s),
                                 Text(
                                   '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
-                                  style: h6(),
+                                  style: h5(),
                                 ),
                               ],
                             ),
@@ -85,20 +86,55 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                         SizedBox(height: gap_m),
                         Text(
                             '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
-                            style: TextStyle(fontSize: gap_m)),
+                            style: h5()),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('기본정보\n\n기준2인 · 최대2\n더블베드 1개\n객실+욕실 / 12.74평'),
+                        Text(
+                          '기본정보',
+                          style: h5(),
+                        ),
+                        SizedBox(height: gap_s),
+                        Text(
+                          '기준2인 · 최대2\n더블베드 1개\n객실+욕실 / 12.74평',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('편의시설\n\nTV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
-    ),
+                        Text(
+                          '편의시설',
+                          style: h5(),
+                        ),
+                        SizedBox(height: gap_s),
+                        Text(
+                          'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                         SizedBox(height: gap_s),
                         Divider(),
                         SizedBox(height: gap_s),
-                        Text('공지\n\n스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인'),
+                        Text(
+                          '공지',
+                          style: h5(),
+                        ),
+                        SizedBox(height: gap_s),
+                        Text(
+                          '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -115,7 +151,9 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms)),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ReservationPage(rooms: widget.rooms)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -130,6 +168,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
               ),
             ),
           ),
+          SizedBox(height: gap_m),
         ],
       ),
     );
@@ -140,14 +179,16 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
       context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
-      initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
+      initialDateRange:
+          DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
     );
 
     if (pickedDateRange != null) {
       setState(() {
         _selectedStartDate = pickedDateRange.start;
         _selectedEndDate = pickedDateRange.end;
-        _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+        _numberOfNights =
+            _selectedEndDate.difference(_selectedStartDate).inDays;
       });
     }
   }

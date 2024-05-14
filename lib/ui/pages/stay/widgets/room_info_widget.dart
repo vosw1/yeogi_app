@@ -11,6 +11,15 @@ class RoomInfoWidget extends StatelessWidget {
 
   const RoomInfoWidget({required this.roomData, required this.roomId});
 
+  String formatTime(String time) {
+    try {
+      final DateTime parsedTime = DateFormat('HH:mm:ss').parse(time);
+      return DateFormat('HH:mm').format(parsedTime);
+    } catch (e) {
+      return time; // 원래 형식으로 반환
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -61,8 +70,9 @@ class RoomInfoWidget extends StatelessWidget {
                     ),
                     SizedBox(height: gap_xx),
                     // 입실 및 퇴실 정보 표시
+                    // 입실 및 퇴실 정보 표시
                     Text(
-                      '입실 : ${roomData.checkInTime}',
+                      '입실 : ${formatTime(roomData.checkInTime)}',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.bold,
@@ -70,14 +80,14 @@ class RoomInfoWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '퇴실 : ${roomData.checkOutTime}',
+                      '퇴실 : ${formatTime(roomData.checkOutTime)}',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
                       ),
                     ),
-                    SizedBox(height: gap_xx),
+                    SizedBox(height: gap_xs),
                     // 가격 표시
                     Text(
                       '${NumberFormat('#,###').format(roomData.roomPrice)} 원',
