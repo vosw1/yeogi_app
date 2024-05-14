@@ -124,7 +124,7 @@ class StayDetailPage extends ConsumerWidget {
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: gap_s),
-                Text(model.stay.stayAddress),
+
                 SizedBox(height: gap_s),
                 SizedBox(
                   width: double.infinity,
@@ -134,7 +134,7 @@ class StayDetailPage extends ConsumerWidget {
                     child: GoogleMap(
                       initialCameraPosition: _currentPosition != null
                           ? CameraPosition(target: _currentPosition!, zoom: 12)
-                          : CameraPosition(target: LatLng(35.1796, 129.0756), zoom: 12),
+                          : CameraPosition(target: LatLng(35.1658, 129.1573), zoom: 12),
                       onMapCreated: (controller) async {
                         _controllerCompleter.complete(controller);
                       },
@@ -144,6 +144,11 @@ class StayDetailPage extends ConsumerWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: gap_m),
+                Text(model.stay.intro,
+                  style: TextStyle(fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,),),
                 Divider(),
                 SizedBox(height: gap_s),
                 Text(
@@ -183,7 +188,6 @@ class StayDetailPage extends ConsumerWidget {
         ),
         floatingActionButton: ScrollFAB(controller: ScrollController()), // 변경된 부분
       );
-
     }
   }
 }

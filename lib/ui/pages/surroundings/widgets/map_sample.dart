@@ -11,7 +11,7 @@ class MapSample extends StatefulWidget {
 
 class MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
-  LatLng _currentPosition = LatLng(35.15958250100625, 129.06019165022786); // 초기 위치를 부산 근처의 좌표로 설정
+  LatLng _currentPosition = LatLng(35.1658, 129.1573); // 초기 위치를 부산 근처의 좌표로 설정
 
   @override
   void initState() {
