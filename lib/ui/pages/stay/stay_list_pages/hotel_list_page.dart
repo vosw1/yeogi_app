@@ -22,7 +22,7 @@ class HotelStayListPage extends ConsumerWidget {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('호텔'),
+          title: Text('호텔', style: h4(),),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),

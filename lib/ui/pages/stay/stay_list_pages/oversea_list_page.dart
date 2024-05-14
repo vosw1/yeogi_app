@@ -20,7 +20,7 @@ class OverseaStayListPage extends ConsumerWidget {
     }else{
       return Scaffold(
         appBar: AppBar(
-          title: Text('해외'),
+          title: Text('해외', style: h4(),),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),

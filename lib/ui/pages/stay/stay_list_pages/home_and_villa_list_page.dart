@@ -23,7 +23,7 @@ class HomeAndVillaStayListPage extends ConsumerWidget {
     }else{
       return Scaffold(
         appBar: AppBar(
-          title: Text('홈&빌라'),
+          title: Text('홈&빌라', style: h4(),),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),

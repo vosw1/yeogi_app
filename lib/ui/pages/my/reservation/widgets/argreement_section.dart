@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/privacy_polocy_dialog.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/third_party_providing_dialog.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/usage_rules_dialog.dart';
+
+import 'age_confirmation_dialog.dart';
 
 class AgreementSection extends StatefulWidget {
   final void Function(bool) onAllChecked;
@@ -72,7 +78,9 @@ class _AgreementSectionState extends State<AgreementSection> {
         Column(
           children: subtitle.map((text) {
             return GestureDetector(
-              onTap: () => _showPopups(context),
+              onTap: () {
+                _showPopup(text); // 팝업을 표시하는 메소드를 호출
+              },
               child: Row(
                 children: [
                   Expanded(
@@ -98,6 +106,65 @@ class _AgreementSectionState extends State<AgreementSection> {
         ),
       ],
     );
+  }
+
+  void _showPopup(String text) {
+    AlertDialog alertDialog;
+
+    switch (text) {
+      case '이용규칙 및 취소/환불 규정 동의(필수)':
+        alertDialog = _buildUsageRulesDialog() as AlertDialog;
+        break;
+      case '개인정보 수집 및 이용 동의(필수)':
+        alertDialog = _buildPrivacyPolicyDialog() as AlertDialog;
+        break;
+      case '개인정보 제3자 제공 동의(필수)':
+        alertDialog = _buildThirdPartyProvidingDialog() as AlertDialog;
+        break;
+      case '만 14세 이상 확인(필수)':
+        alertDialog = _buildAgeConfirmationDialog() as AlertDialog;
+        break;
+      default:
+        alertDialog = _buildDefaultDialog();
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alertDialog;
+      },
+    );
+  }
+
+  AlertDialog _buildDefaultDialog() {
+    return AlertDialog(
+      title: Text('Notice'),
+      content: Text('일치하는 팝업이 없습니다.'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('확인'),
+        ),
+      ],
+    );
+  }
+
+  UsageRulesDialog _buildUsageRulesDialog() {
+    return UsageRulesDialog();
+  }
+
+  PrivacyPolicyDialog _buildPrivacyPolicyDialog() {
+    return PrivacyPolicyDialog();
+  }
+
+  ThirdPartyProvidingDialog _buildThirdPartyProvidingDialog() {
+    return ThirdPartyProvidingDialog(rooms: rooms);
+  }
+
+  AgeConfirmationDialog _buildAgeConfirmationDialog() {
+    return AgeConfirmationDialog();
   }
 
   void _showPopups(BuildContext context) {

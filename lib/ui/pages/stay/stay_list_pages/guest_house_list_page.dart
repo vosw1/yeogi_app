@@ -20,7 +20,7 @@ class GuestHouseStayListPage extends ConsumerWidget {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('게스트 하우스'),
+          title: Text('게스트 하우스', style: h4(),),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),

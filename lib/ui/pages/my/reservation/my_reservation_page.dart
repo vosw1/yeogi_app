@@ -32,7 +32,10 @@ class MyReservationPage extends ConsumerWidget {
       // 예약 내역이 없는 경우
       return Scaffold(
         appBar: AppBar(
-          title: Text('예약내역'),
+          title: Text(
+            '예약내역',
+            style: h4(),
+          ),
         ),
         body: Center(
           child: Text(

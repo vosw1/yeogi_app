@@ -19,7 +19,7 @@ class PensionStayListPage extends ConsumerWidget {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('펜션'),
+          title: Text('펜션', style: h4()),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
