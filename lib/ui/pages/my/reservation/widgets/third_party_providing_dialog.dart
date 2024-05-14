@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/data/models/room.dart';
 
 class ThirdPartyProvidingDialog extends StatelessWidget {
@@ -12,7 +11,7 @@ class ThirdPartyProvidingDialog extends StatelessWidget {
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[
-            Text('제공받는 자\t${rooms.roomName}'),
+            Text('제공받는 자\t호텔 블루 하버'),
             Text('제공 목적\t숙박예약서비스 이용계약 이행\n(서비스 제공, 확인, 이용자 정보 확인)'),
             Text(
                 '제공하는 항목\t예약한 숙박서비스의 이용자 정보(예약자 이름, 휴대폰번호, 예약번호, 예약 업체명, 예약한 객실명, 결제금액)'),

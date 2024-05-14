@@ -42,7 +42,7 @@ class ReservationRepository {
   Future<ResponseDTO> fetchReservationSave(ReservationSaveReqDTO reqDTO,
       String accessToken) async {
     final response =
-    await dio.put("/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
+    await dio.post("/api/reservation/${reqDTO.roomId}", // 동적 roomId를 URL에 포함
         options: Options(headers: {"Authorization": "Bearer $accessToken"}),
         data: reqDTO.toJson());
 

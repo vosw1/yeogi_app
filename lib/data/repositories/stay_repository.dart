@@ -176,7 +176,7 @@ class StayRepository {
       List<Stay> stays = temp.map((e) => Stay.fromJson(e)).toList();
 
       HomeAndVillaStayListModel stayListModel =
-          HomeAndVillaStayListModel(stays);
+      HomeAndVillaStayListModel(stays);
       responseDTO.body = stayListModel; // 숙소 목록을 responseDTO에 할당
     }
 

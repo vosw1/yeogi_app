@@ -41,8 +41,8 @@ class _MyPageState extends State<MyPage> {
           SizedBox(height: gap_s),
           MyPageHeaderBanner(),
           SizedBox(height: gap_s),
-          //if (!_isLoggedIn) // Shows login button if NOT logged in
-            //MyPageLoginButton(),
+          //if (_isLoggedIn) // Shows login button if NOT logged in
+           MyPageLoginButton(),
           // if (!_isLoggedIn) // Shows logout button if logged in
             MyPageLogoutButton(),
           Divider(color: Colors.grey[100], thickness: 10.0),
