@@ -12,7 +12,7 @@ class _MyZoomState extends State<MyZoom> {
   Completer<GoogleMapController> _controller = Completer();
 
   CameraPosition _currentPosition = CameraPosition(
-    target: LatLng(13.0827, 80.2707), //사용자 지정 좌표
+    target: LatLng(35.1658, 129.1573), //사용자 지정 좌표
     zoom: 12, //확대
   );
 
