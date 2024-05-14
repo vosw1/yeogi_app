@@ -1,3 +1,4 @@
+
 class RoomOption {
   int id;
   String imageName;
@@ -8,6 +9,7 @@ class RoomOption {
   String saleState;
   Information information;
   List<RoomDetailOption> options;
+  String notice;
 
   RoomOption({
     required this.id,
@@ -19,12 +21,13 @@ class RoomOption {
     required this.saleState,
     required this.information,
     required this.options,
+    required this.notice,
   });
 
 
   @override
   String toString() {
-    return 'RoomOption{id: $id, imageName: $imageName, imagePath: $imagePath, tier: $tier, price: $price, salePrice: $salePrice, saleState: $saleState, information: $information, options: $options}';
+    return 'RoomOption{id: $id, imageName: $imageName, imagePath: $imagePath, tier: $tier, price: $price, salePrice: $salePrice, saleState: $saleState, information: $information, options: $options, notice: $notice}';
   }
 
   factory RoomOption.fromJson(Map<String, dynamic> json) => RoomOption(
@@ -37,6 +40,7 @@ class RoomOption {
     saleState: json["saleState"],
     information: Information.fromJson(json["information"]),
     options: List<RoomDetailOption>.from(json["options"].map((x) => RoomDetailOption.fromJson(x))),
+    notice: json["notice"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +53,7 @@ class RoomOption {
     "saleState": saleState,
     "information": information.toJson(),
     "Options": List<dynamic>.from(options.map((x) => x.toJson())),
+    "notice": notice,
   };
 }
 
