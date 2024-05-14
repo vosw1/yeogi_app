@@ -6,7 +6,7 @@ import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/main.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
-import 'package:yogi_project/ui/room/room_detail_view_model.dart';
+import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
 
 class RoomDetailPage extends ConsumerStatefulWidget {
   final Room rooms;

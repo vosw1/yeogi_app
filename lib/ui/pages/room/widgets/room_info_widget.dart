@@ -4,7 +4,7 @@ import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/ui/room/room_detail_page.dart';
+import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 
 
 // 숙소 상세보기 내 룸 리스트 기본 틀

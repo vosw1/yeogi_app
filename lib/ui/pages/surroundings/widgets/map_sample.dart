@@ -15,6 +15,7 @@ class MapSampleState extends State<MapSample> {
 
   @override
   void initState() {
+
     super.initState();
     _getCurrentLocation();
   }
