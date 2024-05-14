@@ -15,7 +15,6 @@ class MapSampleState extends State<MapSample> {
 
   @override
   void initState() {
-
     super.initState();
     _getCurrentLocation();
   }
@@ -36,20 +35,30 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: CameraPosition(
-          target: _currentPosition,
-          zoom: 14.0,
+      body: SingleChildScrollView( // SingleChildScrollView 추가
+        child: Column(
+          children: [
+            Container(
+              height: 300, // 높이 조절 필요
+              child: GoogleMap(
+                mapType: MapType.hybrid,
+                initialCameraPosition: CameraPosition(
+                  target: _currentPosition,
+                  zoom: 14.0,
+                ),
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              ),
+            ),
+            SizedBox(height: 16), // 조절 가능한 간격
+            FloatingActionButton.extended(
+              onPressed: _goToTheLake,
+              label: Text('To the lake!'),
+              icon: Icon(Icons.directions_boat),
+            ),
+          ],
         ),
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
       ),
     );
   }
