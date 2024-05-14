@@ -8,18 +8,31 @@ import 'package:yogi_project/main.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
 
-class RoomDetailPage extends ConsumerWidget {
+class RoomDetailPage extends ConsumerStatefulWidget {
   final Room rooms;
 
-  const RoomDetailPage({required this.rooms});
+  const RoomDetailPage({required this.rooms, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    int roomId = rooms.roomId;
-    RoomDetailModel? model = ref.watch(roomDetailProvider(roomId));
-    late DateTime _selectedStartDate = DateTime.now();
-    late DateTime _selectedEndDate = DateTime.now().add(Duration(days: 1));
-    int _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+  _RoomDetailPageState createState() => _RoomDetailPageState();
+}
+
+class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
+  late DateTime _selectedStartDate;
+  late DateTime _selectedEndDate;
+  int _numberOfNights = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedStartDate = DateTime.now();
+    _selectedEndDate = DateTime.now().add(Duration(days: 1));
+    _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    RoomDetailModel? model = ref.watch(roomDetailProvider(widget.rooms.roomId));
 
     return Scaffold(
       appBar: AppBar(
@@ -50,40 +63,26 @@ class RoomDetailPage extends ConsumerWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        SizedBox(height:gap_m),
+                        GestureDetector(
+                          onTap: _selectDateRange,
+                          child: Container(
+                            padding: EdgeInsets.all(gap_s),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(gap_s),
+                              border: Border.all(color: Colors.black, width: 2.0),
+                            ),
+                            child: Row(
                               children: [
-                                SizedBox(height: gap_m),
-                                Text('이용날짜', style: TextStyle(fontSize: gap_m)),
-                                SizedBox(height: gap_xs),
-                                GestureDetector(
-                                  onTap: () => _selectDateRange(ref),
-                                  child: Container(
-                                    padding: EdgeInsets.all(gap_s),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(gap_s),
-                                      border: Border.all(color: Colors.black, width: 2.0),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(width: gap_xx),
-                                        Icon(Icons.calendar_today),
-                                        SizedBox(width: gap_s),
-                                        Text(
-                                          '${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)}',
-                                          style: h6(),
-                                        ),
-                                        SizedBox(width: gap_xs),
-                                      ],
-                                    ),
-                                  ),
+                                Icon(Icons.calendar_today),
+                                SizedBox(width: gap_s),
+                                Text(
+                                  '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
+                                  style: h6(),
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                         SizedBox(height: gap_m),
                         Text(
@@ -118,7 +117,7 @@ class RoomDetailPage extends ConsumerWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: rooms)),
+                      MaterialPageRoute(builder: (context) => ReservationPage(rooms: widget.rooms)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -138,26 +137,22 @@ class RoomDetailPage extends ConsumerWidget {
     );
   }
 
-  Future<void> _selectDateRange(WidgetRef ref) async {
-    late DateTime _selectedStartDate = DateTime.now();
-    late DateTime _selectedEndDate = DateTime.now().add(Duration(days: 1));
-    int _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
-
+  Future<void> _selectDateRange() async {
     final DateTimeRange? pickedDateRange = await showDateRangePicker(
-      context: ref.read(navigatorKey as ProviderListenable).currentContext!,
+      context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
       initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
     );
 
     if (pickedDateRange != null) {
-      _selectedStartDate = pickedDateRange.start;
-      _selectedEndDate = pickedDateRange.end;
-      // Recalculate number of nights
-      _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+      setState(() {
+        _selectedStartDate = pickedDateRange.start;
+        _selectedEndDate = pickedDateRange.end;
+        _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+      });
     }
   }
-
 
   String formatDate(DateTime dateTime) {
     return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
