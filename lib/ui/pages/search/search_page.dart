@@ -95,7 +95,7 @@ class _SearchPageState extends State<SearchPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+            padding: const EdgeInsets.only(top: gap_s, left: gap_m, right: gap_m),
             child: TextField(
               onChanged: (value) {
                 setState(() {
@@ -116,7 +116,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          SizedBox(height: gap_m),
+          SizedBox(height: gap_s),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: gap_m),
             child: Row(

@@ -38,7 +38,7 @@ class OverseaStayListPage extends ConsumerWidget {
 
   Widget buildListItem(BuildContext context, Stay stay, int stayId) {
     return Padding(
-      padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+      padding: const EdgeInsets.only(top: gap_s, left: gap_m, right: gap_m),
       child: InkWell(
         onTap: () {
           Navigator.push(
