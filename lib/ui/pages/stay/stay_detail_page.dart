@@ -79,7 +79,8 @@ class StayDetailPage extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        if (index != 0) SizedBox(height: gap_s), // 첫 번째 요소를 제외하고 간격 추가
+                        if (index != 0) SizedBox(height: gap_s),
+                        // 첫 번째 요소를 제외하고 간격 추가
                         RoomInfoWidget(
                           roomData: model.rooms![index],
                           roomId: model.rooms![index].roomId,
@@ -99,7 +100,11 @@ class StayDetailPage extends ConsumerWidget {
                 SizedBox(height: gap_s),
                 Text(
                   model.stay.intro, // 변경된 부분
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
                 SizedBox(height: gap_s),
                 Divider(),
@@ -111,7 +116,11 @@ class StayDetailPage extends ConsumerWidget {
                 SizedBox(height: gap_s),
                 Text(
                   model.stay.information, // 변경된 부분
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
                 SizedBox(height: gap_s),
                 Divider(),
@@ -124,7 +133,11 @@ class StayDetailPage extends ConsumerWidget {
                 SizedBox(height: gap_s),
                 Text(
                   '객실별 취소 정책이 상이하니 객실 상세정보에서 확인해주세요',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
                 SizedBox(height: gap_s),
               ],
@@ -132,7 +145,7 @@ class StayDetailPage extends ConsumerWidget {
           ),
         ),
         floatingActionButton:
-        ScrollFAB(controller: ScrollController()), // 변경된 부분
+            ScrollFAB(controller: ScrollController()), // 변경된 부분
       );
     }
   }
