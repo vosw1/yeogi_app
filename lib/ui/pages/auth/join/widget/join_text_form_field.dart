@@ -65,7 +65,7 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
                   ? TextInputType.text
                   : widget.keyboardType,
               controller: widget.controller,
-              obscureText: widget.obscureText ?? false, // 수정된 부분: 비밀번호 부분을 *로 표시
+              obscureText: widget.labelText == '비밀번호' ? true : widget.obscureText ?? false, // 수정된 부분: 비밀번호 부분을 *로 표시
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 enabledBorder: OutlineInputBorder(
@@ -82,12 +82,13 @@ class _JoinTextFormFieldState extends State<JoinTextFormField> {
                 ),
                 errorText: _errorText,
               ),
-              validator: (value) {
+              onChanged: (value) {
                 setState(() {
                   _errorText = widget.validator!(value);
                 });
-                return null;
               },
+              validator: widget.validator,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               onTap: () {
                 if (widget.labelText == '생년월일') {
                   _selectDate(context);
