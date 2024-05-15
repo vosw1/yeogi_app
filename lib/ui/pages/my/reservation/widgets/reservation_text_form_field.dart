@@ -38,6 +38,7 @@ class ReservationTextFormField extends StatelessWidget {
             ),
           ),
           validator: validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           inputFormatters: [
             ...?inputFormatters,
             if (keyboardType == TextInputType.phone) // 전화번호 입력 필드에만 PhoneNumberInputFormatter 추가
