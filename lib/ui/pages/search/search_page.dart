@@ -20,15 +20,17 @@ class _SearchPageState extends State<SearchPage> {
   String? _selectedRegion = '지역';
   String? _searchText = '';
 
-  SearchStayDTO defaultData = SearchStayDTO(stayName: '', roomPrice: 0, person: 0, stayAddress: '');
-  SearchStayDTO searchResultList = SearchStayDTO(stayName: '', roomPrice: 0, person: 0, stayAddress: '');
+  SearchStayDTO defaultData =
+      SearchStayDTO(stayName: '', roomPrice: 0, person: 0, stayAddress: '');
+  SearchStayDTO searchResultList =
+      SearchStayDTO(stayName: '', roomPrice: 0, person: 0, stayAddress: '');
 
   void _startSearch() {
     print("검색 버튼 누름");
 
     // 사용자가 입력한 값을 저장할 변수들
     String? searchText = _searchText;
-    String? selectedRegion = _selectedRegion;
+    String? selectedRegion = '';
     String? selectedPersonCount = _selectedPersonCount;
     String? selectedUsePrice = '';
 
@@ -36,6 +38,12 @@ class _SearchPageState extends State<SearchPage> {
       selectedPersonCount = "0명";
     } else {
       selectedPersonCount = _selectedPersonCount;
+    }
+
+    if (_selectedRegion == "지역") {
+      selectedRegion = "";
+    } else {
+      selectedRegion = _selectedRegion;
     }
 
     // 사용자가 입력한 값을 기반으로 searchResultList 생성
@@ -76,7 +84,8 @@ class _SearchPageState extends State<SearchPage> {
   int? _calculatePerson(String? selectedPersonCount) {
     if (selectedPersonCount == null) return defaultData.person;
     if (selectedPersonCount == '4명+') return 4;
-    return int.parse(selectedPersonCount.replaceAll('명', '')) ?? defaultData.person;
+    return int.parse(selectedPersonCount.replaceAll('명', '')) ??
+        defaultData.person;
   }
 
   @override
@@ -89,13 +98,17 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('검색하기', style: h4(),),
+        title: Text(
+          '검색하기',
+          style: h4(),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: gap_s, left: gap_m, right: gap_m),
+            padding:
+                const EdgeInsets.only(top: gap_s, left: gap_m, right: gap_m),
             child: TextField(
               onChanged: (value) {
                 setState(() {

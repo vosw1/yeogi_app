@@ -6,4 +6,4 @@ void main() async {
 
 Future<void> fetchRoomDetail_test() async {
   await RoomRepository().fetchRoomDetail(1);
-      }
+}

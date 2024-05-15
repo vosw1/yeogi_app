@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -32,146 +33,174 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
   Widget build(BuildContext context) {
     RoomDetailModel? model = ref.watch(roomDetailProvider(widget.rooms.roomId));
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('디럭스 룸',style: h4(),),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(gap_m),
-                  child: Container(
-                    padding: EdgeInsets.all(gap_m),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(gap_s),
-                      border: Border.all(color: Colors.grey),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(gap_s),
-                          child: Image.asset(
-                            'assets/images/${model?.roomOption.imageName}',
-                            width: double.infinity,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: gap_m),
-                        GestureDetector(
-                          onTap: _selectDateRange,
-                          child: Container(
-                            padding: EdgeInsets.all(gap_s),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(gap_s),
-                              border:
-                                  Border.all(color: Colors.black, width: 2.0),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.calendar_today),
-                                SizedBox(width: gap_s),
-                                Text(
-                                  '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
-                                  style: h5(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: gap_m),
-                        Text(
-                            '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
-                            style: h5()),
-                        SizedBox(height: gap_s),
-                        Divider(),
-                        SizedBox(height: gap_s),
-                        Text(
-                          '기본정보',
-                          style: h5(),
-                        ),
-                        SizedBox(height: gap_s),
-                        Text(
-                          '기준2인 · 최대2\n더블베드 1개\n객실+욕실 / 12.74평',
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        SizedBox(height: gap_s),
-                        Divider(),
-                        SizedBox(height: gap_s),
-                        Text(
-                          '편의시설',
-                          style: h5(),
-                        ),
-                        SizedBox(height: gap_s),
-                        Text(
-                          'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        SizedBox(height: gap_s),
-                        Divider(),
-                        SizedBox(height: gap_s),
-                        Text(
-                          '공지',
-                          style: h5(),
-                        ),
-                        SizedBox(height: gap_s),
-                        Text(
-                          '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인',
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            '${model.roomOption.tier}',
+            style: h4(),
           ),
-          Padding(
-            padding: EdgeInsets.all(gap_m),
-            child: Center(
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ReservationPage(rooms: widget.rooms)),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.redAccent,
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(gap_m),
+                    child: Container(
+                      padding: EdgeInsets.all(gap_m),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(gap_s),
+                        border: Border.all(color: Colors.grey),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(gap_s),
+                            child: Image.asset(
+                              'assets/images/${model.roomOption.imageName}',
+                              width: double.infinity,
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(height: gap_m),
+                          GestureDetector(
+                            onTap: _selectDateRange,
+                            child: Container(
+                              padding: EdgeInsets.all(gap_s),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(gap_s),
+                                border:
+                                    Border.all(color: Colors.black, width: 2.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.calendar_today),
+                                  SizedBox(width: gap_s),
+                                  Text(
+                                    '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
+                                    style: h6(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: gap_m),
+                          Text(
+                              '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
+                              style: h5()),
+                          SizedBox(height: gap_s),
+                          Divider(),
+                          SizedBox(height: gap_s),
+                          Text(
+                            '기본정보',
+                            style: h5(),
+                          ),
+                          SizedBox(height: gap_s),
+                          Text(
+                            '${model.roomOption.information.basicInformation}',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          SizedBox(height: gap_s),
+                          Divider(),
+                          SizedBox(height: gap_s),
+                          Text(
+                            '편의시설',
+                            style: h5(),
+                          ),
+                          SizedBox(height: gap_s),
+                          Row(
+                            children: List<Widget>.generate(
+                                model.roomOption.options.length * 2 - 1,
+                                (index) {
+                              // 옵션 이름과 콤마를 번갈아가며 배치합니다.
+                              if (index.isEven) {
+                                // 옵션 이름을 표시하는 경우
+                                final optionIndex = index ~/ 2;
+                                final option =
+                                    model.roomOption.options[optionIndex];
+                                return Text(
+                                  option.name,
+                                  style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                );
+                              } else {
+                                // 콤마를 표시하는 경우
+                                return Text(', ');
+                              }
+                            }),
+                          ),
+                          SizedBox(height: gap_s),
+                          Divider(),
+                          SizedBox(height: gap_s),
+                          Text(
+                            '공지',
+                            style: h5(),
+                          ),
+                          SizedBox(height: gap_s),
+                          Text(
+                            '${model.roomOption.information.announcement}',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    '예약하기',
-                    style: TextStyle(fontSize: 18.0),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(gap_m),
+              child: Center(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReservationPage(
+                            rooms: widget.rooms,
+                            numberOfNights: _numberOfNights,
+                          ),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent,
+                    ),
+                    child: Text(
+                      '예약하기',
+                      style: TextStyle(fontSize: 18.0),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: gap_m),
-        ],
-      ),
-    );
+            SizedBox(height: gap_m),
+          ],
+        ),
+      );
+    }
   }
 
   Future<void> _selectDateRange() async {

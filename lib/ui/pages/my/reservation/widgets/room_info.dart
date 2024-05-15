@@ -6,7 +6,8 @@ import 'package:yogi_project/data/models/room.dart';
 
 class RoomInfo extends StatelessWidget {
   final Room rooms;
-  const RoomInfo({Key? key, required this.rooms}) : super(key: key);
+  final int numberOfNights;
+  const RoomInfo({Key? key, required this.rooms, required this.numberOfNights}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class RoomInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage("assets/images/${rooms.roomImgTitle}"),
+              image: AssetImage("assets${rooms.roomImagePath}"),
             ),
           ),
         ),
@@ -43,7 +44,7 @@ class RoomInfo extends StatelessWidget {
               Text('체크아웃: ${rooms.checkOutDate}'),
               Text('퇴실: ${rooms.checkOutTime}'),
               SizedBox(height: gap_s),
-              Text('결제금액 : ${NumberFormat('#,###').format(rooms.price)} 원'),
+              Text('결제금액 : ${NumberFormat('#,###').format(rooms.roomPrice * numberOfNights)} 원'),
             ],
           ),
         ),
