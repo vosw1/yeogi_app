@@ -69,7 +69,7 @@ class HomeBody extends StatelessWidget {
                             borderRadius: BorderRadius.circular(gap_s),
                             image: DecorationImage(
                               image:
-                                  AssetImage("assets/${stays[index].imagePath}"),
+                                  AssetImage("assets${stays[index].imagePath}"),
                               fit: BoxFit.cover,
                             ),
                           ),
