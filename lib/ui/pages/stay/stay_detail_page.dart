@@ -65,7 +65,7 @@ class StayDetailPage extends ConsumerWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets/${model.stayImages[0].stayImagePath}', // 변경된 부분
+                      'assets${model.stayImages[0].stayImagePath}', // 변경된 부분
                       fit: BoxFit.cover,
                     ),
                   ),
