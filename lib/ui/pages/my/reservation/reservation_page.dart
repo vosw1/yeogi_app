@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
@@ -14,8 +15,9 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 
 class ReservationPage extends ConsumerStatefulWidget {
   final Room rooms;
+  final int numberOfNights;
 
-  ReservationPage({required this.rooms});
+  ReservationPage({required this.rooms, required this.numberOfNights});
 
   @override
   _ReservationPageState createState() => _ReservationPageState();
@@ -41,6 +43,9 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    print(widget.numberOfNights);
+    print(widget.rooms.price * widget.numberOfNights);
     return Scaffold(
       appBar: AppBar(title: Text('예약하기', style: h4(),)),
       body: SingleChildScrollView(
@@ -49,7 +54,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              RoomInfo(rooms: widget.rooms,),
+              RoomInfo(rooms: widget.rooms, numberOfNights: widget.numberOfNights,),
               SizedBox(height: gap_m),
               RoomNotice(),
               Divider(),
@@ -88,7 +93,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
                     padding: EdgeInsets.symmetric(vertical: 15.0),
                   ),
                   child: Text(
-                    '${NumberFormat('#,###').format(widget.rooms.price)} 원 결제하기',
+                    '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
