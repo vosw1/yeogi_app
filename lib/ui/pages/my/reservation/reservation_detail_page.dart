@@ -22,21 +22,20 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   late DateTime _checkInDate;
   late DateTime _checkOutDate;
   int _numberOfNights = 1;
-  bool isCanceled = false; // 상태 변수 추가
+  bool isCanceled = false;
 
   @override
   void initState() {
     super.initState();
-    // UTC로 변환
     _checkInDate = widget.reservations.checkInDate.toUtc();
     _checkOutDate = widget.reservations.checkOutDate.toUtc();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
-    isCanceled = widget.reservations.state == 'REFUND'; // 초기 상태 설정
+    isCanceled = widget.reservations.state == 'REFUND';
   }
 
   @override
   Widget build(BuildContext context) {
-    bool showCancelButton = DateTime.now().isBefore(_checkInDate);
+    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isCanceled;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,9 +68,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                       style: TextStyle(fontSize: gap_m)),
                   Text(widget.reservations.stayAddress),
                   SizedBox(height: gap_s),
-                  Text(
-                      '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights +
-                          2} 일',
+                  Text('숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
                       style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_s),
                   Row(
@@ -134,26 +131,21 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   SizedBox(height: gap_m),
                   Text('예약자 : ${widget.reservations.reservationName}'),
                   SizedBox(height: gap_xs),
-                  Text(
-                      '전화번호 : ${formatPhoneNumber(
-                          widget.reservations.reservationTel)}'),
+                  Text('전화번호 : ${formatPhoneNumber(widget.reservations.reservationTel)}'),
                   SizedBox(height: 8),
-                  Text(
-                      '결제금액 : ${NumberFormat('#,###').format(
-                          widget.reservations.amount)} 원',
+                  Text('결제금액 : ${NumberFormat('#,###').format(widget.reservations.amount)} 원',
                       style: subtitle1()),
                   SizedBox(height: gap_xs),
                   Text('결제일자 : ${formatDate(widget.reservations.createdAt)}',
                       style: subtitle1()),
                   SizedBox(height: gap_xs),
                   Text('결제수단 : ${widget.reservations.way}', style: subtitle1()),
-                  // 결제수단 수정
                 ],
               ),
             ),
             SizedBox(height: gap_m),
             Center(
-              child: isCanceled == true
+              child: isCanceled
                   ? Text(
                 '취소된 예약입니다',
                 style: h5(mColor: Colors.redAccent),
@@ -169,7 +161,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.redAccent,
-                      side: BorderSide.none, // 테두리 없음
+                      side: BorderSide.none,
                     ),
                     child: Text('예약 취소'),
                   ),
@@ -181,7 +173,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.redAccent,
-                      side: BorderSide.none, // 테두리 없음
+                      side: BorderSide.none,
                     ),
                     child: Text('리뷰 작성'),
                   ),
@@ -194,7 +186,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.redAccent,
-                  side: BorderSide.none, // 테두리 없음
+                  side: BorderSide.none,
                 ),
                 child: Text('리뷰 작성'),
               ),
@@ -232,19 +224,15 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
         return AlertDialog(
           title: Text('예약 취소'),
           content: Text('이 예약을 취소하시겠습니까?'),
-          actionsAlignment: MainAxisAlignment.center, // 버튼들을 가운데 정렬
+          actionsAlignment: MainAxisAlignment.center,
           actions: <Widget>[
             TextButton(
               onPressed: () async {
-                Navigator.of(context).pop(); // 다이얼로그 닫기
-                await ref
-                    .read(reservationListProvider.notifier)
-                    .payUpdate(widget.reservations.payId);
-                if (widget.reservations.state == 'REFUND') {
-                  setState(() {
-                    isCanceled = true; // 상태 업데이트
-                  });
-                }
+                Navigator.of(context).pop();
+                await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                setState(() {
+                  isCanceled = true;
+                });
               },
               child: Text('예'),
             ),
@@ -274,7 +262,6 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
               SizedBox(height: gap_m),
               ElevatedButton(
                 onPressed: () {
-                  // Add logic to handle submitting the review
                   Navigator.of(context).pop();
                 },
                 child: Text('작성 완료'),
@@ -292,17 +279,8 @@ String formatDate(DateTime dateTime) {
 }
 
 String formatPhoneNumber(String phoneNumber) {
-  // 전화번호에서 숫자만 추출
   String cleaned = phoneNumber.replaceAll(RegExp(r'\D'), '');
-
-  // 'XXX-XXXX-XXXX' 형식으로 포맷 변경
   return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'), (match) {
     return '${match[1]}-${match[2]}-${match[3]}';
   });
-}
-
-void main() {
-  String phoneNumber = '01012344321';
-  String formattedPhoneNumber = formatPhoneNumber(phoneNumber);
-  print(formattedPhoneNumber); // 출력: 010-1234-4321
 }

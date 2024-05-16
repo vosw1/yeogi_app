@@ -14,25 +14,29 @@ class JoinReqDTO {
   });
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "password": password,
-    "email": email,
-    "phone": phone,
-    "birth": birth,
-  };
+        "name": name,
+        "password": password,
+        "email": email,
+        "phone": phone,
+        "birth": birth,
+      };
 }
 
 class LoginReqDTO {
   final String email;
   final String password;
 
-  LoginReqDTO({
+  LoginReqDTO({required this.email, required this.password});
+
+  Map<String, dynamic> toJson() => {"email": email, "password": password};
+}
+
+class DuplimentEmailCheckDTO {
+  final String email;
+
+  DuplimentEmailCheckDTO({
     required this.email,
-    required this.password
   });
 
-  Map<String, dynamic> toJson() => {
-    "email": email,
-    "password": password
-  };
+  Map<String, dynamic> toJson() => {"email": email};
 }
