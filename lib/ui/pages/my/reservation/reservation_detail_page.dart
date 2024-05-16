@@ -35,11 +35,15 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isCanceled;
+    bool showCancelButton =
+        DateTime.now().isBefore(_checkInDate) && !isCanceled;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.reservations.stayName}'),
+        title: Text(
+          '${widget.reservations.stayName}',
+          style: h4(),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: gap_m),
@@ -64,20 +68,30 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     ),
                   ),
                   SizedBox(height: gap_m),
-                  Text('${widget.reservations.roomName}',
-                      style: TextStyle(fontSize: gap_m)),
-                  Text(widget.reservations.stayAddress),
-                  SizedBox(height: gap_s),
-                  Text('숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
-                      style: TextStyle(fontSize: gap_m)),
-                  SizedBox(height: gap_s),
+                  Text(
+                    '${widget.reservations.roomName}',
+                    style: h5(),
+                  ),
+                  Text(
+                    '${widget.reservations.stayAddress}',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(height: gap_m),
+                  Text(
+                      '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
+                      style: h5()),
+                  SizedBox(height: gap_m),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('체크인', style: TextStyle(fontSize: gap_m)),
+                          Text('체크인', style: h5()),
                           SizedBox(height: gap_xs),
                           GestureDetector(
                             onTap: () => _selectDate(context, isCheckIn: true),
@@ -89,7 +103,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                               ),
                               child: Row(
                                 children: [
-                                  Text(formatDate(_checkInDate)),
+                                  Text(
+                                    '${formatDate(_checkInDate)}',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                   SizedBox(width: gap_xs),
                                   Icon(Icons.calendar_today),
                                 ],
@@ -101,7 +122,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('체크아웃', style: TextStyle(fontSize: gap_m)),
+                          Text('체크아웃', style: h5()),
                           SizedBox(height: gap_xs),
                           GestureDetector(
                             onTap: () => _selectDate(context, isCheckIn: false),
@@ -113,7 +134,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                               ),
                               child: Row(
                                 children: [
-                                  Text(formatDate(_checkOutDate)),
+                                  Text(
+                                    '${formatDate(_checkOutDate)}',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                   SizedBox(width: gap_xs),
                                   Icon(Icons.calendar_today),
                                 ],
@@ -129,67 +157,100 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   SizedBox(height: gap_m),
                   Text('예약 정보', style: TextStyle(fontSize: gap_m)),
                   SizedBox(height: gap_m),
-                  Text('예약자 : ${widget.reservations.reservationName}'),
+                  Text(
+                    '예약자 : ${widget.reservations.reservationName}',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                   SizedBox(height: gap_xs),
-                  Text('전화번호 : ${formatPhoneNumber(widget.reservations.reservationTel)}'),
+                  Text(
+                    '전화번호 : ${formatPhoneNumber(widget.reservations.reservationTel)}',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                    ),
+                  ),
                   SizedBox(height: 8),
-                  Text('결제금액 : ${NumberFormat('#,###').format(widget.reservations.amount)} 원',
-                      style: subtitle1()),
+                  Text(
+                    '결제금액 : ${NumberFormat('#,###').format(widget.reservations.amount)} 원',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                   SizedBox(height: gap_xs),
-                  Text('결제일자 : ${formatDate(widget.reservations.createdAt)}',
-                      style: subtitle1()),
+                  Text(
+                    '결제일자 : ${formatDate(widget.reservations.createdAt)}',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                   SizedBox(height: gap_xs),
-                  Text('결제수단 : ${widget.reservations.way}', style: subtitle1()),
+                  Text(
+                    '결제수단 : ${widget.reservations.way}',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: gap_m),
+            SizedBox(height: gap_l),
             Center(
               child: isCanceled
                   ? Text(
-                '취소된 예약입니다',
-                style: h5(mColor: Colors.redAccent),
-              )
+                      '취소된 예약입니다',
+                      style: h4(mColor: Colors.redAccent),
+                    )
                   : showCancelButton
-                  ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _showCancelConfirmationDialog(context, ref);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.redAccent,
-                      side: BorderSide.none,
-                    ),
-                    child: Text('예약 취소'),
-                  ),
-                  SizedBox(width: gap_m),
-                  ElevatedButton(
-                    onPressed: () {
-                      _showReviewWritingDialog(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.redAccent,
-                      side: BorderSide.none,
-                    ),
-                    child: Text('리뷰 작성'),
-                  ),
-                ],
-              )
-                  : ElevatedButton(
-                onPressed: () {
-                  _showReviewWritingDialog(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  side: BorderSide.none,
-                ),
-                child: Text('리뷰 작성'),
-              ),
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                _showCancelConfirmationDialog(context, ref);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.redAccent,
+                                side: BorderSide.none,
+                              ),
+                              child: Text('예약 취소'),
+                            ),
+                            SizedBox(width: gap_m),
+                            ElevatedButton(
+                              onPressed: () {
+                                _showReviewWritingDialog(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.redAccent,
+                                side: BorderSide.none,
+                              ),
+                              child: Text('리뷰 작성'),
+                            ),
+                          ],
+                        )
+                      : ElevatedButton(
+                          onPressed: () {
+                            _showReviewWritingDialog(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.redAccent,
+                            side: BorderSide.none,
+                          ),
+                          child: Text('리뷰 작성'),
+                        ),
             ),
             SizedBox(height: gap_m),
           ],
@@ -198,7 +259,8 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context, {required bool isCheckIn}) async {
+  Future<void> _selectDate(BuildContext context,
+      {required bool isCheckIn}) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: isCheckIn ? _checkInDate : _checkOutDate,
@@ -229,7 +291,9 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
-                await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                await ref
+                    .read(reservationListProvider.notifier)
+                    .payUpdate(widget.reservations.payId);
                 setState(() {
                   isCanceled = true;
                 });
@@ -280,7 +344,8 @@ String formatDate(DateTime dateTime) {
 
 String formatPhoneNumber(String phoneNumber) {
   String cleaned = phoneNumber.replaceAll(RegExp(r'\D'), '');
-  return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'), (match) {
+  return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'),
+      (match) {
     return '${match[1]}-${match[2]}-${match[3]}';
   });
 }
