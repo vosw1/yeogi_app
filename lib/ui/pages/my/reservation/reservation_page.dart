@@ -118,11 +118,24 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
     );
   }
 
+  Future<String?> _getToken() async {
+    // This is a placeholder. Implement your token retrieval logic here.
+    // For example, using SharedPreferences or any other storage mechanism.
+    // return await SharedPreferences.getInstance().getString('token');
+    return Future.value(null); // Replace this with actual token retrieval logic.
+  }
+
   void _attemptReservation(
       BuildContext context,
       TextEditingController nameController,
       TextEditingController phoneController,
-      Room room) {
+      Room room) async {
+    String? token = await _getToken();
+    if (token == null) {
+      _showLoginRequiredDialog(context);
+      return;
+    }
+
     try {
       // Use the selected dates from the widget properties
       DateTime checkInDate = widget.selectedStartDate;
@@ -148,8 +161,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PayPage(
-          ),
+          builder: (context) => PayPage(),
         ),
       );
     } catch (e) {
@@ -169,6 +181,24 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
         },
       );
     }
+  }
+
+  void _showLoginRequiredDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 필요'),
+          content: Text('로그인이 필요합니다.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   DateTime _parseDate(String date) {
