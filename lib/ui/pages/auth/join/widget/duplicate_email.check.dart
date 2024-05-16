@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/repositories/user_repository.dart';
@@ -20,9 +22,12 @@ class DuplimentEmailCheck extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.redAccent,
       ),
-      child: Text(
-        '중복 확인',
-        style: TextStyle(color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.all(gap_s),
+        child: Text(
+          '중복 확인',
+          style: h5(mColor: Colors.white),
+        ),
       ),
     );
   }

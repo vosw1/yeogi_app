@@ -187,9 +187,12 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.redAccent,
                     ),
-                    child: Text(
-                      '예약하기',
-                      style: TextStyle(fontSize: 18.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(gap_s),
+                      child: Text(
+                        '예약하기',
+                        style: h5(mColor: Colors.white),
+                      ),
                     ),
                   ),
                 ),
