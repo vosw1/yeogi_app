@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'JoinForm.dart';
+import 'join_form.dart';
 
 class JoinBody extends StatelessWidget {
   const JoinBody({super.key});

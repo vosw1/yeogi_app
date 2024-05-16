@@ -6,15 +6,15 @@ class Reservation {
   final int price;
   final int roomId;
   final String roomName;
-  final DateTime checkInDate;
-  final DateTime checkOutDate;
+  late final DateTime checkInDate;
+  late final DateTime checkOutDate;
   final String? roomImgTitle;
   final String reservationName;
   final String reservationTel;
   final int payId;
   final int amount;
   final String way;
-  final String state;
+  late final String state;
   final DateTime createdAt;
 
   Reservation({
@@ -67,7 +67,7 @@ class Reservation {
         userId: json['userId'] ?? 0,
         stayName: json['stayName'] ?? 'Unknown',
         stayAddress: json['stayAddress'] ?? 'Unknown',
-        price: price,
+        price: price ,
         roomId: json['roomId'] ?? 0,
         roomName: json['roomName'] ?? 'Unknown',
         checkInDate: checkInDate,

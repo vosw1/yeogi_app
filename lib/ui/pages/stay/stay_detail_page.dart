@@ -94,7 +94,7 @@ class StayDetailPage extends ConsumerWidget {
                         if (index != 0) SizedBox(height: gap_s),
                         // 첫 번째 요소를 제외하고 간격 추가
                         RoomInfoWidget(
-                          roomData: model.rooms![index],
+                          rooms: model.rooms![index],
                           roomId: model.rooms![index].roomId,
                         ),
                       ],
@@ -136,7 +136,8 @@ class StayDetailPage extends ConsumerWidget {
                     child: GoogleMap(
                       initialCameraPosition: _currentPosition != null
                           ? CameraPosition(target: _currentPosition!, zoom: 12)
-                          : CameraPosition(target: LatLng(35.1658, 129.1573), zoom: 12),
+                          : CameraPosition(
+                              target: LatLng(35.1658, 129.1573), zoom: 12),
                       onMapCreated: (controller) async {
                         _controllerCompleter.complete(controller);
                       },
@@ -147,10 +148,14 @@ class StayDetailPage extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(height: gap_m),
-                Text(model.stay.intro,
-                  style: TextStyle(fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,),),
+                Text(
+                  model.stay.intro,
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
                 Divider(),
                 SizedBox(height: gap_s),
                 Text(
@@ -188,7 +193,8 @@ class StayDetailPage extends ConsumerWidget {
             ),
           ),
         ),
-        floatingActionButton: ScrollFAB(controller: ScrollController()), // 변경된 부분
+        floatingActionButton:
+            ScrollFAB(controller: ScrollController()), // 변경된 부분
       );
     }
   }

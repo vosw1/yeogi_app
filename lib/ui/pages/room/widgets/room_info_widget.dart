@@ -9,9 +9,9 @@ import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 
 // 숙소 상세보기 내 룸 리스트 기본 틀
 class RoomInfoWidget extends StatelessWidget {
-  final Room roomData;
+  final Room rooms;
 
-  const RoomInfoWidget({required this.roomData});
+  const RoomInfoWidget({required this.rooms});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class RoomInfoWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(gap_s),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/${roomData.roomImgTitle}'),
+                  image: AssetImage('assets/images/${rooms.roomImgTitle}'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -47,11 +47,11 @@ class RoomInfoWidget extends StatelessWidget {
                 children: [
                   // 객실 이름 표시
                   Text(
-                    roomData.roomName,
+                    rooms.roomName,
                   ),
                   SizedBox(height: gap_s),
                   Text(
-                    '입실 : ${roomData.checkInTime}',
+                    '입실 : ${rooms.checkInTime}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class RoomInfoWidget extends StatelessWidget {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '퇴실 : ${roomData.checkOutTime}',
+                    '퇴실 : ${rooms.checkOutTime}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class RoomInfoWidget extends StatelessWidget {
                   SizedBox(height: gap_s),
                   // 가격 표시
                   Text(
-                    '${NumberFormat('#,###').format(roomData.price)} 원',
+                    '${NumberFormat('#,###').format(rooms.price)} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,

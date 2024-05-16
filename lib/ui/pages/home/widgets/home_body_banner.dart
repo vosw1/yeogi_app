@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'home_banner_item.dart';
+import 'package:yogi_project/ui/pages/my/event/event_detail_page.dart'; // EventDetailPage 임포트
 
 class HomeBodyBanner extends StatefulWidget {
   final List<EventTitleBannerData> eventTitleBannerDataList; // 타입 변경
@@ -30,8 +32,19 @@ class _HomeBodyBannerState extends State<HomeBodyBanner> {
               });
             },
             itemBuilder: (context, index) {
-              return HomeBannerItem(bannerData: widget.eventTitleBannerDataList[index],
-              ); // HomeBannerItem으로 수정
+              return GestureDetector( // GestureDetector로 수정
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventDetailPage(
+                        BannerImagePath: eventContentBanners[index].eventImagePath,
+                      ),
+                    ),
+                  );
+                },
+                child: HomeBannerItem(bannerData: widget.eventTitleBannerDataList[index]),
+              );
             },
           ),
         ),

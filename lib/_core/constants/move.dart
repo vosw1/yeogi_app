@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/data/models/reply.dart';
+import 'package:yogi_project/data/models/event_detail_content.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
-import 'package:yogi_project/data/models/pay.dart';
-import 'package:yogi_project/data/models/reservation.dart';
-import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
-import 'package:yogi_project/data/models/room_option.dart';
-import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
@@ -16,11 +11,8 @@ import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
-import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
-import 'package:yogi_project/ui/pages/search/search_page.dart';
-import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
@@ -57,23 +49,6 @@ final User users = User(
   createdAt: null,
   updatedAt: null,
 );
-
-final Room rooms = Room(
-    roomId: 1,
-    personCount: '2',
-    roomName: '디럭스룸',
-    roomImgTitle: 'room1.jpg',
-    price: 150000,
-    specialPrice: 130000,
-    checkInDate: '2024-05-22',
-    checkOutDate: '2024-05-24',
-    checkInTime: '15:00',
-    checkOutTime: "11:00",
-    roomInfo: '기준2인 · 최대2\n더블베드 1개\n객실+욕실 / 12.74평',
-    amenities:
-        'TV, 미니냉장고, 미니바(유료), 금고, 전화기, 전기포트, 휴대폰충전기, 무료생수(2병), 커피, 티, 헤어드라이어, 비데, 욕실용품, 머리빗, 면봉, 손톱줄, 슬리퍼',
-    notice: '스마트앱 체크인만 가능\n비대면 체크인,대면시 추가요금발생\n여기어때 발송 입퇴실시간 무관:하이원 발송 시간 확인');
-
 
 final List<EventTitleBannerData> eventTitleBannerDataList = [
   EventTitleBannerData(
@@ -125,6 +100,25 @@ final List<EventMyPageBannerData> eventMyPageBanners = [
   ),
 ];
 
+final List<EventDetailContent> eventContentBanners = [
+  EventDetailContent(
+    imageTitle: '신규 회원 할인 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event1.png',
+  ),
+  EventDetailContent(
+    imageTitle: '여어떻노 GOOD REVIEWER 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event2.png',
+  ),
+  EventDetailContent(
+    imageTitle: '가정의 달 할인 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event3.png',
+  ),
+  EventDetailContent(
+    imageTitle: '슈퍼위크 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event4.png',
+  ),
+];
+
 // URL에 해당 페이지 연결
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
@@ -147,8 +141,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // Move.stayDetailPage: (context) =>
     //     StayDetailPage(stays: stays, rooms: rooms),
     // 기업(숙서) 페이지
-    Move.roomDetailPage: (context) => RoomDetailPage(rooms: rooms),
-    // 룸 상세보기 페이지
+    // Move.roomDetailPage: (context) => RoomDetailPage(rooms: rooms,),
+    // // 룸 상세보기 페이지
 
     // Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지

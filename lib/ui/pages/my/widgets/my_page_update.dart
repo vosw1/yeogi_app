@@ -1,17 +1,22 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // shared_preferences 패키지 추가
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
-import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart'; // JoinTextFormField 임포트 추가
+import 'package:yogi_project/data/store/session_store.dart';
+import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
 import 'package:yogi_project/data/models/user.dart';
-import 'package:yogi_project/ui/pages/my/my_page.dart'; // User 모델 임포트 추가
+import 'package:yogi_project/ui/pages/my/my_page.dart';
+import 'dart:io';
 
 class MyPageUpdate extends StatefulWidget {
-  final User users; // User 데이터 전달을 위한 필드 추가
+  final User users;
 
-  MyPageUpdate({required this.users}); // 생성자 추가
+  MyPageUpdate({required this.users});
 
   @override
   _MyPageUpdateState createState() => _MyPageUpdateState();
@@ -23,20 +28,53 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
   final _nameController = TextEditingController();
   final _ageController = MaskedTextController(mask: '0000-00-00');
   final _phoneController = MaskedTextController(mask: '000-0000-0000');
+  File? _imageFile;
+  late bool isLogin = false;
 
   @override
   void initState() {
     super.initState();
-    // User 데이터를 사용하여 필드 초기화
     _nameController.text = widget.users.name!;
-    // 다른 필드들도 위와 같이 초기화
+    isLogin = SessionStore().accessToken != null;
+  }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  void _showLoginPopup() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 필요'),
+          content: Text('로그인해주세요.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // 로그인 페이지로 이동하는 로직 추가
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('회원정보 수정'),
+        title: Text('회원정보 수정', style: h4()),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -46,7 +84,33 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: gap_m),
+                Center(
+                  child: GestureDetector(
+                    onTap: _pickImage,
+                    child: ClipOval(
+                      child: _imageFile != null
+                          ? Image.file(
+                        _imageFile!,
+
+                        width: 180,
+                        height: 180,
+
+                        fit: BoxFit.cover,
+                      )
+                          : Image.asset(
+                        "assets/images/user1.png",
+
+                        width: 180,
+                        height: 180,
+
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: gap_l),
+
                 JoinTextFormField(
                   controller: _nameController,
                   labelText: '이름',
@@ -58,7 +122,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   controller: _passwordController,
                   labelText: '비밀번호',
                   validator: validatePassword,
-                  hintText: "패스워드를 입력하세요",
+                  hintText: "비밀번호를 입력하세요",
                 ),
                 SizedBox(height: gap_m),
                 JoinTextFormField(
@@ -76,7 +140,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   hintText: '000-0000-0000',
                   validator: validatePhoneNumber,
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_l),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -92,7 +156,12 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                         builder: (context) => MyPage(
                           users: User(
                             name: _nameController.text,
-                            password: _passwordController.text, id: 1, email: '', createdAt: null, updatedAt: null, userImgTitle: '',
+                            password: _passwordController.text,
+                            id: 1,
+                            email: '',
+                            createdAt: null,
+                            updatedAt: null,
+                            userImgTitle: '',
                           ),
                         ),
                       ),
@@ -101,10 +170,12 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
                   ),
-                  child: Text('수정', style: TextStyle(color: Colors.white),),
-
+                  child: Padding(
+                    padding: const EdgeInsets.all(gap_s),
+                    child: Text('수정하기', style: h5(mColor: Colors.white)),
+                  ),
                 ),
-                SizedBox(height: gap_l),
+                SizedBox(height: gap_m),
               ],
             ),
           ),

@@ -5,11 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:yogi_project/_core/constants/phone_number_input_formatter.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
-class ReservationTextFormField extends StatelessWidget {
+class ReservationTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
   final String hintText;
-  final String? Function(String?)? validator;
+  final FormFieldValidator<String>? validator;
   final TextInputType keyboardType;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -23,33 +23,70 @@ class ReservationTextFormField extends StatelessWidget {
   });
 
   @override
+  State<ReservationTextFormField> createState() => _ReservationTextFormFieldState();
+}
+
+
+class _ReservationTextFormFieldState extends State<ReservationTextFormField> {
+
+  String? _errorText;
+
+  @override
+  void initState() {
+    super.initState();
+    _errorText = widget.validator!(widget.controller.text);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: controller,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            labelText: labelText,
-            hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(gap_s),
+        if (widget.labelText != null)
+          Text(
+            widget.labelText!,
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: 'Jalnan2TTF',
+              color: Colors.redAccent,
             ),
           ),
-          validator: validator,
+        SizedBox(height: gap_xs),
+        TextFormField(
+          controller: widget.controller,
+          keyboardType: widget.keyboardType,
+          decoration: InputDecoration(
+            // labelText: widget.labelText,
+            hintText: widget.hintText,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            errorText: _errorText,
+          ),
+          onChanged: (value) {
+            setState(() {
+              _errorText = widget.validator!(value);
+            });
+          },
+          validator: widget.validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           inputFormatters: [
-            ...?inputFormatters,
-            if (keyboardType == TextInputType.phone) // 전화번호 입력 필드에만 PhoneNumberInputFormatter 추가
+            ...?widget.inputFormatters,
+            if (widget.keyboardType == TextInputType.phone) // 전화번호 입력 필드에만 PhoneNumberInputFormatter 추가
               PhoneNumberInputFormatter(),
           ],
         ),
         SizedBox(height: 5),
-        if (validator != null)
-          Text(
-            validator!(controller.text) ?? '',
-            style: TextStyle(color: Colors.red),
-          ),
+
       ],
     );
   }
