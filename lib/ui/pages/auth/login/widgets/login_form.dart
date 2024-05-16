@@ -7,7 +7,7 @@ import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
-import 'kakao_login_button.dart';
+import 'join_button.dart';
 
 class LoginForm extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>(); // 글로벌 키
@@ -32,7 +32,7 @@ class LoginForm extends ConsumerWidget {
             SizedBox(height: gap_xx),
             _buildLoginButton(ref, context),
             SizedBox(height: gap_xx),
-            _buildKakaoLoginButton(),
+            _buildJoinButton(),
             SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
           ],
         ),
@@ -76,7 +76,7 @@ class LoginForm extends ConsumerWidget {
 
   Widget _buildLoginButton(WidgetRef ref, context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
+      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_l),
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
@@ -110,8 +110,8 @@ class LoginForm extends ConsumerWidget {
     );
   }
 
-  Widget _buildKakaoLoginButton() {
-    return KakaoLoginButton();
+  Widget _buildJoinButton() {
+    return JoinButton();
   }
 }
 
@@ -121,7 +121,7 @@ class LoginLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: gap_xx, bottom: gap_m),
+      padding: const EdgeInsets.only(top: gap_l, bottom: gap_m),
       child: Text(
         "여어떻노.",
         textAlign: TextAlign.center,

@@ -91,20 +91,26 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                       child: _imageFile != null
                           ? Image.file(
                         _imageFile!,
-                        width: 200,
-                        height: 200,
+
+                        width: 180,
+                        height: 180,
+
                         fit: BoxFit.cover,
                       )
                           : Image.asset(
                         "assets/images/user1.png",
-                        width: 200,
-                        height: 200,
+
+                        width: 180,
+                        height: 180,
+
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: gap_m),
+
+                SizedBox(height: gap_l),
+
                 JoinTextFormField(
                   controller: _nameController,
                   labelText: '이름',

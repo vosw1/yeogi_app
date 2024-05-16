@@ -37,7 +37,7 @@ class _MainHolderState extends State<MainHolder> {
       ),
       bottomNavigationBar: HomeBottomNavigationBar(
         currentIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
+        onItemTapped: _onItemTapped
       ),
     );
   }
