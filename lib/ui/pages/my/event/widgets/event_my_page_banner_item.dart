@@ -26,16 +26,16 @@ class EventMyPageBannerItem extends StatelessWidget {
               SizedBox(width: 16), // 타이틀과 이미지 사이의 간격 조정
             ],
           ),
-          SizedBox(height: 8), // 타이틀과 이미지 사이의 간격 조정
+          SizedBox(height: gap_xs), // 타이틀과 이미지 사이의 간격 조정
           Image.asset(
             eventMyPageBannerData.imagePath,
             fit: BoxFit.cover,
-            width: double.infinity,
+            width: double.infinity, // 이미지를 화면 너비에 맞게 설정
           ),
           SizedBox(height: 8), // 이미지와 데드라인 사이의 간격 조정
           Row(
             children: [
-              SizedBox(width: 16), // 데드라인을 이미지와 맞추기 위한 간격 조정
+              SizedBox(width: gap_m), // 데드라인을 이미지와 맞추기 위한 간격 조정
               Text(
                 '일시 : ${eventMyPageBannerData.deadLine}',
                 style: TextStyle(fontSize: 16, color: Colors.grey),
