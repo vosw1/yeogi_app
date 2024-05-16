@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 // 홈페이지 상단 앱바에 아이콘 + text 세트 기본 틀
 class HeadAppBarItem extends StatelessWidget {
@@ -28,7 +29,7 @@ class HeadAppBarItem extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8),
-        Text(text),
+        Text(text, style: h6(),),
       ],
     );
   }

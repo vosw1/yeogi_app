@@ -20,16 +20,17 @@ class HomePage extends ConsumerWidget {
     final List<Stay> domesticStayList = model?.domesticStayList ?? [];
     final List<Stay> overseaStayList = model?.overseaStayList ?? [];
 
-    if(model == null){
+    if (model == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    } else{
+    } else {
       return Scaffold(
         body: SingleChildScrollView(
           controller: _scrollController,
           child: Column(
             children: [
+              SizedBox(height: gap_s),
               SizedBox(height: gap_xm),
               // 상단 로고, 벨 아이콘 + 상단 아이콘
               HomeHeader(),
@@ -54,6 +55,7 @@ class HomePage extends ConsumerWidget {
                 title: "해외 숙소",
                 stays: overseaStayList, // 해외 숙소 리스트 전달
               ),
+              SizedBox(height: gap_m),
             ],
           ),
         ),
