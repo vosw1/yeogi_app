@@ -83,9 +83,15 @@ String? validatePhoneNumber(String? value) {
   if (value!.isEmpty) {
     return "전화번호는 공백이 들어갈 수 없습니다.";
   } else {
+    // 정규 표현식을 사용하여 전화번호 형식 검사
+    RegExp phoneRegex = RegExp(r'^0[0-9]{2}-[0-9]{3,4}-[0-9]{4}$');
+    if (!phoneRegex.hasMatch(value)) {
+      return "전화번호 형식이 올바르지 않습니다.";
+    }
     return null;
   }
 }
+
 
 
 bool _isEmailDuplicate(String? email) {

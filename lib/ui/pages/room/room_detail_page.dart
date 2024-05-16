@@ -83,7 +83,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                   Icon(Icons.calendar_today),
                                   SizedBox(width: gap_s),
                                   Text(
-                                    '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
+                                 ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
                                     style: h6(),
                                   ),
                                 ],

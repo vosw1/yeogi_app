@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/data/models/event_detail_content.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -96,6 +97,25 @@ final List<EventMyPageBannerData> eventMyPageBanners = [
     bannerTitle: '',
     imagePath: 'assets/images/event/event_title/eventTitle4.png',
     deadLine: ' 24/5/20 부터 ~ 24/5/26 까지 ',
+  ),
+];
+
+final List<EventDetailContent> eventContentBanners = [
+  EventDetailContent(
+    imageTitle: '신규 회원 할인 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event1.png',
+  ),
+  EventDetailContent(
+    imageTitle: '여어떻노 GOOD REVIEWER 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event2.png',
+  ),
+  EventDetailContent(
+    imageTitle: '가정의 달 할인 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event3.png',
+  ),
+  EventDetailContent(
+    imageTitle: '슈퍼위크 이벤트',
+    eventImagePath: 'assets/images/event/event_content/event4.png',
   ),
 ];
 
