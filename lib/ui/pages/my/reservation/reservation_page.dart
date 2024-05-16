@@ -104,7 +104,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
                   ),
                   child: Text(
                     '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
-                    style: TextStyle(color: Colors.white),
+                    style: h5(mColor: Colors.white),
                   ),
                 ),
               ),

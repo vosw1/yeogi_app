@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
@@ -5,6 +6,20 @@ import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/models/user.dart';
 
 class UserRepository {
+
+  Future<ResponseDTO> fetchEmailSameCheck(DuplimentEmailCheckDTO requestDTO) async {
+    final response = await dio.get(
+      "/users/email-same-check",
+      queryParameters: requestDTO.toJson(),
+    );
+
+    print('데이터 확인 : ${requestDTO.toJson()}');
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+    print('데이터 확인 : ${responseDTO.body}');
+
+    return responseDTO;
+  }
+
   Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     // 통신 시작
     final response = await dio.post("/users/join", data: requestDTO.toJson());
