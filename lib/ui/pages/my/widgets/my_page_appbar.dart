@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:yogi_project/_core/constants/move.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // SharedPreferences for token management
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/user.dart';
@@ -16,6 +16,41 @@ class MyPageAppBar extends StatelessWidget {
 
   const MyPageAppBar({Key? key, required this.user, required this.eventMyPageBannerDataList}) : super(key: key);
 
+  Future<String?> _getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
+  void _showLoginRequiredDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('미 로그인 상태'),
+          content: Text('로그인을 먼저 해주세요.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _checkLoginAndNavigate(BuildContext context, Widget page) async {
+    String? token = await _getToken();
+    if (token == null) {
+      _showLoginRequiredDialog(context);
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,10 +64,7 @@ class MyPageAppBar extends StatelessWidget {
             iconData: FontAwesomeIcons.idBadge,
             title: "정보 수정",
             onTap: () {
-              Navigator.push(
-                context,
-               MaterialPageRoute(builder: (context) => MyPageUpdate(users: users,)),
-              );
+              _checkLoginAndNavigate(context, MyPageUpdate(users: user));
             },
           ),
           MyPageBodyIcon(
@@ -49,20 +81,14 @@ class MyPageAppBar extends StatelessWidget {
             iconData: FontAwesomeIcons.commentDots,
             title: "내 리뷰",
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyReviewPage()),
-              );
+              _checkLoginAndNavigate(context, MyReviewPage());
             },
           ),
           MyPageBodyIcon(
             iconData: FontAwesomeIcons.bell,
             title: "알림함",
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NotificationPage()),
-              );
+              _checkLoginAndNavigate(context, NotificationPage());
             },
           ),
         ],

@@ -188,8 +188,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('로그인 필요'),
-          content: Text('로그인이 필요합니다.'),
+          title: Text('미 로그인 상태'),
+          content: Text('로그인을 먼저 해주세요.'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(),

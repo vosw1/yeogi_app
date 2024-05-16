@@ -1,11 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // SharedPreferences for token management
 import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 
-// 마이페이지의 예약메뉴
 class MyPageBookMenuHolder extends StatelessWidget {
+  Future<String?> _getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
+  void _showLoginRequiredDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('미 로그인 상태'),
+          content: Text('로그인을 먼저 해주세요.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _checkLoginAndNavigate(BuildContext context, Widget page) async {
+    String? token = await _getToken();
+    if (token == null) {
+      _showLoginRequiredDialog(context);
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,13 +66,9 @@ class MyPageBookMenuHolder extends StatelessWidget {
           ),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            // 국내 숙소 탭 시 MyReservationPage로 이동, 사용자 정보와 이벤트 배너 목록 전달
-            Navigator.push(
+            _checkLoginAndNavigate(
               context,
-              MaterialPageRoute(
-                builder: (context) => MyReservationPage(
-                    users: users, eventMyPageBanners: eventMyPageBanners),
-              ),
+              MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
             );
           },
         ),
