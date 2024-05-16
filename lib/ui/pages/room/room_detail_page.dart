@@ -83,7 +83,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                   Icon(Icons.calendar_today),
                                   SizedBox(width: gap_s),
                                   Text(
-                                    ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
+                                 ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
                                     style: h6(),
                                   ),
                                 ],
@@ -187,9 +187,12 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.redAccent,
                     ),
-                    child: Text(
-                      '예약하기',
-                      style: TextStyle(fontSize: 18.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(gap_s),
+                      child: Text(
+                        '예약하기',
+                        style: h5(mColor: Colors.white),
+                      ),
                     ),
                   ),
                 ),

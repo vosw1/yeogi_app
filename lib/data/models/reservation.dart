@@ -67,7 +67,7 @@ class Reservation {
         userId: json['userId'] ?? 0,
         stayName: json['stayName'] ?? 'Unknown',
         stayAddress: json['stayAddress'] ?? 'Unknown',
-        price: price,
+        price: price ,
         roomId: json['roomId'] ?? 0,
         roomName: json['roomName'] ?? 'Unknown',
         checkInDate: checkInDate,
