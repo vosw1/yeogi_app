@@ -9,7 +9,7 @@ class UserRepository {
 
   Future<ResponseDTO> fetchEmailSameCheck(DuplimentEmailCheckDTO requestDTO) async {
     final response = await dio.get(
-      "/users/email-same-check",
+      "/users/username-same-check",
       queryParameters: requestDTO.toJson(),
     );
 

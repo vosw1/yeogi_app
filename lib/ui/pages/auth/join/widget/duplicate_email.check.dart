@@ -42,10 +42,10 @@ class DuplimentEmailCheck extends StatelessWidget {
       UserRepository userRepository = UserRepository();
       ResponseDTO responseDTO = await userRepository.fetchEmailSameCheck(requestDTO);
 
-      if (responseDTO.body == 200) {
+      if (responseDTO.body == false) {
         // 이메일이 중복되지 않았을 경우 처리
         _showSuccessDialog(context, '사용 가능한 이메일입니다.');
-      } else if (responseDTO.body == false)  {
+      } else if (responseDTO.body == null)  {
         // 이메일이 중복되었을 경우 처리
         _showErrorDialog(context, '중복된 이메일입니다.');
       }
@@ -76,14 +76,14 @@ class DuplimentEmailCheck extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('중복된 이메일입니다'),
-          content: Text(message),
+          title: Text('중복된 이메일'),
+          content: Text('다른 이메일을 입력해주세요.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Center(child: Text('')),
+              child: Center(child: Text('확인')),
             ),
           ],
         );
@@ -97,8 +97,8 @@ class DuplimentEmailCheck extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('성공'),
-          content: Text(message),
+          title: Text('사용 가능한 이메일'),
+          content: Text('이메일이 사용 가능합니다.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
