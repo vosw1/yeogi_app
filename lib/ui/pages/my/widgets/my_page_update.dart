@@ -1,9 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // shared_preferences 패키지 추가
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/auth/join/widget/join_text_form_field.dart';
 import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
@@ -25,12 +29,13 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
   final _ageController = MaskedTextController(mask: '0000-00-00');
   final _phoneController = MaskedTextController(mask: '000-0000-0000');
   File? _imageFile;
+  late bool isLogin = false;
 
   @override
   void initState() {
     super.initState();
     _nameController.text = widget.users.name!;
-    // 다른 필드들도 초기화할 수 있습니다
+    isLogin = SessionStore().accessToken != null;
   }
 
   Future<void> _pickImage() async {
@@ -41,6 +46,28 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
         _imageFile = File(pickedFile.path);
       });
     }
+  }
+
+  void _showLoginPopup() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 필요'),
+          content: Text('로그인해주세요.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // 로그인 페이지로 이동하는 로직 추가
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -64,8 +91,8 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                       child: _imageFile != null
                           ? Image.file(
                         _imageFile!,
-                        width: 150,
-                        height: 150,
+                        width: 200,
+                        height: 200,
                         fit: BoxFit.cover,
                       )
                           : Image.asset(
