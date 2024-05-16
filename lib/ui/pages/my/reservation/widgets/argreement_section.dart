@@ -44,7 +44,8 @@ class _AgreementSectionState extends State<AgreementSection> {
       onChecked: (bool value) {
         setState(() {
           _isChecked = value;
-          _subCheckboxValues = List<bool>.filled(_subCheckboxValues.length, value);
+          _subCheckboxValues =
+              List<bool>.filled(_subCheckboxValues.length, value);
         });
         widget.onAllChecked(value);
       },
@@ -90,7 +91,8 @@ class _AgreementSectionState extends State<AgreementSection> {
                           value: _subCheckboxValues[subtitle.indexOf(text)],
                           onChanged: (bool? value) {
                             setState(() {
-                              _subCheckboxValues[subtitle.indexOf(text)] = value ?? false;
+                              _subCheckboxValues[subtitle.indexOf(text)] =
+                                  value ?? false;
                             });
                           },
                         ),
@@ -199,11 +201,11 @@ class _AgreementSectionState extends State<AgreementSection> {
           );
         },
       );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => PayPage()),
-      );
+      // } else {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => PayPage()),
+      //   );
     }
   }
 }

@@ -145,7 +145,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PayPage(),
+          builder: (context) => PayPage(
+          ),
         ),
       );
     } catch (e) {
