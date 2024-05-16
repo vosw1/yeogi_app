@@ -56,7 +56,7 @@ class RoomInfoWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 38), // 이미지와 텍스트 사이 간격 조절
+              SizedBox(width:gap_m), // 이미지와 텍스트 사이 간격 조절
               // 중간에 객실 정보 표시
               Expanded(
                 child: Column(
@@ -69,7 +69,6 @@ class RoomInfoWidget extends StatelessWidget {
                       style: h5(),
                     ),
                     SizedBox(height: gap_xx),
-                    // 입실 및 퇴실 정보 표시
                     // 입실 및 퇴실 정보 표시
                     Text(
                       '입실 : ${formatTime(rooms.checkInTime)}',
@@ -89,14 +88,43 @@ class RoomInfoWidget extends StatelessWidget {
                     ),
                     SizedBox(height: gap_xs),
                     // 가격 표시
-                    Text(
-                      '${NumberFormat('#,###').format(rooms.roomPrice)} 원',
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19,
-                        color: Colors.grey.shade600,
-                      ),
+                    Row(
+                      children: [
+                        // 원래 가격
+                        // 가격 표시
+                        if (rooms.roomSpecialState == "APPLIED") ...[
+                          Text(
+                            '${NumberFormat('#,###').format(rooms.roomPrice)}원',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              color: Colors.grey.shade600,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          SizedBox(width: 8), // 가격 간격 조절
+                          Text(
+                            '${NumberFormat('#,###').format(rooms.roomSpecialPrice)}원',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.redAccent.shade200,
+                            ),
+                          ),
+                        ] else ...[
+                          Text(
+                            '${NumberFormat('#,###').format(rooms.roomPrice)}원',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ],
                 ),

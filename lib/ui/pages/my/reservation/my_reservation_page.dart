@@ -48,7 +48,7 @@ class MyReservationPage extends ConsumerWidget {
       // 예약 내역이 있는 경우
       return Scaffold(
         appBar: AppBar(
-          title: Text('예약내역'),
+          title: Text('예약내역', style: h4(),),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
@@ -66,7 +66,7 @@ class MyReservationPage extends ConsumerWidget {
 
   Widget buildListItem(BuildContext context, Reservation reservation) {
     return Padding(
-      padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
+      padding: const EdgeInsets.only(left: gap_m, right: gap_m),
       child: Row(
         children: [
           SizedBox(height: gap_xs),

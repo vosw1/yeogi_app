@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
@@ -186,7 +187,7 @@ class _JoinFormState extends State<JoinForm> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
             ),
-            child: Text('회원가입', style: TextStyle(color: Colors.white)),
+            child: Text('회원가입', style: h5(mColor: Colors.white)),
           ),
           SizedBox(height: gap_l),
         ],
@@ -266,7 +267,7 @@ class _JoinFormState extends State<JoinForm> {
             onPressed: () {
               Navigator.pop(context, true);
             },
-            child: Text('확인'),
+            child: Center(child: Text('확인')),
           ),
         ),
       ],
