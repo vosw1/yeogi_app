@@ -266,6 +266,10 @@ class StayRepository {
 
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
+    Logger().d(responseDTO);
+    Logger().d(responseDTO.body);
+    Logger().d(responseDTO.runtimeType);
+
     if (responseDTO.status == 200) {
       // 숙소 파싱
       final stayContents = responseDTO.body['stayContents'];

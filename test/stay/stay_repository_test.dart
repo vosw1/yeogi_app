@@ -1,17 +1,17 @@
 import 'package:yogi_project/data/repositories/stay_repository.dart';
 
 void main() async {
-  await fetchStaySearchList_test(); // 검색 테스트
-  // await fetchSaleStayList_test(); // 특가 숙소 리스트
-  // await fetchHotelStayList_test(); // 호텔 숙소 리스트
-  // await fetchOverseaStayList_test(); // 해외 숙소 리스트
-  // await fetchPensionStayList_test(); // 해외 숙소 리스트
-  // await fetchMotelStayList_test(); // 모텔 숙소 리스트
-  // await fetchHomeAndVillaStayList_test(); // 홈&빌라 숙소 리스트
-  await fetchCampingStayList_test(); // 홈&빌라 숙소 리스트
-  await fetchGuesthouseStayList_test(); // 게하 숙소 리스트
+  // await fetchStaySearchList_test(); // 검색 테스트
+  // // await fetchSaleStayList_test(); // 특가 숙소 리스트
+  // // await fetchHotelStayList_test(); // 호텔 숙소 리스트
+  // // await fetchOverseaStayList_test(); // 해외 숙소 리스트
+  // // await fetchPensionStayList_test(); // 해외 숙소 리스트
+  // // await fetchMotelStayList_test(); // 모텔 숙소 리스트
+  // // await fetchHomeAndVillaStayList_test(); // 홈&빌라 숙소 리스트
+  // // await fetchCampingStayList_test(); // 홈&빌라 숙소 리스트
+  // // await fetchGuesthouseStayList_test(); // 게하 숙소 리스트
   // await fetchHomeStayList_test(); // 홈 페이지 리스트
-  // await fetchStayDetail_test(); // 숙소 상세 보기 리스트
+  await fetchStayDetail_test(); // 숙소 상세 보기 리스트
 }
 
 // 검색 테스트
@@ -66,5 +66,5 @@ Future<void> fetchHomeStayList_test() async {
 
 // 숙소 상세보기 리스트
 Future<void> fetchStayDetail_test() async {
-  await StayRepository().fetchStayDetail(1);
+  await StayRepository().fetchStayDetail(2);
 }

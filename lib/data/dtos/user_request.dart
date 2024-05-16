@@ -14,12 +14,12 @@ class JoinReqDTO {
   });
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "password": password,
-        "email": email,
-        "phone": phone,
-        "birth": birth,
-      };
+    "name": name,
+    "password": password,
+    "email": email,
+    "phone": phone,
+    "birth": birth,
+  };
 }
 
 class LoginReqDTO {

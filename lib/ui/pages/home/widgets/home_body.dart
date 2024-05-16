@@ -42,7 +42,7 @@ class HomeBody extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          StayDetailPage(stayId: stays[index].id),
+                          StayDetailPage(stayId: stays[index].stayId),
                     ),
                   );
                 },
@@ -58,7 +58,7 @@ class HomeBody extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  StayDetailPage(stayId: index),
+                                  StayDetailPage(stayId: stays[index].stayId),
                             ),
                           );
                         },
