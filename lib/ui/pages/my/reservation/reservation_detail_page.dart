@@ -70,20 +70,20 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   SizedBox(height: gap_m),
                   Text(
                     '${widget.reservations.roomName}',
-                    style: h5(),
+                    style: h4(),
                   ),
                   Text(
                     '${widget.reservations.stayAddress}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                      fontSize: 19,
                     ),
                   ),
                   SizedBox(height: gap_m),
                   Text(
                       '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
-                      style: h5()),
+                      style: h4()),
                   SizedBox(height: gap_m),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,14 +155,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   SizedBox(height: gap_m),
                   Divider(),
                   SizedBox(height: gap_m),
-                  Text('예약 정보', style: TextStyle(fontSize: gap_m)),
+                  Text('예약 정보', style: h4()),
                   SizedBox(height: gap_m),
                   Text(
                     '예약자 : ${widget.reservations.reservationName}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 19,
                     ),
                   ),
                   SizedBox(height: gap_xs),
@@ -171,16 +171,16 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 19,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: gap_xs),
                   Text(
                     '결제금액 : ${NumberFormat('#,###').format(widget.reservations.amount)} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 19,
                     ),
                   ),
                   SizedBox(height: gap_xs),
@@ -189,7 +189,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 19,
                     ),
                   ),
                   SizedBox(height: gap_xs),
@@ -198,7 +198,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 19,
                     ),
                   ),
                 ],
