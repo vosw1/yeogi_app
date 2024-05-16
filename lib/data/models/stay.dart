@@ -26,7 +26,7 @@ class Stay {
   final information;
 
   Stay({
-    this.id,
+    required this.id,
     this.company,
     required this.stayImgTitle,
     required this.stayName,
