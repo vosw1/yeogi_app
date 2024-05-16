@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 // 마이페이지 회원가입/로그인 버튼
 class MyPageLoginButton extends StatelessWidget {
@@ -24,7 +25,7 @@ class MyPageLoginButton extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     "회원가입 / 로그인",
-                    style: TextStyle(fontSize: 17, color: Colors.white),
+                    style: h5(mColor: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                   decoration: BoxDecoration(

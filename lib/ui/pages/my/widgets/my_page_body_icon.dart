@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 // 회원가입, 로그인 아래에 아이콘들
 class MyPageBodyIcon extends StatelessWidget {
@@ -22,7 +23,7 @@ class MyPageBodyIcon extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 title,
-                style: TextStyle(fontSize: 14, color: Colors.black),
+                style: h6(),
               ),
             )
           ],
