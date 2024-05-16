@@ -42,14 +42,33 @@ class _ReservationTextFormFieldState extends State<ReservationTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (widget.labelText != null)
+          Text(
+            widget.labelText!,
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: 'Jalnan2TTF',
+              color: Colors.redAccent,
+            ),
+          ),
+        SizedBox(height: gap_xs),
         TextFormField(
           controller: widget.controller,
           keyboardType: widget.keyboardType,
           decoration: InputDecoration(
-            labelText: widget.labelText,
+            // labelText: widget.labelText,
             hintText: widget.hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(gap_s),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
             errorText: _errorText,
           ),
