@@ -22,7 +22,6 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   late DateTime _checkInDate;
   late DateTime _checkOutDate;
   int _numberOfNights = 1;
-  bool isCanceled = false;
 
   @override
   void initState() {
@@ -30,18 +29,21 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     _checkInDate = widget.reservations.checkInDate.toUtc();
     _checkOutDate = widget.reservations.checkOutDate.toUtc();
     _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
-    isCanceled = widget.reservations.state == 'REFUND';
   }
 
   @override
   Widget build(BuildContext context) {
-    bool showCancelButton =
-        DateTime.now().isBefore(_checkInDate) && !isCanceled;
+    final reservationList = ref.watch(reservationListProvider);
+
+    final reservation = reservationList.firstWhere((res) => res.payId == widget.reservations.payId, orElse: () => widget.reservations);
+
+    bool isCanceled = reservation.state == 'REFUND';
+    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isCanceled;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '${widget.reservations.stayName}',
+          '${reservation.stayName}',
           style: h4(),
         ),
       ),
@@ -61,7 +63,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets/images/${widget.reservations.roomImgTitle}',
+                      'assets/images/${reservation.roomImgTitle}',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,
@@ -69,11 +71,11 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_m),
                   Text(
-                    '${widget.reservations.roomName}',
+                    '${reservation.roomName}',
                     style: h4(),
                   ),
                   Text(
-                    '${widget.reservations.stayAddress}',
+                    '${reservation.stayAddress}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -82,8 +84,9 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_m),
                   Text(
-                      '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
-                      style: h4()),
+                    '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
+                    style: h4(),
+                  ),
                   SizedBox(height: gap_m),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,7 +161,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   Text('예약 정보', style: h4()),
                   SizedBox(height: gap_m),
                   Text(
-                    '예약자 : ${widget.reservations.reservationName}',
+                    '예약자 : ${reservation.reservationName}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -167,16 +170,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '전화번호 : ${formatPhoneNumber(widget.reservations.reservationTel)}',
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.bold,
-                        fontSize: 19,
-                    ),
-                  ),
-                  SizedBox(height: gap_xs),
-                  Text(
-                    '결제금액 : ${NumberFormat('#,###').format(widget.reservations.amount)} 원',
+                    '전화번호 : ${formatPhoneNumber(reservation.reservationTel)}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -185,7 +179,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '결제일자 : ${formatDate(widget.reservations.createdAt)}',
+                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount)} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -194,7 +188,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '결제수단 : ${widget.reservations.way}',
+                    '결제일자 : ${formatDate(reservation.createdAt)}',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -204,148 +198,66 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 ],
               ),
             ),
-            SizedBox(height: gap_l),
-            Center(
-              child: isCanceled
-                  ? Text(
-                      '취소된 예약입니다',
-                      style: h4(mColor: Colors.redAccent),
-                    )
-                  : showCancelButton
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                _showCancelConfirmationDialog(context, ref);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.redAccent,
-                                side: BorderSide.none,
-                              ),
-                              child: Text('예약 취소'),
-                            ),
-                            SizedBox(width: gap_m),
-                            ElevatedButton(
-                              onPressed: () {
-                                _showReviewWritingDialog(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.redAccent,
-                                side: BorderSide.none,
-                              ),
-                              child: Text('리뷰 작성'),
-                            ),
-                          ],
-                        )
-                      : ElevatedButton(
-                          onPressed: () {
-                            _showReviewWritingDialog(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: Colors.redAccent,
-                            side: BorderSide.none,
-                          ),
-                          child: Text('리뷰 작성'),
-                        ),
-            ),
-            SizedBox(height: gap_m),
+            if (showCancelButton)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                    // Optionally navigate back or refresh the page
+                  },
+                  child: Text(
+                    '예약취소',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(12), backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Future<void> _selectDate(BuildContext context,
-      {required bool isCheckIn}) async {
-    final DateTime? pickedDate = await showDatePicker(
+  Future<void> _selectDate(BuildContext context, {required bool isCheckIn}) async {
+    DateTime initialDate = isCheckIn ? _checkInDate : _checkOutDate;
+    DateTime firstDate = DateTime.now();
+    DateTime lastDate = DateTime.now().add(Duration(days: 365));
+
+    DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: isCheckIn ? _checkInDate : _checkOutDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
     );
-    if (pickedDate != null) {
+
+    if (picked != null && picked != initialDate) {
       setState(() {
         if (isCheckIn) {
-          _checkInDate = pickedDate;
+          _checkInDate = picked;
         } else {
-          _checkOutDate = pickedDate;
+          _checkOutDate = picked;
         }
+
         _numberOfNights = _checkOutDate.difference(_checkInDate).inDays;
       });
     }
   }
 
-  void _showCancelConfirmationDialog(BuildContext context, WidgetRef ref) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('예약 취소'),
-          content: Text('이 예약을 취소하시겠습니까?'),
-          actionsAlignment: MainAxisAlignment.center,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () async {
-                Navigator.of(context).pop();
-                await ref
-                    .read(reservationListProvider.notifier)
-                    .payUpdate(widget.reservations.payId);
-                setState(() {
-                  isCanceled = true;
-                });
-              },
-              child: Text('예'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('아니요'),
-            ),
-          ],
-        );
-      },
-    );
+  String formatDate(DateTime date) {
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 
-  void _showReviewWritingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('리뷰 작성'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: InputDecoration(labelText: '리뷰 내용'),
-                maxLines: 3,
-              ),
-              SizedBox(height: gap_m),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('작성 완료'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+  String formatPhoneNumber(String phoneNumber) {
+    if (phoneNumber.length == 11) {
+      return '${phoneNumber.substring(0, 3)}-${phoneNumber.substring(3, 7)}-${phoneNumber.substring(7, 11)}';
+    } else {
+      return phoneNumber;
+    }
   }
-}
-
-String formatDate(DateTime dateTime) {
-  return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
-}
-
-String formatPhoneNumber(String phoneNumber) {
-  String cleaned = phoneNumber.replaceAll(RegExp(r'\D'), '');
-  return cleaned.replaceFirstMapped(RegExp(r'^(\d{3})(\d{4})(\d{4})$'),
-      (match) {
-    return '${match[1]}-${match[2]}-${match[3]}';
-  });
 }
