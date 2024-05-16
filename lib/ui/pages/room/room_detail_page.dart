@@ -84,7 +84,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                   SizedBox(width: gap_s),
                                   Text(
                                     '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
-                                    style: h5(),
+                                    style: h6(),
                                   ),
                                 ],
                               ),
