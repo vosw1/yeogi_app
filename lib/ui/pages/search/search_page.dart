@@ -108,7 +108,7 @@ class _SearchPageState extends State<SearchPage> {
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(top: gap_s, left: gap_m, right: gap_m),
+                const EdgeInsets.only(left: gap_m, right: gap_m),
             child: TextField(
               onChanged: (value) {
                 setState(() {
