@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
@@ -16,8 +15,15 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 class ReservationPage extends ConsumerStatefulWidget {
   final Room rooms;
   final int numberOfNights;
+  final DateTime selectedStartDate;
+  final DateTime selectedEndDate;
 
-  ReservationPage({required this.rooms, required this.numberOfNights});
+  ReservationPage({
+    required this.rooms,
+    required this.numberOfNights,
+    required this.selectedStartDate,
+    required this.selectedEndDate,
+  });
 
   @override
   _ReservationPageState createState() => _ReservationPageState();
@@ -43,18 +49,25 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
 
   @override
   Widget build(BuildContext context) {
-
     print(widget.numberOfNights);
     print(widget.rooms.price * widget.numberOfNights);
     return Scaffold(
-      appBar: AppBar(title: Text('예약하기', style: h4(),)),
+      appBar: AppBar(
+          title: Text(
+            '예약하기',
+            style: h4(),
+          )),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(gap_m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              RoomInfo(rooms: widget.rooms, numberOfNights: widget.numberOfNights,),
+              RoomInfo(
+                  rooms: widget.rooms,
+                  numberOfNights: widget.numberOfNights,
+                  selectedStartDate: widget.selectedStartDate,
+                  selectedEndDate: widget.selectedEndDate),
               SizedBox(height: gap_m),
               RoomNotice(),
               Divider(),
@@ -83,11 +96,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: gap_m),
                 child: ElevatedButton(
-                  onPressed: () => _attemptReservation(
-                      context,
-                      _nameController,
-                      _phoneNumberController,
-                      widget.rooms),
+                  onPressed: () => _attemptReservation(context, _nameController,
+                      _phoneNumberController, widget.rooms),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -110,31 +120,41 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       TextEditingController nameController,
       TextEditingController phoneController,
       Room room) {
-    if ([true, true, true, true].every((val) => val)) { // 이 부분은 실제 체크 상태를 반영해야 합니다.
+    try {
+      // Use the selected dates from the widget properties
+      DateTime checkInDate = widget.selectedStartDate;
+      DateTime checkOutDate = widget.selectedEndDate;
+
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: room.roomId,
         roomName: room.roomName ?? 'defaultRoomName',
         roomImgTitle: room.roomImgTitle ?? 'defaultImgTitle',
         price: (room.price ?? 0).toInt(),
-        checkInDate: DateTime.parse(room.checkInDate ?? DateTime.now().toString()),
-        checkOutDate: DateTime.parse(room.checkOutDate ?? DateTime.now().toString()),
-        reservationName: nameController.text.isNotEmpty ? nameController.text : 'Default Name',
-        reservationTel: phoneController.text.isNotEmpty ? phoneController.text : 'Default Tel',
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        reservationName: nameController.text.isNotEmpty
+            ? nameController.text
+            : 'Default Name',
+        reservationTel: phoneController.text.isNotEmpty
+            ? phoneController.text
+            : 'Default Tel',
         stayAdress: '',
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PayPage()),
+        MaterialPageRoute(
+          builder: (context) => PayPage(),
+        ),
       );
-    } else {
+    } catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Notice'),
-            content: Text('모든 필수 항목에 동의해주세요.'),
+            content: Text('날짜 형식이 올바르지 않습니다.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
@@ -144,6 +164,14 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
           );
         },
       );
+    }
+  }
+
+  DateTime _parseDate(String date) {
+    try {
+      return DateTime.parse(date);
+    } catch (e) {
+      return DateTime.now();
     }
   }
 }

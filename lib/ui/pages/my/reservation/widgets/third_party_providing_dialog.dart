@@ -3,9 +3,6 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/room.dart';
 
 class ThirdPartyProvidingDialog extends AlertDialog {
-  final Room rooms;
-
-  const ThirdPartyProvidingDialog({required this.rooms});
 
   @override
   Widget build(BuildContext context) {

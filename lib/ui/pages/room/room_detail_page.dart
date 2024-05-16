@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -77,8 +76,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                               padding: EdgeInsets.all(gap_s),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(gap_s),
-                                border:
-                                    Border.all(color: Colors.black, width: 2.0),
+                                border: Border.all(color: Colors.black, width: 2.0),
                               ),
                               child: Row(
                                 children: [
@@ -86,7 +84,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                   SizedBox(width: gap_s),
                                   Text(
                                     '${formatDate(_selectedStartDate)} ~ ${formatDate(_selectedEndDate)}',
-                                    style: h6(),
+                                    style: h5(),
                                   ),
                                 ],
                               ),
@@ -123,26 +121,26 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                           Row(
                             children: List<Widget>.generate(
                                 model.roomOption.options.length * 2 - 1,
-                                (index) {
-                              // 옵션 이름과 콤마를 번갈아가며 배치합니다.
-                              if (index.isEven) {
-                                // 옵션 이름을 표시하는 경우
-                                final optionIndex = index ~/ 2;
-                                final option =
+                                    (index) {
+                                  // 옵션 이름과 콤마를 번갈아가며 배치합니다.
+                                  if (index.isEven) {
+                                    // 옵션 이름을 표시하는 경우
+                                    final optionIndex = index ~/ 2;
+                                    final option =
                                     model.roomOption.options[optionIndex];
-                                return Text(
-                                  option.name,
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                );
-                              } else {
-                                // 콤마를 표시하는 경우
-                                return Text(', ');
-                              }
-                            }),
+                                    return Text(
+                                      option.name,
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    );
+                                  } else {
+                                    // 콤마를 표시하는 경우
+                                    return Text(', ');
+                                  }
+                                }),
                           ),
                           SizedBox(height: gap_s),
                           Divider(),
@@ -174,12 +172,13 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ReservationPage(
                             rooms: widget.rooms,
                             numberOfNights: _numberOfNights,
+                            selectedStartDate: _selectedStartDate,
+                            selectedEndDate: _selectedEndDate,
                           ),
                         ),
                       );
@@ -209,7 +208,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
       initialDateRange:
-          DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
+      DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
     );
 
     if (pickedDateRange != null) {

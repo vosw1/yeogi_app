@@ -159,8 +159,9 @@ class _AgreementSectionState extends State<AgreementSection> {
     return PrivacyPolicyDialog();
   }
 
+  // todo : 숙소 이름이 필요함
   ThirdPartyProvidingDialog _buildThirdPartyProvidingDialog() {
-    return ThirdPartyProvidingDialog(rooms: rooms);
+    return ThirdPartyProvidingDialog();
   }
 
   AgeConfirmationDialog _buildAgeConfirmationDialog() {
