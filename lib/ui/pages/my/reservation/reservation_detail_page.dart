@@ -237,7 +237,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                         child: ElevatedButton(
                           onPressed: () => _showReviewWritingDialog(context),
                           child: Text(
-                            '작성하기',
+                            '리뷰 작성',
                             style: h5(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(

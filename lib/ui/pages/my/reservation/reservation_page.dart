@@ -53,68 +53,66 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
     print(widget.rooms.price * widget.numberOfNights);
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        '예약하기',
-        style: h4(),
-      )),
+        title: Text(
+          '예약하기',
+          style: h4(),
+        ),
+      ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              RoomInfo(
-                  rooms: widget.rooms,
-                  numberOfNights: widget.numberOfNights,
-                  selectedStartDate: widget.selectedStartDate,
-                  selectedEndDate: widget.selectedEndDate),
-              SizedBox(height: gap_m),
-              RoomNotice(),
-              Divider(),
-              SizedBox(height: gap_s),
-              ReservationInfoForm(
-                nameController: _nameController,
-                phoneNumberController: _phoneNumberController,
-              ),
-              SizedBox(height: gap_xs),
-              Divider(),
-              SizedBox(height: gap_s),
-              AgreementSection(
-                onAllChecked: (bool value) {
-                  // 이 부분은 예제에 따라 상태 관리 로직이 필요합니다.
-                },
-                subCheckboxValues: [false, false, false, false],
-                subtitles: [
-                  '이용규칙 및 취소/환불 규정 동의(필수)',
-                  '개인정보 수집 및 이용 동의(필수)',
-                  '개인정보 제3자 제공 동의(필수)',
-                  '만 14세 이상 확인(필수)',
-                ],
-              ),
-              SizedBox(height: gap_l),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () => _attemptReservation(context, _nameController,
-                      _phoneNumberController, widget.rooms),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.redAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(gap_s),
-                    child: Text(
-                      '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
-                      style: h5(mColor: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+        padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            RoomInfo(
+              rooms: widget.rooms,
+              numberOfNights: widget.numberOfNights,
+              selectedStartDate: widget.selectedStartDate,
+              selectedEndDate: widget.selectedEndDate,
+            ),
+            SizedBox(height: gap_m),
+            RoomNotice(),
+            Divider(),
+            SizedBox(height: gap_s),
+            ReservationInfoForm(
+              nameController: _nameController,
+              phoneNumberController: _phoneNumberController,
+            ),
+            SizedBox(height: gap_xs),
+            Divider(),
+            SizedBox(height: gap_s),
+            AgreementSection(
+              onAllChecked: (bool value) {
+                // 이 부분은 예제에 따라 상태 관리 로직이 필요합니다.
+              },
+              subCheckboxValues: [false, false, false, false],
+              subtitles: [
+                '이용규칙 및 취소/환불 규정 동의(필수)',
+                '개인정보 수집 및 이용 동의(필수)',
+                '개인정보 제3자 제공 동의(필수)',
+                '만 14세 이상 확인(필수)',
+              ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(gap_m),
+        child: ElevatedButton(
+          onPressed: () => _attemptReservation(context, _nameController,
+              _phoneNumberController, widget.rooms),
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.redAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(gap_s),
+            child: Text(
+              '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
+              style: h5(mColor: Colors.white),
+            ),
           ),
         ),
       ),
@@ -125,7 +123,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       BuildContext context,
       TextEditingController nameController,
       TextEditingController phoneController,
-      Room room) {
+      Room room,
+      ) {
     try {
       DateTime checkInDate = widget.selectedStartDate;
       DateTime checkOutDate = widget.selectedEndDate;
@@ -143,7 +142,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
         reservationTel: phoneController.text.isNotEmpty
             ? phoneController.text
             : 'Default Tel',
-        stayAdress: '', reservedDates: '',
+        stayAdress: '',
+        reservedDates: '',
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);

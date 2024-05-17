@@ -20,16 +20,12 @@ class MyReservationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Reservation> reservations = ref.watch(reservationListProvider);
+    // Fetch reservations when the widget is built
+    ref.read(reservationListProvider.notifier).reservationList();
 
-    if (reservations == null) {
-      return Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else if (reservations.isEmpty) {
-      // 예약 내역이 없는 경우
+    final reservations = ref.read(reservationListProvider);
+
+    if (reservations.isEmpty) {
       return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -45,10 +41,12 @@ class MyReservationPage extends ConsumerWidget {
         ),
       );
     } else {
-      // 예약 내역이 있는 경우
       return Scaffold(
         appBar: AppBar(
-          title: Text('예약내역', style: h4(),),
+          title: Text(
+            '예약내역',
+            style: h4(),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.only(bottom: gap_m),
