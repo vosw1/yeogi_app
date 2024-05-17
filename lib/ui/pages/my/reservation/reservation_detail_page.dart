@@ -116,7 +116,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   SizedBox(width: gap_xs),
@@ -147,7 +147,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   SizedBox(width: gap_xs),
