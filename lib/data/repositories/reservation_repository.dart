@@ -8,6 +8,23 @@ import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
 class ReservationRepository {
+
+  // 방별 예약 불가능한 날짜 조회하기
+  Future<List<DateTime>> fetchReservedDates(int roomId, String accessToken) async {
+    final response = await dio.get(
+      "/room/detail/$roomId/calendar",
+      options: Options(headers: {"Authorization": "Bearer $accessToken"}),
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> dates = response.data['body'];
+      List<DateTime> reservedDates = dates.map((date) => DateTime.parse(date)).toList();
+      return reservedDates;
+    } else {
+      throw Exception("Failed to load reserved dates");
+    }
+  }
+
   // 예약 내역보기
   Future<ResponseDTO> fetchReservationDetail(int reservationId, String accessToken) async {
     final response = await dio.get(

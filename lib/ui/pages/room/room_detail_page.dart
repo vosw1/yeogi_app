@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
+import 'package:yogi_project/ui/pages/room/widgets/room_detail_view_model.dart';
 
 class RoomDetailPage extends ConsumerStatefulWidget {
   final Room rooms;
@@ -27,10 +30,17 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     _selectedStartDate = DateTime.now();
     _selectedEndDate = DateTime.now().add(Duration(days: 1));
     _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+    _fetchReservedDates();
+  }
+
+  void _fetchReservedDates() async {
+    await ref.read(reservedDatesProvider(widget.rooms.roomId).notifier).fetchReservedDates(widget.rooms.roomId);
   }
 
   @override
   Widget build(BuildContext context) {
+    final reservedDates = ref.watch(reservedDatesProvider(widget.rooms.roomId));
+
     RoomDetailModel? model = ref.watch(roomDetailProvider(widget.rooms.roomId));
 
     if (model == null) {
@@ -71,23 +81,43 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                             ),
                           ),
                           SizedBox(height: gap_m),
-                          GestureDetector(
-                            onTap: _selectDateRange,
-                            child: Container(
-                              padding: EdgeInsets.all(gap_s),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(gap_s),
-                                border: Border.all(color: Colors.black, width: 2.0),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.calendar_today),
-                                  SizedBox(width: gap_s),
-                                  Text(
-                                    ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
-                                    style: h6(),
-                                  ),
-                                ],
+                          TableCalendar(
+                            locale: 'ko_KR',
+                            focusedDay: _selectedStartDate,
+                            firstDay: DateTime.utc(2000, 1, 1),
+                            lastDay: DateTime.utc(2100, 12, 31),
+                            selectedDayPredicate: (day) {
+                              return isSameDay(_selectedStartDate, day);
+                            },
+                            onDaySelected: (selectedDay, focusedDay) {
+                              setState(() {
+                                _selectedStartDate = selectedDay;
+                                _selectedEndDate = selectedDay.add(Duration(days: _numberOfNights));
+                              });
+                            },
+                            calendarBuilders: CalendarBuilders(
+                              defaultBuilder: (context, day, focusedDay) {
+                                if (reservedDates.contains(day)) {
+                                  return Center(
+                                    child: Text(
+                                      '${day.day}',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  );
+                                }
+                                return null;
+                              },
+                              selectedBuilder: (context, date, events) => Container(
+                                margin: const EdgeInsets.all(4.0),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Text(
+                                  '${date.day}',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),
@@ -124,9 +154,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                             children: List<Widget>.generate(
                               model.roomOption.options.length * 2 - 1,
                                   (index) {
-                                // 옵션 이름과 콤마를 번갈아가며 배치합니다.
                                 if (index.isEven) {
-                                  // 옵션 이름을 표시하는 경우
                                   final optionIndex = index ~/ 2;
                                   final option = model.roomOption.options[optionIndex];
                                   return Text(
@@ -138,7 +166,6 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                     ),
                                   );
                                 } else {
-                                  // 콤마를 표시하는 경우
                                   return Text(', ');
                                 }
                               },
@@ -205,6 +232,9 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
       initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
+      builder: (context, child) {
+        return child == null ? SizedBox.shrink() : _buildDatePicker(child);
+      },
     );
 
     if (pickedDateRange != null) {
@@ -214,6 +244,18 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
         _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
       });
     }
+  }
+
+  Widget _buildDatePicker(Widget child) {
+    return Theme(
+      data: ThemeData.light().copyWith(
+        primaryColor: Colors.redAccent,
+        hintColor: Colors.redAccent,
+        colorScheme: ColorScheme.light(primary: Colors.redAccent),
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+      ),
+      child: child,
+    );
   }
 
   String formatDate(DateTime dateTime) {
