@@ -39,6 +39,28 @@ class ScrapRepository {
     Logger().d(responseDTO);
     Logger().d(responseDTO.body);
 
+    //responseDTO.body =
+
+    // if (responseDTO.status == 200) {
+    //   responseDTO.body = Scrap.fromJson(responseDTO.body);
+    //   Logger().d(responseDTO.body.runtimeType);
+    // }
+
+    return responseDTO;
+  }
+
+  // 스크랩 삭제
+  Future<ResponseDTO> fetchDeleteScrap(int stayId, String accessToken) async {
+    final response = await dio.delete(
+      "/api/scrap/stay/$stayId",
+      options: Options(headers: {"Authorization": "Bearer $accessToken"}),
+    );
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    Logger().d(responseDTO);
+    Logger().d(responseDTO.body);
+
     // if (responseDTO.status == 200) {
     //   responseDTO.body = Scrap.fromJson(responseDTO.body);
     //   Logger().d(responseDTO.body.runtimeType);

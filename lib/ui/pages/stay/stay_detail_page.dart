@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,12 +11,14 @@ import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/scrap_login_widget.dart';
 
 class StayDetailPage extends ConsumerWidget {
   int stayId;
   late Completer<GoogleMapController> _controllerCompleter;
   LatLng? _currentPosition;
   final Set<Marker> markers = {};
+  Color? _scrapColor = Colors.black;
 
   StayDetailPage({required this.stayId});
 
@@ -41,17 +44,27 @@ class StayDetailPage extends ConsumerWidget {
             IconButton(
               icon: Icon(
                 Icons.bookmark,
-                color: Colors.redAccent, // 변경된 부분
+                color: _scrapColor,
               ),
               onPressed: () async {
-                // await ref.read().notifyAdd(model.stay.stayId);
-              },
+                if (model.isLogin) { // 로그인 상태를 확인
+                  if (model.isScrap == false) { // 스크랩을 하지 않은 상태일 때
+                    ref.read(stayDetailProvider(stayId).notifier).notifyAdd(stayId);
+                    _scrapColor = Colors.redAccent;
+                  } else if (model.isScrap == true) { // 스크랩을 한 상태일 때
+                    ref.read(stayDetailProvider(stayId).notifier).notifyRemove(stayId);
+                    _scrapColor = Colors.black;
+                  }
+                } else {
+                  showLoginAlert(context); // 로그인 상태가 아니면 알림 표시
+                }
+              }
             ),
             SizedBox(width: gap_s),
           ],
         ),
         body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(), // 수정된 부분
+          physics: AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.all(gap_m),
             child: Column(
@@ -66,7 +79,7 @@ class StayDetailPage extends ConsumerWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets${model.stayImages[0].stayImagePath}', // 변경된 부분
+                      'assets${model.stayImages[0].stayImagePath}',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -85,7 +98,7 @@ class StayDetailPage extends ConsumerWidget {
                 ),
                 SizedBox(height: gap_s),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(), // 수정된 부분
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: model.rooms?.length,
                   itemBuilder: (context, index) {
@@ -111,7 +124,7 @@ class StayDetailPage extends ConsumerWidget {
                 ),
                 SizedBox(height: gap_s),
                 Text(
-                  model.stay.intro, // 변경된 부분
+                  model.stay.intro,
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.bold,
@@ -164,7 +177,7 @@ class StayDetailPage extends ConsumerWidget {
                 ),
                 SizedBox(height: gap_s),
                 Text(
-                  model.stay.information, // 변경된 부분
+                  model.stay.information,
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.bold,
@@ -194,7 +207,7 @@ class StayDetailPage extends ConsumerWidget {
           ),
         ),
         floatingActionButton:
-            ScrollFAB(controller: ScrollController()), // 변경된 부분
+            ScrollFAB(controller: ScrollController()),
       );
     }
   }
