@@ -1,13 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 
-// 마이페이지의 예약메뉴
-class MyPageBookMenuHolder extends StatelessWidget {
+class MyPageBookMenuHolder extends ConsumerWidget {
+
+  void _showLoginRequiredDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 필요'),
+          content: Text('로그인을 먼저 해주세요.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _checkLoginAndNavigate(BuildContext context, WidgetRef ref, Widget page) async {
+    final sessionStore = ref.read(sessionProvider);
+
+    if (sessionStore.isLogin) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+      );
+    } else {
+      _showLoginRequiredDialog(context);
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: <Widget>[
         ListTile(
@@ -31,13 +63,10 @@ class MyPageBookMenuHolder extends StatelessWidget {
           ),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            // 국내 숙소 탭 시 MyReservationPage로 이동, 사용자 정보와 이벤트 배너 목록 전달
-            Navigator.push(
+            _checkLoginAndNavigate(
               context,
-              MaterialPageRoute(
-                builder: (context) => MyReservationPage(
-                    users: users, eventMyPageBanners: eventMyPageBanners),
-              ),
+              ref,
+              MyReservationPage(),
             );
           },
         ),

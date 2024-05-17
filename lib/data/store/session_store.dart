@@ -32,7 +32,7 @@ class SessionStore extends SessionUser {
     super.isLogin = false;
 
     await secureStorage.delete(key: "accessToken");
-    Navigator.popAndPushNamed(mContext!, Move.loginPage);
+    navigatorKey.currentState?.pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 
   void loginCheck(String path) {

@@ -5,6 +5,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/review_writing_dialog.dart';
 
 class ReservationDetailPage extends ConsumerStatefulWidget {
   final Reservation reservations;
@@ -35,10 +36,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   Widget build(BuildContext context) {
     final reservationList = ref.watch(reservationListProvider);
 
-    final reservation = reservationList.firstWhere((res) => res.payId == widget.reservations.payId, orElse: () => widget.reservations);
+    final reservation = reservationList.firstWhere(
+          (res) => res.payId == widget.reservations.payId,
+      orElse: () => widget.reservations,
+    );
 
-    bool isCanceled = reservation.state == 'REFUND';
-    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isCanceled;
+    bool isRefund = reservation.amount == 0;
+    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
+    bool showReviewButton = !isRefund;
 
     return Scaffold(
       appBar: AppBar(
@@ -198,24 +203,52 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 ],
               ),
             ),
-            if (showCancelButton)
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                    // Optionally navigate back or refresh the page
-                  },
-                  child: Text(
-                    '예약취소',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(12), backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+            if (showCancelButton || showReviewButton)
+              Padding(
+                padding: const EdgeInsets.only(top: gap_l, bottom: gap_l),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (showCancelButton)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                            // Optionally navigate back or refresh the page
+                          },
+                          child: Text(
+                            '예약취소',
+                            style: h5(mColor: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(12),
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (showCancelButton && showReviewButton)
+                      SizedBox(width: gap_m),
+                    if (showReviewButton)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => _showReviewWritingDialog(context),
+                          child: Text(
+                            '작성하기',
+                            style: h5(mColor: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(12),
+                            backgroundColor: Colors.redAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
           ],
@@ -259,5 +292,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     } else {
       return phoneNumber;
     }
+  }
+
+  void _showReviewWritingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ReviewWritingDialog();
+      },
+    );
   }
 }

@@ -92,16 +92,16 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                           ? Image.file(
                         _imageFile!,
 
-                        width: 180,
-                        height: 180,
+                        width: 150,
+                        height: 150,
 
                         fit: BoxFit.cover,
                       )
                           : Image.asset(
                         "assets/images/user1.png",
 
-                        width: 180,
-                        height: 180,
+                        width: 150,
+                        height: 150,
 
                         fit: BoxFit.cover,
                       ),
@@ -109,7 +109,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   ),
                 ),
 
-                SizedBox(height: gap_l),
+                SizedBox(height: gap_m),
 
                 JoinTextFormField(
                   controller: _nameController,
@@ -169,6 +169,11 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(gap_s),

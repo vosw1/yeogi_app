@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yogi_project/data/models/event_detail_content.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
-import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
@@ -11,7 +10,6 @@ import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/my/my_page.dart';
 import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
-import 'package:yogi_project/ui/pages/room/room_detail_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 
 // navigator로 이동하는 url 설정
@@ -149,7 +147,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.paymentPage: (context) => const PayPage(),
     // 결제 페이지
     Move.myReservationPage: (context) =>
-        MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
+        MyReservationPage(),
     // 국내 숙소 예약확인 페이지
     // Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

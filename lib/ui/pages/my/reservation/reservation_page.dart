@@ -54,12 +54,13 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            '예약하기',
-            style: h4(),
-          )),
+        '예약하기',
+        style: h4(),
+      )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(gap_m),
+          padding:
+              const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -94,13 +95,15 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
               SizedBox(height: gap_l),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: gap_m),
                 child: ElevatedButton(
                   onPressed: () => _attemptReservation(context, _nameController,
                       _phoneNumberController, widget.rooms),
                   style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
                     backgroundColor: Colors.redAccent,
-                    padding: EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(gap_s),
@@ -124,9 +127,16 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       TextEditingController phoneController,
       Room room) {
     try {
-      // Use the selected dates from the widget properties
       DateTime checkInDate = widget.selectedStartDate;
       DateTime checkOutDate = widget.selectedEndDate;
+
+
+      if (checkInDate == checkOutDate) {
+        checkOutDate = checkOutDate.add(const Duration(days: 1));
+      } else {
+        checkInDate = checkInDate.add(const Duration(days: 1));
+        checkOutDate = checkOutDate.add(const Duration(days: 1));
+      }
 
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: room.roomId,
@@ -148,8 +158,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PayPage(
-          ),
+          builder: (context) => PayPage(),
         ),
       );
     } catch (e) {
@@ -168,14 +177,6 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
           );
         },
       );
-    }
-  }
-
-  DateTime _parseDate(String date) {
-    try {
-      return DateTime.parse(date);
-    } catch (e) {
-      return DateTime.now();
     }
   }
 }
