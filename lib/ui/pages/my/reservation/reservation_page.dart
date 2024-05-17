@@ -59,7 +59,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
+          padding:
+              const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -130,6 +131,11 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       DateTime checkInDate = widget.selectedStartDate;
       DateTime checkOutDate = widget.selectedEndDate;
 
+      // If check-in and check-out dates are the same, add 1 day to check-out date
+      if (checkInDate == checkOutDate) {
+        checkOutDate = checkOutDate.add(Duration(days: 1));
+      }
+
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: room.roomId,
         roomName: room.roomName ?? 'defaultRoomName',
@@ -169,14 +175,6 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
           );
         },
       );
-    }
-  }
-
-  DateTime _parseDate(String date) {
-    try {
-      return DateTime.parse(date);
-    } catch (e) {
-      return DateTime.now();
     }
   }
 }

@@ -38,7 +38,7 @@ class RoomInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: gap_s),
+              SizedBox(height: gap_xx),
               Container(
                 constraints: BoxConstraints(minHeight: 40),
                 child: Text(
@@ -81,13 +81,9 @@ class RoomInfo extends StatelessWidget {
                 ),
               ),
               SizedBox(height: gap_s),
-              if (rooms.specialPrice != null)
-                Text(
-                  '결제금액 : ${NumberFormat('#,###').format(rooms.specialPrice! * numberOfNights)} 원',
-                )
-              else
                 Text(
                   '결제금액 : ${NumberFormat('#,###').format(rooms.roomPrice * numberOfNights)} 원',
+                  style: h6(),
                 ),
             ],
           ),
