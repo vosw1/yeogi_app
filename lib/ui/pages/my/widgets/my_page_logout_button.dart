@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 
@@ -38,7 +39,7 @@ class MyPageLogoutButton extends ConsumerWidget {
                   ),
                   child: Text(
                     "로그아웃",
-                    style: TextStyle(fontSize: 17, color: Colors.white),
+                    style: h5(mColor: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 ),

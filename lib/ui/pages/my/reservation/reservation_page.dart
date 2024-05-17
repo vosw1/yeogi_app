@@ -102,9 +102,12 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
                     backgroundColor: Colors.redAccent,
                     padding: EdgeInsets.symmetric(vertical: 15.0),
                   ),
-                  child: Text(
-                    '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
-                    style: TextStyle(color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.all(gap_s),
+                    child: Text(
+                      '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
+                      style: h5(mColor: Colors.white),
+                    ),
                   ),
                 ),
               ),

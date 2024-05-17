@@ -23,13 +23,14 @@ class MyPage extends ConsumerWidget {
     return Scaffold(
       body: ListView(
         children: [
-          SizedBox(height: gap_s),
+          SizedBox(height: gap_m),
           MyPageHeaderBanner(),
-          SizedBox(height: gap_s),
+          SizedBox(height: gap_m),
           if (!sessionStore.isLogin)
             MyPageLoginButton(),
           if (sessionStore.isLogin)
             MyPageLogoutButton(),
+          SizedBox(height: gap_m),
           Divider(color: Colors.grey[100], thickness: 10.0),
           MyPageAppBar(user: users, eventMyPageBannerDataList: eventMyPageBanners),
           Divider(color: Colors.grey[200], thickness: 10),

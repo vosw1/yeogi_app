@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/scrap.dart';
-import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/repositories/scrap_repository.dart';
-import 'package:yogi_project/data/repositories/stay_repository.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/main.dart';
 
 class ScrapListModel {

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/dtos/response_dto.dart';
+import 'package:yogi_project/data/dtos/user_request.dart';
+import 'package:yogi_project/data/repositories/user_repository.dart';
 
 class DuplimentEmailCheck extends StatelessWidget {
   final TextEditingController emailController;
@@ -15,17 +20,20 @@ class DuplimentEmailCheck extends StatelessWidget {
         _checkDuplicateEmail(context);
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.redAccent, // 버튼 색상을 빨간색으로 설정
+        backgroundColor: Colors.redAccent,
       ),
-      child: Text(
-        '중복 확인',
-        style: TextStyle(color: Colors.white), // 텍스트 색상을 흰색으로 설정
+      child: Padding(
+        padding: const EdgeInsets.all(gap_s),
+        child: Text(
+          '중복 확인',
+          style: h5(mColor: Colors.white),
+        ),
       ),
     );
   }
 
-  void _checkDuplicateEmail(BuildContext context) {
-    String? email = emailController.text;
+  void _checkDuplicateEmail(BuildContext context) async {
+    String email = emailController.text;
 
     // 이메일 유효성 검사
     String? validationResult = validateEmail(email);
@@ -34,22 +42,18 @@ class DuplimentEmailCheck extends StatelessWidget {
       return;
     }
 
-    // 서버 또는 데이터베이스와 통신하여 이메일 중복 확인
-    bool isEmailDuplicate = _isEmailDuplicate(email);
+      // 서버와 통신하여 이메일 중복 확인
+      DuplimentEmailCheckDTO requestDTO = DuplimentEmailCheckDTO(email: email);
+      UserRepository userRepository = UserRepository();
+      ResponseDTO responseDTO = await userRepository.fetchEmailSameCheck(requestDTO);
 
-    if (isEmailDuplicate) {
-      // 이메일이 중복되었을 경우 처리
-      _showErrorDialog(context, '중복된 이메일입니다.');
-    } else {
-      // 이메일이 중복되지 않았을 경우 처리
-      _showSuccessDialog(context, '사용 가능한 이메일입니다.');
-    }
-  }
-
-  // 이메일 중복 확인 함수 (가짜 함수)
-  bool _isEmailDuplicate(String? email) {
-   //todo : 이메일 중복체크 통신하기
-    return email == 'test@email.com';
+      if (responseDTO.body == false) {
+        // 이메일이 중복되지 않았을 경우 처리
+        _showSuccessDialog(context, '사용 가능한 이메일입니다.');
+      } else if (responseDTO.body == null)  {
+        // 이메일이 중복되었을 경우 처리
+        _showErrorDialog(context, '중복된 이메일입니다.');
+      }
   }
 
   // 이메일 유효성 검사 함수
@@ -77,14 +81,14 @@ class DuplimentEmailCheck extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('오류'),
-          content: Text(message),
+          title: Text('중복된 이메일'),
+          content: Text('다른 이메일을 입력해주세요.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('확인'),
+              child: Center(child: Text('확인')),
             ),
           ],
         );
@@ -98,8 +102,8 @@ class DuplimentEmailCheck extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('성공'),
-          content: Text(message),
+          title: Text('사용 가능한 이메일'),
+          content: Text('이메일이 사용 가능합니다.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

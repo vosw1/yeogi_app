@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yogi_project/_core/constants/scroll_fab.dart';
 import 'package:yogi_project/_core/constants/size.dart';
@@ -24,6 +22,7 @@ class StayDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     StayDetailModel? model = ref.watch(stayDetailProvider(stayId));
+    print(stayId);
 
     if (model == null) {
       return Center(
@@ -44,7 +43,9 @@ class StayDetailPage extends ConsumerWidget {
                 Icons.bookmark,
                 color: Colors.redAccent, // 변경된 부분
               ),
-              onPressed: () {},
+              onPressed: () async {
+                // await ref.read().notifyAdd(model.stay.stayId);
+              },
             ),
             SizedBox(width: gap_s),
           ],

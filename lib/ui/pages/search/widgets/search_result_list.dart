@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/stay_request.dart';
 import 'package:yogi_project/ui/pages/search/search_view_model.dart';
 import 'package:yogi_project/ui/pages/search/widgets/search_result_item.dart';
@@ -27,9 +28,7 @@ class SearchResultList extends ConsumerWidget {
             children: [
               Text(
                 '결과 ${model.stay.length}건',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+               style: h5(),
               ),
               Divider(), // 결과 몇 건인지를 나타내는 디바이더 추가
               SizedBox(height: gap_s), // 디바이더와 결과 목록 사이 간격 조절
@@ -38,7 +37,7 @@ class SearchResultList extends ConsumerWidget {
                     ? Center(
                   child: Text(
                     '검색 결과가 없습니다.',
-                    style: TextStyle(fontSize: 18),
+                    style: h4(),
                   ),
                 )
                     : ListView.builder(

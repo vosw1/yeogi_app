@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -113,14 +114,13 @@ class _NearFromMePageState extends State<NearFromMePage> {
             Navigator.pop(context);
           },
         ),
-        title: Text('내 주변 검색하기'),
+        title: Text('주변 숙소 검색하기', style: h4(),),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: gap_m, horizontal: gap_s),
+        padding: EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: gap_m),
             TextField(
               onChanged: (value) {
                 setState(() {
@@ -174,8 +174,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 ),
               ),
             ),
-            SizedBox(height: gap_s),
-            Text('결과 ${searchResults.length}건'),
+            SizedBox(height: gap_m),
+            Text('결과 ${searchResults.length}건', style: h5(),),
             Divider(),
             Expanded(
               child: ListView.builder(
