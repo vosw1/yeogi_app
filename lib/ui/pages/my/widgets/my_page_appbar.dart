@@ -26,7 +26,7 @@ class MyPageAppBar extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('미 로그인 상태'),
+          title: Text('로그인 필요'),
           content: Text('로그인을 먼저 해주세요.'),
           actions: <Widget>[
             TextButton(

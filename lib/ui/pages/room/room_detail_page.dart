@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
@@ -83,7 +84,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                                   Icon(Icons.calendar_today),
                                   SizedBox(width: gap_s),
                                   Text(
-                                 ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
+                                    ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
                                     style: h6(),
                                   ),
                                 ],
@@ -92,8 +93,9 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                           ),
                           SizedBox(height: gap_m),
                           Text(
-                              '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
-                              style: h5()),
+                            '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
+                            style: h5(),
+                          ),
                           SizedBox(height: gap_s),
                           Divider(),
                           SizedBox(height: gap_s),
@@ -120,27 +122,27 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                           SizedBox(height: gap_s),
                           Row(
                             children: List<Widget>.generate(
-                                model.roomOption.options.length * 2 - 1,
-                                    (index) {
-                                  // 옵션 이름과 콤마를 번갈아가며 배치합니다.
-                                  if (index.isEven) {
-                                    // 옵션 이름을 표시하는 경우
-                                    final optionIndex = index ~/ 2;
-                                    final option =
-                                    model.roomOption.options[optionIndex];
-                                    return Text(
-                                      option.name,
-                                      style: TextStyle(
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                    );
-                                  } else {
-                                    // 콤마를 표시하는 경우
-                                    return Text(', ');
-                                  }
-                                }),
+                              model.roomOption.options.length * 2 - 1,
+                                  (index) {
+                                // 옵션 이름과 콤마를 번갈아가며 배치합니다.
+                                if (index.isEven) {
+                                  // 옵션 이름을 표시하는 경우
+                                  final optionIndex = index ~/ 2;
+                                  final option = model.roomOption.options[optionIndex];
+                                  return Text(
+                                    option.name,
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  );
+                                } else {
+                                  // 콤마를 표시하는 경우
+                                  return Text(', ');
+                                }
+                              },
+                            ),
                           ),
                           SizedBox(height: gap_s),
                           Divider(),
@@ -171,18 +173,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ReservationPage(
-                            rooms: widget.rooms,
-                            numberOfNights: _numberOfNights,
-                            selectedStartDate: _selectedStartDate,
-                            selectedEndDate: _selectedEndDate,
-                          ),
-                        ),
-                      );
-                    },
+                    onPressed: _attemptReservation,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.redAccent,
@@ -210,21 +201,60 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
       context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
-      initialDateRange:
-      DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
+      initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
     );
 
     if (pickedDateRange != null) {
       setState(() {
         _selectedStartDate = pickedDateRange.start;
         _selectedEndDate = pickedDateRange.end;
-        _numberOfNights =
-            _selectedEndDate.difference(_selectedStartDate).inDays;
+        _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
       });
     }
   }
 
   String formatDate(DateTime dateTime) {
     return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
+  }
+
+  Future<String?> _getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
+  void _showLoginRequiredDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 필요'),
+          content: Text('로그인을 먼저 해주세요.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _attemptReservation() async {
+    String? token = await _getToken();
+    if (token == null) {
+      _showLoginRequiredDialog(context);
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ReservationPage(
+            rooms: widget.rooms,
+            numberOfNights: _numberOfNights,
+            selectedStartDate: _selectedStartDate,
+            selectedEndDate: _selectedEndDate,
+          ),
+        ),
+      );
+    }
   }
 }
