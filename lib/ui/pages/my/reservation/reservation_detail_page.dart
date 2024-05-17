@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/reservation.dart';
+import 'package:yogi_project/data/repositories/reservation_repository.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/review_writing_dialog.dart';
 
@@ -116,7 +117,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   SizedBox(width: gap_xs),
@@ -147,7 +148,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   SizedBox(width: gap_xs),
@@ -236,7 +237,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                         child: ElevatedButton(
                           onPressed: () => _showReviewWritingDialog(context),
                           child: Text(
-                            '작성하기',
+                            '리뷰 작성',
                             style: h5(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(

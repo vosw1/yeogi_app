@@ -1,31 +1,35 @@
-import 'package:yogi_project/data/dtos/reservation_request.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
-void main() async {
-  await fetchReservationSaveTest();
-}
+void main() {
+  test('fetchReservedDates returns list of reserved dates', () async {
+    final roomId = 1;
+    final reservationRepository = ReservationRepository();
 
-Future<void> fetchReservationSaveTest() async {
-  // given
-  ReservationSaveReqDTO requestDTO = ReservationSaveReqDTO(
-    roomId: 1,
-    stayAdress: '부산광역시 진구',
-    roomName: 'Deluxe',
-    roomImgTitle: 'room1.png',
-    price: 142000,
-    checkInDate: DateTime.parse("2024-06-24"), // 문자열을 DateTime 객체로 변환
-    checkOutDate: DateTime.parse("2024-06-26"), // 문자열을 DateTime 객체로 변환
-    reservationName: "설동훈",
-    reservationTel: "11111111111",
-  );
-  // accessToken 추가
-  String accessToken =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2Nzc0NTc0LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.EuUOAo3CwFsy-Z_hTnEPYh_Ms8-8wM2O_V2bKGyl2nvWZ_-PzkspmukGfyHNfYlukoq2r4aA_mKWSX9Z5GBmTg';
+    try {
+      final reservedDates = await reservationRepository.fetchReservedDates(roomId);
 
-  // Send join request with accessToken
-  final response = await ReservationRepository()
-      .fetchReservationSave(requestDTO, accessToken);
+      expect(reservedDates, isNotEmpty);
+      print("예약 목록 가져오기 성공:");
+      for (var date in reservedDates) {
+        print(date);
+      }
+    } catch (e) {
+      print("예약 목록 가져오기 실패: $e");
+      fail("예약 목록 가져오기 실패");
+    }
+  });
 
-  // Log response
-  print("BookSave Response: $response");
+  test('fetchReservedDates throws an exception on error', () async {
+    final roomId = -1; // 유효하지 않은 roomId로 테스트
+    final reservationRepository = ReservationRepository();
+
+    try {
+      await reservationRepository.fetchReservedDates(roomId);
+      fail("예약 목록 가져오기에 실패해야 합니다.");
+    } catch (e) {
+      print("예약 목록 가져오기 실패 (예상된 오류): $e");
+      expect(e, isA<Exception>());
+    }
+  });
 }

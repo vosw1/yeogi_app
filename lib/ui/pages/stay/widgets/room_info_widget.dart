@@ -98,12 +98,12 @@ class RoomInfoWidget extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.bold,
-                              fontSize: 13,
+                              fontSize: 10,
                               color: Colors.grey.shade600,
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
-                          SizedBox(width: 8), // 가격 간격 조절
+                          SizedBox(width: 6), // 가격 간격 조절
                           Text(
                             '${NumberFormat('#,###').format(rooms.roomSpecialPrice)}원',
                             style: TextStyle(
