@@ -9,12 +9,14 @@ class ReservationCalendar extends ConsumerStatefulWidget {
   final DateTime selectedEndDate;
   final Function(DateTime, DateTime) onRangeSelected;
   final int roomId;
+  final List<DateTime> reservedDates;
 
   ReservationCalendar({
     required this.selectedStartDate,
     required this.selectedEndDate,
     required this.onRangeSelected,
     required this.roomId,
+    required this.reservedDates,
   });
 
   @override
@@ -25,24 +27,15 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
   late final ReservationListViewModel _viewModel;
   DateTime? _tempStart;
   DateTime? _tempEnd;
-  List<DateTime> _reservedDates = [];
 
   @override
   void initState() {
     super.initState();
     _viewModel = ref.read(reservationListProvider.notifier);
-    _fetchReservedDates();
-  }
-
-  Future<void> _fetchReservedDates() async {
-    final dates = await _viewModel.fetchReservedDates(widget.roomId);
-    setState(() {
-      _reservedDates = dates;
-    });
   }
 
   bool _isReserved(DateTime day) {
-    return _reservedDates.contains(day);
+    return widget.reservedDates.any((reservedDate) => isSameDay(reservedDate, day));
   }
 
   bool _isPast(DateTime day) {
@@ -114,11 +107,34 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
             }
             return null;
           },
+          disabledBuilder: (context, day, focusedDay) {
+            if (_isReserved(day) || _isPast(day)) {
+              return Center(
+                child: Text(
+                  '${day.day}',
+                  style: TextStyle(color: Colors.grey.withOpacity(0.5)),
+                ),
+              );
+            }
+            return null;
+          },
           selectedBuilder: (context, date, _) => Container(
             margin: const EdgeInsets.all(4.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.redAccent,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              '${date.day}',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          todayBuilder: (context, date, _) => Container(
+            margin: const EdgeInsets.all(4.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.redAccent.shade100,
               shape: BoxShape.circle,
             ),
             child: Text(

@@ -136,7 +136,6 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
       final reservedDates = ref.read(reservedDatesProvider(widget.rooms.roomId));
       bool isOverlapping = false;
 
-      // Check if selected range overlaps with reserved dates
       for (DateTime day = _selectedStartDate; day.isBefore(_selectedEndDate) || isSameDay(day, _selectedEndDate); day = day.add(Duration(days: 1))) {
         if (reservedDates.contains(day)) {
           isOverlapping = true;

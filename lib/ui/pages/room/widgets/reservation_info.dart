@@ -49,6 +49,7 @@ class ReservationInfo extends StatelessWidget {
               selectedEndDate: selectedEndDate,
               onRangeSelected: onRangeSelected,
               roomId: model.roomOption.id,
+              reservedDates: reservedDates,
             ),
             SizedBox(height: gap_m),
             Text(
@@ -82,7 +83,7 @@ class ReservationInfo extends StatelessWidget {
             Row(
               children: List<Widget>.generate(
                 model.roomOption.options.length * 2 - 1,
-                (index) {
+                    (index) {
                   if (index.isEven) {
                     final optionIndex = index ~/ 2;
                     final option = model.roomOption.options[optionIndex];
@@ -109,7 +110,7 @@ class ReservationInfo extends StatelessWidget {
             ),
             SizedBox(height: gap_s),
             Text(
-              '${model.roomOption.information.announcement}',
+              '${model.roomOption.information}',
               style: TextStyle(
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.bold,
