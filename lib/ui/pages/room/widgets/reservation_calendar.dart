@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:yogi_project/data/repositories/reservation_repository.dart';
-import 'package:yogi_project/ui/pages/room/widgets/reservation_calendar.dart';
-import 'package:yogi_project/ui/pages/room/widgets/reservation_calendar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
-late final ReservationRepository reservationRepository;
-
-class ReservationCalendar extends StatefulWidget {
+class ReservationCalendar extends ConsumerStatefulWidget {
   final DateTime selectedStartDate;
   final DateTime selectedEndDate;
   final Function(DateTime, DateTime) onRangeSelected;
@@ -24,7 +21,8 @@ class ReservationCalendar extends StatefulWidget {
   _ReservationCalendarState createState() => _ReservationCalendarState();
 }
 
-class _ReservationCalendarState extends State<ReservationCalendar> {
+class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
+  late final ReservationListViewModel _viewModel;
   DateTime? _tempStart;
   DateTime? _tempEnd;
   List<DateTime> _reservedDates = [];
@@ -32,12 +30,14 @@ class _ReservationCalendarState extends State<ReservationCalendar> {
   @override
   void initState() {
     super.initState();
-    reservationRepository.fetchReservedDates(widget.roomId).then((dates) {
-      setState(() {
-        _reservedDates = dates;
-      });
-    }).catchError((error) {
-      print("Failed to load reserved dates: $error");
+    _viewModel = ref.read(reservationListProvider.notifier);
+    _fetchReservedDates();
+  }
+
+  Future<void> _fetchReservedDates() async {
+    final dates = await _viewModel.fetchReservedDates(widget.roomId);
+    setState(() {
+      _reservedDates = dates;
     });
   }
 
