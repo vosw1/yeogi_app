@@ -1,6 +1,7 @@
 class Reservation {
   final int reservationId;
   final int userId;
+  final int reviewId;
   final String stayName;
   final String stayAddress;
   final int price;
@@ -20,6 +21,7 @@ class Reservation {
   Reservation({
     required this.reservationId,
     required this.userId,
+    required this.reviewId,
     required this.stayName,
     required this.stayAddress,
     required this.price,
@@ -29,7 +31,7 @@ class Reservation {
     required this.checkOutDate,
     this.roomImgTitle,
     required this.reservationName,
-    required this.reservationTel,
+    required  this.reservationTel,
     required this.payId,
     required this.amount,
     required this.way,
@@ -39,42 +41,48 @@ class Reservation {
 
   @override
   String toString() {
-    return 'Reservation(reservationId: $reservationId, userId: $userId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, roomName: $roomName, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel, payId: $payId, amount: $amount, way: $way, state: $state)';
+    return 'Reservation(reservationId: $reservationId, userId: $userId, reviewId: $reviewId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, roomName: $roomName, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel, payId: $payId, amount: $amount, way: $way, state: $state)';
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
-    print("Parsing JSON: $json"); // 추가된 로그
+    // 'price' 값을 JSON 데이터에서 가져오기
+    final dynamic priceData = json['price'];
+    // priceData가 null이면 0으로 설정
+    final int price = priceData != null ? int.tryParse(priceData.toString()) ?? 0 : 0;
 
-    final int price = json['price'] != null ? int.tryParse(json['price'].toString()) ?? 0 : 0;
+    // checkInDate 및 checkOutDate를 파싱하기 전에 값이 null인지 확인
+    final String? checkInDateString = json['checkInDate'];
+    final String? checkInTimeString = json['checkInTime'];
+    final String? checkOutDateString = json['checkOutDate'];
+    final String? checkOutTimeString = json['checkOutTime'];
 
-    // 날짜와 시간을 합쳐서 파싱
-    final String checkInDateStr = json['checkInDate'] ?? '';
-    final String checkInTimeStr = json['checkInTime'] ?? '';
-    final String checkOutDateStr = json['checkOutDate'] ?? '';
-    final String checkOutTimeStr = json['checkOutTime'] ?? '';
+    final DateTime checkInDate = checkInDateString != null && checkInTimeString != null
+        ? DateTime.parse(checkInDateString + ' ' + checkInTimeString)
+        : DateTime.now(); // 널 값이면 기본값으로 설정
 
-    // 날짜와 시간을 합쳐서 DateTime 객체로 변환
-    final DateTime checkInDate = DateTime.parse('$checkInDateStr $checkInTimeStr');
-    final DateTime checkOutDate = DateTime.parse('$checkOutDateStr $checkOutTimeStr');
+    final DateTime checkOutDate = checkOutDateString != null && checkOutTimeString != null
+        ? DateTime.parse(checkOutDateString + ' ' + checkOutTimeString)
+        : DateTime.now(); // 널 값이면 기본값으로 설정
 
-    return Reservation(
-      reservationId: json['reservationId'] ?? 0,
-      userId: json['userId'] ?? 0,
-      stayName: json['stayName'] ?? 'Unknown',
-      stayAddress: json['stayAddress'] ?? 'Unknown',
-      price: price,
-      roomId: json['roomId'] ?? 0,
-      roomName: json['roomName'] ?? 'Unknown',
-      checkInDate: checkInDate,
-      checkOutDate: checkOutDate,
-      roomImgTitle: json['roomImageName'] ?? 'room1.jpg',
-      reservationName: json['reservationName'] ?? 'Unknown',
-      reservationTel: json['reservationTel'] ?? 'Unknown',
-      payId: json['payId'] ?? 0,
-      amount: json['amount'] ?? 0,
-      way: json['way'] ?? 'Unknown',
-      state: json['payState'] ?? 'Unknown',
-      createdAt: DateTime.parse(json['payAt'] ?? DateTime.now().toString()),
-    );
+      return Reservation(
+        reservationId: json['reservationId'] ?? 0,
+        userId: json['userId'] ?? 0,
+        reviewId: json['reviewId'] ?? 0,
+        stayName: json['stayName'] ?? 'Unknown',
+        stayAddress: json['stayAddress'] ?? 'Unknown',
+        price: price ,
+        roomId: json['roomId'] ?? 0,
+        roomName: json['roomName'] ?? 'Unknown',
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        roomImgTitle: json['roomImgTitle'] ?? '',
+        reservationName: json['reservationName'] ?? 'Unknown',
+        reservationTel: json['reservationTel'] ?? 'Unknown',
+        payId: json['payId'] ?? 0,
+        amount: json['amount'] ?? 0,
+        way: json['way'] ?? 'Unknown',
+        state: json['state'] ?? 'Unknown',
+        createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toString()),
+      );
   }
 }
