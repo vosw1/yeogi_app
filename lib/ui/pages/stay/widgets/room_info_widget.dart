@@ -46,7 +46,7 @@ class RoomInfoWidget extends StatelessWidget {
             children: [
               // 왼쪽에 이미지
               Container(
-                width: 180,
+                width: 160,
                 height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(gap_s),
@@ -109,7 +109,7 @@ class RoomInfoWidget extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 15,
                               color: Colors.redAccent.shade200,
                             ),
                           ),
