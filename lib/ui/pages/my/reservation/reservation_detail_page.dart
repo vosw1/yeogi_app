@@ -36,10 +36,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   Widget build(BuildContext context) {
     final reservationList = ref.watch(reservationListProvider);
 
-    final reservation = reservationList.firstWhere((res) => res.payId == widget.reservations.payId, orElse: () => widget.reservations);
+    final reservation = reservationList.firstWhere(
+          (res) => res.payId == widget.reservations.payId,
+      orElse: () => widget.reservations,
+    );
 
-    bool isCanceled = reservation.state == 'REFUND';
-    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isCanceled;
+    bool isRefund = reservation.amount == 0;
+    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
+    bool showReviewButton = !isRefund;
 
     return Scaffold(
       appBar: AppBar(
@@ -199,48 +203,51 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 ],
               ),
             ),
-            if (showCancelButton)
+            if (showCancelButton || showReviewButton)
               Padding(
                 padding: const EdgeInsets.only(top: gap_l, bottom: gap_l),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                          // Optionally navigate back or refresh the page
-                        },
-                        child: Text(
-                          '예약취소',
-                          style: h5(mColor: Colors.white),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(12),
-                          backgroundColor: Colors.red,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                    if (showCancelButton)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                            // Optionally navigate back or refresh the page
+                          },
+                          child: Text(
+                            '예약취소',
+                            style: h5(mColor: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(12),
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(width: gap_m),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () => _showReviewWritingDialog(context),
-                        child: Text(
-                          '작성하기',
-                          style: h5(mColor: Colors.white),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(12),
-                          backgroundColor: Colors.redAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                    if (showCancelButton && showReviewButton)
+                      SizedBox(width: gap_m),
+                    if (showReviewButton)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => _showReviewWritingDialog(context),
+                          child: Text(
+                            '작성하기',
+                            style: h5(mColor: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(12),
+                            backgroundColor: Colors.redAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),
