@@ -53,6 +53,7 @@ class Reservation {
     final String checkOutDateStr = json['checkOutDate'] ?? '';
     final String checkOutTimeStr = json['checkOutTime'] ?? '';
 
+    // 날짜와 시간을 합쳐서 DateTime 객체로 변환
     final DateTime checkInDate = DateTime.parse('$checkInDateStr $checkInTimeStr');
     final DateTime checkOutDate = DateTime.parse('$checkOutDateStr $checkOutTimeStr');
 

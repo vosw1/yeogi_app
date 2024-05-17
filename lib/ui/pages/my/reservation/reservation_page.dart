@@ -131,7 +131,9 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       DateTime checkOutDate = widget.selectedEndDate;
 
 
-      if (checkInDate == checkOutDate || checkInDate != checkOutDate) {
+      if (checkInDate == checkOutDate) {
+        checkOutDate = checkOutDate.add(const Duration(days: 1));
+      } else {
         checkInDate = checkInDate.add(const Duration(days: 1));
         checkOutDate = checkOutDate.add(const Duration(days: 1));
       }
