@@ -59,7 +59,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(gap_m),
+          padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

@@ -51,7 +51,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
               child: ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(gap_m),
+                    padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
                     child: Container(
                       padding: EdgeInsets.all(gap_m),
                       decoration: BoxDecoration(
