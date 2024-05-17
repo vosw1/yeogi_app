@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // SharedPreferences for token management
-import 'package:yogi_project/_core/constants/move.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 
-class MyPageBookMenuHolder extends StatelessWidget {
-  Future<String?> _getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
-  }
+class MyPageBookMenuHolder extends ConsumerWidget {
 
   void _showLoginRequiredDialog(BuildContext context) {
     showDialog(
@@ -29,20 +25,21 @@ class MyPageBookMenuHolder extends StatelessWidget {
     );
   }
 
-  void _checkLoginAndNavigate(BuildContext context, Widget page) async {
-    String? token = await _getToken();
-    if (token == null) {
-      _showLoginRequiredDialog(context);
-    } else {
+  void _checkLoginAndNavigate(BuildContext context, WidgetRef ref, Widget page) async {
+    final sessionStore = ref.read(sessionProvider);
+
+    if (sessionStore.isLogin) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => page),
       );
+    } else {
+      _showLoginRequiredDialog(context);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: <Widget>[
         ListTile(
@@ -68,6 +65,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
           onTap: () {
             _checkLoginAndNavigate(
               context,
+              ref,
               MyReservationPage(),
             );
           },

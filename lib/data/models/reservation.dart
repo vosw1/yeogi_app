@@ -72,7 +72,7 @@ class Reservation {
         roomName: json['roomName'] ?? 'Unknown',
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        roomImgTitle: json['roomImgTitle'] ?? '',
+        roomImgTitle: json['roomImgTitle'] ?? 'room1.jpg',
         reservationName: json['reservationName'] ?? 'Unknown',
         reservationTel: json['reservationTel'] ?? 'Unknown',
         payId: json['payId'] ?? 0,

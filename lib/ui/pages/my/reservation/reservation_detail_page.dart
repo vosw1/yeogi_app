@@ -199,21 +199,24 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
               ),
             ),
             if (showCancelButton)
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                    // Optionally navigate back or refresh the page
-                  },
-                  child: Text(
-                    '예약취소',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(12), backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+              Padding(
+                padding: const EdgeInsets.only(top: gap_l, bottom: gap_l),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                      // Optionally navigate back or refresh the page
+                    },
+                    child: Text(
+                      '예약취소',
+                      style: h5(mColor: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(12), backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
                     ),
                   ),
                 ),
