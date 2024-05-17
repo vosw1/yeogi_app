@@ -26,34 +26,12 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
 
   ReservationListViewModel(mContext, this.ref) : super([]);
 
-  // 예약 내역보기
-  Future<void> reservationDetail() async {
-    // JWT 토큰 가져오기
-    SessionStore sessionStore = ref.read(sessionProvider);
-    // 통신하기
-    print("통신 시작");
-    ResponseDTO responseDTO = await ReservationRepository()
-        .fetchReservationList(sessionStore.accessToken!);
-
-    if (responseDTO.status == 200) {
-      print("예약 상세보기 성공:");
-      print(responseDTO.body);
-
-      // 예약 목록을 상태로 설정
-      state = List<Reservation>.from(responseDTO.body);
-    } else {
-      print(
-          "예약 상세보기 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
-    }
-  }
-
-
   // 결제 환불하기(예약취소)
   Future<void> payUpdate(int payId) async {
     String accessToken = ref.read(sessionProvider).accessToken!;
 
-    ResponseDTO responseDTO =
-        await ReservationRepository().fetchdeleteReservation(payId, accessToken);
+    ResponseDTO responseDTO = await ReservationRepository()
+        .fetchdeleteReservation(payId, accessToken);
     if (responseDTO.status == 200) {
       logger.d("Refund processed successfully.");
     } else {
@@ -82,31 +60,7 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
     }
   }
 
-  // 예약하기
-  Future<void> reservationSave(ReservationSaveReqDTO reqDTO) async {
-    // JWT 토큰 가져오기
-    SessionStore sessionStore = ref.read(sessionProvider);
-    print("예약 요청 시작");
-
-    // 예약 정보 서버로 전송
-    ResponseDTO responseDTO = await ReservationRepository()
-        .fetchReservationSave(reqDTO, sessionStore.accessToken!);
-
-    if (responseDTO.status == 200) {
-      // 성공적으로 예약이 추가된 경우
-      print("예약 성공: ${responseDTO.body}");
-      Reservation newReservation = responseDTO.body as Reservation;
-
-      state = [...state, newReservation];
-    } else {
-      // 상태 업데이트
-      // 예약 실패 처리
-      print(
-          "예약 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
-    }
-  }
-
-  // 예약 내역 조회하기
+  // 예약 내역보기
   Future<void> reservationList() async {
     // JWT 토큰 가져오기
     SessionStore sessionStore = ref.read(sessionProvider);
@@ -121,9 +75,35 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
 
       // 예약 목록을 상태로 설정
       state = List<Reservation>.from(responseDTO.body);
+      print("State updated: $state");
     } else {
       print(
           "예약 목록 가져오기 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
+    }
+  }
+
+  // 예약하기
+  Future<void> reservationSave(ReservationSaveReqDTO reqDTO) async {
+    // JWT 토큰 가져오기
+    SessionStore sessionStore = ref.read(sessionProvider);
+    print("예약 요청 시작");
+
+    // 예약 정보 서버로 전송
+    ResponseDTO responseDTO = await ReservationRepository()
+        .fetchReservationSave(reqDTO, sessionStore.accessToken!);
+
+    if (responseDTO.status == 200) {
+      // 성공적으로 예약이 추가된 경우
+      print("예약 성공: ${responseDTO.body}");
+      Reservation newReservation = Reservation.fromJson(responseDTO.body);
+
+      // 상태 업데이트
+      state = [...state, newReservation];
+      print("State after save: $state");
+    } else {
+      // 예약 실패 처리
+      print(
+          "예약 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
     }
   }
 }

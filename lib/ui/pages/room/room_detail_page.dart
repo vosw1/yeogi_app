@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
 
@@ -51,7 +51,7 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
               child: ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(gap_m),
+                    padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
                     child: Container(
                       padding: EdgeInsets.all(gap_m),
                       decoration: BoxDecoration(
@@ -173,10 +173,13 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _attemptReservation,
+                    onPressed: () => _attemptReservation(ref),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.redAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(gap_s),
@@ -217,11 +220,6 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
   }
 
-  Future<String?> _getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
-  }
-
   void _showLoginRequiredDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -240,11 +238,10 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     );
   }
 
-  void _attemptReservation() async {
-    String? token = await _getToken();
-    if (token == null) {
-      _showLoginRequiredDialog(context);
-    } else {
+  void _attemptReservation(WidgetRef ref) async {
+    final sessionStore = ref.read(sessionProvider);
+
+    if (sessionStore.isLogin) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ReservationPage(
@@ -255,6 +252,8 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
           ),
         ),
       );
+    } else {
+      _showLoginRequiredDialog(context);
     }
   }
 }

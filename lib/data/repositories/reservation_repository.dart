@@ -28,7 +28,7 @@ class ReservationRepository {
       // 결제 파싱
       final payContents = responseDTO.body['payContents'];
       Pay pay = Pay.fromJson(payContents['pay']);
-      
+
       responseDTO.body = ReservationDetailModel(
         reservation: reservation, pay: pay,
       );
@@ -59,7 +59,7 @@ class ReservationRepository {
     return responseDTO;
   }
 
-// 예약 삭제하기
+  // 예약 삭제하기
   Future<ResponseDTO> fetchdeleteReservation(int payId, String accessToken) async {
     var response = await dio.put("/api/reservation/refund/${payId}",
         options: Options(headers: {"Authorization": "${accessToken}"}));
@@ -71,11 +71,11 @@ class ReservationRepository {
     return responseDTO;
   }
 
-// 예약 내역 조회하기
+  // 예약내역 조회하기
   Future<ResponseDTO> fetchReservationList(String accessToken) async {
     final response = await dio.get(
       "/api/my-reservations",
-      options: Options(headers: {"Authorization": "$accessToken"}),
+      options: Options(headers: {"Authorization": "Bearer $accessToken"}),
     );
 
     print("HTTP Status Code: ${response.statusCode}");
@@ -87,8 +87,7 @@ class ReservationRepository {
       List<dynamic> temp = responseDTO.body as List<dynamic>;
       List<Reservation> reservations =
       temp.map((e) => Reservation.fromJson(e)).toList();
-      responseDTO.body =
-          reservations; // Update the body to be the list of reservations
+      responseDTO.body = reservations; // Update the body to be the list of reservations
 
       for (var reservation in reservations) {
         print('데이터 확인 : ${reservation.toString()}');
