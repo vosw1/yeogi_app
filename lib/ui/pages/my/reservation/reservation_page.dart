@@ -127,13 +127,13 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       TextEditingController phoneController,
       Room room) {
     try {
-      // Use the selected dates from the widget properties
       DateTime checkInDate = widget.selectedStartDate;
       DateTime checkOutDate = widget.selectedEndDate;
 
-      // If check-in and check-out dates are the same, add 1 day to check-out date
-      if (checkInDate == checkOutDate) {
-        checkOutDate = checkOutDate.add(Duration(days: 1));
+
+      if (checkInDate == checkOutDate || checkInDate != checkOutDate) {
+        checkInDate = checkInDate.add(const Duration(days: 1));
+        checkOutDate = checkOutDate.add(const Duration(days: 1));
       }
 
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(

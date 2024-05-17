@@ -43,21 +43,18 @@ class Reservation {
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
-    // 'price' 값을 JSON 데이터에서 가져오기
-    final dynamic priceData = json['price'];
-    // priceData가 null이면 0으로 설정
-    final int price = priceData != null ? int.tryParse(priceData.toString()) ?? 0 : 0;
+    print("Parsing JSON: $json"); // 추가된 로그
 
-    // checkInDate 및 checkOutDate를 ISO 8601 형식으로 파싱
-    final String? checkInDateTimeString = json['checkInDateTime'];
-    final DateTime checkInDate = checkInDateTimeString != null
-        ? DateTime.parse(checkInDateTimeString)
-        : DateTime.now(); // 널 값이면 기본값으로 설정
+    final int price = json['price'] != null ? int.tryParse(json['price'].toString()) ?? 0 : 0;
 
-    final String? checkOutDateTimeString = json['checkOutDateTime'];
-    final DateTime checkOutDate = checkOutDateTimeString != null
-        ? DateTime.parse(checkOutDateTimeString)
-        : DateTime.now(); // 널 값이면 기본값으로 설정
+    // 날짜와 시간을 합쳐서 파싱
+    final String checkInDateStr = json['checkInDate'] ?? '';
+    final String checkInTimeStr = json['checkInTime'] ?? '';
+    final String checkOutDateStr = json['checkOutDate'] ?? '';
+    final String checkOutTimeStr = json['checkOutTime'] ?? '';
+
+    final DateTime checkInDate = DateTime.parse('$checkInDateStr $checkInTimeStr');
+    final DateTime checkOutDate = DateTime.parse('$checkOutDateStr $checkOutTimeStr');
 
     return Reservation(
       reservationId: json['reservationId'] ?? 0,
@@ -69,14 +66,14 @@ class Reservation {
       roomName: json['roomName'] ?? 'Unknown',
       checkInDate: checkInDate,
       checkOutDate: checkOutDate,
-      roomImgTitle: json['roomImgTitle'] ?? 'room1.jpg',
+      roomImgTitle: json['roomImageName'] ?? 'room1.jpg',
       reservationName: json['reservationName'] ?? 'Unknown',
       reservationTel: json['reservationTel'] ?? 'Unknown',
       payId: json['payId'] ?? 0,
       amount: json['amount'] ?? 0,
       way: json['way'] ?? 'Unknown',
-      state: json['state'] ?? 'Unknown',
-      createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toString()),
+      state: json['payState'] ?? 'Unknown',
+      createdAt: DateTime.parse(json['payAt'] ?? DateTime.now().toString()),
     );
   }
 }
