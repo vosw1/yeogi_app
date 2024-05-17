@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 
-class LoginTextFormField extends StatelessWidget {
+class LoginTextFormField extends StatefulWidget {
   final String text;
   final TextEditingController controller;
   final bool obscureText;
@@ -17,6 +17,19 @@ class LoginTextFormField extends StatelessWidget {
   });
 
   @override
+  State<LoginTextFormField> createState() => _LoginTextFormFieldState();
+}
+
+class _LoginTextFormFieldState extends State<LoginTextFormField> {
+  String? _errorText;
+
+  @override
+  void initState() {
+    super.initState();
+    _validate(widget.controller.text);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: gap_xx),
@@ -25,7 +38,7 @@ class LoginTextFormField extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            text,
+            widget.text,
             style: TextStyle(
               fontSize: 14,
               fontFamily: 'Jalnan2TTF',
@@ -33,11 +46,11 @@ class LoginTextFormField extends StatelessWidget {
             ),
           ),
           TextFormField(
-            obscureText: obscureText,
-            validator: validator,
-            controller: controller,
+            obscureText: widget.obscureText,
+            validator: widget.validator,
+            controller: widget.controller,
             decoration: InputDecoration(
-              hintText: hintText,
+              hintText: widget.hintText,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -50,10 +63,26 @@ class LoginTextFormField extends StatelessWidget {
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
+              errorText: _errorText,
             ),
+            onChanged: (value) {
+              setState(() {
+                _errorText = widget.validator!(value);
+              });
+            },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
         ],
       ),
     );
   }
+
+  void _validate(String? value) {
+    if (widget.validator != null) {
+      setState(() {
+        _errorText = widget.validator!(value);
+      });
+    }
+  }
 }
+
