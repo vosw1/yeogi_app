@@ -68,7 +68,7 @@ class MyPageBookMenuHolder extends StatelessWidget {
           onTap: () {
             _checkLoginAndNavigate(
               context,
-              MyReservationPage(users: users, eventMyPageBanners: eventMyPageBanners),
+              MyReservationPage(),
             );
           },
         ),

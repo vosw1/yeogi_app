@@ -10,13 +10,6 @@ import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dar
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
 class MyReservationPage extends ConsumerWidget {
-  final User users;
-  final List<EventMyPageBannerData> eventMyPageBanners;
-
-  MyReservationPage({
-    required this.users,
-    required this.eventMyPageBanners,
-  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
