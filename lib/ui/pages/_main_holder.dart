@@ -9,6 +9,11 @@ import 'home/widgets/bottom_navigation_bar.dart';
 import 'my/my_page.dart'; // 주변 페이지의 경로
 
 class MainHolder extends StatefulWidget {
+
+  final int initialIndex;
+
+  MainHolder({this.initialIndex = 0});
+
   @override
   _MainHolderState createState() => _MainHolderState();
 }
@@ -16,11 +21,18 @@ class MainHolder extends StatefulWidget {
 class _MainHolderState extends State<MainHolder> {
   int _selectedIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
