@@ -5,6 +5,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/reservation.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/review_writing_dialog.dart';
 
 class ReservationDetailPage extends ConsumerStatefulWidget {
   final Reservation reservations;
@@ -201,24 +202,46 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             if (showCancelButton)
               Padding(
                 padding: const EdgeInsets.only(top: gap_l, bottom: gap_l),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                      // Optionally navigate back or refresh the page
-                    },
-                    child: Text(
-                      '예약취소',
-                      style: h5(mColor: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(12), backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
+                          // Optionally navigate back or refresh the page
+                        },
+                        child: Text(
+                          '예약취소',
+                          style: h5(mColor: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(12),
+                          backgroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    SizedBox(width: gap_m),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => _showReviewWritingDialog(context),
+                        child: Text(
+                          '작성하기',
+                          style: h5(mColor: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(12),
+                          backgroundColor: Colors.redAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
           ],
@@ -262,5 +285,14 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     } else {
       return phoneNumber;
     }
+  }
+
+  void _showReviewWritingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ReviewWritingDialog();
+      },
+    );
   }
 }

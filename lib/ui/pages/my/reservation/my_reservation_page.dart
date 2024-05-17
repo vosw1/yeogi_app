@@ -59,7 +59,7 @@ class MyReservationPage extends ConsumerWidget {
 
   Widget buildListItem(BuildContext context, Reservation reservation) {
     return Padding(
-      padding: const EdgeInsets.only(left: gap_m, right: gap_m),
+      padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_s),
       child: Row(
         children: [
           SizedBox(height: gap_xs),
