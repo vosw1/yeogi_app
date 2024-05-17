@@ -54,9 +54,9 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            '예약하기',
-            style: h4(),
-          )),
+        '예약하기',
+        style: h4(),
+      )),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(gap_m),
@@ -94,13 +94,15 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
               SizedBox(height: gap_l),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: gap_m),
                 child: ElevatedButton(
                   onPressed: () => _attemptReservation(context, _nameController,
                       _phoneNumberController, widget.rooms),
                   style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
                     backgroundColor: Colors.redAccent,
-                    padding: EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(gap_s),
@@ -148,8 +150,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PayPage(
-          ),
+          builder: (context) => PayPage(),
         ),
       );
     } catch (e) {
