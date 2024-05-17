@@ -3,16 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
+import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/reservation.dart';
+import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_detail_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 
 class MyReservationPage extends ConsumerWidget {
+  final User users;
+  final List<EventMyPageBannerData> eventMyPageBanners;
+
+  MyReservationPage({
+    required this.users,
+    required this.eventMyPageBanners,
+  });
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<Reservation> reservations = ref.watch(reservationListProvider);
-
-    print("Current reservations: $reservations");
 
     if (reservations == null) {
       return Container(
@@ -58,7 +66,7 @@ class MyReservationPage extends ConsumerWidget {
 
   Widget buildListItem(BuildContext context, Reservation reservation) {
     return Padding(
-      padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_s),
+      padding: const EdgeInsets.only(left: gap_m, right: gap_m),
       child: Row(
         children: [
           SizedBox(height: gap_xs),

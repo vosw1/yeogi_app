@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
@@ -16,8 +15,8 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/room_notice.dart';
 class ReservationPage extends ConsumerStatefulWidget {
   final Room rooms;
   final int numberOfNights;
-  late final DateTime selectedStartDate;
-  late final DateTime selectedEndDate;
+  final DateTime selectedStartDate;
+  final DateTime selectedEndDate;
 
   ReservationPage({
     required this.rooms,
@@ -33,21 +32,12 @@ class ReservationPage extends ConsumerStatefulWidget {
 class _ReservationPageState extends ConsumerState<ReservationPage> {
   late TextEditingController _nameController;
   late TextEditingController _phoneNumberController;
-  List<DateTime> reservedDates = [];
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController();
     _phoneNumberController = TextEditingController();
-    _fetchReservedDates();
-  }
-
-  void _fetchReservedDates() async {
-    final dates = await ref.read(reservationListProvider.notifier).fetchReservedDates(widget.rooms.roomId);
-    setState(() {
-      reservedDates = dates;
-    });
   }
 
   @override
@@ -63,66 +53,25 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
     print(widget.rooms.price * widget.numberOfNights);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '예약하기',
-          style: h4(),
-        ),
-      ),
+          title: Text(
+        '예약하기',
+        style: h4(),
+      )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
+          padding:
+              const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               RoomInfo(
-                rooms: widget.rooms,
-                numberOfNights: widget.numberOfNights,
-                selectedStartDate: widget.selectedStartDate,
-                selectedEndDate: widget.selectedEndDate,
-              ),
+                  rooms: widget.rooms,
+                  numberOfNights: widget.numberOfNights,
+                  selectedStartDate: widget.selectedStartDate,
+                  selectedEndDate: widget.selectedEndDate),
               SizedBox(height: gap_m),
               RoomNotice(),
               Divider(),
-              SizedBox(height: gap_s),
-              TableCalendar(
-                focusedDay: widget.selectedStartDate,
-                firstDay: DateTime.utc(2000, 1, 1),
-                lastDay: DateTime.utc(2100, 12, 31),
-                selectedDayPredicate: (day) {
-                  return isSameDay(widget.selectedStartDate, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    widget.selectedStartDate = selectedDay;
-                    widget.selectedEndDate = selectedDay.add(Duration(days: widget.numberOfNights - 1));
-                  });
-                },
-                calendarBuilders: CalendarBuilders(
-                  defaultBuilder: (context, day, focusedDay) {
-                    if (reservedDates.contains(day)) {
-                      return Center(
-                        child: Text(
-                          '${day.day}',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      );
-                    }
-                    return null;
-                  },
-                  selectedBuilder: (context, date, events) => Container(
-                    margin: const EdgeInsets.all(4.0),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Text(
-                      '${date.day}',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(height: gap_s),
               ReservationInfoForm(
                 nameController: _nameController,
@@ -147,7 +96,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                  onPressed: () => _attemptReservation(context, _nameController, _phoneNumberController, widget.rooms),
+                  onPressed: () => _attemptReservation(context, _nameController,
+                      _phoneNumberController, widget.rooms),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.redAccent,
@@ -180,13 +130,6 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       DateTime checkInDate = widget.selectedStartDate;
       DateTime checkOutDate = widget.selectedEndDate;
 
-      if (checkInDate == checkOutDate) {
-        checkOutDate = checkOutDate.add(const Duration(days: 1));
-      } else {
-        checkInDate = checkInDate.add(const Duration(days: 1));
-        checkOutDate = checkOutDate.add(const Duration(days: 1));
-      }
-
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: room.roomId,
         roomName: room.roomName ?? 'defaultRoomName',
@@ -194,8 +137,12 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
         price: (room.price ?? 0).toInt(),
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        reservationName: nameController.text.isNotEmpty ? nameController.text : 'Default Name',
-        reservationTel: phoneController.text.isNotEmpty ? phoneController.text : 'Default Tel',
+        reservationName: nameController.text.isNotEmpty
+            ? nameController.text
+            : 'Default Name',
+        reservationTel: phoneController.text.isNotEmpty
+            ? phoneController.text
+            : 'Default Tel',
         stayAdress: '',
       );
 

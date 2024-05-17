@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/store/session_store.dart';
@@ -66,7 +67,7 @@ class MyPageBookMenuHolder extends ConsumerWidget {
             _checkLoginAndNavigate(
               context,
               ref,
-              MyReservationPage(),
+              MyReservationPage(users: users, eventMyPageBanners: [],),
             );
           },
         ),
