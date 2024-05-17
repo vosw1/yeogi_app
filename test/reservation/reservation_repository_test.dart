@@ -1,22 +1,35 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yogi_project/data/repositories/reservation_repository.dart';
 
-final Token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGF5Iiwicm9sZSI6InVzZXIiLCJpZCI6MSwiZXhwIjoxNzQ2ODM5Mzc0LCJlbWFpbCI6InNzYXJAbmF0ZS5jb20ifQ.mGGHbjog-nZgkLfh-jyJzwV5we20UNaOuUDK2aBc94klgv4JBEhrDYQhbKcnW3w-1kUP8WheLlyHrCKfg-x6KA";
-
 void main() {
-  test('Delete reservation test', () async {
-    await fetchReservationListTest();
+  test('fetchReservedDates returns list of reserved dates', () async {
+    final roomId = 1;
+    final reservationRepository = ReservationRepository();
+
+    try {
+      final reservedDates = await reservationRepository.fetchReservedDates(roomId);
+
+      expect(reservedDates, isNotEmpty);
+      print("예약 목록 가져오기 성공:");
+      for (var date in reservedDates) {
+        print(date);
+      }
+    } catch (e) {
+      print("예약 목록 가져오기 실패: $e");
+      fail("예약 목록 가져오기 실패");
+    }
   });
-}
 
-Future<void> fetchReservationListTest() async {
-  final responseDTO = await ReservationRepository().fetchReservationList(
-      Token);
+  test('fetchReservedDates throws an exception on error', () async {
+    final roomId = -1; // 유효하지 않은 roomId로 테스트
+    final reservationRepository = ReservationRepository();
 
-  if (responseDTO.status == 200) {
-    print("예약 목록 가져오기 성공:");
-    print(responseDTO.body);
-  } else {
-    print("예약 목록 가져오기 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
-  }
+    try {
+      await reservationRepository.fetchReservedDates(roomId);
+      fail("예약 목록 가져오기에 실패해야 합니다.");
+    } catch (e) {
+      print("예약 목록 가져오기 실패 (예상된 오류): $e");
+      expect(e, isA<Exception>());
+    }
+  });
 }

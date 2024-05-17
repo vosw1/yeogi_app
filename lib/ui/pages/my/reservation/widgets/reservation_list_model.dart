@@ -28,8 +28,7 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
 
   // 예약된 날짜 조회하기
   Future<List<DateTime>> fetchReservedDates(int roomId) async {
-    SessionStore sessionStore = ref.read(sessionProvider);
-    return await ReservationRepository().fetchReservedDates(roomId, sessionStore.accessToken!);
+    return await ReservationRepository().fetchReservedDates(roomId);
   }
 
   // 결제 환불하기(예약취소)

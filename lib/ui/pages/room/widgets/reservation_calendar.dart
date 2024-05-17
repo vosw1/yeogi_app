@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:yogi_project/data/repositories/reservation_repository.dart';
+import 'package:yogi_project/ui/pages/room/widgets/reservation_calendar.dart';
+import 'package:yogi_project/ui/pages/room/widgets/reservation_calendar.dart';
+
+late final ReservationRepository reservationRepository;
 
 class ReservationCalendar extends StatefulWidget {
   final DateTime selectedStartDate;
   final DateTime selectedEndDate;
   final Function(DateTime, DateTime) onRangeSelected;
-  final List<DateTime> reservedDates;
+  final int roomId;
 
   ReservationCalendar({
     required this.selectedStartDate,
     required this.selectedEndDate,
     required this.onRangeSelected,
-    required this.reservedDates,
+    required this.roomId,
   });
 
   @override
@@ -22,9 +27,22 @@ class ReservationCalendar extends StatefulWidget {
 class _ReservationCalendarState extends State<ReservationCalendar> {
   DateTime? _tempStart;
   DateTime? _tempEnd;
+  List<DateTime> _reservedDates = [];
+
+  @override
+  void initState() {
+    super.initState();
+    reservationRepository.fetchReservedDates(widget.roomId).then((dates) {
+      setState(() {
+        _reservedDates = dates;
+      });
+    }).catchError((error) {
+      print("Failed to load reserved dates: $error");
+    });
+  }
 
   bool _isReserved(DateTime day) {
-    return widget.reservedDates.contains(day);
+    return _reservedDates.contains(day);
   }
 
   bool _isPast(DateTime day) {
@@ -86,14 +104,7 @@ class _ReservationCalendarState extends State<ReservationCalendar> {
             );
           },
           defaultBuilder: (context, day, focusedDay) {
-            if (_isReserved(day)) {
-              return Center(
-                child: Text(
-                  '${day.day}',
-                  style: TextStyle(color: Colors.grey.withOpacity(0.5)),
-                ),
-              );
-            } else if (_isPast(day)) {
+            if (_isReserved(day) || _isPast(day)) {
               return Center(
                 child: Text(
                   '${day.day}',

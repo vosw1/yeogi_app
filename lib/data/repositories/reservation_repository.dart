@@ -10,15 +10,21 @@ import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_mo
 class ReservationRepository {
 
   // 방별 예약 불가능한 날짜 조회하기
-  Future<List<DateTime>> fetchReservedDates(int roomId, String accessToken) async {
+  Future<List<DateTime>> fetchReservedDates(int roomId) async {
     final response = await dio.get(
       "/room/detail/$roomId/calendar",
-      options: Options(headers: {"Authorization": "Bearer $accessToken"}),
     );
 
     if (response.statusCode == 200) {
       List<dynamic> dates = response.data['body'];
-      List<DateTime> reservedDates = dates.map((date) => DateTime.parse(date)).toList();
+      List<DateTime> reservedDates = dates.expand((dateRange) {
+        DateTime checkIn = DateTime.parse(dateRange['checkInDate']);
+        DateTime checkOut = DateTime.parse(dateRange['checkOutDate']);
+        return List<DateTime>.generate(
+          checkOut.difference(checkIn).inDays,
+              (index) => checkIn.add(Duration(days: index)),
+        );
+      }).toList();
       return reservedDates;
     } else {
       throw Exception("Failed to load reserved dates");

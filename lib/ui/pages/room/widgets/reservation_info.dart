@@ -48,7 +48,7 @@ class ReservationInfo extends StatelessWidget {
               selectedStartDate: selectedStartDate,
               selectedEndDate: selectedEndDate,
               onRangeSelected: onRangeSelected,
-              reservedDates: reservedDates,
+              roomId: model.roomOption.id,
             ),
             SizedBox(height: gap_m),
             Text(
@@ -82,7 +82,7 @@ class ReservationInfo extends StatelessWidget {
             Row(
               children: List<Widget>.generate(
                 model.roomOption.options.length * 2 - 1,
-                    (index) {
+                (index) {
                   if (index.isEven) {
                     final optionIndex = index ~/ 2;
                     final option = model.roomOption.options[optionIndex];

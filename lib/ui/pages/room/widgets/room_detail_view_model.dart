@@ -12,7 +12,7 @@ class RoomDetailViewModel extends StateNotifier<List<DateTime>> {
   Future<void> fetchReservedDates(int roomId) async {
     SessionStore sessionStore = ref.read(sessionProvider);
     try {
-      List<DateTime> dates = await ReservationRepository().fetchReservedDates(roomId, sessionStore.accessToken!);
+      List<DateTime> dates = await ReservationRepository().fetchReservedDates(roomId);
       state = dates;
     } catch (e) {
       logger.e(e.toString());
