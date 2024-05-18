@@ -151,6 +151,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);
+      print('reservationSave확인: $dto');
       Navigator.push(
         context,
         MaterialPageRoute(

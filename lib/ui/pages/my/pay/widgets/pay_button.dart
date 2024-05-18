@@ -25,8 +25,12 @@ class _PaymentButtonState extends State<PayButton> {
   bool isPaymentComplete = false;
 
   void handlePayment(BuildContext context) async {
-    int amount = widget.reservations.amount < 1000 ? 130000 : widget.reservations.amount; // 결제 금액
-
+    int amount = widget.reservations.amount < 1000
+        ? 130000
+        : widget.reservations.amount; // 결제 금액
+    print('reservations확인: ${widget.reservations}');
+    print("amount 확인: ${widget.reservations.amount}");
+    print("price 확인: ${widget.reservations.price}");
     PaySaveReqDTO payInfo = PaySaveReqDTO(
       payId: widget.reservations.roomId,
       reservationId: widget.reservations.reservationId,
