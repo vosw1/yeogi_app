@@ -42,6 +42,33 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
     return day.isBefore(DateTime.now().subtract(Duration(days: 1)));
   }
 
+  bool _containsReservedDates(DateTime start, DateTime end) {
+    for (DateTime date = start;
+    date.isBefore(end.add(Duration(days: 1)));
+    date = date.add(Duration(days: 1))) {
+      if (_isReserved(date)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void _showReservationError(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('예약 불가'),
+        content: Text('예약 불가 날짜가 포함되어 있습니다.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Center(child: Text('확인')),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,7 +93,13 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
               } else {
                 _tempEnd = selectedDay;
               }
-              widget.onRangeSelected(_tempStart!, _tempEnd!);
+              if (_containsReservedDates(_tempStart!, _tempEnd!)) {
+                _showReservationError(context);
+                _tempStart = null;
+                _tempEnd = null;
+              } else {
+                widget.onRangeSelected(_tempStart!, _tempEnd!);
+              }
             } else if (_tempStart != null && _tempEnd != null) {
               _tempStart = selectedDay;
               _tempEnd = null;
