@@ -54,23 +54,21 @@ class SessionStore extends SessionUser {
   Future<void> join(JoinReqDTO joinReqDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
 
-    // 비지니스 로직
     if (responseDTO.status == 200) {
-      // 회원가입 성공
-      this.user = User.fromJson(responseDTO.body); // 회원 정보 저장
+      this.user = User.fromJson(responseDTO.body);
       this.isJoin = true;
-      Navigator.pushNamed(mContext!, Move.mainHolder);
+      this.isLogin = true;
+      this.accessToken = responseDTO.body["accessToken"];
+      await secureStorage.write(key: "accessToken", value: this.accessToken);
+
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
     } else {
-      // 회원가입 실패
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-        SnackBar(content: Text("회원가입 실패: ${responseDTO.errorMessage}")),
-      );
+      _showErrorDialog("회원가입 실패", '${responseDTO.errorMessage}');
     }
   }
 
   Future<void> login(LoginReqDTO loginReqDTO) async {
-    var (responseDTO, accessToken) =
-        await UserRepository().fetchLogin(loginReqDTO);
+    var (responseDTO, accessToken) = await UserRepository().fetchLogin(loginReqDTO);
 
     if (responseDTO.status == 200) {
       await secureStorage.write(key: "accessToken", value: accessToken);
@@ -79,15 +77,31 @@ class SessionStore extends SessionUser {
       this.accessToken = accessToken;
       this.isLogin = true;
 
-      // 비지니스 로직
-      if (responseDTO.status == 200) {
-        Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
-      } else {
-        ScaffoldMessenger.of(mContext!).showSnackBar(
-          SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")),
-        );
-      }
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
+    } else {
+      _showErrorDialog("로그인 실패",'${responseDTO.errorMessage}');
     }
+  }
+
+  void _showErrorDialog(String title, String message) {
+    showDialog(
+      context: mContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Center(child: Text("확인", style: TextStyle(color: Colors.white))),
+              style: TextButton.styleFrom(backgroundColor: Colors.redAccent),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 

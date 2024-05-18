@@ -3,6 +3,7 @@ import 'package:yogi_project/data/models/event_detail_content.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/event_title_banner.dart';
 import 'package:yogi_project/data/models/user.dart';
+import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/join/join_page.dart';
 import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
@@ -14,28 +15,28 @@ import 'package:yogi_project/ui/pages/scrap/scrap_list_page.dart';
 
 // navigator로 이동하는 url 설정
 class Move {
-  static String loginPage = "/users/login";
-  static String joinPage = "/users/join";
-  static String homePage = "/home";
-  static String mainHolder = "/main";
-  static String searchPage = "/search";
-  static String scrapPage = "/scrap";
-  static String myPage = "/my";
-  static String stayDetailPage = "/stay";
-  static String roomDetailPage = "/room";
-  static String myReservationPage = "/api/my-reservations";
-  static String overseasBookList = "/reservaion/overseas";
-  static String overseasStayList = "/Overseas";
-  static String saleStayList = "/sale";
-  static String hotelStayList = "/hotel";
-  static String motelStayList = "/motel";
-  static String pensionStayList = "/spension";
-  static String homeAndBillaStayList = "/homeAndBilla";
-  static String campingStayList = "/camping";
-  static String guestHouseStayList = "/guestHouse";
-  static String reservationPage = "/api/my-reservations";
-  static String paymentPage = "/pay";
-  static String eventPage = "/event";
+  static const String loginPage = "/users/login";
+  static const String joinPage = "/users/join";
+  static const String homePage = "/home";
+  static const String mainHolder = "/main";
+  static const String searchPage = "/search";
+  static const String scrapPage = "/scrap";
+  static const String myPage = "/my";
+  static const String stayDetailPage = "/stay";
+  static const String roomDetailPage = "/room";
+  static const String myReservationPage = "/api/my-reservations";
+  static const String overseasBookList = "/reservaion/overseas";
+  static const String overseasStayList = "/Overseas";
+  static const String saleStayList = "/sale";
+  static const String hotelStayList = "/hotel";
+  static const String motelStayList = "/motel";
+  static const String pensionStayList = "/spension";
+  static const String homeAndBillaStayList = "/homeAndBilla";
+  static const String campingStayList = "/camping";
+  static const String guestHouseStayList = "/guestHouse";
+  static const String reservationPage = "/api/my-reservations";
+  static const String paymentPage = "/pay";
+  static const String eventPage = "/event";
 }
 
 final User users = User(
@@ -133,8 +134,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.scrapPage: (context) => ScrapListPage(),
     // 내 주변 페이지
     Move.myPage: (context) => MyPage(
-          users: users,
-        ),
+      users: users,
+    ),
     // 마이 페이지
     // Move.stayDetailPage: (context) =>
     //     StayDetailPage(stays: stays, rooms: rooms),
@@ -144,7 +145,21 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     // Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지
-    Move.paymentPage: (context) => const PayPage(),
+    // 임시로 유효한 ReservationSaveReqDTO 인스턴스를 전달
+    Move.paymentPage: (context) => PayPage(
+      reservations: ReservationSaveReqDTO(
+        roomId: 1,
+        roomName: '',
+        stayAdress: '',
+        checkInDate: DateTime.parse('2014-05-12'),
+        checkOutDate: DateTime.parse('2014-05-12'),
+        reservedDates: '',
+        price: 100000,
+        reservationName: "Test Name",
+        reservationTel: "010-1234-5678",
+        roomImgTitle: '', reservationId: 1,
+      ),
+    ),
     // 결제 페이지
     Move.myReservationPage: (context) =>
         MyReservationPage(users: users, eventMyPageBanners: [],),

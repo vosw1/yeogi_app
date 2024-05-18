@@ -5,6 +5,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/event_my_page_banner.dart';
 import 'package:yogi_project/data/models/user.dart';
 import 'package:yogi_project/data/store/session_store.dart';
+import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 import 'package:yogi_project/ui/pages/my/event/event_my_page_banner_page.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_page_update.dart';
 import 'package:yogi_project/ui/pages/my/widgets/my_review_page.dart';
@@ -26,8 +27,14 @@ class MyPageAppBar extends ConsumerWidget {
           content: Text('로그인을 먼저 해주세요.'),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Center(child: Text('확인')),
+              onPressed: () {
+                Navigator.of(context).pop(); // 닫기
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Center(child: Text('로그인 페이지로 이동', style: TextStyle(color: Colors.redAccent),)),
             ),
           ],
         );
