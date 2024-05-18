@@ -5,7 +5,7 @@ import 'package:yogi_project/data/models/scrap.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 class ScrapListItem extends StatelessWidget {
-  final Scrap scrap; // Scrap 데이터를 받아올 변수 추가
+  final Scrap scrap;
 
   const ScrapListItem({required this.scrap}); // 생성자 추가
 
