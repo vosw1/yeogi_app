@@ -13,19 +13,39 @@ import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/scrap_login_widget.dart';
 
-class StayDetailPage extends ConsumerWidget {
-  int stayId;
-  late Completer<GoogleMapController> _controllerCompleter;
-  LatLng? _currentPosition;
-  final Set<Marker> markers = {};
-  Color? _scrapColor = Colors.black;
+class StayDetailPage extends ConsumerStatefulWidget {
+  final int stayId;
 
   StayDetailPage({required this.stayId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    StayDetailModel? model = ref.watch(stayDetailProvider(stayId));
-    print(stayId);
+  _StayDetailPageState createState() => _StayDetailPageState();
+}
+
+class _StayDetailPageState extends ConsumerState<StayDetailPage> {
+  late Completer<GoogleMapController> _controllerCompleter;
+  late ScrollController _scrollController;
+  LatLng? _currentPosition;
+  final Set<Marker> markers = {};
+  Color? _scrapColor = Colors.black;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerCompleter = Completer();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final model = ref.watch(stayDetailProvider(widget.stayId));
+    print(widget.stayId);
 
     if (model == null) {
       return Center(
@@ -42,28 +62,33 @@ class StayDetailPage extends ConsumerWidget {
           ),
           actions: [
             IconButton(
-              icon: Icon(
-                Icons.bookmark,
-                color: _scrapColor,
-              ),
-              onPressed: () async {
-                if (model.isLogin) { // 로그인 상태를 확인
-                  if (model.isScrap == false) { // 스크랩을 하지 않은 상태일 때
-                    ref.read(stayDetailProvider(stayId).notifier).notifyAdd(stayId);
-                    _scrapColor = Colors.redAccent;
-                  } else if (model.isScrap == true) { // 스크랩을 한 상태일 때
-                    ref.read(stayDetailProvider(stayId).notifier).notifyRemove(stayId);
-                    _scrapColor = Colors.black;
+                icon: Icon(
+                  Icons.bookmark,
+                  color: _scrapColor,
+                ),
+                onPressed: () async {
+                  if (model.isLogin) { // 로그인 상태를 확인
+                    if (model.isScrap == false) { // 스크랩을 하지 않은 상태일 때
+                      ref.read(stayDetailProvider(widget.stayId).notifier).notifyAdd(widget.stayId);
+                      setState(() {
+                        _scrapColor = Colors.redAccent;
+                      });
+                    } else if (model.isScrap == true) { // 스크랩을 한 상태일 때
+                      ref.read(stayDetailProvider(widget.stayId).notifier).notifyRemove(widget.stayId);
+                      setState(() {
+                        _scrapColor = Colors.black;
+                      });
+                    }
+                  } else {
+                    showLoginAlert(context); // 로그인 상태가 아니면 알림 표시
                   }
-                } else {
-                  showLoginAlert(context); // 로그인 상태가 아니면 알림 표시
                 }
-              }
             ),
             SizedBox(width: gap_s),
           ],
         ),
         body: SingleChildScrollView(
+          controller: _scrollController,
           physics: AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.all(gap_m),
@@ -150,7 +175,7 @@ class StayDetailPage extends ConsumerWidget {
                       initialCameraPosition: _currentPosition != null
                           ? CameraPosition(target: _currentPosition!, zoom: 12)
                           : CameraPosition(
-                              target: LatLng(35.1658, 129.1573), zoom: 12),
+                          target: LatLng(35.1658, 129.1573), zoom: 12),
                       onMapCreated: (controller) async {
                         _controllerCompleter.complete(controller);
                       },
@@ -206,8 +231,7 @@ class StayDetailPage extends ConsumerWidget {
             ),
           ),
         ),
-        floatingActionButton:
-            ScrollFAB(controller: ScrollController()),
+        floatingActionButton: ScrollFAB(controller: _scrollController),
       );
     }
   }

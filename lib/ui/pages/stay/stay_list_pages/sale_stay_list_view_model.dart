@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/data/repositories/stay_repository.dart';

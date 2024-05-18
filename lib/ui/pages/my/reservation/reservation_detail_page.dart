@@ -54,7 +54,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: gap_m),
+        padding: EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_l),
         child: ListView(
           children: [
             Container(
@@ -206,7 +206,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             ),
             if (showCancelButton || showReviewButton)
               Padding(
-                padding: const EdgeInsets.only(top: gap_l, bottom: gap_l),
+                padding: const EdgeInsets.only(top: gap_l),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

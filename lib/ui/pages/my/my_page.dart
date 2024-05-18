@@ -23,9 +23,9 @@ class MyPage extends ConsumerWidget {
     return Scaffold(
       body: ListView(
         children: [
-          SizedBox(height: gap_m),
+          SizedBox(height: gap_s),
           MyPageHeaderBanner(),
-          SizedBox(height: gap_m),
+          SizedBox(height: gap_s),
           if (!sessionStore.isLogin)
             MyPageLoginButton(),
           if (sessionStore.isLogin)

@@ -78,7 +78,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(gap_m),
+          padding: EdgeInsets.only(left: gap_m, right: gap_m,bottom: gap_m),
           child: Form(
             key: _formKey,
             child: Column(
@@ -92,16 +92,16 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                           ? Image.file(
                         _imageFile!,
 
-                        width: 150,
-                        height: 150,
+                        width: 120,
+                        height: 120,
 
                         fit: BoxFit.cover,
                       )
                           : Image.asset(
                         "assets/images/user1.png",
 
-                        width: 150,
-                        height: 150,
+                        width: 120,
+                        height: 120,
 
                         fit: BoxFit.cover,
                       ),
@@ -109,7 +109,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   ),
                 ),
 
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
 
                 JoinTextFormField(
                   controller: _nameController,
@@ -117,14 +117,14 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   validator: validateName,
                   hintText: "이름을 입력하세요",
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 JoinTextFormField(
                   controller: _passwordController,
                   labelText: '비밀번호',
                   validator: validatePassword,
                   hintText: "비밀번호를 입력하세요",
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 JoinTextFormField(
                   controller: _ageController,
                   keyboardType: TextInputType.number,
@@ -132,7 +132,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   hintText: 'YYYY-MM-DD',
                   validator: validateAge,
                 ),
-                SizedBox(height: gap_m),
+                SizedBox(height: gap_s),
                 JoinTextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
@@ -140,7 +140,7 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                   hintText: '000-0000-0000',
                   validator: validatePhoneNumber,
                 ),
-                SizedBox(height: gap_l),
+                SizedBox(height: gap_xm),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -180,7 +180,6 @@ class _MyPageUpdateState extends State<MyPageUpdate> {
                     child: Text('수정하기', style: h5(mColor: Colors.white)),
                   ),
                 ),
-                SizedBox(height: gap_m),
               ],
             ),
           ),

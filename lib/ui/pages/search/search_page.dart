@@ -129,7 +129,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          SizedBox(height: gap_s),
+          SizedBox(height: gap_xs),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: gap_m),
             child: Row(

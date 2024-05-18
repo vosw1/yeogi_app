@@ -48,23 +48,20 @@ class MyReservationPage extends ConsumerWidget {
             style: h4(),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(bottom: gap_m),
-          child: ListView.builder(
+        body: ListView.builder(
             itemCount: reservations.length,
             itemBuilder: (context, index) {
               final Reservation reservation = reservations[index];
               return buildListItem(context, reservation);
             },
           ),
-        ),
       );
     }
   }
 
   Widget buildListItem(BuildContext context, Reservation reservation) {
     return Padding(
-      padding: const EdgeInsets.only(left: gap_m, right: gap_m),
+      padding: const EdgeInsets.only(top:gap_s, left: gap_m, right: gap_m, bottom: gap_m),
       child: Row(
         children: [
           SizedBox(height: gap_xs),
