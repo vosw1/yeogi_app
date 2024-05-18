@@ -1,39 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/home_and_villa_stay_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
 class HomeAndVillaStayListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     HomeAndVillaStayListModel? model = ref.watch(homeAndVillaStayListProvider);
 
-    if(model == null){
+    if (model == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    }else{
+    } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('홈&빌라', style: h4(),),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(bottom: gap_m),
-          child: ListView.builder(
-            itemCount: model.stay.length,
-            itemBuilder: (context, index) {
-              final Stay stay = model.stay[index];
-              return buildListItem(context, stay, model.stay[index].stayId);
-            },
+          title: Text(
+            '홈&빌라',
+            style: h4(),
           ),
+        ),
+        body: ListView.builder(
+          itemCount: model.stay.length,
+          itemBuilder: (context, index) {
+            final Stay stay = model.stay[index];
+            return buildListItem(context, stay, model.stay[index].stayId);
+          },
         ),
       );
     }

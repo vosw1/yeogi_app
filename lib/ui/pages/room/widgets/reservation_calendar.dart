@@ -138,7 +138,11 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
                 ),
               );
             }
-            return null;
+            return Center(
+              child: Text(
+                '${day.day}',
+              ),
+            );
           },
           disabledBuilder: (context, day, focusedDay) {
             if (_isReserved(day) || _isPast(day)) {
