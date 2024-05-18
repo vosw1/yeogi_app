@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
+import 'package:yogi_project/ui/pages/room/widgets/room_detail_view_model.dart';
+import 'package:yogi_project/ui/pages/room/widgets/reservation_info.dart';
 
 class RoomDetailPage extends ConsumerStatefulWidget {
   final Room rooms;
@@ -27,10 +30,24 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     _selectedStartDate = DateTime.now();
     _selectedEndDate = DateTime.now().add(Duration(days: 1));
     _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
+    _fetchReservedDates();
+  }
+
+  void _fetchReservedDates() async {
+    await ref.read(reservedDatesProvider(widget.rooms.roomId).notifier).fetchReservedDates(widget.rooms.roomId);
+  }
+
+  void _onRangeSelected(DateTime start, DateTime end) {
+    setState(() {
+      _selectedStartDate = start;
+      _selectedEndDate = end;
+      _numberOfNights = end.difference(start).inDays;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final reservedDates = ref.watch(reservedDatesProvider(widget.rooms.roomId));
     RoomDetailModel? model = ref.watch(roomDetailProvider(widget.rooms.roomId));
 
     if (model == null) {
@@ -50,119 +67,13 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
             Expanded(
               child: ListView(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
-                    child: Container(
-                      padding: EdgeInsets.all(gap_m),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(gap_s),
-                        border: Border.all(color: Colors.grey),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(gap_s),
-                            child: Image.asset(
-                              'assets/images/${model.roomOption.imageName}',
-                              width: double.infinity,
-                              height: 200,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(height: gap_m),
-                          GestureDetector(
-                            onTap: _selectDateRange,
-                            child: Container(
-                              padding: EdgeInsets.all(gap_s),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(gap_s),
-                                border: Border.all(color: Colors.black, width: 2.0),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.calendar_today),
-                                  SizedBox(width: gap_s),
-                                  Text(
-                                    ' ${formatDate(_selectedStartDate)}  ~  ${formatDate(_selectedEndDate)} ',
-                                    style: h6(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: gap_m),
-                          Text(
-                            '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
-                            style: h5(),
-                          ),
-                          SizedBox(height: gap_s),
-                          Divider(),
-                          SizedBox(height: gap_s),
-                          Text(
-                            '기본정보',
-                            style: h5(),
-                          ),
-                          SizedBox(height: gap_s),
-                          Text(
-                            '${model.roomOption.information.basicInformation}',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          SizedBox(height: gap_s),
-                          Divider(),
-                          SizedBox(height: gap_s),
-                          Text(
-                            '편의시설',
-                            style: h5(),
-                          ),
-                          SizedBox(height: gap_s),
-                          Row(
-                            children: List<Widget>.generate(
-                              model.roomOption.options.length * 2 - 1,
-                                  (index) {
-                                // 옵션 이름과 콤마를 번갈아가며 배치합니다.
-                                if (index.isEven) {
-                                  // 옵션 이름을 표시하는 경우
-                                  final optionIndex = index ~/ 2;
-                                  final option = model.roomOption.options[optionIndex];
-                                  return Text(
-                                    option.name,
-                                    style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  );
-                                } else {
-                                  // 콤마를 표시하는 경우
-                                  return Text(', ');
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(height: gap_s),
-                          Divider(),
-                          SizedBox(height: gap_s),
-                          Text(
-                            '공지',
-                            style: h5(),
-                          ),
-                          SizedBox(height: gap_s),
-                          Text(
-                            '${model.roomOption.information.announcement}',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  ReservationInfo(
+                    numberOfNights: _numberOfNights,
+                    model: model,
+                    selectedStartDate: _selectedStartDate,
+                    selectedEndDate: _selectedEndDate,
+                    onRangeSelected: _onRangeSelected,
+                    reservedDates: reservedDates,
                   ),
                 ],
               ),
@@ -199,27 +110,6 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     }
   }
 
-  Future<void> _selectDateRange() async {
-    final DateTimeRange? pickedDateRange = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-      initialDateRange: DateTimeRange(start: _selectedStartDate, end: _selectedEndDate),
-    );
-
-    if (pickedDateRange != null) {
-      setState(() {
-        _selectedStartDate = pickedDateRange.start;
-        _selectedEndDate = pickedDateRange.end;
-        _numberOfNights = _selectedEndDate.difference(_selectedStartDate).inDays;
-      });
-    }
-  }
-
-  String formatDate(DateTime dateTime) {
-    return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
-  }
-
   void _showLoginRequiredDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -242,18 +132,50 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     final sessionStore = ref.read(sessionProvider);
 
     if (sessionStore.isLogin) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ReservationPage(
-            rooms: widget.rooms,
-            numberOfNights: _numberOfNights,
-            selectedStartDate: _selectedStartDate,
-            selectedEndDate: _selectedEndDate,
+      final reservedDates = ref.read(reservedDatesProvider(widget.rooms.roomId));
+      bool isOverlapping = false;
+
+      for (DateTime day = _selectedStartDate; day.isBefore(_selectedEndDate) || isSameDay(day, _selectedEndDate); day = day.add(Duration(days: 1))) {
+        if (reservedDates.contains(day)) {
+          isOverlapping = true;
+          break;
+        }
+      }
+
+      if (isOverlapping) {
+        _showOverlapDialog(context);
+      } else {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ReservationPage(
+              rooms: widget.rooms,
+              numberOfNights: _numberOfNights,
+              selectedStartDate: _selectedStartDate,
+              selectedEndDate: _selectedEndDate,
+            ),
           ),
-        ),
-      );
+        );
+      }
     } else {
       _showLoginRequiredDialog(context);
     }
+  }
+
+  void _showOverlapDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('예약 불가'),
+          content: Text('이미 예약되어있어 예약이 불가합니다.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

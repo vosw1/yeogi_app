@@ -31,8 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^4.0.4
-  intl: ^0.17.0
+  intl: ^0.18.1
   geolocator: ^11.0.0
+  flutter_localizations:
+    sdk: flutter
   url_launcher: ^6.0.9
   kakao_flutter_sdk: ^1.9.1+2
   dio: ^5.4.3+1
@@ -58,6 +60,7 @@ dependencies:
   flutter_google_places: ^0.3.0
   google_maps_webservice: ^0.0.19
   image_picker: ^1.1.1
+  table_calendar: ^3.0.0
 
 dev_dependencies:
   flutter_test:

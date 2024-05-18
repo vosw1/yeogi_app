@@ -10,6 +10,7 @@ class ReservationSaveReqDTO {
   final int price; // 가격
   final String reservationName; // 예약자 이름
   final String reservationTel; // 예약자 전화번호
+  final String reservedDates; // 예약자 전화번호
 
   ReservationSaveReqDTO({
     required this.roomId,
@@ -21,6 +22,7 @@ class ReservationSaveReqDTO {
     required this.price,
     required this.reservationName,
     required this.reservationTel,
+    required this.reservedDates,
   });
 
   factory ReservationSaveReqDTO.fromJson(Map<String, dynamic> json) {
@@ -34,6 +36,7 @@ class ReservationSaveReqDTO {
       price: json['price'],
       reservationName: json['reservationName'],
       reservationTel: json['reservationTel'],
+      reservedDates: json['reservedDates'],
     );
   }
 
@@ -49,6 +52,7 @@ class ReservationSaveReqDTO {
       'price': price,
       'reservationName': reservationName,
       'reservationTel': reservationTel,
+      'reservedDates': reservedDates,
     };
   }
 }

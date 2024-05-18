@@ -23,15 +23,12 @@ class SaleStayListPage extends ConsumerWidget {
             style: h4(),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(bottom: gap_m),
-          child: ListView.builder(
-            itemCount: model.stay.length,
-            itemBuilder: (context, index) {
-              final Stay stay = model.stay[index];
-              return buildListItem(context, stay, model.stay[index].stayId);
-            },
-          ),
+        body: ListView.builder(
+          itemCount: model.stay.length,
+          itemBuilder: (context, index) {
+            final Stay stay = model.stay[index];
+            return buildListItem(context, stay, model.stay[index].stayId);
+          },
         ),
       );
     }

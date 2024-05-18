@@ -13,7 +13,7 @@ class SearchResultItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: gap_m),
+      padding: const EdgeInsets.only(bottom: gap_s),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(gap_s),

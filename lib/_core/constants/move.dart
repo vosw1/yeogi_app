@@ -147,7 +147,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.paymentPage: (context) => const PayPage(),
     // 결제 페이지
     Move.myReservationPage: (context) =>
-        MyReservationPage(),
+        MyReservationPage(users: users, eventMyPageBanners: [],),
     // 국내 숙소 예약확인 페이지
     // Move.overseasStayList: (context) => OverseasStayList(),
     // 해외 숙소 페이지

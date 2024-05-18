@@ -22,10 +22,11 @@ class SearchResultList extends ConsumerWidget {
     } else {
       return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(gap_m),
+          padding: const EdgeInsets.symmetric(horizontal: gap_m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: gap_s,),
               Text(
                 '결과 ${model.stay.length}건',
                style: h5(),

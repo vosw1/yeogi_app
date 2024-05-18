@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
@@ -21,15 +20,12 @@ class PensionStayListPage extends ConsumerWidget {
         appBar: AppBar(
           title: Text('펜션', style: h4()),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(bottom: gap_m),
-          child: ListView.builder(
-            itemCount: model.stay.length,
-            itemBuilder: (context, index) {
-              final Stay stay = model.stay[index];
-              return buildListItem(context, stay, model.stay[index].stayId);
-            },
-          ),
+        body: ListView.builder(
+          itemCount: model.stay.length,
+          itemBuilder: (context, index) {
+            final Stay stay = model.stay[index];
+            return buildListItem(context, stay, model.stay[index].stayId);
+          },
         ),
       );
     }

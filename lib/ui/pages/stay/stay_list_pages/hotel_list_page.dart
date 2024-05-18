@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 import 'package:yogi_project/ui/pages/stay/stay_list_pages/hotel_stay_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/oversea_stay_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_list_pages/sale_stay_list_view_model.dart';
 
 class HotelStayListPage extends ConsumerWidget {
   @override
@@ -22,17 +18,17 @@ class HotelStayListPage extends ConsumerWidget {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('호텔', style: h4(),),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(bottom: gap_m),
-          child: ListView.builder(
-            itemCount: model.stay.length,
-            itemBuilder: (context, index) {
-              final Stay stay = model.stay[index];
-              return buildListItem(context, stay, model.stay[index].stayId);
-            },
+          title: Text(
+            '호텔',
+            style: h4(),
           ),
+        ),
+        body: ListView.builder(
+          itemCount: model.stay.length,
+          itemBuilder: (context, index) {
+            final Stay stay = model.stay[index];
+            return buildListItem(context, stay, model.stay[index].stayId);
+          },
         ),
       );
     }

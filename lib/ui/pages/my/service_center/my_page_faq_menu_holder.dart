@@ -77,7 +77,7 @@ class MyPageFaqMenuHolder extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
-                          '(공휴일, 주말 제외) 09:00 ~ 18:00',
+                          '(공휴일, 주말 제외)\n  09:00 ~ 18:00',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.bold,

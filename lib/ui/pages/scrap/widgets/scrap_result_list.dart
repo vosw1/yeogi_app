@@ -4,7 +4,6 @@ import 'package:yogi_project/ui/pages/scrap/scrap_list_view_model.dart';
 import 'package:yogi_project/ui/pages/scrap/widgets/scrap_list_item.dart';
 
 class ScrapResultList extends ConsumerWidget {
-  const ScrapResultList(); // 생성자 추가
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

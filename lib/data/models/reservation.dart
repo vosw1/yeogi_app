@@ -1,6 +1,8 @@
 class Reservation {
   final int reservationId;
+  final int reservedDates;
   final int userId;
+  final int reviewId;
   final String stayName;
   final String stayAddress;
   final int price;
@@ -19,7 +21,9 @@ class Reservation {
 
   Reservation({
     required this.reservationId,
+    required this.reservedDates,
     required this.userId,
+    required this.reviewId,
     required this.stayName,
     required this.stayAddress,
     required this.price,
@@ -39,42 +43,48 @@ class Reservation {
 
   @override
   String toString() {
-    return 'Reservation(reservationId: $reservationId, userId: $userId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, roomName: $roomName, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel, payId: $payId, amount: $amount, way: $way, state: $state)';
+    return 'Reservation(reservationId: $reservationId, reservedDates: $reservedDates, userId: $userId, reviewId: $reviewId, stayName: $stayName, stayAddress: $stayAddress, price: $price, roomId: $roomId, roomName: $roomName, checkInDate: $checkInDate, checkOutDate: $checkOutDate, roomImgTitle: $roomImgTitle, reservationName: $reservationName, reservationTel: $reservationTel, payId: $payId, amount: $amount, way: $way, state: $state, createdAt: $createdAt)';
   }
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
-    print("Parsing JSON: $json"); // 추가된 로그
+    // Ensure correct type conversion for price
+    final dynamic priceData = json['price'];
+    final int price = priceData != null ? int.tryParse(priceData.toString()) ?? 0 : 0;
 
-    final int price = json['price'] != null ? int.tryParse(json['price'].toString()) ?? 0 : 0;
+    // Parse dates and times correctly
+    final String? checkInDateString = json['checkInDate'];
+    final String? checkInTimeString = json['checkInTime'];
+    final String? checkOutDateString = json['checkOutDate'];
+    final String? checkOutTimeString = json['checkOutTime'];
 
-    // 날짜와 시간을 합쳐서 파싱
-    final String checkInDateStr = json['checkInDate'] ?? '';
-    final String checkInTimeStr = json['checkInTime'] ?? '';
-    final String checkOutDateStr = json['checkOutDate'] ?? '';
-    final String checkOutTimeStr = json['checkOutTime'] ?? '';
+    final DateTime checkInDate = checkInDateString != null && checkInTimeString != null
+        ? DateTime.parse('$checkInDateString $checkInTimeString')
+        : DateTime.now(); // Default value if null
 
-    // 날짜와 시간을 합쳐서 DateTime 객체로 변환
-    final DateTime checkInDate = DateTime.parse('$checkInDateStr $checkInTimeStr');
-    final DateTime checkOutDate = DateTime.parse('$checkOutDateStr $checkOutTimeStr');
+    final DateTime checkOutDate = checkOutDateString != null && checkOutTimeString != null
+        ? DateTime.parse('$checkOutDateString $checkOutTimeString')
+        : DateTime.now(); // Default value if null
 
     return Reservation(
-      reservationId: json['reservationId'] ?? 0,
-      userId: json['userId'] ?? 0,
+      reservationId: json['reservationId'] is int ? json['reservationId'] : int.parse(json['reservationId'] ?? '0'),
+      reservedDates: json['reservedDates'] is int ? json['reservedDates'] : int.parse(json['reservedDates'] ?? '0'),
+      userId: json['userId'] is int ? json['userId'] : int.parse(json['userId'] ?? '0'),
+      reviewId: json['reviewId'] is int ? json['reviewId'] : int.parse(json['reviewId'] ?? '0'),
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
       price: price,
-      roomId: json['roomId'] ?? 0,
+      roomId: json['roomId'] is int ? json['roomId'] : int.parse(json['roomId'] ?? '0'),
       roomName: json['roomName'] ?? 'Unknown',
       checkInDate: checkInDate,
       checkOutDate: checkOutDate,
-      roomImgTitle: json['roomImageName'] ?? 'room1.jpg',
+      roomImgTitle: json['roomImageName'] ?? '',
       reservationName: json['reservationName'] ?? 'Unknown',
       reservationTel: json['reservationTel'] ?? 'Unknown',
-      payId: json['payId'] ?? 0,
-      amount: json['amount'] ?? 0,
+      payId: json['payId'] is int ? json['payId'] : int.parse(json['payId'] ?? '0'),
+      amount: json['amount'] is int ? json['amount'] : int.parse(json['amount'] ?? '0'),
       way: json['way'] ?? 'Unknown',
-      state: json['payState'] ?? 'Unknown',
-      createdAt: DateTime.parse(json['payAt'] ?? DateTime.now().toString()),
+      state: json['state'] ?? 'Unknown',
+      createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toString()),
     );
   }
 }
