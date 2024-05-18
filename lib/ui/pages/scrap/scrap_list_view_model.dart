@@ -31,6 +31,11 @@ class ScrapListViewModel extends StateNotifier<ScrapListModel?> {
 
     state = responseDTO.body;
   }
+
+  // 로그 아웃 시 사용
+  void clearScrapList() {
+    state = null;
+  }
 }
 
 final scrapListProvider =
