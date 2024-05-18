@@ -4,6 +4,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
+import 'package:yogi_project/ui/pages/scrap/scrap_list_view_model.dart';
 
 class MyPageLogoutButton extends ConsumerWidget {
   const MyPageLogoutButton({super.key});
@@ -21,6 +22,9 @@ class MyPageLogoutButton extends ConsumerWidget {
                 onTap: () async {
                   // SessionStore의 logout 메서드 호출
                   await ref.read(sessionProvider).logout();
+
+                  // 로그 아웃 시 null이 되도록 다시 상태 초기화 (스크랩 리스트)
+                  ref.read(scrapListProvider.notifier).clearScrapList();
 
                   // MainHolder로 이동
                   Navigator.of(context).pushAndRemoveUntil(
