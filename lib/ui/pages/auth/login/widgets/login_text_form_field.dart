@@ -14,6 +14,7 @@ class LoginTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.hintText,
     this.validator,
+    required TextInputType keyboardType,
   });
 
   @override
@@ -67,7 +68,7 @@ class _LoginTextFormFieldState extends State<LoginTextFormField> {
             ),
             onChanged: (value) {
               setState(() {
-                _errorText = widget.validator!(value);
+                _errorText = widget.validator != null ? widget.validator!(value) : null;
               });
             },
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -85,4 +86,3 @@ class _LoginTextFormFieldState extends State<LoginTextFormField> {
     }
   }
 }
-

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/utils/validator_util.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/dtos/user_request.dart';
@@ -52,11 +51,12 @@ class LoginForm extends ConsumerWidget {
         controller: _emailController,
         text: "이메일",
         hintText: "이메일을 입력하세요",
+        keyboardType: TextInputType.emailAddress,
         validator: (value) {
           if (value!.isEmpty) {
             return "이메일은 공백이 있을 수 없습니다";
           }
-          return null;
+          return validateEmail(value);
         },
       ),
     );
@@ -71,6 +71,7 @@ class LoginForm extends ConsumerWidget {
         hintText: "패스워드를 입력하세요",
         obscureText: true,
         validator: validatePassword,
+        keyboardType: TextInputType.text, // Added explicit keyboardType
       ),
     );
   }
@@ -79,23 +80,23 @@ class LoginForm extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_l),
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState!.validate()) {
             // 이메일과 비밀번호 가져오기
             String email = _emailController.text;
             String password = _passwordController.text;
 
             // 로그인 요청 DTO 생성
-            LoginReqDTO loginReqDTO =
-                LoginReqDTO(email: email, password: password);
+            LoginReqDTO loginReqDTO = LoginReqDTO(email: email, password: password);
 
             // 로그인 메서드 호출
             final sessionStore = ref.read(sessionProvider);
-            sessionStore.login(loginReqDTO);
+            await sessionStore.login(loginReqDTO);
 
-            ref.invalidate(scrapListProvider); // 스크랩 뷰 상태 초기화
-
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainHolder()), (route) => false);
+            if (sessionStore.isLogin) {
+              ref.invalidate(scrapListProvider); // 스크랩 뷰 상태 초기화
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainHolder()), (route) => false);
+            }
           }
         },
         child: Text(
