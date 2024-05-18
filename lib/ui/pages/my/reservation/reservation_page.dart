@@ -143,14 +143,14 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
             ? phoneController.text
             : 'Default Tel',
         stayAdress: '',
-        reservedDates: '',
+        reservedDates: '', reservationId: 1,
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PayPage(),
+          builder: (context) => PayPage(reservations: dto),
         ),
       );
     } catch (e) {
