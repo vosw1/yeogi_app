@@ -69,8 +69,8 @@ class Stay {
 
       // 숙소 리스트
       "stayId": stayId ?? "",
-      "imageName": imageName ?? "",
-      "imagePath": imagePath ?? "",
+      "imageName": imageName ?? "user1.png",
+      "imagePath": imagePath ?? "/images/user1.png",
       "name": name ?? "",
       "address": address ?? "",
       "intro": intro ?? "",
@@ -101,8 +101,8 @@ class Stay {
 
       // 숙소 리스트
       stayId: json['stayId'] ?? "",
-      imageName: json['imageName'] ?? "",
-      imagePath: json['imagePath'] ?? "",
+      imageName: json['imageName'] ?? "user1.png",
+      imagePath: json['imagePath'] ?? "/images/user1.png",
       name: json['name'] ?? "",
       address: json['address'] ?? "",
       intro: json['intro'] ?? "",

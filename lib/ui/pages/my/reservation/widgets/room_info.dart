@@ -12,10 +12,10 @@ class RoomInfo extends StatelessWidget {
 
   const RoomInfo(
       {Key? key,
-        required this.rooms,
-        required this.numberOfNights,
-        required this.selectedStartDate,
-        required this.selectedEndDate})
+      required this.rooms,
+      required this.numberOfNights,
+      required this.selectedStartDate,
+      required this.selectedEndDate})
       : super(key: key);
 
   @override
@@ -81,10 +81,9 @@ class RoomInfo extends StatelessWidget {
                 ),
               ),
               SizedBox(height: gap_s),
-                Text(
-                  '결제금액 : ${NumberFormat('#,###').format(rooms.roomPrice * numberOfNights)} 원',
-                  style: h6(),
-                ),
+              Text(
+                '${NumberFormat('#,###').format((rooms.roomSpecialPrice ?? rooms.roomPrice) * numberOfNights)} 원',
+              ),
             ],
           ),
         ),

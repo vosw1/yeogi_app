@@ -6,14 +6,14 @@ class ReviewWidget extends StatelessWidget {
   final double stars;
   final String comment;
   final String userName;
-  final String userImgTitle;
+  final String imagePath;
   final rating;
 
   ReviewWidget({
     required this.stars,
     required this.comment,
     required this.userName,
-    required this.userImgTitle,
+    required this.imagePath,
     required this.rating,
   });
 
@@ -81,7 +81,7 @@ class ReviewWidget extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage(userImgTitle),
+          backgroundImage: AssetImage("assets/images/${imagePath}"),
         ),
         SizedBox(width: gap_s),
         Column(
