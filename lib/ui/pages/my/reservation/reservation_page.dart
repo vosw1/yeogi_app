@@ -50,7 +50,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
   @override
   Widget build(BuildContext context) {
     print(widget.numberOfNights);
-    print(widget.rooms.price * widget.numberOfNights);
+    print(widget.rooms.roomSpecialPrice * widget.numberOfNights);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -98,8 +98,12 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(gap_m),
         child: ElevatedButton(
-          onPressed: () => _attemptReservation(context, _nameController,
-              _phoneNumberController, widget.rooms),
+          onPressed: () => _attemptReservation(
+            context,
+            _nameController,
+            _phoneNumberController,
+            widget.rooms,
+          ),
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: Colors.redAccent,
@@ -110,7 +114,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
           child: Padding(
             padding: const EdgeInsets.all(gap_s),
             child: Text(
-              '${NumberFormat('#,###').format(widget.rooms.roomPrice * widget.numberOfNights)} 원 결제하기',
+              '${NumberFormat('#,###').format((widget.rooms.roomSpecialPrice ?? widget.rooms.roomPrice) * widget.numberOfNights)} 원 결제하기',
               style: h5(mColor: Colors.white),
             ),
           ),

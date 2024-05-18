@@ -44,7 +44,7 @@ class _PaymentButtonState extends State<PayButton> {
     Bootpay().requestPayment(
       context: context,
       payload: payload,
-      showCloseButton: true,
+      showCloseButton: false,
       onCancel: (String data) {
         print('------- onCancel: $data');
         Bootpay().dismiss(context);
