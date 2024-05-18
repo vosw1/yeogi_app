@@ -79,15 +79,13 @@ class SessionStore extends SessionUser {
       this.accessToken = accessToken;
       this.isLogin = true;
 
-      // 비지니스 로직
-      if (responseDTO.status == 200) {
-        Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
-      } else {
-        ScaffoldMessenger.of(mContext!).showSnackBar(
-          SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")),
-        );
-      }
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.mainHolder, (route) => false);
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("로그인 실패 : ${responseDTO.errorMessage}")),
+      );
     }
+
   }
 }
 

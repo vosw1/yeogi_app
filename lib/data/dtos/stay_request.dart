@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 class StaySaveReqDTO {
   final String stayImgTitle; // 숙소 이미지 제목
   final String stayName; // 숙소 이름
   final String stayInfo; // 숙소 소개
   final String location; // 위치
+  final double gpslng;
+  final double gpslat;
   final String notice;
 
   StaySaveReqDTO({
@@ -10,6 +14,8 @@ class StaySaveReqDTO {
     required this.stayName,
     required this.stayInfo,
     required this.location,
+    required this.gpslng,
+    required this.gpslat,
     required this.notice,
   }); // 이용공지
 
@@ -30,6 +36,8 @@ class StayUpdateReqDTO {
   final String stayName; // 숙소 이름
   final String stayInfo; // 숙소 소개
   final String location; // 위치
+  final double gpslng;
+  final double gpslat;
   final String notice;
 
   StayUpdateReqDTO({
@@ -37,7 +45,10 @@ class StayUpdateReqDTO {
     required this.stayName,
     required this.stayInfo,
     required this.location,
+    required this.gpslng,
+    required this.gpslat,
     required this.notice,
+
   }); // 이용공지
 
   // StayUpdateReqDTO 객체를 JSON으로 변환
@@ -47,6 +58,8 @@ class StayUpdateReqDTO {
       "stayName": stayName,
       "stayInfo": stayInfo,
       "location": location,
+      "gpslng": gpslng,
+      "gpslat": gpslat,
       "notice": notice,
     };
   }
