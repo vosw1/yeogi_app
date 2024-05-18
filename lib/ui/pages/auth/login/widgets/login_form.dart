@@ -29,9 +29,8 @@ class LoginForm extends ConsumerWidget {
             _buildLogo(),
             _buildEmailField(),
             _buildPasswordField(),
-            SizedBox(height: gap_xx),
+            SizedBox(height: gap_m),
             _buildLoginButton(ref, context),
-            SizedBox(height: gap_xx),
             _buildJoinButton(),
             SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
           ],
@@ -46,7 +45,7 @@ class LoginForm extends ConsumerWidget {
 
   Widget _buildEmailField() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
+      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_s),
       child: LoginTextFormField(
         controller: _emailController,
         text: "이메일",
@@ -78,7 +77,7 @@ class LoginForm extends ConsumerWidget {
 
   Widget _buildLoginButton(WidgetRef ref, context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_l),
+      padding: EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_m),
       child: ElevatedButton(
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
