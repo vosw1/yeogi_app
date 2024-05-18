@@ -30,13 +30,12 @@ class _PaymentButtonState extends State<PayButton> {
         : widget.reservations.amount; // 결제 금액
     print('reservations확인: ${widget.reservations}');
     print("amount 확인: ${widget.reservations.amount}");
-    print("price 확인: ${widget.reservations.price}");
     PaySaveReqDTO payInfo = PaySaveReqDTO(
       payId: widget.reservations.roomId,
       reservationId: widget.reservations.reservationId,
       amount: amount,
       way: "Credit Card",
-      state: "COMPLETE",
+      state: "COMPLETION",
       payAt: DateTime.now(),
     );
 
