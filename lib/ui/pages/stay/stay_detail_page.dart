@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,6 +33,25 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
     super.initState();
     _controllerCompleter = Completer();
     _scrollController = ScrollController();
+
+    // 모델에서 데이터 가져와서 마커 설정
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final model = ref.read(stayDetailProvider(widget.stayId).notifier).state;
+      if (model != null) {
+        _currentPosition = LatLng(model.stay.latitude ?? 0.0, model.stay.longitude ?? 0.0);
+        markers.add(
+          Marker(
+            markerId: MarkerId('stay_location'),
+            position: _currentPosition!,
+            infoWindow: InfoWindow(
+              title: model.stay.address,
+              snippet: model.stay.address,
+            ),
+          ),
+        );
+        setState(() {}); // 상태 업데이트
+      }
+    });
   }
 
   @override
@@ -67,20 +85,20 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                   color: _scrapColor,
                 ),
                 onPressed: () async {
-                  if (model.isLogin) { // 로그인 상태를 확인
-                    if (model.isScrap == false) { // 스크랩을 하지 않은 상태일 때
+                  if (model.isLogin) {
+                    if (!model.isScrap) {
                       ref.read(stayDetailProvider(widget.stayId).notifier).notifyAdd(widget.stayId);
                       setState(() {
                         _scrapColor = Colors.redAccent;
                       });
-                    } else if (model.isScrap == true) { // 스크랩을 한 상태일 때
+                    } else {
                       ref.read(stayDetailProvider(widget.stayId).notifier).notifyRemove(widget.stayId);
                       setState(() {
                         _scrapColor = Colors.black;
                       });
                     }
                   } else {
-                    showLoginAlert(context); // 로그인 상태가 아니면 알림 표시
+                    showLoginAlert(context);
                   }
                 }
             ),
@@ -110,13 +128,10 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                   ),
                 ),
                 SizedBox(height: gap_m),
-                // Review section
                 ReviewSection(reviews: model.reviews),
                 SizedBox(height: gap_xx),
-                // 편의 시설 섹션
                 AmenitySection(),
                 SizedBox(height: gap_xx),
-                // 객실 선택 섹션
                 Text(
                   '객실 선택',
                   style: TextStyle(fontSize: 20),
@@ -130,7 +145,6 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                     return Column(
                       children: [
                         if (index != 0) SizedBox(height: gap_s),
-                        // 첫 번째 요소를 제외하고 간격 추가
                         RoomInfoWidget(
                           rooms: model.rooms![index],
                           roomId: model.rooms![index].roomId,
@@ -142,7 +156,6 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                 SizedBox(height: gap_s),
                 Divider(),
                 SizedBox(height: gap_s),
-                // 숙소 소개 섹션
                 Text(
                   '숙소 소개',
                   style: TextStyle(fontSize: 20),
@@ -164,30 +177,37 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: gap_s),
-
-                SizedBox(height: gap_s),
                 SizedBox(
                   width: double.infinity,
-                  height: 150,
+                  height: 220,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: GoogleMap(
                       initialCameraPosition: _currentPosition != null
-                          ? CameraPosition(target: _currentPosition!, zoom: 12)
-                          : CameraPosition(
-                          target: LatLng(35.1658, 129.1573), zoom: 12),
+                          ? CameraPosition(target: _currentPosition!, zoom: 16)
+                          : CameraPosition(target: LatLng(model.stay.latitude ?? 0.0, model.stay.longitude ?? 0.0), zoom: 12),
                       onMapCreated: (controller) async {
                         _controllerCompleter.complete(controller);
                       },
-                      markers: markers,
-                      myLocationEnabled: true,
-                      myLocationButtonEnabled: true,
+                      markers: {
+                        if (_currentPosition != null) // 현재 위치가 유효한 경우에만 마커를 추가합니다.
+                          Marker(
+                            markerId: MarkerId('stay_location'),
+                            position: _currentPosition!,
+                            infoWindow: InfoWindow(
+                              title: model.stay.stayName,
+                              snippet: model.stay.address,
+                            ),
+                          ),
+                      },
+                      zoomControlsEnabled: true,
+                      zoomGesturesEnabled: true,
                     ),
                   ),
                 ),
                 SizedBox(height: gap_m),
                 Text(
-                  model.stay.intro,
+                  model.stay.address,
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.bold,
@@ -212,7 +232,6 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                 SizedBox(height: gap_s),
                 Divider(),
                 SizedBox(height: gap_s),
-                // 취소 및 환불 규정 섹션
                 Text(
                   '취소 및 환불 정책',
                   style: TextStyle(fontSize: 20),

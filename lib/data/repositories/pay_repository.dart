@@ -9,7 +9,7 @@ class PayRepository {
 
   PayRepository(Dio dio, Logger logger)
       : dio = dio..options = BaseOptions(
-    baseUrl: "http://192.168.219.110:8080", // API 서버의 기본 주소
+    baseUrl: "http://192.168.200.106:8080", // API 서버의 기본 주소
     contentType: "application/json; charset=utf-8",
     validateStatus: (_) => true,
   ),

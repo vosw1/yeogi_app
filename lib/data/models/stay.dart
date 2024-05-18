@@ -9,6 +9,8 @@ class Stay {
   final stayAddress; // 숙소 주소
   final category; // 숙소 분류
   final location; // 위치
+  final double? latitude; // 위도
+  final double? longitude; // 경도
   final notice; // 이용 공지 (서버/information)
   final state; // 숙소 삭제 여부
   final createdAt; // 생성 일자
@@ -34,6 +36,8 @@ class Stay {
     this.stayAddress,
     this.category,
     this.location,
+    this.latitude,
+    this.longitude,
     this.notice,
     this.state,
     this.createdAt,
@@ -62,6 +66,8 @@ class Stay {
       "stayAddress": stayAddress ?? "",
       "category": category ?? "",
       "location": location ?? "",
+      "latitude": latitude ?? 0.0, // 기본값 또는 원하는 값으로 변경
+      "longitude": longitude ?? 0.0, // 기본값 또는 원하는 값으로 변경
       "notice": notice ?? "",
       "state": state ?? "",
       "createdAt": createdAt ?? "",
@@ -91,6 +97,8 @@ class Stay {
       stayAddress: json['stayAddress'] ?? "",
       category: json['category'] ?? "",
       location: json['location'] ?? "",
+      latitude: json['latitude'] != null ? double.tryParse(json['latitude'].toString()) : null,
+      longitude: json['longitude'] != null ? double.tryParse(json['longitude'].toString()) : null,
       notice: json['notice'] ?? "",
       state: json['state'] ?? "",
       createdAt: json['createdAt'] ?? "",
@@ -112,3 +120,5 @@ class Stay {
     );
   }
 }
+
+

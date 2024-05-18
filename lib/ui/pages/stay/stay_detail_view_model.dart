@@ -6,6 +6,7 @@ import 'package:yogi_project/data/models/option.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
 import 'package:yogi_project/data/models/stay.dart';
+import 'package:yogi_project/data/models/stay_detail_all.dart';
 import 'package:yogi_project/data/models/stay_image.dart';
 import 'package:yogi_project/data/repositories/scrap_repository.dart';
 import 'package:yogi_project/data/repositories/stay_repository.dart';
@@ -13,6 +14,7 @@ import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/main.dart';
 
 class StayDetailModel {
+
   Stay stay;
   List<Room>? rooms;
   List<Review> reviews;

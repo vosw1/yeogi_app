@@ -69,6 +69,7 @@ class SessionStore extends SessionUser {
     }
   }
 
+
   void _showErrorDialog(String title, String message) {
     showDialog(
       context: mContext!,

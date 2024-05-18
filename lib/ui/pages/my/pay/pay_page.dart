@@ -5,6 +5,7 @@ import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/pay/widgets/pay_button.dart';
 import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 
+
 class PayPage extends ConsumerWidget {
   final ReservationSaveReqDTO reservations;
 
@@ -15,6 +16,7 @@ class PayPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final sessionStore = ref.read(sessionProvider);
 
     void onPaymentDone() {
@@ -39,7 +41,9 @@ class PayPage extends ConsumerWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 "결제 방법",
+
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+
               ),
             ),
             Padding(
@@ -56,6 +60,7 @@ class PayPage extends ConsumerWidget {
                 child: PayButton(
                   reservations: reservations,
                   onPaymentDone: onPaymentDone,
+
                 ),
               ),
             ),
