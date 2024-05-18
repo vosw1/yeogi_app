@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
+import 'package:yogi_project/ui/pages/room/widgets/phone_number_formatter.dart';
 import 'package:yogi_project/ui/pages/room/widgets/reservation_calendar.dart';
 
 class ReservationInfo extends StatelessWidget {
@@ -11,6 +13,8 @@ class ReservationInfo extends StatelessWidget {
   final DateTime selectedEndDate;
   final Function(DateTime, DateTime) onRangeSelected;
   final List<DateTime> reservedDates;
+
+  final TextEditingController _phoneController = TextEditingController();
 
   ReservationInfo({
     required this.numberOfNights,
@@ -115,6 +119,26 @@ class ReservationInfo extends StatelessWidget {
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
+              ),
+            ),
+            SizedBox(height: gap_s),
+            Divider(),
+            SizedBox(height: gap_s),
+            Text(
+              '전화번호',
+              style: h5(),
+            ),
+            SizedBox(height: gap_s),
+            TextField(
+              controller: _phoneController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                PhoneNumberFormatter(),
+              ],
+              decoration: InputDecoration(
+                hintText: '전화번호를 입력하세요',
+                border: OutlineInputBorder(),
               ),
             ),
           ],

@@ -61,7 +61,7 @@ class Review {
       rating: double.parse(json['rating'] ?? "0"),
       comment: json['comment'] ?? "",
       userName: json['userName'] ?? "",
-      userImgTitle: json['userImgTitle'] ?? "",
+      userImgTitle: json['userImgTitle'] ?? "user1.png",
       replies: (json['replies'] as List<dynamic>?)
           ?.map((replyJson) => Review.fromJson(replyJson))
           .toList() ?? [],

@@ -9,6 +9,7 @@ import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/room/widgets/room_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/room/widgets/reservation_info.dart';
+import 'package:yogi_project/ui/pages/auth/login/login_page.dart'; // Import the login page
 
 class RoomDetailPage extends ConsumerStatefulWidget {
   final Room rooms;
@@ -119,8 +120,14 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
           content: Text('로그인을 먼저 해주세요.'),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Center(child: Text('확인')),
+              onPressed: () {
+                Navigator.of(context).pop(); // 닫기
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Center(child: Text('로그인 페이지로 이동', style: TextStyle(color: Colors.redAccent),)),
             ),
           ],
         );

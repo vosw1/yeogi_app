@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yogi_project/_core/constants/phone_number_input_formatter.dart';
@@ -26,15 +25,13 @@ class ReservationTextFormField extends StatefulWidget {
   State<ReservationTextFormField> createState() => _ReservationTextFormFieldState();
 }
 
-
 class _ReservationTextFormFieldState extends State<ReservationTextFormField> {
-
   String? _errorText;
 
   @override
   void initState() {
     super.initState();
-    _errorText = widget.validator!(widget.controller.text);
+    _errorText = widget.validator?.call(widget.controller.text);
   }
 
   @override
@@ -42,21 +39,19 @@ class _ReservationTextFormFieldState extends State<ReservationTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.labelText != null)
-          Text(
-            widget.labelText!,
-            style: TextStyle(
-              fontSize: 14,
-              fontFamily: 'Jalnan2TTF',
-              color: Colors.redAccent,
-            ),
+        Text(
+          widget.labelText,
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: 'Jalnan2TTF',
+            color: Colors.redAccent,
           ),
+        ),
         SizedBox(height: gap_xs),
         TextFormField(
           controller: widget.controller,
           keyboardType: widget.keyboardType,
           decoration: InputDecoration(
-            // labelText: widget.labelText,
             hintText: widget.hintText,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
@@ -74,21 +69,20 @@ class _ReservationTextFormFieldState extends State<ReservationTextFormField> {
           ),
           onChanged: (value) {
             setState(() {
-              _errorText = widget.validator!(value);
+              _errorText = widget.validator?.call(value);
             });
           },
           validator: widget.validator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           inputFormatters: [
+            LengthLimitingTextInputFormatter(13),
             ...?widget.inputFormatters,
-            if (widget.keyboardType == TextInputType.phone) // 전화번호 입력 필드에만 PhoneNumberInputFormatter 추가
+            if (widget.keyboardType == TextInputType.phone)
               PhoneNumberInputFormatter(),
           ],
         ),
         SizedBox(height: 5),
-
       ],
     );
   }
 }
-

@@ -50,7 +50,7 @@ class ReviewSection extends StatelessWidget {
                       stars: starRating,
                       comment: review.reviewContent,
                       userName: review.userName,
-                      userImgTitle: review.userImgTitle,
+                      imagePath: review.userImgTitle,
                       rating: review.reviewScore, // 추가된 부분
                     ),
                   ],

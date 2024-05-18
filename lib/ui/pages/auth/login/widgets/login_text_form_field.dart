@@ -1,34 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-
 class LoginTextFormField extends StatefulWidget {
   final String text;
   final TextEditingController controller;
   final bool obscureText;
   final String? hintText;
   final FormFieldValidator<String>? validator;
-
   LoginTextFormField({
     required this.controller,
     required this.text,
     this.obscureText = false,
     this.hintText,
     this.validator,
+    required TextInputType keyboardType,
   });
 
   @override
   State<LoginTextFormField> createState() => _LoginTextFormFieldState();
 }
-
 class _LoginTextFormFieldState extends State<LoginTextFormField> {
   String? _errorText;
-
   @override
   void initState() {
     super.initState();
     _validate(widget.controller.text);
   }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,7 +63,7 @@ class _LoginTextFormFieldState extends State<LoginTextFormField> {
             ),
             onChanged: (value) {
               setState(() {
-                _errorText = widget.validator!(value);
+                _errorText = widget.validator != null ? widget.validator!(value) : null;
               });
             },
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -76,7 +72,6 @@ class _LoginTextFormFieldState extends State<LoginTextFormField> {
       ),
     );
   }
-
   void _validate(String? value) {
     if (widget.validator != null) {
       setState(() {
@@ -85,4 +80,3 @@ class _LoginTextFormFieldState extends State<LoginTextFormField> {
     }
   }
 }
-
