@@ -1,7 +1,7 @@
 class Pay {
   final int payId;
   final int reservationId;
-  final int amount;
+  final int price;
   final String way;
   final String state;
   final DateTime createdAt;
@@ -9,7 +9,7 @@ class Pay {
   Pay({
     required this.payId,
     required this.reservationId,
-    required this.amount,
+    required this.price,
     required this.way,
     required this.state,
     required this.createdAt,
@@ -19,7 +19,7 @@ class Pay {
     return Pay(
       payId: json['payId'] ,
       reservationId: json['reservationId'],
-      amount: json['amount'],
+      price: json['price'],
       way: json['way'] ?? 'Credit Card',
       state: json['state'] ?? 'COMPLETION',
       createdAt: DateTime.parse(json['createdAt']),
@@ -30,7 +30,7 @@ class Pay {
     return {
       'payId': payId,
       'reservationId': reservationId,
-      'amount': amount,
+      'price': price,
       'way': way,
       'state': state,
       'createdAt': createdAt.toIso8601String(),
