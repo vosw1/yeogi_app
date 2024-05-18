@@ -143,7 +143,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
             ? phoneController.text
             : 'Default Tel',
         stayAdress: '',
-        reservedDates: '', reservationId: 1,
+        reservedDates: '', reservationId: 1, amount: 100000,
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);
