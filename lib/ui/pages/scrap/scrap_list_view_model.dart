@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/scrap.dart';
 import 'package:yogi_project/data/repositories/scrap_repository.dart';
@@ -18,15 +19,22 @@ class ScrapListViewModel extends StateNotifier<ScrapListModel?> {
   ScrapListViewModel(super.state, this.ref);
 
   Future<void> notifyInit() async {
-    // 통신하기
-    ResponseDTO responseDTO = await ScrapRepository().fetchSrapList();
-    // 상태값 갱신 (새로 new해서 넣어줘야 한다)
-    // 여기는 리스트로 받아서 이렇게 설정
+    print("통신 수행!");
+    SessionUser sessionUser = ref.read(sessionProvider);
+
+    // 로그인된 경우에만 스크랩 리스트 가져오기
+    ResponseDTO responseDTO =
+        await ScrapRepository().fetchScrapList(sessionUser.accessToken!);
+
+    Logger().d(responseDTO);
+    Logger().d(responseDTO.body);
+
     state = responseDTO.body;
   }
 }
 
 final scrapListProvider =
-StateNotifierProvider<ScrapListViewModel, ScrapListModel?>((ref) {
+    StateNotifierProvider.autoDispose<ScrapListViewModel, ScrapListModel?>(
+        (ref) {
   return ScrapListViewModel(null, ref)..notifyInit();
 });

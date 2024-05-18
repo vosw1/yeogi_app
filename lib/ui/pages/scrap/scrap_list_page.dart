@@ -1,102 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/_core/constants/style.dart';
-import 'package:yogi_project/data/models/scrap.dart';
-import 'package:yogi_project/ui/pages/scrap/scrap_list_view_model.dart';
-import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
+import 'package:yogi_project/ui/pages/scrap/widgets/scrap_result_list.dart';
 
-class ScrapListPage  extends ConsumerWidget {
+class ScrapListPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ScrapListModel? model = ref.watch(scrapListProvider);
-
-    if(model == null){
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }else{
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('찜한 숙소'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(bottom: gap_m),
-          child: ListView.builder(
-            itemCount: model.scraps.length,
-            itemBuilder: (context, index) {
-              final Scrap scrap = model.scraps[index];
-              return buildListItem(context, scrap);
-            },
-          ),
-        ),
-      );
-    }
-  }
-
-  Widget buildListItem(BuildContext context, Scrap scrap) {
-    return Padding(
-      padding: const EdgeInsets.only(top: gap_m, left: gap_m, right: gap_m),
-      child: Row(
-        children: [
-          SizedBox(height: gap_xs),
-          Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    // TODO: 수정 필요
-                    builder: (context) => StayDetailPage(stayId: 0),
-                  ),
-                );
-              },
-              child: Container(
-                height: 120, // 사진의 높이
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/camping/camping1.png"), // 이미지 경로
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 8), // 사진과 텍스트 사이 간격
-          Expanded(
-            flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity, // 화면 너비에 맞추기 위해 사용
-                  child: Text(
-                    scrap.name,
-                    style: h5(),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                SizedBox(height: 4), // 텍스트 사이 간격
-                Text(
-                  scrap.address, // 숙소 위치
-                  style: subtitle1(),maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4), // 텍스트 사이 간격
-                Text(
-                  scrap.intro, // 숙소 정보
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-        ],
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('찜한 숙소'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: gap_m),
+        child: ScrapResultList(), // ScrapResultList 위젯을 불러와서 사용
       ),
     );
   }

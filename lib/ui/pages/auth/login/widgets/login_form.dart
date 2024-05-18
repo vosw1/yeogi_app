@@ -7,6 +7,7 @@ import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
+import 'package:yogi_project/ui/pages/scrap/scrap_list_view_model.dart';
 import 'join_button.dart';
 
 class LoginForm extends ConsumerWidget {
@@ -91,6 +92,8 @@ class LoginForm extends ConsumerWidget {
             // 로그인 메서드 호출
             final sessionStore = ref.read(sessionProvider);
             sessionStore.login(loginReqDTO);
+
+            ref.invalidate(scrapListProvider); // 스크랩 뷰 상태 초기화
 
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainHolder()), (route) => false);
           }

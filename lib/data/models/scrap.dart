@@ -14,13 +14,20 @@ class Scrap {
   final createdAt; // 생성 일자
   final reviews; // 리뷰 리스트
 
-
+  // 카테고리 별 숙소 리스트
   final stayId;
   final imageName;
   final imagePath;
   final name;
   final address;
   final intro;
+
+  // 로그인한 유저 스크랩 리스트
+  final scrapId;
+  final stayIntro;
+  final stayImageId;
+  final stayImageName;
+  final stayImagePath;
 
   Scrap({
     this.id,
@@ -36,13 +43,20 @@ class Scrap {
     this.createdAt,
     this.reviews,
 
-    // 세일 숙소 리스트
+    // 카테고리 별 숙소 리스트
     this.stayId,
     this.imageName,
     this.imagePath,
     this.name,
     this.address,
     this.intro,
+
+    // 로그인한 유저 스크랩 리스트
+    this.scrapId,
+    this.stayIntro,
+    this.stayImageId,
+    this.stayImageName,
+    this.stayImagePath,
   });
 
   // Convert Stay object to JSON
@@ -61,13 +75,20 @@ class Scrap {
       "createdAt": createdAt ?? "",
       "reviews": reviews?.map((review) => review?.toJson()).toList() ?? "",
 
-      // 세일 숙소 리스트
+      // 카테고리 별 숙소 리스트
       "stayId": stayId ?? "",
       "imageName": imageName ?? "",
       "imagePath": imagePath ?? "",
       "name": name ?? "",
       "address": address ?? "",
       "intro": intro ?? "",
+
+      // 로그인한 유저 스크랩 리스트
+      "scrapId": scrapId ?? "",
+      "stayIntro": stayIntro ?? "",
+      "stayImageId": stayImageId ?? "",
+      "stayImageName": stayImageName ?? "",
+      "stayImagePath": stayImagePath ?? "",
     };
   }
 
@@ -90,13 +111,20 @@ class Scrap {
           .toList() ??
           "",
 
-      // 세일 숙소 리스트
+      // 카테고리 별 숙소 리스트
       stayId: json['stayId'] ?? "",
       imageName: json['imageName'] ?? "",
       imagePath: json['imagePath'] ?? "",
       name: json['name'] ?? "",
       address: json['address'] ?? "",
       intro: json['intro'] ?? "",
+
+      // 로그인한 유저 스크랩 리스트
+      scrapId: json['scrapId'] ?? "",
+      stayIntro: json['stayIntro'] ?? "",
+      stayImageId: json['stayImageId'] ?? "",
+      stayImageName: json['stayImageName'] ?? "",
+      stayImagePath: json['stayImagePath'] ?? "",
     );
   }
 }
