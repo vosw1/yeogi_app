@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/_core/constants/style.dart';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -26,7 +24,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
     super.initState();
     _controllerCompleter = Completer<GoogleMapController>();
     _getCurrentLocation();
-    _places = GoogleMapsPlaces(apiKey: 'YOUR_API_KEY');
+    _places = GoogleMapsPlaces(apiKey: 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA');
   }
 
   Future<void> _getCurrentLocation() async {
@@ -45,6 +43,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
           }
           print('현재 위치를 찾았습니다: $position');
         });
+      } else {
+        print('위치 권한이 거부되었습니다.');
       }
     } catch (e) {
       print('위치 가져오기 오류: $e');
@@ -83,7 +83,6 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 Text('주소: ${response.result.formattedAddress ?? ''}'),
                 Text('전화번호: ${response.result.formattedPhoneNumber ?? ''}'),
                 Text('평점: ${response.result.rating ?? ''}'),
-                Text('가격 수준: ${response.result.priceLevel ?? ''}'),
               ],
             ),
             actions: [
@@ -108,10 +107,10 @@ class _NearFromMePageState extends State<NearFromMePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('주변 숙소 검색하기', style: h4(),),
+        title: Text('주변 숙소 검색하기'),
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -129,14 +128,16 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 prefixIcon: IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
-                    setState(() {
-                      searchResults = [];
-                    });
+                    if (_currentPosition != null) {
+                      _searchNearbyPlaces(_currentPosition!);
+                    } else {
+                      print('현재 위치를 가져올 수 없습니다.');
+                    }
                   },
                 ),
               ),
             ),
-            SizedBox(height: gap_s),
+            SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {
                 _goToCurrentPosition();
@@ -168,19 +169,20 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 ),
               ),
             ),
-            SizedBox(height: gap_m),
-            Text('결과 ${searchResults.length}건', style: h5(),),
-            Divider(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(searchResults[index]),
-                  );
-                },
-              ),
-            ),
+            SizedBox(height: 16),
+            // Uncomment the following lines to display search results
+            // Text('결과 ${searchResults.length}건', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            // Divider(),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: searchResults.length,
+            //     itemBuilder: (context, index) {
+            //       return ListTile(
+            //         title: Text(searchResults[index]),
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -198,6 +200,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
         });
         final GoogleMapController controller = await _controllerCompleter.future;
         controller.animateCamera(CameraUpdate.newLatLng(_currentPosition!));
+        print('지도 위치를 현재 위치로 이동했습니다: $_currentPosition');
       }
     } catch (e) {
       print('위치 가져오기 오류: $e');
@@ -206,15 +209,19 @@ class _NearFromMePageState extends State<NearFromMePage> {
 
   Future<void> _searchNearbyPlaces(LatLng coordinate) async {
     try {
+      print('주변 숙소 검색 시작 - 좌표: $coordinate');
       PlacesSearchResponse response = await _places.searchNearbyWithRadius(
         Location(lat: coordinate.latitude, lng: coordinate.longitude),
-        20000,
+        5000,
         type: 'lodging',
+        language: 'ko'
       );
 
       if (response.status == 'OK') {
         setState(() {
           searchResults.clear();
+          markers.clear();
+          _addMarker(_currentPosition!, 'current');
           for (PlacesSearchResult result in response.results) {
             _addMarker(
               LatLng(result.geometry!.location.lat, result.geometry!.location.lng),
@@ -223,6 +230,9 @@ class _NearFromMePageState extends State<NearFromMePage> {
             searchResults.add(result.name!);
           }
         });
+        print('검색된 결과 수: ${response.results.length}');
+      } else {
+        print('검색 결과 오류: ${response.errorMessage}');
       }
     } catch (e) {
       print('주변 숙소 검색 오류: $e');
