@@ -124,23 +124,23 @@ class ReservationInfo extends StatelessWidget {
             SizedBox(height: gap_s),
             Divider(),
             SizedBox(height: gap_s),
-            Text(
-              '전화번호',
-              style: h5(),
-            ),
-            SizedBox(height: gap_s),
-            TextField(
-              controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                PhoneNumberFormatter(),
-              ],
-              decoration: InputDecoration(
-                hintText: '전화번호를 입력하세요',
-                border: OutlineInputBorder(),
-              ),
-            ),
+            // Text(
+            //   '전화번호',
+            //   style: h5(),
+            // ),
+            // SizedBox(height: gap_s),
+            // TextField(
+            //   controller: _phoneController,
+            //   keyboardType: TextInputType.phone,
+            //   inputFormatters: [
+            //     FilteringTextInputFormatter.digitsOnly,
+            //     PhoneNumberFormatter(),
+            //   ],
+            //   decoration: InputDecoration(
+            //     hintText: '전화번호를 입력하세요',
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),
           ],
         ),
       ),
