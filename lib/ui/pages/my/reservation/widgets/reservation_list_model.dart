@@ -45,7 +45,7 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
   }
 
   // 결제하기
-  Future<void> paySave(PaySaveReqDTO reqDTO) async {
+  Future<ResponseDTO> paySave(PaySaveReqDTO reqDTO) async {
     // JWT 토큰 가져오기
     SessionStore sessionStore = ref.read(sessionProvider);
     print("결제 요청 시작");
@@ -63,6 +63,8 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
       print(
           "결제 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
     }
+
+    return responseDTO; // 반환 값 추가
   }
 
   // 예약 내역보기
@@ -114,6 +116,6 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
 }
 
 final reservationListProvider =
-    StateNotifierProvider<ReservationListViewModel, List<Reservation>>((ref) {
+StateNotifierProvider<ReservationListViewModel, List<Reservation>>((ref) {
   return ReservationListViewModel(null, ref)..reservationList();
 });

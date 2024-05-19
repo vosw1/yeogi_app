@@ -14,7 +14,6 @@ class ResponseDTO {
     return 'ResponseDTO(status: $status, message: $errorMessage, body: $body)';
   }
 
-
   ResponseDTO.fromJson(Map<String, dynamic> json)
       : status = json['status'] as int?,
         errorMessage = json['errorMessage'] as String?,
@@ -26,5 +25,13 @@ class ResponseDTO {
     } else {
       return data;
     }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'status': status,
+      'errorMessage': errorMessage,
+      'body': body,
+    };
   }
 }
