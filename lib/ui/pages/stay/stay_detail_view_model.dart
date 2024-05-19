@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 import 'package:yogi_project/data/models/option.dart';
 import 'package:yogi_project/data/models/review.dart';
 import 'package:yogi_project/data/models/room.dart';
+import 'package:yogi_project/data/models/scrap.dart';
 import 'package:yogi_project/data/models/stay.dart';
-import 'package:yogi_project/data/models/stay_detail_all.dart';
 import 'package:yogi_project/data/models/stay_image.dart';
 import 'package:yogi_project/data/repositories/scrap_repository.dart';
 import 'package:yogi_project/data/repositories/stay_repository.dart';
@@ -67,7 +65,6 @@ class StayDetailViewModel extends StateNotifier<StayDetailModel?> {
 
     // 통신하기
     ResponseDTO responseDTO = await StayRepository().fetchStayDetail(stayId);
-
     StayDetailModel? model = responseDTO.body;
 
     if (sessionUser.accessToken == null) {
@@ -75,6 +72,13 @@ class StayDetailViewModel extends StateNotifier<StayDetailModel?> {
     } else {
       print("로그인이 되었습니다");
       model!.isLogin = true;
+    }
+
+    if (sessionUser.accessToken != null && model != null) {
+      model.isLogin = true;
+      ResponseDTO scrapListResponse = await ScrapRepository().fetchScrapList(sessionUser.accessToken!);
+      List<Scrap> scrapList = scrapListResponse.body.scraps;
+      model.isScrap = scrapList.any((scrap) => scrap.stayId == stayId);
     }
 
     state = model;
