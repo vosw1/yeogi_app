@@ -26,7 +26,7 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
   late ScrollController _scrollController;
   LatLng? _currentPosition;
   final Set<Marker> markers = {};
-  Color? _scrapColor = Colors.black;
+  Color? _scrapColor = Colors.black; // 스크랩 버튼 색상 초기화
 
   @override
   void initState() {
@@ -49,15 +49,12 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
             ),
           ),
         );
-        setState(() {}); // 상태 업데이트
+        // 스크랩 상태에 따른 버튼 색상 설정
+        setState(() {
+          _scrapColor = model.isScrap ? Colors.redAccent : Colors.black;
+        });
       }
     });
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -82,21 +79,19 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
             IconButton(
                 icon: Icon(
                   Icons.bookmark,
-                  color: _scrapColor,
+                  color: model.isScrap ? Colors.redAccent : Colors.black, // 스크랩 상태에 따라 색상 설정
                 ),
                 onPressed: () async {
                   if (model.isLogin) {
                     if (!model.isScrap) {
-                      ref.read(stayDetailProvider(widget.stayId).notifier).notifyAdd(widget.stayId);
-                      setState(() {
-                        _scrapColor = Colors.redAccent;
-                      });
+                      await ref.read(stayDetailProvider(widget.stayId).notifier).notifyAdd(widget.stayId);
                     } else {
-                      ref.read(stayDetailProvider(widget.stayId).notifier).notifyRemove(widget.stayId);
-                      setState(() {
-                        _scrapColor = Colors.black;
-                      });
+                      await ref.read(stayDetailProvider(widget.stayId).notifier).notifyRemove(widget.stayId);
                     }
+                    // 스크랩 상태가 변경된 후 버튼 색상 업데이트
+                    setState(() {
+                      _scrapColor = model.isScrap ? Colors.redAccent : Colors.black;
+                    });
                   } else {
                     showLoginAlert(context);
                   }
@@ -255,3 +250,4 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
     }
   }
 }
+

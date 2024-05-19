@@ -4,20 +4,20 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_view_model.dart';
 import 'package:yogi_project/ui/pages/scrap/widgets/scrap_list_item.dart';
 
-import '../../auth/login/login_page.dart';
+import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
 
 class ScrapResultList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.read(scrapListProvider.notifier);
+    final viewModel = ref.watch(scrapListProvider.notifier);
     ScrapListModel? model = ref.watch(scrapListProvider);
 
+    // 초기 데이터 로딩
     if (model == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         viewModel.notifyInit();
       });
 
-      // Return the login required message and button directly in the widget tree
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,6 +67,9 @@ class ScrapResultList extends ConsumerWidget {
           ),
           child: ScrapListItem(
             scrap: model.scraps[index],
+            onScrapChanged: () {
+              viewModel.notifyInit(); // 스크랩 변경 시 목록 갱신
+            },
           ),
         );
       },
