@@ -9,6 +9,7 @@ class ReservationSaveReqDTO {
   final DateTime checkOutDate; // 체크아웃 날짜와 시간
   final int price; // 가격
   final int amount; // 결제 가격
+  final int amountToPay; // 결제 가격
   final int reservationId;
   final String reservationName; // 예약자 이름
   final String reservationTel; // 예약자 전화번호
@@ -22,6 +23,7 @@ class ReservationSaveReqDTO {
     required this.checkInDate,
     required this.checkOutDate,
     required this.price,
+    required this.amountToPay,
     required this.amount,
     required this.reservationId,
     required this.reservationName,
@@ -39,6 +41,7 @@ class ReservationSaveReqDTO {
       checkOutDate: DateTime.parse(json['checkOutDate']),
       price: json['price'],
       amount: json['amount'],
+      amountToPay: json['amountToPay'],
       reservationId: json['reservationId'],
       reservationName: json['reservationName'],
       reservationTel: json['reservationTel'],
@@ -57,6 +60,7 @@ class ReservationSaveReqDTO {
       'checkOutDate': checkOutDate.toUtc().toIso8601String(),
       'price': price??'',
       'amount': amount??'',
+      'amountToPay': amountToPay??'',
       'reservationId': reservationId ?? '',
       'reservationName': reservationName,
       'reservationTel': reservationTel,

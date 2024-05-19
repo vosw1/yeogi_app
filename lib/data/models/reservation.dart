@@ -2,7 +2,7 @@ class Reservation {
   final int reservationId;
   final List<String> reservedDates;
   final int userId;
-  final int reviewId;
+  final int? reviewId;
   final String stayName;
   final String stayAddress;
   final int price;
@@ -23,7 +23,7 @@ class Reservation {
     required this.reservationId,
     required this.reservedDates,
     required this.userId,
-    required this.reviewId,
+    this.reviewId,
     required this.stayName,
     required this.stayAddress,
     required this.price,
@@ -44,17 +44,17 @@ class Reservation {
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
       reservationId: json['reservationId'] is int ? json['reservationId'] : int.parse(json['reservationId'] ?? '0'),
-      reservedDates: (json['reservedDates'] as List<dynamic>).cast<String>(), // 수정된 부분
+      reservedDates: (json['reservedDates'] as List<dynamic>? ?? []).cast<String>(), // 수정된 부분
       userId: json['userId'] is int ? json['userId'] : int.parse(json['userId'] ?? '0'),
-      reviewId: json['reviewId'] is int ? json['reviewId'] : int.parse(json['reviewId'] ?? '0'),
+      reviewId: json['reviewId'] != null ? (json['reviewId'] is int ? json['reviewId'] : int.parse(json['reviewId'])) : null,
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
       price: json['price'] is int ? json['price'] : int.parse(json['price'] ?? '0'),
       roomId: json['roomId'] is int ? json['roomId'] : int.parse(json['roomId'] ?? '0'),
       roomName: json['roomName'] ?? 'Unknown',
-      checkInDate: DateTime.parse(json['checkInDate'] ?? DateTime.now().toString()), // 수정된 부분
-      checkOutDate: DateTime.parse(json['checkOutDate'] ?? DateTime.now().toString()), // 수정된 부분
-      roomImgTitle: json['roomImageName'] ?? '',
+      checkInDate: DateTime.parse(json['checkInDate'] ?? DateTime.now().toString()),
+      checkOutDate: DateTime.parse(json['checkOutDate'] ?? DateTime.now().toString()),
+      roomImgTitle: json['roomImageName'],
       reservationName: json['reservationName'] ?? 'Unknown',
       reservationTel: json['reservationTel'] ?? 'Unknown',
       payId: json['payId'] is int ? json['payId'] : int.parse(json['payId'] ?? '0'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/pay/widgets/pay_button.dart';
@@ -41,9 +42,7 @@ class PayPage extends ConsumerWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 "결제 방법",
-
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-
               ),
             ),
             Padding(
@@ -60,7 +59,6 @@ class PayPage extends ConsumerWidget {
                 child: PayButton(
                   reservations: reservations,
                   onPaymentDone: onPaymentDone,
-
                 ),
               ),
             ),

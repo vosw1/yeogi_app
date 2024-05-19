@@ -133,11 +133,14 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       DateTime checkInDate = widget.selectedStartDate;
       DateTime checkOutDate = widget.selectedEndDate;
 
+      int totalAmount = (room.roomSpecialPrice ?? room.roomPrice) * widget.numberOfNights;
+
       ReservationSaveReqDTO dto = ReservationSaveReqDTO(
         roomId: room.roomId,
         roomName: room.roomName ?? 'defaultRoomName',
         roomImgTitle: room.roomImgTitle ?? 'defaultImgTitle',
-        price: (room.price ?? 0).toInt(),
+        price: totalAmount,
+        amountToPay: totalAmount,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
         reservationName: nameController.text.isNotEmpty
@@ -147,7 +150,9 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
             ? phoneController.text
             : 'Default Tel',
         stayAdress: '',
-        reservedDates: '', reservationId: 1, amount: 100000,
+        reservedDates: '',
+        reservationId: 1,
+        amount: totalAmount,
       );
 
       ref.read(reservationListProvider.notifier).reservationSave(dto);

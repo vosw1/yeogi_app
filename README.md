@@ -11,7 +11,7 @@
 - cupertino_icons: ^1.0.6
 - font_awesome_flutter: ^10.7.0
 - flutter_native_splash: ^2.4.0
-- - flutter_svg: ^2.0.10+1
+- flutter_svg: ^2.0.10+1
 - google_fonts: ^4.0.4
 - intl: ^0.17.0
 - geolocator: ^7.6.2

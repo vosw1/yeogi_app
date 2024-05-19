@@ -157,7 +157,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
         price: 100000,
         reservationName: "Test Name",
         reservationTel: "010-1234-5678",
-        roomImgTitle: '', reservationId: 1, amount: 100000,
+        roomImgTitle: '', reservationId: 1, amount: 100000, amountToPay: 100000,
       ),
     ),
     // 결제 페이지
