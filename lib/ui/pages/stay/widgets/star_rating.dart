@@ -25,12 +25,12 @@ class _StarRatingState extends State<StarRating> {
             },
             child: Icon(
               Icons.star,
-              color: widget.rating >= i ? Colors.yellow : Colors.grey,
+              color: widget.rating >= i ? Colors.redAccent : Colors.grey,
             ),
           ),
         SizedBox(width: 8), // 간격 추가
         Text(
-          '${widget.rating} 점', // 현재 별점을 표시
+          '${widget.rating}.0 점', // 현재 별점을 표시
           style: TextStyle(fontSize: 16),
         ),
       ],
