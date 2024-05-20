@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PaySaveReqDTO {
-  final int payId;
   final int reservationId;
+  final int payId;
   final int amount;
   final String way;
   final String state;
   final DateTime payAt;
 
   PaySaveReqDTO({
-    required this.payId,
     required this.reservationId,
+    required this.payId,
     required this.amount,
     required this.way,
     required this.state,
@@ -19,8 +19,8 @@ class PaySaveReqDTO {
 
   factory PaySaveReqDTO.fromJson(Map<String, dynamic> json) {
     return PaySaveReqDTO(
-      payId: json['payId'] ?? "",
       reservationId: json['reservationId'],
+      payId: json['payId'],
       amount: json['amount'],
       way: json['way'],
       state: json['state'],
@@ -30,8 +30,8 @@ class PaySaveReqDTO {
 
   Map<String, dynamic> toJson() {
     return {
-      'payId': payId,
       'reservationId': reservationId,
+      'payId': payId,
       'amount': amount,
       'way': way,
       'state': 'state',

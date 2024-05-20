@@ -16,7 +16,7 @@ class MyReviewPage extends StatelessWidget {
           {
             'starCount': 4,
             'comment':
-            "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+                "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
           },
         ],
       ),
@@ -27,7 +27,7 @@ class MyReviewPage extends StatelessWidget {
           {
             'starCount': 5,
             'comment':
-            "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
+                "설 연휴에 아이와 함께 가족 여행 다녀왔습니다^^ 사진에서 봤던 것 보다 더 아기자기 하고 예쁘고 관리가 잘된 캠핑장이었구요^^",
           },
         ],
       ),
@@ -70,7 +70,8 @@ class MyReviewPage extends StatelessWidget {
                                     content: Text('리뷰를 삭제하시겠습니까?'),
                                     actions: <Widget>[
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           TextButton(
                                             onPressed: () {
@@ -81,7 +82,8 @@ class MyReviewPage extends StatelessWidget {
                                           SizedBox(width: 8),
                                           TextButton(
                                             onPressed: () {
-                                              print('Delete review: ${review.stayName}');
+                                              print(
+                                                  'Delete review: ${review.stayName}');
                                               Navigator.of(context).pop();
                                             },
                                             child: Text('아니요'),
@@ -99,9 +101,15 @@ class MyReviewPage extends StatelessWidget {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('이용 날짜 : ${review.checkInDate}',
-                              style: TextStyle(color: Colors.grey)),
-                          SizedBox(height: 4),
+                          Text(
+                            '이용 날짜 : ${review.checkInDate}',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          SizedBox(height: gap_s),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: review.reviews!.map<Widget>((reviewData) {
@@ -114,16 +122,16 @@ class MyReviewPage extends StatelessWidget {
                                         children: List.generate(5, (index) {
                                           if (index < reviewData['starCount']) {
                                             return Icon(Icons.star,
-                                                color: Colors.amber);
+                                                color: Colors.redAccent);
                                           } else {
                                             return Icon(Icons.star_border,
-                                                color: Colors.amber);
+                                                color: Colors.redAccent);
                                           }
                                         }),
                                       ),
                                       SizedBox(width: gap_s),
                                       Text(
-                                        '${reviewData['starCount']} 점',
+                                        '${reviewData['starCount']}.0 점',
                                         style: TextStyle(color: Colors.black87),
                                       ),
                                     ],
@@ -131,7 +139,12 @@ class MyReviewPage extends StatelessWidget {
                                   SizedBox(height: gap_s),
                                   Text(
                                     '${reviewData['comment']}',
-                                    style: TextStyle(color: Colors.black87),
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.black
+                                    ),
                                   ),
                                 ],
                               );

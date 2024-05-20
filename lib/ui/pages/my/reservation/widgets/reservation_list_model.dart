@@ -51,13 +51,15 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
     print("결제 요청 시작");
 
     // 결제 정보 서버로 전송
-    ResponseDTO responseDTO = await PayRepository(dio, logger)
+    ResponseDTO responseDTO = await PayRepository(logger)
         .fetchPaySave(reqDTO, sessionStore.accessToken!);
 
     if (responseDTO.status == 200) {
       print("결제 성공: ${responseDTO.body}");
-      Reservation newReservation = responseDTO.body as Reservation;
+      // 서버 응답에서 새로운 예약 정보 가져오기
+      Reservation newReservation = Reservation.fromJson(responseDTO.body);
 
+      // 상태 업데이트
       state = [...state, newReservation];
     } else {
       print(
@@ -89,15 +91,18 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
     }
   }
 
-  // 예약하기
-  Future<void> reservationSave(ReservationSaveReqDTO reqDTO) async {
+  Future<int> reservationSave(ReservationSaveReqDTO reqDTO) async {
     // JWT 토큰 가져오기
     SessionStore sessionStore = ref.read(sessionProvider);
     print("예약 요청 시작");
+    print('전송할 데이터: ${reqDTO.toJson()}'); // 디버깅 코드 추가
 
     // 예약 정보 서버로 전송
     ResponseDTO responseDTO = await ReservationRepository()
         .fetchReservationSave(reqDTO, sessionStore.accessToken!);
+
+    print("서버 응답 상태: ${responseDTO.status}");
+    print("서버 응답 본문: ${responseDTO.body}");
 
     if (responseDTO.status == 200) {
       // 성공적으로 예약이 추가된 경우
@@ -105,17 +110,15 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
       Reservation newReservation = Reservation.fromJson(responseDTO.body);
 
       // 상태 업데이트
-      state = [...state, newReservation];
-      print("State after save: $state");
+      return newReservation.reservationId; // 예약 ID 반환
     } else {
       // 예약 실패 처리
-      print(
-          "예약 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
+      print("예약 실패: ${responseDTO.errorMessage ?? 'No error message provided'}");
+      return -1; // 실패 시 -1 반환
     }
   }
 }
 
-final reservationListProvider =
-StateNotifierProvider<ReservationListViewModel, List<Reservation>>((ref) {
+final reservationListProvider = StateNotifierProvider<ReservationListViewModel, List<Reservation>>((ref) {
   return ReservationListViewModel(null, ref)..reservationList();
 });
