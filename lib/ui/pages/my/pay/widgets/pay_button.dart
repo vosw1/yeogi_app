@@ -37,9 +37,6 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
   }
 
   void handlePayment(BuildContext context) async {
-    int amount = widget.reservations.amountToPay < 1000
-        ? 1000
-        : widget.reservations.amountToPay; // 결제 금액
     print("amount 확인: ${widget.reservations.amountToPay}");
 
     PaySaveReqDTO payInfo = PaySaveReqDTO(
@@ -47,7 +44,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       // 결제 아이디 사용
       reservationId: widget.id,
       // 예약 아이디 사용
-      amount: amount,
+      amount: widget.reservations.amountToPay,
       way: "나이스페이",
       state: "COMPLETION",
       payAt: DateTime.now(),
@@ -147,7 +144,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
     item.name = widget.reservations.reservationName ?? 'Unknown';
     item.qty = 1;
     item.id = widget.reservations.roomId.toString();
-    item.price = payInfo.amount.toDouble();
+    item.price = widget.reservations.amountToPay.toDouble();
 
     payload.webApplicationId = 'your-web-5b8f6a4d396fa665fdc2b5e7-id';
     payload.androidApplicationId = '5b8f6a4d396fa665fdc2b5e8';
@@ -155,7 +152,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
 
     payload.pg = '나이스페이';
     payload.orderName = widget.reservations.reservationName ?? 'Unknown';
-    payload.price = payInfo.amount.toDouble();
+    payload.price = widget.reservations.amountToPay.toDouble();
     payload.orderId = DateTime.now().millisecondsSinceEpoch.toString();
 
     payload.items = [item];
