@@ -73,7 +73,7 @@ class PayPage extends ConsumerWidget {
                 ),
               ),
             ),
-            SizedBox(height: 150),
+            SizedBox(height: 140),
             Container(
               color: Colors.grey.shade100,
               child: Padding(
@@ -82,7 +82,11 @@ class PayPage extends ConsumerWidget {
                   '''(주)여어떻노\n\n주소 : 부산광역시 중앙대로 749, 범향빌딩 3층\n대표이사 : 최주호 \n사업자등록번호: 122-83-00279 사업자정보확인\n
 전자우편주소 : help@ssar.kr\n통신판매번호 : 2024-부산여기-12345 \n관광사업자 등록번호: 제123-12호 \n전화번호 : 1234-5678 \n호스팅서비스제공자의 상호 표시: (주)여어떻노
 \n(주)여어떻노는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.''',
-                  style: TextStyle(color: Colors.grey.shade900),
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15
+                  ),
                 ),
               ),
             ),

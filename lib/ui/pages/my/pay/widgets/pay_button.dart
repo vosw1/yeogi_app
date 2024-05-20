@@ -33,7 +33,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
   @override
   void initState() {
     super.initState();
-    isPaymentComplete = Payload().price == null;
+    isPaymentComplete = widget.id != null;
   }
 
   void handlePayment(BuildContext context) async {
@@ -125,29 +125,13 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       print('결제 정보 저장 시작');
       print('저장할 데이터: ${payInfo.toJson()}');
 
-      final responseDTO = await ref.watch(reservationListProvider.notifier).paySave(payInfo);
+      final responseDTO = await ref.read(reservationListProvider.notifier).paySave(payInfo);
 
       print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
+      payId = responseDTO.body; // 서버 응답에서 payId를 받아옴
     } catch (e) {
       print('결제 정보 저장 중 오류 발생: $e');
-    }
-  }
-
-  Future<int?> fetchPaySave(PaySaveReqDTO reqDTO) async {
-    print('결제 정보 전송 시작');
-    print('전송할 데이터: ${reqDTO.toJson()}');
-
-    final responseDTO = await ref.watch(reservationListProvider.notifier).paySave(reqDTO);
-
-    print('결제 정보 전송 완료');
-    print('서버 응답: ${responseDTO}');
-
-    // 서버 응답에서 payId를 추출
-    if (responseDTO.status == 200) {
-      return responseDTO.body;
-    } else {
-      return null; // Add this to handle cases where responseDTO.status is not 200
     }
   }
 
@@ -189,7 +173,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       onPressed: isPaymentComplete ? null : () => handlePayment(context),
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.all(12),
-        backgroundColor: isPaymentComplete ? Colors.grey : Colors.redAccent,
+        backgroundColor: Colors.redAccent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

@@ -104,7 +104,7 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
           controller: _scrollController,
           physics: AlwaysScrollableScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.all(gap_m),
+            padding: EdgeInsets.only(left: gap_m, right: gap_m, bottom: gap_m),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
