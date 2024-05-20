@@ -36,7 +36,7 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
 
     // 모델에서 데이터 가져와서 마커 설정
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final model = ref.read(stayDetailProvider(widget.stayId).notifier).state;
+      final model = ref.watch(stayDetailProvider(widget.stayId).notifier).state;
       if (model != null) {
         _currentPosition = LatLng(model.stay.latitude ?? 0.0, model.stay.longitude ?? 0.0);
         markers.add(
