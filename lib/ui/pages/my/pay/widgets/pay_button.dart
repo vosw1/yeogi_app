@@ -7,6 +7,7 @@ import 'package:bootpay/model/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
+import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
 import 'dart:convert';
 
@@ -91,6 +92,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       onDone: (String data) async {
         print('------- onDone: $data');
         // 결제 완료 후 payId를 서버로부터 받아옴
+        widget.onPaymentDone();
       },
     );
   }
@@ -116,11 +118,24 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       print('결제 정보 저장 시작');
       print('저장할 데이터: ${payInfo.toJson()}');
 
-      final responseDTO = await ref.read(reservationListProvider.notifier).paySave(payInfo);
-
+      final responseDTO =
+          await ref.read(reservationListProvider.notifier).paySave(payInfo);
       print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
-      Navigator.pushReplacementNamed(context, '/myReservations');
+      // '내 예약 페이지'로 이동
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyReservationPage(),
+        ),
+      );
+      // Extract the payId from the response body
+      if (responseDTO.body is Map<String, dynamic> &&
+          responseDTO.body['id'] is int) {
+        payId = responseDTO.body['id'];
+      } else {
+        throw Exception('Invalid response format');
+      }
     } catch (e) {
       print('결제 정보 저장 중 오류 발생: $e');
     }

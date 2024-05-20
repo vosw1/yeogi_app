@@ -74,7 +74,7 @@ class MyPageBookMenuHolder extends ConsumerWidget {
             _checkLoginAndNavigate(
               context,
               ref,
-              MyReservationPage(users: users, eventMyPageBanners: [],),
+              MyReservationPage(),
             );
           },
         ),

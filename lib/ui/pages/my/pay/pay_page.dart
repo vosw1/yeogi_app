@@ -27,8 +27,6 @@ class PayPage extends ConsumerWidget {
           context,
           MaterialPageRoute(
             builder: (context) => MyReservationPage(
-              users: sessionStore.user!,
-              eventMyPageBanners: [],
             ),
           ),
           (Route<dynamic> route) => false,
