@@ -68,7 +68,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets/images/${reservation.roomImgTitle}',
+                      'assets${reservation.roomImagePath}',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,

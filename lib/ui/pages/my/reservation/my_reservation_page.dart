@@ -88,7 +88,7 @@ class MyReservationPage extends ConsumerWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(gap_s),
                         child: Image.asset(
-                          "assets/images/${reservation.roomImgTitle}",
+                          "assets${reservation.roomImagePath}",
                           fit: BoxFit.cover,
                         ),
                       ),

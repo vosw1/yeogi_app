@@ -12,6 +12,7 @@ class Reservation {
   final DateTime checkInDate;
   final DateTime checkOutDate;
   final String? roomImgTitle;
+  final String? roomImagePath;
   final String reservationName;
   final String reservationTel;
   final int payId;
@@ -34,6 +35,7 @@ class Reservation {
     required this.checkInDate,
     required this.checkOutDate,
     this.roomImgTitle,
+    this.roomImagePath,
     required this.reservationName,
     required this.reservationTel,
     required this.payId,
@@ -72,6 +74,7 @@ class Reservation {
       checkOutDate:
           DateTime.parse(json['checkOutDate'] ?? DateTime.now().toString()),
       roomImgTitle: json['roomImgTitle'],
+      roomImagePath: json['roomImagePath'],
       reservationName: json['reservationName'] ?? 'Unknown',
       reservationTel: json['reservationTel'] ?? 'Unknown',
       payId: json['payId'] != null
@@ -102,6 +105,7 @@ class Reservation {
         'checkInDate: $checkInDate, '
         'checkOutDate: $checkOutDate, '
         'roomImgTitle: $roomImgTitle, '
+        'roomImagePath: $roomImagePath, '
         'reservationName: $reservationName, '
         'reservationTel: $reservationTel, '
         'payId: $payId, '
