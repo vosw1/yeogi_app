@@ -91,7 +91,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_m),
                   Text(
-                    '숙박기간 : ${_numberOfNights + 1} 박 ${_numberOfNights + 2} 일',
+                    '숙박기간 : ${_numberOfNights} 박 ${_numberOfNights + 1} 일',
                     style: h4(),
                   ),
                   SizedBox(height: gap_m),

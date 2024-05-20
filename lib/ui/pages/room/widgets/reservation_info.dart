@@ -121,9 +121,6 @@ class ReservationInfo extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-            SizedBox(height: gap_s),
-            Divider(),
-            SizedBox(height: gap_s),
             // Text(
             //   '전화번호',
             //   style: h5(),
