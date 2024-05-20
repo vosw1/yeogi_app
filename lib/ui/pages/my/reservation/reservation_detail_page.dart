@@ -186,7 +186,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount).toString()} 원',
+                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount / 2).toString()} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -211,7 +211,47 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (!showCancelButton)
+                    if (showCancelButton)
+                    //   Expanded(
+                    //     child: ElevatedButton(
+                    //       onPressed: () async {
+                    //         await ref
+                    //             .read(reservationListProvider.notifier)
+                    //             .payUpdate(widget.reservations.payId);
+                    //         // 상태를 갱신하여 UI를 다시 빌드
+                    //         setState(() {});
+                    //       },
+                    //       child: Text(
+                    //         '예약 취소',
+                    //         style: h6(mColor: Colors.white),
+                    //       ),
+                    //       style: ElevatedButton.styleFrom(
+                    //         padding: EdgeInsets.all(12),
+                    //         backgroundColor: Colors.red,
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // if (showReviewButton)
+                    //   Expanded(
+                    //     child: ElevatedButton(
+                    //       onPressed: () => _showReviewWritingDialog(context),
+                    //       child: Text(
+                    //         '리뷰 작성',
+                    //         style: h6(mColor: Colors.white),
+                    //       ),
+                    //       style: ElevatedButton.styleFrom(
+                    //         padding: EdgeInsets.all(12),
+                    //         backgroundColor: Colors.redAccent,
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    if (!showCancelButton && !showReviewButton)
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
@@ -234,25 +274,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                           ),
                         ),
                       ),
-                    if (showCancelButton && showReviewButton)
-                      SizedBox(width: gap_m),
-                    if (!showReviewButton)
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () => _showReviewWritingDialog(context),
-                          child: Text(
-                            '리뷰 작성',
-                            style: h6(mColor: Colors.white),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(12),
-                            backgroundColor: Colors.redAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ),
+
                   ],
                 ),
               ),
