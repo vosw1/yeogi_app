@@ -43,7 +43,9 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
 
     bool isRefund = reservation.state == 'REFUND';
     bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
-    bool showReviewButton = reservation.reviewId == null && DateTime.now().isBefore(_checkInDate.add(Duration(days: 30))) && !isRefund;
+    bool showReviewButton = reservation.reviewId == null &&
+        DateTime.now().isBefore(_checkInDate.add(Duration(days: 30))) &&
+        !isRefund;
 
     return Scaffold(
       appBar: AppBar(
@@ -213,8 +215,11 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                            await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                            // Optionally navigate back or refresh the page
+                            await ref
+                                .read(reservationListProvider.notifier)
+                                .payUpdate(widget.reservations.payId);
+                            // 상태를 갱신하여 UI를 다시 빌드
+                            setState(() {});
                           },
                           child: Text(
                             '예약취소',
