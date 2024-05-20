@@ -41,7 +41,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
       orElse: () => widget.reservations,
     );
 
-    bool isRefund = reservation.amount == 0;
+    bool isRefund = reservation.state == 'REFUND';
     bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
     bool showReviewButton = !isRefund;
 
@@ -205,7 +205,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             ),
             if (showCancelButton || showReviewButton)
               Padding(
-                padding: const EdgeInsets.only(top: gap_l),
+                padding: const EdgeInsets.only(top: gap_m),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -218,7 +218,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                           },
                           child: Text(
                             '예약취소',
-                            style: h5(mColor: Colors.white),
+                            style: h6(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(12),
@@ -237,7 +237,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                           onPressed: () => _showReviewWritingDialog(context),
                           child: Text(
                             '리뷰 작성',
-                            style: h5(mColor: Colors.white),
+                            style: h6(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(12),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/my/pay/widgets/pay_button.dart';
@@ -29,7 +31,7 @@ class PayPage extends ConsumerWidget {
               eventMyPageBanners: [],
             ),
           ),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
       });
     }
@@ -46,16 +48,20 @@ class PayPage extends ConsumerWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 "결제 방법",
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                style: h5(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            Center(
               child: Text(
                 "신용카드/페이코/카카오페이/네이버페이",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ),
+            SizedBox(height: gap_l),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
@@ -73,8 +79,10 @@ class PayPage extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "결제 진행 시 예상 소요 시간은 약 3~5분 입니다.",
-                  style: TextStyle(fontSize: 14.0, color: Colors.grey),
+                  '''(주)여어떻노\n\n주소 : 부산광역시 중앙대로 749, 범향빌딩 3층\n대표이사 : 최주호 \n사업자등록번호: 122-83-00279 사업자정보확인\n
+전자우편주소 : help@ssar.kr\n통신판매번호 : 2024-부산여기-12345 \n관광사업자 등록번호: 제123-12호 \n전화번호 : 1234-5678 \n호스팅서비스제공자의 상호 표시: (주)여어떻노
+\n(주)여어떻노는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.''',
+                  style: TextStyle(color: Colors.grey.shade900),
                 ),
               ),
             ),
