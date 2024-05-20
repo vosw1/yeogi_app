@@ -92,7 +92,6 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       onDone: (String data) async {
         print('------- onDone: $data');
         // 결제 완료 후 payId를 서버로부터 받아옴
-        payId = await fetchPaySave(payInfo);
         if (payId != null) {
           setState(() {
             isPaymentComplete = true;
@@ -126,7 +125,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       print('결제 정보 저장 시작');
       print('저장할 데이터: ${payInfo.toJson()}');
 
-      final responseDTO = await ref.read(reservationListProvider.notifier).paySave(payInfo);
+      final responseDTO = await ref.watch(reservationListProvider.notifier).paySave(payInfo);
 
       print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
@@ -139,7 +138,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
     print('결제 정보 전송 시작');
     print('전송할 데이터: ${reqDTO.toJson()}');
 
-    final responseDTO = await ref.read(reservationListProvider.notifier).paySave(reqDTO);
+    final responseDTO = await ref.watch(reservationListProvider.notifier).paySave(reqDTO);
 
     print('결제 정보 전송 완료');
     print('서버 응답: ${responseDTO}');

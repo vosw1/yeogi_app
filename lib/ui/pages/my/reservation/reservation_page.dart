@@ -149,7 +149,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
 
     print('ReservationSaveReqDTO 확인: ${dto.toJson()}'); // 디버깅 코드 추가
 
-    int reservationId = await ref.read(reservationListProvider.notifier).reservationSave(dto);
+    int reservationId = await ref.watch(reservationListProvider.notifier).reservationSave(dto);
     print('reservationSave 확인: $dto');
     print('Received reservationId: $reservationId'); // Debug statement
 
