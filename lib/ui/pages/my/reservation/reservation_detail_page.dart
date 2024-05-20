@@ -41,9 +41,11 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
       orElse: () => widget.reservations,
     );
 
-    bool isRefund = reservation.amount == 0;
+    bool isRefund = reservation.state == 'REFUND';
     bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
-    bool showReviewButton = !isRefund;
+    bool showReviewButton = reservation.reviewId == null &&
+        DateTime.now().isBefore(_checkInDate.add(Duration(days: 30))) &&
+        !isRefund;
 
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +70,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(gap_s),
                     child: Image.asset(
-                      'assets/images/${reservation.roomImgTitle}',
+                      'assets${reservation.roomImagePath}',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,
@@ -184,7 +186,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount)} 원',
+                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount).toString()} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
@@ -205,7 +207,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
             ),
             if (showCancelButton || showReviewButton)
               Padding(
-                padding: const EdgeInsets.only(top: gap_l),
+                padding: const EdgeInsets.only(top: gap_m),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -213,12 +215,15 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                            await ref.read(reservationListProvider.notifier).payUpdate(widget.reservations.payId);
-                            // Optionally navigate back or refresh the page
+                            await ref
+                                .read(reservationListProvider.notifier)
+                                .payUpdate(widget.reservations.payId);
+                            // 상태를 갱신하여 UI를 다시 빌드
+                            setState(() {});
                           },
                           child: Text(
                             '예약취소',
-                            style: h5(mColor: Colors.white),
+                            style: h6(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(12),
@@ -237,7 +242,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                           onPressed: () => _showReviewWritingDialog(context),
                           child: Text(
                             '리뷰 작성',
-                            style: h5(mColor: Colors.white),
+                            style: h6(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(12),

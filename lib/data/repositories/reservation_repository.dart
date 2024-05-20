@@ -69,17 +69,7 @@ class ReservationRepository {
         options: Options(headers: {"Authorization": "Bearer $accessToken"}),
         data: reqDTO.toJson());
 
-    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-    Logger().d(responseDTO.body);
-    print("HTTP Status Code: ${response.statusCode}");
-    print("Response Data: ${response.data}");
-    Logger().d(responseDTO.body.runtimeType);
-
-    if (responseDTO.status == 200) {
-      responseDTO.body = Reservation.fromJson(responseDTO.body);
-      Logger().d(responseDTO.body.runtimeType);
-    }
-    return responseDTO;
+    return ResponseDTO.fromJson(response.data);
   }
 
   // 예약 삭제하기

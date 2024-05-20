@@ -7,17 +7,18 @@ import 'package:bootpay/model/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/reservation_request.dart';
-import 'package:yogi_project/data/dtos/response_dto.dart';
-import 'package:yogi_project/data/models/pay.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
+import 'dart:convert';
 
 class PayButton extends ConsumerStatefulWidget {
   final ReservationSaveReqDTO reservations;
   final Function onPaymentDone;
+  final int id; // 결제 아이디로 사용할 변수
 
   const PayButton({
     Key? key,
     required this.reservations,
+    required this.id, // 결제 아이디로 사용할 변수
     required this.onPaymentDone,
   }) : super(key: key);
 
@@ -39,11 +40,13 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
     int amount = widget.reservations.amountToPay < 1000
         ? 1000
         : widget.reservations.amountToPay; // 결제 금액
-    print('reservations 확인: ${widget.reservations}');
     print("amount 확인: ${widget.reservations.amountToPay}");
+
     PaySaveReqDTO payInfo = PaySaveReqDTO(
-      payId: payId ?? 0, // null일 경우 기본값 설정
-      reservationId: widget.reservations.reservationId,
+      payId: widget.id,
+      // 결제 아이디 사용
+      reservationId: widget.id,
+      // 예약 아이디 사용
       amount: amount,
       way: "나이스페이",
       state: "COMPLETION",
@@ -78,8 +81,9 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
         print('------- onClose');
         Bootpay().dismiss(context);
       },
-      onIssued: (String data) {
+      onIssued: (String data) async {
         print('------- onIssued: $data');
+        await savePaymentData(data); // 결제 정보 저장
       },
       onConfirm: (String data) {
         print('------- onConfirm: $data');
@@ -88,7 +92,6 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       onDone: (String data) async {
         print('------- onDone: $data');
         // 결제 완료 후 payId를 서버로부터 받아옴
-        payId = await fetchPaySave(payInfo);
         if (payId != null) {
           setState(() {
             isPaymentComplete = true;
@@ -101,26 +104,50 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
     );
   }
 
-  Future<int?> fetchPaySave(PaySaveReqDTO reqDTO) async {
+  Future<void> savePaymentData(String data) async {
+    final Map<String, dynamic> jsonData = jsonDecode(data);
+    final receiptId = jsonData['data']['receipt_id'];
+    final orderId = jsonData['data']['order_id'];
+    final amount = jsonData['data']['price'];
+    final paymentMethod = jsonData['data']['method'];
+    print('아이디 확인 : ${widget.id}--------------------------------');
+
+    PaySaveReqDTO payInfo = PaySaveReqDTO(
+      payId: widget.id,
+      reservationId: widget.id,
+      amount: amount,
+      way: paymentMethod,
+      state: "COMPLETION",
+      payAt: DateTime.now(),
+    );
+
     try {
-      print('결제 정보 전송 시작');
-      print('전송할 데이터: ${reqDTO.toJson()}');
+      print('결제 정보 저장 시작');
+      print('저장할 데이터: ${payInfo.toJson()}');
 
-      final ResponseDTO responseDTO = await ref.read(reservationListProvider.notifier).paySave(reqDTO);
+      final responseDTO = await ref.watch(reservationListProvider.notifier).paySave(payInfo);
 
-      print('결제 정보 전송 완료');
+      print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
-
-      // 서버 응답에서 payId를 추출
-      if (responseDTO.status == 200) {
-        return responseDTO.body['payId']; // payId를 반환
-      } else {
-        print('결제 실패: ${responseDTO.errorMessage}');
-        return null;
-      }
     } catch (e) {
-      print('결제 정보 전송 중 오류 발생: $e');
-      return null;
+      print('결제 정보 저장 중 오류 발생: $e');
+    }
+  }
+
+  Future<int?> fetchPaySave(PaySaveReqDTO reqDTO) async {
+    print('결제 정보 전송 시작');
+    print('전송할 데이터: ${reqDTO.toJson()}');
+
+    final responseDTO = await ref.watch(reservationListProvider.notifier).paySave(reqDTO);
+
+    print('결제 정보 전송 완료');
+    print('서버 응답: ${responseDTO}');
+
+    // 서버 응답에서 payId를 추출
+    if (responseDTO.status == 200) {
+      return responseDTO.body;
+    } else {
+      return null; // Add this to handle cases where responseDTO.status is not 200
     }
   }
 

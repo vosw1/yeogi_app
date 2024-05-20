@@ -41,40 +41,57 @@ class _ReviewWritingDialogState extends State<ReviewWritingDialog> {
           ),
         ],
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StarRating(
-                onChanged: (rating) {
-                  setState(() {
-                    _rating = rating;
-                  });
-                },
-                rating: _rating,
-              ),
-            ],
-          ),
-          SizedBox(height: gap_m),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(gap_s),
-              border: Border.all(color: Colors.black),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StarRating(
+                  onChanged: (rating) {
+                    setState(() {
+                      _rating = rating;
+                    });
+                  },
+                  rating: _rating,
+                ),
+              ],
             ),
-            child: TextField(
-              controller: _reviewController,
-              decoration: InputDecoration(
-                labelText: '리뷰 내용',
-                contentPadding: EdgeInsets.all(gap_s),
-                border: InputBorder.none,
+            SizedBox(height: gap_m),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(gap_s),
+                border: Border.all(color: Colors.black),
               ),
-              maxLines: 5,
+              child: TextField(
+                controller: _reviewController,
+                decoration: InputDecoration(
+                  labelText: '리뷰 내용',
+                  contentPadding: EdgeInsets.all(gap_s),
+                  border: InputBorder.none,
+                ),
+                maxLines: 5,
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(top: gap_s),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '*30일 이내에만 작성 가능합니다.',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       actions: [
         Row(
