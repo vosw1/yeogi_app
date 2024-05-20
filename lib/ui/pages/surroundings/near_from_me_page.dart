@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:yogi_project/_core/constants/size.dart';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -110,7 +111,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
         title: Text('주변 숙소 검색하기'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.only(right: gap_m, left: gap_m, bottom: gap_m),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
