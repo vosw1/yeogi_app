@@ -91,11 +91,6 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       onDone: (String data) async {
         print('------- onDone: $data');
         // 결제 완료 후 payId를 서버로부터 받아옴
-        if (payId != null) {
-          widget.onPaymentDone();
-          // '내 예약 페이지'로 이동
-          Navigator.pushReplacementNamed(context, '/myReservations');
-        }
       },
     );
   }
@@ -125,7 +120,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
 
       print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
-      payId = responseDTO.body; // 서버 응답에서 payId를 받아옴
+      Navigator.pushReplacementNamed(context, '/myReservations');
     } catch (e) {
       print('결제 정보 저장 중 오류 발생: $e');
     }
