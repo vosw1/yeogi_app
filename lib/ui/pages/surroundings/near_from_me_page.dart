@@ -2,9 +2,13 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
+
+
+const String GOOGLE_API_KEY = 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -18,6 +22,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
   LatLng? _currentPosition;
   final Set<Marker> markers = {};
   late GoogleMapsPlaces _places;
+  late BitmapDescriptor customIcon;
 
   @override
   void initState() {
@@ -25,6 +30,14 @@ class _NearFromMePageState extends State<NearFromMePage> {
     _controllerCompleter = Completer<GoogleMapController>();
     _getCurrentLocation();
     _places = GoogleMapsPlaces(apiKey: 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA');
+    _loadCustomMarker();
+  }
+
+  Future<void> _loadCustomMarker() async {
+    customIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(24, 24)),
+        'assets/images/hotel_icon.png'
+    );
   }
 
   Future<void> _getCurrentLocation() async {
@@ -57,6 +70,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
     final Marker marker = Marker(
       markerId: markerId,
       position: coordinate,
+      icon: customIcon,
       onTap: () {
         if (placeId != 'current') {
           _showPlaceDetails(placeId);
@@ -155,8 +169,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 borderRadius: BorderRadius.circular(8),
                 child: GoogleMap(
                   initialCameraPosition: _currentPosition != null
-                      ? CameraPosition(target: _currentPosition!, zoom: 12)
-                      : CameraPosition(target: LatLng(35.1796, 129.0756), zoom: 12),
+                      ? CameraPosition(target: _currentPosition!, zoom: 16)
+                      : CameraPosition(target: LatLng(35.1796, 129.0756), zoom: 16),
                   onMapCreated: (controller) async {
                     _controllerCompleter.complete(controller);
                   },
@@ -214,13 +228,14 @@ class _NearFromMePageState extends State<NearFromMePage> {
         Location(lat: coordinate.latitude, lng: coordinate.longitude),
         5000,
         type: 'lodging',
-        language: 'ko'
+        language: 'korean',
       );
 
       if (response.status == 'OK') {
         setState(() {
           searchResults.clear();
           markers.clear();
+
           _addMarker(_currentPosition!, 'current');
           for (PlacesSearchResult result in response.results) {
             _addMarker(
