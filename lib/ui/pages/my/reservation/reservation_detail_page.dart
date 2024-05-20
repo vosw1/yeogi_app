@@ -43,7 +43,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
 
     bool isRefund = reservation.state == 'REFUND';
     bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
-    bool showReviewButton = !isRefund;
+    bool showReviewButton = reservation.reviewId == null && DateTime.now().isBefore(_checkInDate.add(Duration(days: 30))) && !isRefund;
 
     return Scaffold(
       appBar: AppBar(
