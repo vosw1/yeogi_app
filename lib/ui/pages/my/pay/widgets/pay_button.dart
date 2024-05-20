@@ -33,7 +33,6 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
   @override
   void initState() {
     super.initState();
-    isPaymentComplete = widget.id != null;
   }
 
   void handlePayment(BuildContext context) async {
@@ -93,9 +92,6 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
         print('------- onDone: $data');
         // 결제 완료 후 payId를 서버로부터 받아옴
         if (payId != null) {
-          setState(() {
-            isPaymentComplete = true;
-          });
           widget.onPaymentDone();
           // '내 예약 페이지'로 이동
           Navigator.pushReplacementNamed(context, '/myReservations');
@@ -179,7 +175,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
         ),
       ),
       child: Text(
-        isPaymentComplete ? '결제 완료' : '결제하기',
+        '결제하기',
         style: TextStyle(fontSize: 16.0, color: Colors.white),
       ),
     );

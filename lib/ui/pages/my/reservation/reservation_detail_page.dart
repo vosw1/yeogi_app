@@ -37,7 +37,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     final reservationList = ref.watch(reservationListProvider);
 
     final reservation = reservationList.firstWhere(
-          (res) => res.payId == widget.reservations.payId,
+      (res) => res.payId == widget.reservations.payId,
       orElse: () => widget.reservations,
     );
 
@@ -211,7 +211,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (showCancelButton)
+                    if (!showCancelButton)
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
@@ -222,7 +222,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                             setState(() {});
                           },
                           child: Text(
-                            '예약취소',
+                            '예약 취소',
                             style: h6(mColor: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -236,7 +236,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                       ),
                     if (showCancelButton && showReviewButton)
                       SizedBox(width: gap_m),
-                    if (showReviewButton)
+                    if (!showReviewButton)
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () => _showReviewWritingDialog(context),
@@ -262,7 +262,8 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context, {required bool isCheckIn}) async {
+  Future<void> _selectDate(BuildContext context,
+      {required bool isCheckIn}) async {
     DateTime initialDate = isCheckIn ? _checkInDate : _checkOutDate;
     DateTime firstDate = DateTime.now();
     DateTime lastDate = DateTime.now().add(Duration(days: 365));
