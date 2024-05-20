@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/reservation_list_model.dart';
@@ -73,7 +72,6 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
   Widget build(BuildContext context) {
     return Container(
       child: TableCalendar(
-        locale: 'ko_KR',
         focusedDay: _tempStart ?? DateTime.now(),
         firstDay: DateTime.utc(2000, 1, 1),
         lastDay: DateTime.utc(2100, 12, 31),
@@ -113,9 +111,6 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
         headerStyle: HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
-          titleTextFormatter: (date, locale) {
-            return DateFormat.yMMMM(locale).format(date);
-          },
         ),
         calendarBuilders: CalendarBuilders(
           headerTitleBuilder: (context, date) {
@@ -123,7 +118,7 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  DateFormat.yMMMM('ko_KR').format(date),
+                  '${date.year}년 ${date.month}월',
                   style: TextStyle(fontSize: 20.0),
                 ),
               ],
@@ -145,15 +140,12 @@ class _ReservationCalendarState extends ConsumerState<ReservationCalendar> {
             );
           },
           disabledBuilder: (context, day, focusedDay) {
-            if (_isReserved(day) || _isPast(day)) {
-              return Center(
-                child: Text(
-                  '${day.day}',
-                  style: TextStyle(color: Colors.grey.withOpacity(0.5)),
-                ),
-              );
-            }
-            return null;
+            return Center(
+              child: Text(
+                '${day.day}',
+                style: TextStyle(color: Colors.grey.withOpacity(0.5)),
+              ),
+            );
           },
           selectedBuilder: (context, date, _) => Container(
             margin: const EdgeInsets.all(4.0),

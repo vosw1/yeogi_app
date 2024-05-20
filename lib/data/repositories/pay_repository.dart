@@ -1,19 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:yogi_project/_core/constants/http.dart';
 import 'package:yogi_project/data/dtos/pay_request.dart';
 import 'package:yogi_project/data/dtos/response_dto.dart';
 
 class PayRepository {
-  final Dio dio;
   final Logger logger;
 
-  PayRepository(Dio dio, Logger logger)
-      : dio = dio..options = BaseOptions(
-    baseUrl: "http://192.168.200.106:8080", // API 서버의 기본 주소
-    contentType: "application/json; charset=utf-8",
-    validateStatus: (_) => true,
-  ),
-        logger = logger;
+  PayRepository(Logger logger)
+      : logger = logger;
 
   // 결제하기
   Future<ResponseDTO> fetchPaySave(PaySaveReqDTO reqDTO, String accessToken) async {
@@ -22,7 +17,7 @@ class PayRepository {
       var payload = reqDTO.toJson();
       payload['state'] = 'COMPLETION'; // 상태값 고정하기
 
-      Response response = await dio.post(
+      Response response = await dio.put(
           "/api/reservation/pay/${reqDTO.payId}",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}),
           data: payload

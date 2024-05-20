@@ -184,7 +184,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount)} 원',
+                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount).toString()} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,

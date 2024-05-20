@@ -146,20 +146,20 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // Move.reservationPage: (context) => ReservationPage(rooms: rooms),
     // 예약 페이지
     // 임시로 유효한 ReservationSaveReqDTO 인스턴스를 전달
-    Move.paymentPage: (context) => PayPage(
-      reservations: ReservationSaveReqDTO(
-        roomId: 1,
-        roomName: '',
-        stayAdress: '',
-        checkInDate: DateTime.parse('2014-05-12'),
-        checkOutDate: DateTime.parse('2014-05-12'),
-        reservedDates: '',
-        price: 100000,
-        reservationName: "Test Name",
-        reservationTel: "010-1234-5678",
-        roomImgTitle: '', reservationId: 1, amount: 100000, amountToPay: 100000,
-      ),
-    ),
+    // Move.paymentPage: (context) => PayPage(
+    //   reservations: ReservationSaveReqDTO(
+    //     roomId: 1,
+    //     roomName: '',
+    //     stayAdress: '',
+    //     checkInDate: DateTime.parse('2014-05-12'),
+    //     checkOutDate: DateTime.parse('2014-05-12'),
+    //     reservedDates: '',
+    //     price: 100000,
+    //     reservationName: "Test Name",
+    //     reservationTel: "010-1234-5678",
+    //     roomImgTitle: '', amount: 100000, amountToPay: 100000,
+    //   ), reservationId: null,
+    // ),
     // 결제 페이지
     Move.myReservationPage: (context) =>
         MyReservationPage(users: users, eventMyPageBanners: [],),

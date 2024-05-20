@@ -49,8 +49,6 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.numberOfNights);
-    print(widget.rooms.roomSpecialPrice * widget.numberOfNights);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -128,57 +126,63 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       TextEditingController nameController,
       TextEditingController phoneController,
       Room room,
-      ) {
-    try {
-      DateTime checkInDate = widget.selectedStartDate;
-      DateTime checkOutDate = widget.selectedEndDate;
+      ) async {
+    DateTime checkInDate = widget.selectedStartDate;
+    DateTime checkOutDate = widget.selectedEndDate;
 
-      int totalAmount = (room.roomSpecialPrice ?? room.roomPrice) * widget.numberOfNights;
+    int totalAmount = (room.roomSpecialPrice ?? room.roomPrice) * widget.numberOfNights;
 
-      ReservationSaveReqDTO dto = ReservationSaveReqDTO(
-        roomId: room.roomId,
-        roomName: room.roomName ?? 'defaultRoomName',
-        roomImgTitle: room.roomImgTitle ?? 'defaultImgTitle',
-        price: totalAmount,
-        amountToPay: totalAmount,
-        checkInDate: checkInDate,
-        checkOutDate: checkOutDate,
-        reservationName: nameController.text.isNotEmpty
-            ? nameController.text
-            : 'Default Name',
-        reservationTel: phoneController.text.isNotEmpty
-            ? phoneController.text
-            : 'Default Tel',
-        stayAdress: '',
-        reservedDates: '',
-        reservationId: 1,
-        amount: totalAmount,
-      );
+    ReservationSaveReqDTO dto = ReservationSaveReqDTO(
+      roomId: room.roomId,
+      roomName: room.roomName ?? 'defaultRoomName',
+      roomImgTitle: room.roomImgTitle ?? 'defaultImgTitle',
+      price: totalAmount,
+      amountToPay: totalAmount,
+      checkInDate: checkInDate,
+      checkOutDate: checkOutDate,
+      reservationName: nameController.text.isNotEmpty ? nameController.text : 'Default Name',
+      reservationTel: phoneController.text.isNotEmpty ? phoneController.text : 'Default Tel',
+      reservedDates: '',
+      amount: totalAmount,
+      stayAddress: '',
+    );
 
-      ref.read(reservationListProvider.notifier).reservationSave(dto);
-      print('reservationSave확인: $dto');
+    print('ReservationSaveReqDTO 확인: ${dto.toJson()}'); // 디버깅 코드 추가
+
+    int reservationId = await ref.read(reservationListProvider.notifier).reservationSave(dto);
+    print('reservationSave 확인: $dto');
+    print('Received reservationId: $reservationId'); // Debug statement
+
+    if (reservationId != -1) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PayPage(reservations: dto),
+          builder: (context) => PayPage(
+            reservations: dto,
+            reservationId: reservationId, // 예약 아이디 전달
+          ),
         ),
       );
-    } catch (e) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Notice'),
-            content: Text('날짜 형식이 올바르지 않습니다.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('확인'),
-              ),
-            ],
-          );
-        },
-      );
+    } else {
+      _showErrorDialog(context, '예약에 실패했습니다. 다시 시도해주세요.');
     }
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Notice'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Center(child: Text('확인')),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
