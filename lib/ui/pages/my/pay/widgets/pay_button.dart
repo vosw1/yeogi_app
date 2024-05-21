@@ -15,12 +15,14 @@ class PayButton extends ConsumerStatefulWidget {
   final ReservationSaveReqDTO reservations;
   final Function onPaymentDone;
   final int id; // 결제 아이디로 사용할 변수
+  final int numberOfNights; // 숙박일수
 
   const PayButton({
     Key? key,
     required this.reservations,
     required this.id, // 결제 아이디로 사용할 변수
     required this.onPaymentDone,
+    required this.numberOfNights,
   }) : super(key: key);
 
   @override
@@ -102,10 +104,13 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
     final paymentMethod = jsonData['data']['method'];
     print('아이디 확인 : ${widget.id}--------------------------------');
 
+    // amount를 일일 금액으로 변환 후 int 타입으로 저장
+    int dailyAmount = (amount / widget.numberOfNights).round();
+
     PaySaveReqDTO payInfo = PaySaveReqDTO(
       payId: widget.id,
       reservationId: widget.id,
-      amount: amount,
+      amount: dailyAmount, // 일일 금액으로 저장
       way: paymentMethod,
       state: "COMPLETION",
       payAt: DateTime.now(),
@@ -116,7 +121,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       print('저장할 데이터: ${payInfo.toJson()}');
 
       final responseDTO =
-          await ref.read(reservationListProvider.notifier).paySave(payInfo);
+      await ref.read(reservationListProvider.notifier).paySave(payInfo);
       print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
       // '내 예약 페이지'로 이동

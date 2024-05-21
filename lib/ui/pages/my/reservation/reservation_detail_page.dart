@@ -45,7 +45,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
     bool showCancelButton = !isRefund && DateTime.now().isBefore(_checkInDate);
     bool showReviewButton = !isRefund &&
         reservation.reviewId == null &&
-        DateTime.now().isAfter(_checkOutDate) &&
+        DateTime.now().isAfter(_checkInDate) &&
         DateTime.now().isBefore(_checkOutDate.add(Duration(days: 30)));
 
     return Scaffold(
@@ -187,7 +187,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                   ),
                   SizedBox(height: gap_xs),
                   Text(
-                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount/2).toString()} 원',
+                    '결제금액 : ${NumberFormat('#,###').format(reservation.amount).toString()} 원',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,

@@ -10,11 +10,13 @@ import 'package:yogi_project/ui/pages/my/reservation/my_reservation_page.dart';
 class PayPage extends ConsumerWidget {
   final ReservationSaveReqDTO reservations;
   final int reservationId; // 예약 아이디 추가
+  final int numberOfNights;
 
   const PayPage({
     Key? key,
     required this.reservations,
     required this.reservationId, // 예약 아이디 추가
+    required this.numberOfNights,
   }) : super(key: key);
 
   @override
@@ -26,8 +28,7 @@ class PayPage extends ConsumerWidget {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => MyReservationPage(
-            ),
+            builder: (context) => MyReservationPage(),
           ),
           (Route<dynamic> route) => false,
         );
@@ -68,6 +69,7 @@ class PayPage extends ConsumerWidget {
                   id: reservationId, // 예약 아이디를 결제 페이지로 전달
                   reservations: reservations,
                   onPaymentDone: onPaymentDone,
+                  numberOfNights: numberOfNights,
                 ),
               ),
             ),
@@ -81,10 +83,9 @@ class PayPage extends ConsumerWidget {
 전자우편주소 : help@ssar.kr\n통신판매번호 : 2024-부산여기-12345 \n관광사업자 등록번호: 제123-12호 \n전화번호 : 1234-5678 \n호스팅서비스제공자의 상호 표시: (주)여어떻노
 \n(주)여어떻노는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.''',
                   style: TextStyle(
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15
-                  ),
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
                 ),
               ),
             ),

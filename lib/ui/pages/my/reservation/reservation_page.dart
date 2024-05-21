@@ -178,7 +178,8 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
         MaterialPageRoute(
           builder: (context) => PayPage(
             reservations: dto,
-            reservationId: reservationId, // 예약 아이디 전달
+            reservationId: reservationId,
+              numberOfNights: widget.numberOfNights// 예약 아이디 전달
           ),
         ),
       );
