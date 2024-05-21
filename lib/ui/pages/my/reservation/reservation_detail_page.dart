@@ -186,6 +186,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                     ),
                   ),
                   SizedBox(height: gap_xs),
+                  // 예약 금액 * 일수 = 결제 금액
                   Text(
                     '결제금액 : ${NumberFormat('#,###').format(reservation.amount).toString()} 원',
                     style: TextStyle(
