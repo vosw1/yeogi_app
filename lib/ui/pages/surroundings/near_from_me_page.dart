@@ -31,7 +31,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
     super.initState();
     _controllerCompleter = Completer<GoogleMapController>();
 
-    _places = GoogleMapsPlaces(apiKey: 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA');
+    _places = GoogleMapsPlaces(apiKey: GOOGLE_API_KEY);
     _loadCustomMarker().then((value) {
       _getCurrentLocation();
     });
@@ -93,9 +93,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
       onTap: () {
         _showPlaceDetails(stayId);
         if (stayId != 'current') {
-          _showSnackbarWithDetails(stayId);
+          _showPopupWithDetails(stayId);
         }
-
       },
     );
     setState(() {
@@ -145,26 +144,35 @@ class _NearFromMePageState extends State<NearFromMePage> {
     }
   }
 
-
-
-
-  void _showSnackbarWithDetails(String stayId) {
+  void _showPopupWithDetails(String stayId) {
     final stayInfo = stayInfoMap[stayId];
     if (stayInfo != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${stayInfo.name} - ${stayInfo.address}'),
-          action: SnackBarAction(
-            label: '상세 보기',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => StayDetailPage(stayId: int.parse(stayId)),
-                ),
-              );
-            },
-          ),
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(stayInfo.name),
+          content: Text(stayInfo.address),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('확인'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StayDetailPage(stayId: int.parse(stayId)),
+                  ),
+                );
+              },
+              child: Text('상세 보기'),
+            ),
+          ],
         ),
       );
     }
