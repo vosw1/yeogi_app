@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:yogi_project/_core/constants/move.dart';
 import 'package:yogi_project/_core/constants/size.dart';
-import 'package:yogi_project/ui/pages/my/pay/pay_page.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/privacy_polocy_dialog.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/third_party_providing_dialog.dart';
 import 'package:yogi_project/ui/pages/my/reservation/widgets/usage_rules_dialog.dart';
-
-import 'age_confirmation_dialog.dart';
+import 'package:yogi_project/ui/pages/my/reservation/widgets/age_confirmation_dialog.dart';
 
 class AgreementSection extends StatefulWidget {
   final void Function(bool) onAllChecked;
   final List<bool> subCheckboxValues;
+  final void Function(int, bool) onSubCheckboxChanged;
   final List<String> subtitles;
 
   const AgreementSection({
     Key? key,
     required this.onAllChecked,
     required this.subCheckboxValues,
+    required this.onSubCheckboxChanged,
     required this.subtitles,
   }) : super(key: key);
 
@@ -31,7 +30,7 @@ class _AgreementSectionState extends State<AgreementSection> {
   @override
   void initState() {
     super.initState();
-    _isChecked = false;
+    _isChecked = widget.subCheckboxValues.every((element) => element);
     _subCheckboxValues = List<bool>.from(widget.subCheckboxValues);
   }
 
@@ -44,8 +43,7 @@ class _AgreementSectionState extends State<AgreementSection> {
       onChecked: (bool value) {
         setState(() {
           _isChecked = value;
-          _subCheckboxValues =
-              List<bool>.filled(_subCheckboxValues.length, value);
+          _subCheckboxValues = List<bool>.filled(_subCheckboxValues.length, value);
         });
         widget.onAllChecked(value);
       },
@@ -78,6 +76,7 @@ class _AgreementSectionState extends State<AgreementSection> {
         SizedBox(height: gap_s),
         Column(
           children: subtitle.map((text) {
+            int index = subtitle.indexOf(text);
             return GestureDetector(
               onTap: () {
                 _showPopup(text); // 팝업을 표시하는 메소드를 호출
@@ -88,11 +87,12 @@ class _AgreementSectionState extends State<AgreementSection> {
                     child: Row(
                       children: [
                         Checkbox(
-                          value: _subCheckboxValues[subtitle.indexOf(text)],
+                          value: _subCheckboxValues[index],
                           onChanged: (bool? value) {
                             setState(() {
-                              _subCheckboxValues[subtitle.indexOf(text)] =
-                                  value ?? false;
+                              _subCheckboxValues[index] = value ?? false;
+                              _isChecked = _subCheckboxValues.every((element) => element);
+                              widget.onSubCheckboxChanged(index, value ?? false);
                             });
                           },
                         ),
@@ -115,16 +115,16 @@ class _AgreementSectionState extends State<AgreementSection> {
 
     switch (text) {
       case '이용규칙 및 취소/환불 규정 동의(필수)':
-        alertDialog = _buildUsageRulesDialog() as AlertDialog;
+        alertDialog = _buildUsageRulesDialog();
         break;
       case '개인정보 수집 및 이용 동의(필수)':
-        alertDialog = _buildPrivacyPolicyDialog() as AlertDialog;
+        alertDialog = _buildPrivacyPolicyDialog();
         break;
       case '개인정보 제3자 제공 동의(필수)':
-        alertDialog = _buildThirdPartyProvidingDialog() as AlertDialog;
+        alertDialog = _buildThirdPartyProvidingDialog();
         break;
       case '만 14세 이상 확인(필수)':
-        alertDialog = _buildAgeConfirmationDialog() as AlertDialog;
+        alertDialog = _buildAgeConfirmationDialog();
         break;
       default:
         alertDialog = _buildDefaultDialog();
@@ -161,51 +161,11 @@ class _AgreementSectionState extends State<AgreementSection> {
     return PrivacyPolicyDialog();
   }
 
-  // todo : 숙소 이름이 필요함
   ThirdPartyProvidingDialog _buildThirdPartyProvidingDialog() {
     return ThirdPartyProvidingDialog();
   }
 
   AgeConfirmationDialog _buildAgeConfirmationDialog() {
     return AgeConfirmationDialog();
-  }
-
-  void _showPopups(BuildContext context) {
-    List<String> messages = [];
-    if (!_subCheckboxValues.every((element) => element)) {
-      messages.add('모두 동의해주세요');
-    }
-
-    if (messages.isNotEmpty) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Notice'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: messages.map((message) => Text(message)).toList(),
-            ),
-            backgroundColor: Colors.white,
-            actions: <Widget>[
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('확인'),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-      // } else {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(builder: (context) => PayPage()),
-      //   );
-    }
   }
 }

@@ -23,9 +23,8 @@ class _JoinFormState extends State<JoinForm> {
   final _addressController = TextEditingController();
   final _ageController = MaskedTextController(mask: '0000-00-00');
   final _phoneController = MaskedTextController(mask: '000-0000-0000');
-  bool _serviceAgreementChecked = false;
-  bool _ageCheck = false;
-  bool _privacyCheck = false;
+  List<bool> _subCheckboxValues = [false, false];
+  bool _isAllChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +76,12 @@ class _JoinFormState extends State<JoinForm> {
           Row(
             children: [
               Checkbox(
-                value: _serviceAgreementChecked,
+                value: _isAllChecked,
                 onChanged: (value) {
                   setState(() {
-                    _serviceAgreementChecked = value ?? false;
-                    _ageCheck = _serviceAgreementChecked;
-                    _privacyCheck = _serviceAgreementChecked;
+                    _isAllChecked = value ?? false;
+                    _subCheckboxValues =
+                    List<bool>.filled(_subCheckboxValues.length, _isAllChecked);
                   });
                 },
               ),
@@ -90,80 +89,31 @@ class _JoinFormState extends State<JoinForm> {
                 onTap: () async {
                   _showPopup(context, 0);
                 },
-                child: Row(
-                  children: [
-                    Text(
-                      '서비스 약관에 동의합니다',
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  '전체 동의',
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8),
-          Row(
-            children: [
-              Checkbox(
-                value: _ageCheck,
-                onChanged: (value) {
-                  setState(() {
-                    _ageCheck = value ?? false;
-                  });
-                },
-              ),
-              GestureDetector(
-                onTap: () async {
-                  _showPopup(context, 1);
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      '만 14세 이상 확인',
-                    ),
-                    SizedBox(width: 150),
-                    Icon(Icons.arrow_forward_ios, size: gap_m),
-                  ],
-                ),
-              ),
-            ],
+          _buildCheckboxWithPopup(
+            context: context,
+            index: 0,
+            text: '만 14세 이상 확인',
           ),
-          SizedBox(height: 8),
-          Row(
-            children: [
-              Checkbox(
-                value: _privacyCheck,
-                onChanged: (value) {
-                  setState(() {
-                    _privacyCheck = value ?? false;
-                  });
-                },
-              ),
-              GestureDetector(
-                onTap: () async {
-                  _showPopup(context, 2);
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      '개인정보 수집 및 이용 동의',
-                    ),
-                    SizedBox(width: 90),
-                    Icon(Icons.arrow_forward_ios, size: gap_m),
-                  ],
-                ),
-              ),
-            ],
+          _buildCheckboxWithPopup(
+            context: context,
+            index: 1,
+            text: '개인정보 수집 및 이용 동의',
           ),
           SizedBox(height: 32.0),
           ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate() &&
-                  _serviceAgreementChecked &&
-                  _ageCheck &&
-                  _privacyCheck) {
+            onPressed: _canProceed()
+                ? () {
+              if (_formKey.currentState!.validate()) {
                 String password = _passwordController.text;
                 String email = _emailController.text;
                 String name = _nameController.text;
@@ -172,18 +122,25 @@ class _JoinFormState extends State<JoinForm> {
                 String birth = _ageController.text;
 
                 JoinReqDTO joinReqDTO = JoinReqDTO(
-                    password: password, email: email, name: name, phone: phone, birth: birth);
+                    password: password,
+                    email: email,
+                    name: name,
+                    phone: phone,
+                    birth: birth);
 
-                SessionStore store = SessionStore(); // Change this to the appropriate way to get the SessionStore instance
+                SessionStore store =
+                SessionStore(); // Change this to the appropriate way to get the SessionStore instance
 
                 store.join(joinReqDTO);
 
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => MainHolder()),
+                    MaterialPageRoute(
+                        builder: (context) => MainHolder()),
                         (route) => false);
               }
-            },
+            }
+                : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
             ),
@@ -193,6 +150,44 @@ class _JoinFormState extends State<JoinForm> {
         ],
       ),
     );
+  }
+
+  Widget _buildCheckboxWithPopup({
+    required BuildContext context,
+    required int index,
+    required String text,
+  }) {
+    return Row(
+      children: [
+        Checkbox(
+          value: _subCheckboxValues[index],
+          onChanged: (value) {
+            setState(() {
+              _subCheckboxValues[index] = value ?? false;
+              _isAllChecked = _subCheckboxValues.every((element) => element);
+            });
+          },
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              _showPopup(context, index + 1);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(text),
+                Icon(Icons.arrow_forward_ios, size: gap_m), // 아이콘의 위치를 적절히 조정
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  bool _canProceed() {
+    return _subCheckboxValues.every((element) => element);
   }
 
   void _showPopup(BuildContext context, int index) {
@@ -238,8 +233,6 @@ class _JoinFormState extends State<JoinForm> {
           ],
         );
         break;
-      default:
-        break;
     }
 
     if (alertDialog != null) {
@@ -278,12 +271,14 @@ class _JoinFormState extends State<JoinForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(content,
+        Text(
+          content,
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontWeight: FontWeight.bold,
             fontSize: 15,
-          ),),
+          ),
+        ),
       ],
     );
   }
