@@ -5,11 +5,11 @@ void showLoginAlert(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("알림"),
-        content: Text("로그인이 필요합니다."),
+        title: Text("로그인 필요"),
+        content: Text("로그인을 먼저 해주세요."),
         actions: [
           TextButton(
-            child: Text("확인"),
+            child: Center(child: Text("로그인 페이지로 이동", style: TextStyle(color: Colors.redAccent),)),
             onPressed: () {
               // 현재 AlertDialog를 닫음
               Navigator.of(context).pop();
