@@ -8,8 +8,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/data/models/stay_info.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
-
-const String GOOGLE_API_KEY = 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA';
+const String GOOGLE_API_KEY = 'YOUR_GOOGLE_API_KEY';
 
 class NearFromMePage extends StatefulWidget {
   @override
@@ -39,7 +38,6 @@ class _NearFromMePageState extends State<NearFromMePage> {
       stayInfoMap[stayInfo.id.toString()] = stayInfo;
     }
   }
-
 
   Future<void> _loadCustomMarker() async {
     customIcon = await BitmapDescriptor.fromAssetImage(
@@ -111,27 +109,31 @@ class _NearFromMePageState extends State<NearFromMePage> {
         final result = response.result;
         if (result != null) {
           final stayInfo = stayInfoMap[stayId];
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(stayInfo?.name ?? '이름 없음'),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('주소: ${stayInfo?.address ?? '주소 없음'}'),
+          if (stayInfo != null) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(stayInfo.name),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('주소: ${stayInfo.address}'),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('닫기'),
+                  ),
                 ],
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('닫기'),
-                ),
-              ],
-            ),
-          );
+            );
+          } else {
+            print('stayInfo가 null입니다.');
+          }
         } else {
           print('응답에 유효한 결과가 없습니다.');
         }
@@ -151,7 +153,26 @@ class _NearFromMePageState extends State<NearFromMePage> {
         context: context,
         builder: (context) => AlertDialog(
           title: Text(stayInfo.name),
-          content: Text(stayInfo.address),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(
+                    'assets/images/hotel/${stayInfo.stayImgTitle}',
+                    fit: BoxFit.cover, // Use BoxFit to cover the entire container
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(stayInfo.address),
+              SizedBox(height: 8),
+              Text(stayInfo.description),
+            ],
+          ),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             TextButton(
@@ -245,19 +266,6 @@ class _NearFromMePageState extends State<NearFromMePage> {
               ),
             ),
             SizedBox(height: 16),
-            // Uncomment the following lines to display search results
-            // Text('결과 ${searchResults.length}건', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            // Divider(),
-            // Expanded(
-            //   child: ListView.builder(
-            //     itemCount: searchResults.length,
-            //     itemBuilder: (context, index) {
-            //       return ListTile(
-            //         title: Text(searchResults[index]),
-            //       );
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -267,51 +275,39 @@ class _NearFromMePageState extends State<NearFromMePage> {
   Future<void> _goToCurrentPosition() async {
     try {
       Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.medium,
+        desiredAccuracy: LocationAccuracy.high,
       );
-      if (position != null) {
-        setState(() {
-          _currentPosition = LatLng(position.latitude, position.longitude);
-        });
-        final GoogleMapController controller = await _controllerCompleter.future;
-        controller.animateCamera(CameraUpdate.newLatLng(_currentPosition!));
-        print('지도 위치를 현재 위치로 이동했습니다: $_currentPosition');
-      }
+
+      if (!mounted) return;
+
+      setState(() {
+        _currentPosition = LatLng(position.latitude, position.longitude);
+      });
+
+      final GoogleMapController controller = await _controllerCompleter.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: _currentPosition!,
+          zoom: 16,
+        ),
+      ));
     } catch (e) {
-      print('위치 가져오기 오류: $e');
+      print('현재 위치를 가져오는 중 오류 발생: $e');
     }
   }
 
-  Future<void> _searchNearbyPlaces(LatLng coordinate) async {
-    try {
-      print('주변 숙소 검색 시작 - 좌표: $coordinate');
-      PlacesSearchResponse response = await _places.searchNearbyWithRadius(
-        Location(lat: coordinate.latitude, lng: coordinate.longitude),
-        5000,
-        type: 'lodging',
-        language: 'korean',
-      );
+  void _searchNearbyPlaces(LatLng coordinate) async {
+    final response = await _places.searchNearbyWithRadius(
+      Location(lat: coordinate.latitude, lng: coordinate.longitude),
+      500,
+    );
 
-      if (response.status == 'OK') {
-        setState(() {
-          searchResults.clear();
-          markers.clear();
-
-          _addMarker(_currentPosition!, 'current');
-          for (PlacesSearchResult result in response.results) {
-            _addMarker(
-              LatLng(result.geometry!.location.lat, result.geometry!.location.lng),
-              result.placeId!,
-            );
-            searchResults.add(result.name!);
-          }
-        });
-        print('검색된 결과 수: ${response.results.length}');
-      } else {
-        print('검색 결과 오류: ${response.errorMessage}');
-      }
-    } catch (e) {
-      print('주변 숙소 검색 오류: $e');
+    if (response.status == 'OK') {
+      setState(() {
+        searchResults = response.results.map((result) => result.name).toList();
+      });
+    } else {
+      print('검색 결과를 가져오지 못했습니다: ${response.errorMessage}');
     }
   }
 }
