@@ -32,46 +32,12 @@ class ScrapListViewModel extends StateNotifier<ScrapListModel?> {
     state = responseDTO.body;
   }
 
-  // 스크랩 추가 메서드
-  Future<void> notifyAdd(int stayId) async {
-    SessionUser sessionUser = ref.read(sessionProvider);
-    if (sessionUser.accessToken == null) {
-      print("로그인이 되지 않았습니다");
-    } else {
-      ResponseDTO responseDTO =
-      await ScrapRepository().fetchScrap(stayId, sessionUser.accessToken!);
-      if (responseDTO.status == 200) {
-        print("스크랩 등록에 성공 하셨습니다");
-        notifyInit();  // 스크랩 추가 후 목록 갱신
-      } else {
-        print("스크랩 등록에 실패 하셨습니다");
-      }
-    }
-  }
-
-  // 스크랩 삭제 메서드
-  Future<void> notifyRemove(int stayId) async {
-    SessionUser sessionUser = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await ScrapRepository()
-        .fetchDeleteScrap(stayId, sessionUser.accessToken!);
-    if(sessionUser.accessToken == null){
-      print("로그인이 되지 않았습니다");
-    } else{
-      if (responseDTO.status == 200) {
-        print("스크랩 삭제에 성공 하셨습니다");
-        notifyInit();  // 스크랩 삭제 후 목록 갱신
-      } else {
-        print("스크랩 삭제에 실패 하셨습니다");
-      }
-    }
-  }
-
+  // 로그 아웃 시 사용
   void clearScrapList() {
     state = null;
   }
 }
 
-// 상태 관리 제공자
 final scrapListProvider =
 StateNotifierProvider.autoDispose<ScrapListViewModel, ScrapListModel?>(
         (ref) {

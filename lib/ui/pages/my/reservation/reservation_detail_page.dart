@@ -41,11 +41,12 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
       orElse: () => widget.reservations,
     );
 
-    bool isRefund = reservation.state == 'REFUND';
-    bool showCancelButton = DateTime.now().isBefore(_checkInDate) && !isRefund;
-    bool showReviewButton = reservation.reviewId == null &&
-        DateTime.now().isBefore(_checkInDate.add(Duration(days: 30))) &&
-        !isRefund;
+    bool isRefund = reservation.state == 'REFUND' || reservation.amount == 0;
+    bool showCancelButton = !isRefund && DateTime.now().isBefore(_checkInDate);
+    bool showReviewButton = !isRefund &&
+        reservation.reviewId == null &&
+        DateTime.now().isAfter(_checkOutDate) &&
+        DateTime.now().isBefore(_checkOutDate.add(Duration(days: 30)));
 
     return Scaffold(
       appBar: AppBar(
@@ -205,53 +206,27 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                 ],
               ),
             ),
-            if (showCancelButton || showReviewButton)
+            if (isRefund)
+              Padding(
+                padding: const EdgeInsets.only(top: gap_m),
+                child: Center(
+                  child: Text(
+                    '취소된 예약입니다',
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            if (!isRefund && (showCancelButton || showReviewButton))
               Padding(
                 padding: const EdgeInsets.only(top: gap_m),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (showCancelButton)
-                    //   Expanded(
-                    //     child: ElevatedButton(
-                    //       onPressed: () async {
-                    //         await ref
-                    //             .read(reservationListProvider.notifier)
-                    //             .payUpdate(widget.reservations.payId);
-                    //         // 상태를 갱신하여 UI를 다시 빌드
-                    //         setState(() {});
-                    //       },
-                    //       child: Text(
-                    //         '예약 취소',
-                    //         style: h6(mColor: Colors.white),
-                    //       ),
-                    //       style: ElevatedButton.styleFrom(
-                    //         padding: EdgeInsets.all(12),
-                    //         backgroundColor: Colors.red,
-                    //         shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(20),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // if (showReviewButton)
-                    //   Expanded(
-                    //     child: ElevatedButton(
-                    //       onPressed: () => _showReviewWritingDialog(context),
-                    //       child: Text(
-                    //         '리뷰 작성',
-                    //         style: h6(mColor: Colors.white),
-                    //       ),
-                    //       style: ElevatedButton.styleFrom(
-                    //         padding: EdgeInsets.all(12),
-                    //         backgroundColor: Colors.redAccent,
-                    //         shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(20),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    if (!showCancelButton && !showReviewButton)
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
@@ -274,7 +249,23 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
                           ),
                         ),
                       ),
-
+                    if (showReviewButton)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => _showReviewWritingDialog(context),
+                          child: Text(
+                            '리뷰 작성',
+                            style: h6(mColor: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(12),
+                            backgroundColor: Colors.redAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -315,11 +306,8 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
   }
 
   String formatPhoneNumber(String phoneNumber) {
-    if (phoneNumber.length == 11) {
-      return '${phoneNumber.substring(0, 3)}-${phoneNumber.substring(3, 7)}-${phoneNumber.substring(7, 11)}';
-    } else {
-      return phoneNumber;
-    }
+    return phoneNumber.replaceAllMapped(RegExp(r'(\d{3})(\d{3,4})(\d{4})'),
+        (Match m) => '${m[1]}-${m[2]}-${m[3]}');
   }
 
   void _showReviewWritingDialog(BuildContext context) {

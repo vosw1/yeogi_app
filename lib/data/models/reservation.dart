@@ -47,45 +47,77 @@ class Reservation {
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
-      reservationId:
-          json['id'] is int ? json['id'] : int.parse(json['id'] ?? '0'),
+      reservationId: json['id'] is int ? json['id'] : int.parse(json['id'] ?? '0'),
       id: json['id'] is int ? json['id'] : int.parse(json['id'] ?? '0'),
-      reservedDates:
-          (json['reservedDates'] as List<dynamic>? ?? []).cast<String>(),
-      userId: json['userId'] is int
-          ? json['userId']
-          : int.parse(json['userId'] ?? '0'),
+      reservedDates: (json['reservedDates'] as List<dynamic>? ?? []).cast<String>(),
+      userId: json['userId'] is int ? json['userId'] : int.parse(json['userId'] ?? '0'),
       reviewId: json['reviewId'] != null
-          ? (json['reviewId'] is int
-              ? json['reviewId']
-              : int.parse(json['reviewId']))
+          ? (json['reviewId'] is int ? json['reviewId'] : int.parse(json['reviewId']))
           : null,
       stayName: json['stayName'] ?? 'Unknown',
       stayAddress: json['stayAddress'] ?? 'Unknown',
-      price: json['price'] is int
-          ? json['price']
-          : int.parse(json['price'] ?? '0'),
-      roomId: json['roomId'] is int
-          ? json['roomId']
-          : int.parse(json['roomId'] ?? '0'),
+      price: json['price'] is int ? json['price'] : int.parse(json['price'] ?? '0'),
+      roomId: json['roomId'] is int ? json['roomId'] : int.parse(json['roomId'] ?? '0'),
       roomName: json['roomName'] ?? 'Unknown',
-      checkInDate:
-          DateTime.parse(json['checkInDate'] ?? DateTime.now().toString()),
-      checkOutDate:
-          DateTime.parse(json['checkOutDate'] ?? DateTime.now().toString()),
+      checkInDate: DateTime.parse(json['checkInDate'] ?? DateTime.now().toString()),
+      checkOutDate: DateTime.parse(json['checkOutDate'] ?? DateTime.now().toString()),
       roomImgTitle: json['roomImgTitle'],
       roomImagePath: json['roomImagePath'],
       reservationName: json['reservationName'] ?? 'Unknown',
       reservationTel: json['reservationTel'] ?? 'Unknown',
-      payId: json['payId'] != null
-          ? (json['payId'] is int ? json['payId'] : int.parse(json['payId']))
-          : 0,
-      amount: json['amount'] is int
-          ? json['amount']
-          : int.parse(json['amount'] ?? '0'),
+      payId: json['payId'] != null ? (json['payId'] is int ? json['payId'] : int.parse(json['payId'])) : 0,
+      amount: json['amount'] is int ? json['amount'] : int.parse(json['amount'] ?? '0'),
       way: json['way'] ?? 'Unknown',
       state: json['state'] ?? 'Unknown',
       createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toString()),
+    );
+  }
+
+  Reservation copyWith({
+    int? reservationId,
+    int? id,
+    List<String>? reservedDates,
+    int? userId,
+    int? reviewId,
+    String? stayName,
+    String? stayAddress,
+    int? price,
+    int? roomId,
+    String? roomName,
+    DateTime? checkInDate,
+    DateTime? checkOutDate,
+    String? roomImgTitle,
+    String? roomImagePath,
+    String? reservationName,
+    String? reservationTel,
+    int? payId,
+    int? amount,
+    String? way,
+    String? state,
+    DateTime? createdAt,
+  }) {
+    return Reservation(
+      reservationId: reservationId ?? this.reservationId,
+      id: id ?? this.id,
+      reservedDates: reservedDates ?? this.reservedDates,
+      userId: userId ?? this.userId,
+      reviewId: reviewId ?? this.reviewId,
+      stayName: stayName ?? this.stayName,
+      stayAddress: stayAddress ?? this.stayAddress,
+      price: price ?? this.price,
+      roomId: roomId ?? this.roomId,
+      roomName: roomName ?? this.roomName,
+      checkInDate: checkInDate ?? this.checkInDate,
+      checkOutDate: checkOutDate ?? this.checkOutDate,
+      roomImgTitle: roomImgTitle ?? this.roomImgTitle,
+      roomImagePath: roomImagePath ?? this.roomImagePath,
+      reservationName: reservationName ?? this.reservationName,
+      reservationTel: reservationTel ?? this.reservationTel,
+      payId: payId ?? this.payId,
+      amount: amount ?? this.amount,
+      way: way ?? this.way,
+      state: state ?? this.state,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 

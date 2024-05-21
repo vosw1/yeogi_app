@@ -6,9 +6,8 @@ import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 class ScrapListItem extends StatelessWidget {
   final Scrap scrap;
-  final VoidCallback onScrapChanged;
 
-  const ScrapListItem({required this.scrap, required this.onScrapChanged}); // onScrapChanged 콜백 추가
+  const ScrapListItem({required this.scrap}); // 생성자 추가
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class ScrapListItem extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => StayDetailPage(stayId: scrap.stayId),
               ),
-            ).then((_) => onScrapChanged()); // 상세 페이지에서 돌아왔을 때 콜백 호출
+            );
           },
           child: Row(
             children: [

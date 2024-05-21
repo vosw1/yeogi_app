@@ -39,6 +39,15 @@ class ReservationListViewModel extends StateNotifier<List<Reservation>> {
         .fetchdeleteReservation(payId, accessToken);
     if (responseDTO.status == 200) {
       logger.d("Refund processed successfully.");
+
+      // 상태 업데이트
+      state = state.map((reservation) {
+        if (reservation.payId == payId) {
+          return reservation.copyWith(state: 'REFUND');
+        }
+        return reservation;
+      }).toList();
+
     } else {
       logger.e("Failed to process refund: ${responseDTO.errorMessage}");
     }
