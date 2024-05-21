@@ -32,6 +32,8 @@ class ReservationPage extends ConsumerStatefulWidget {
 class _ReservationPageState extends ConsumerState<ReservationPage> {
   late TextEditingController _nameController;
   late TextEditingController _phoneNumberController;
+  List<bool> _subCheckboxValues = [false, false, false, false];
+  bool _isAllChecked = false;
 
   @override
   void initState() {
@@ -46,6 +48,22 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
     _phoneNumberController.dispose();
     super.dispose();
   }
+
+  void _onAllChecked(bool value) {
+    setState(() {
+      _isAllChecked = value;
+      _subCheckboxValues = List<bool>.filled(_subCheckboxValues.length, value);
+    });
+  }
+
+  void _onSubCheckboxChanged(int index, bool value) {
+    setState(() {
+      _subCheckboxValues[index] = value;
+      _isAllChecked = _subCheckboxValues.every((element) => element);
+    });
+  }
+
+  bool get _canProceed => _subCheckboxValues.every((element) => element);
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +97,9 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
             Divider(),
             SizedBox(height: gap_s),
             AgreementSection(
-              onAllChecked: (bool value) {
-                // 이 부분은 예제에 따라 상태 관리 로직이 필요합니다.
-              },
-              subCheckboxValues: [false, false, false, false],
+              onAllChecked: _onAllChecked,
+              subCheckboxValues: _subCheckboxValues,
+              onSubCheckboxChanged: _onSubCheckboxChanged,
               subtitles: [
                 '이용규칙 및 취소/환불 규정 동의(필수)',
                 '개인정보 수집 및 이용 동의(필수)',
@@ -96,12 +113,14 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(gap_m),
         child: ElevatedButton(
-          onPressed: () => _attemptReservation(
+          onPressed: _canProceed
+              ? () => _attemptReservation(
             context,
             _nameController,
             _phoneNumberController,
             widget.rooms,
-          ),
+          )
+              : null,
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: Colors.redAccent,
