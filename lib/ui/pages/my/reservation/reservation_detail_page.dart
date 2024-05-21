@@ -52,7 +52,7 @@ class _ReservationDetailPageState extends ConsumerState<ReservationDetailPage> {
       appBar: AppBar(
         title: Text(
           '${reservation.stayName}',
-          style: h4(),
+          style: h4()
         ),
       ),
       body: Padding(
