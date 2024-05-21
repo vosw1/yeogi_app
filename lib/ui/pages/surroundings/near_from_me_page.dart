@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -212,7 +210,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 _goToCurrentPosition();
               },
               icon: Icon(Icons.location_on),
-              label: Text('내 위치에서 '),
+              label: Text('내 위치에서 찾기'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
                 foregroundColor: Colors.white,

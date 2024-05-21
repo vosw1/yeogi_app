@@ -116,7 +116,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 _goToCurrentPosition(); // 내 위치로 이동하는 함수 호출
               },
               icon: Icon(Icons.location_on),
-              label: Text('내 위치에서 찾아보기'),
+              label: Text('내 위치에서 찾기'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
                 foregroundColor: Colors.white,
