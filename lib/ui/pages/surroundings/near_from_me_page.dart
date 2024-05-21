@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/data/models/stay_info.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
@@ -41,9 +42,7 @@ class _NearFromMePageState extends State<NearFromMePage> {
 
   Future<void> _loadCustomMarker() async {
     customIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(size: Size(24, 24)),
-        'assets/images/hotel_icon.png'
-    );
+        ImageConfiguration(size: Size(24, 24)), 'assets/images/hotel_icon.png');
   }
 
   Future<void> _getCurrentLocation() async {
@@ -102,7 +101,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
 
   Future<void> _showPlaceDetails(String stayId) async {
     try {
-      PlacesDetailsResponse response = await _places.getDetailsByPlaceId(stayId);
+      PlacesDetailsResponse response =
+          await _places.getDetailsByPlaceId(stayId);
 
       print("response.status: ${response.status}");
       if (response.status == 'OK') {
@@ -137,7 +137,6 @@ class _NearFromMePageState extends State<NearFromMePage> {
         } else {
           print('응답에 유효한 결과가 없습니다.');
         }
-
       } else {
         print('장소 세부 정보를 가져오지 못했습니다: ${response.errorMessage}');
       }
@@ -152,25 +151,35 @@ class _NearFromMePageState extends State<NearFromMePage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(stayInfo.name),
+          title: Text(stayInfo.name, style: h5(),),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Center(
                 child: Container(
-                  width: 100,
+                  width: 150,
                   height: 100,
                   child: Image.asset(
                     'assets/images/hotel/${stayInfo.stayImgTitle}',
-                    fit: BoxFit.cover, // Use BoxFit to cover the entire container
+                    fit: BoxFit
+                        .cover, // Use BoxFit to cover the entire container
                   ),
                 ),
               ),
               SizedBox(height: 8),
-              Text(stayInfo.address),
+              Text(
+                stayInfo.address,
+              ),
               SizedBox(height: 8),
-              Text(stayInfo.description),
+              Text(
+                stayInfo.description,
+                style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
             ],
           ),
           actionsAlignment: MainAxisAlignment.center,
@@ -187,7 +196,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StayDetailPage(stayId: int.parse(stayId)),
+                    builder: (context) =>
+                        StayDetailPage(stayId: int.parse(stayId)),
                   ),
                 );
               },
@@ -252,7 +262,8 @@ class _NearFromMePageState extends State<NearFromMePage> {
                 child: GoogleMap(
                   initialCameraPosition: _currentPosition != null
                       ? CameraPosition(target: _currentPosition!, zoom: 16)
-                      : CameraPosition(target: LatLng(35.1796, 129.0756), zoom: 16),
+                      : CameraPosition(
+                          target: LatLng(35.1796, 129.0756), zoom: 16),
                   onMapCreated: (controller) async {
                     _controllerCompleter.complete(controller);
                   },
