@@ -194,7 +194,7 @@ class _JoinFormState extends State<JoinForm> {
     AlertDialog? alertDialog;
 
     switch (index) {
-      case 0:
+      case 1:
         alertDialog = _buildDialog(
           title: '만 14세 이상 확인',
           content: [
@@ -207,7 +207,7 @@ class _JoinFormState extends State<JoinForm> {
           ],
         );
         break;
-      case 1:
+      case 2:
         alertDialog = _buildDialog(
           title: '개인정보 수집 및 이용 동의',
           content: [
