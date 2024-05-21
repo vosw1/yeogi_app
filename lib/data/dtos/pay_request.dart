@@ -34,8 +34,8 @@ class PaySaveReqDTO {
       'payId': payId,
       'amount': amount,
       'way': way,
-      'state': 'state',
-      'paytAt': payAt.toIso8601String(),
+      'state': state,
+      'payAt': payAt.toIso8601String(),  // Fixed key from 'paytAt' to 'payAt'
     };
   }
 }

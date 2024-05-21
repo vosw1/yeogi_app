@@ -41,9 +41,7 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
 
     PaySaveReqDTO payInfo = PaySaveReqDTO(
       payId: widget.id,
-      // 결제 아이디 사용
       reservationId: widget.id,
-      // 예약 아이디 사용
       amount: widget.reservations.amountToPay,
       way: "나이스페이",
       state: "COMPLETION",
@@ -102,10 +100,13 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
     final paymentMethod = jsonData['data']['method'];
     print('아이디 확인 : ${widget.id}--------------------------------');
 
+    // PaySaveReqDTO를 생성하기 전에 로그를 추가하여 데이터를 확인합니다.
+    print('결제 금액 확인: $amount');
+
     PaySaveReqDTO payInfo = PaySaveReqDTO(
       payId: widget.id,
       reservationId: widget.id,
-      amount: amount,
+      amount: amount, // 여기에 전달되는 amount 값이 올바른지 확인합니다.
       way: paymentMethod,
       state: "COMPLETION",
       payAt: DateTime.now(),
@@ -116,9 +117,15 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
       print('저장할 데이터: ${payInfo.toJson()}');
 
       final responseDTO =
-          await ref.read(reservationListProvider.notifier).paySave(payInfo);
+      await ref.read(reservationListProvider.notifier).paySave(payInfo);
+
+      // 서버 응답을 로그로 출력하여 확인합니다.
       print('결제 정보 저장 완료');
       print('서버 응답: ${responseDTO}');
+
+      // 서버 응답 데이터를 로그로 출력합니다.
+      print('Response Data: ${responseDTO.body}');
+
       // '내 예약 페이지'로 이동
       Navigator.pushReplacement(
         context,
@@ -126,10 +133,13 @@ class _PaymentButtonState extends ConsumerState<PayButton> {
           builder: (context) => MyReservationPage(),
         ),
       );
-      // Extract the payId from the response body
+
+      // 서버 응답에서 payId를 추출하여 확인합니다.
       if (responseDTO.body is Map<String, dynamic> &&
           responseDTO.body['id'] is int) {
         payId = responseDTO.body['id'];
+        // 응답 데이터의 amount 값을 확인합니다.
+        print('응답 데이터의 금액: ${responseDTO.body['amount']}');
       } else {
         throw Exception('Invalid response format');
       }
