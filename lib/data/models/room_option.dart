@@ -34,13 +34,13 @@ class RoomOption {
         imageName: json["imageName"] ?? 'room1.jpg',
         imagePath: json["imagePath"] ?? '',
         tier: json["tier"],
-        price: json["price"],
-        salePrice: json["salePrice"],
-        saleState: json["saleState"],
+        price: json["price"] ?? '',
+        salePrice: json["salePrice"] ?? '',
+        saleState: json["saleState"] ?? '',
         information: Information.fromJson(json["information"]),
         options: List<RoomDetailOption>.from(
             json["options"].map((x) => RoomDetailOption.fromJson(x))),
-        notice: json["notice"],
+        notice: json["notice"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -104,11 +104,11 @@ class Information {
   }
 
   factory Information.fromJson(Map<String, dynamic> json) => Information(
-        minPerson: json["minPerson"],
-        maxPerson: json["maxPerson"],
+        minPerson: json["minPerson"] ?? "",
+        maxPerson: json["maxPerson"] ?? "",
         announcement: json["announcement"] ?? "",
         basicInformation: json["basicInformation"] ?? "",
-        moreinfo: json["moreinfo"],
+        moreinfo: json["moreinfo"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

@@ -278,12 +278,12 @@ class _JoinFormState extends State<JoinForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-        ),
-        SizedBox(height: 8),
-        Text(content),
-        SizedBox(height: 16),
+        Text(content,
+          style: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),),
       ],
     );
   }
