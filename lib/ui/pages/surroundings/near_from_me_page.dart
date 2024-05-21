@@ -7,6 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:yogi_project/_core/constants/size.dart';
+import 'package:yogi_project/data/models/stay_info.dart';
+import 'package:yogi_project/ui/pages/stay/stay_detail_page.dart';
 
 
 const String GOOGLE_API_KEY = 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA';
@@ -24,15 +26,22 @@ class _NearFromMePageState extends State<NearFromMePage> {
   final Set<Marker> markers = {};
   late GoogleMapsPlaces _places;
   late BitmapDescriptor customIcon;
+  Map<String, StayInfo> stayInfoMap = {};
 
   @override
   void initState() {
     super.initState();
     _controllerCompleter = Completer<GoogleMapController>();
-    _getCurrentLocation();
+
     _places = GoogleMapsPlaces(apiKey: 'AIzaSyD64Qv2AkiSWrGiN1sn-cHn-_QuW0XlwjA');
-    _loadCustomMarker();
+    _loadCustomMarker().then((value) {
+      _getCurrentLocation();
+    });
+    for (var stayInfo in hotels) {
+      stayInfoMap[stayInfo.id.toString()] = stayInfo;
+    }
   }
+
 
   Future<void> _loadCustomMarker() async {
     customIcon = await BitmapDescriptor.fromAssetImage(
@@ -49,14 +58,24 @@ class _NearFromMePageState extends State<NearFromMePage> {
           desiredAccuracy: LocationAccuracy.medium,
         );
 
+        if (!mounted) return;
+
         setState(() {
           _currentPosition = LatLng(position.latitude, position.longitude);
           if (_currentPosition != null) {
-            _addMarker(_currentPosition!, 'current');
+            _addMarker(_currentPosition!, '현재위치');
             _goToCurrentPosition();
           }
           print('현재 위치를 찾았습니다: $position');
         });
+
+        // 호텔 위치에 마커 추가
+        for (var stayInfo in hotels) {
+          _addMarker(
+            LatLng(stayInfo.latitude, stayInfo.longitude),
+            stayInfo.id.toString(),
+          );
+        }
       } else {
         print('위치 권한이 거부되었습니다.');
       }
@@ -65,17 +84,20 @@ class _NearFromMePageState extends State<NearFromMePage> {
     }
   }
 
-  void _addMarker(LatLng coordinate, String placeId) {
+  void _addMarker(LatLng coordinate, String stayId) {
     final int id = Random().nextInt(100);
     final MarkerId markerId = MarkerId(id.toString());
     final Marker marker = Marker(
       markerId: markerId,
       position: coordinate,
       icon: customIcon,
+      visible: true,
       onTap: () {
-        if (placeId != 'current') {
-          _showPlaceDetails(placeId);
+        _showPlaceDetails(stayId);
+        if (stayId != 'current') {
+          _showSnackbarWithDetails(stayId);
         }
+
       },
     );
     setState(() {
@@ -83,38 +105,70 @@ class _NearFromMePageState extends State<NearFromMePage> {
     });
   }
 
-  Future<void> _showPlaceDetails(String placeId) async {
+  Future<void> _showPlaceDetails(String stayId) async {
     try {
-      PlacesDetailsResponse response = await _places.getDetailsByPlaceId(placeId);
+      PlacesDetailsResponse response = await _places.getDetailsByPlaceId(stayId);
+
+      print("response.status: ${response.status}");
       if (response.status == 'OK') {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(response.result.name ?? ''),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('주소: ${response.result.formattedAddress ?? ''}'),
-                Text('전화번호: ${response.result.formattedPhoneNumber ?? ''}'),
-                Text('평점: ${response.result.rating ?? ''}'),
+        final result = response.result;
+        if (result != null) {
+          final stayInfo = stayInfoMap[stayId];
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(stayInfo?.name ?? '이름 없음'),
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('주소: ${stayInfo?.address ?? '주소 없음'}'),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('닫기'),
+                ),
               ],
             ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('닫기'),
-              ),
-            ],
-          ),
-        );
+          );
+        } else {
+          print('응답에 유효한 결과가 없습니다.');
+        }
+
       } else {
         print('장소 세부 정보를 가져오지 못했습니다: ${response.errorMessage}');
       }
     } catch (e) {
       print('장소 세부 정보 검색 오류: $e');
+    }
+  }
+
+
+
+
+  void _showSnackbarWithDetails(String stayId) {
+    final stayInfo = stayInfoMap[stayId];
+    if (stayInfo != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${stayInfo.name} - ${stayInfo.address}'),
+          action: SnackBarAction(
+            label: '상세 보기',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => StayDetailPage(stayId: int.parse(stayId)),
+                ),
+              );
+            },
+          ),
+        ),
+      );
     }
   }
 
