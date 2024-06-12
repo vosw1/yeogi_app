@@ -1,81 +1,61 @@
-# 🏨 [숙박 중계 플랫폼] 여어떻노.
+# I am
+| 이름 | 사진 | 역할 | 프론트엔드 |
+|:--:|:--:|:--:|:---------------:|:---------------:|
+| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"/> | 프론트엔드 팀장| 테이블 설계<br/>화면 디자인<br/>UI 구현<br/>단위 테스트<br/>통신(회원가입, 로그인, 예약, 결제)<br/>상태관리<br/>유효성 검사<br/>코드 리팩토링|
+---
 
-![yeoeotteohno_logo](https://github.com/donghunseol/yeogi_copy/blob/master/src/main/resources/static/images/myPageBanner.png?raw=true)
+# Project
 
-<br>
+![yeogilogo-removebg-preview](https://github.com/vosw1/vosw1/assets/153582401/26ccb41b-46b4-4701-90a0-eefab74532c4)
 
-# 📖 프로젝트 소개
+누구나 사용 가능하고 카테고리 별 다양한 숙소를 예약하고 결제하는 숙박 중계 플랫폼입니다.
 
-> `여어떻노`는 **누구나 사용 가능한 숙박 중계 플랫폼**입니다.</br>
-> 카테고리 별 다양한 숙소를 예약하고 결제하는 숙박 중계 플랫폼입니다.</br>
+기간 : 2024.04.22 ~ 2024.05.22 ( __총 31일__ )
 
-<br>
+---
 
-# 📈 프로젝트 목표
+# Team
 
-- `Model을 ResponseEntity 응답`
-- `ResponseEntity ORM`
-- `JSON으로 변환`
-- `image base64로 변환`
-- `JUnit 테스트`
-- `AOP(유효성검사)`
-- `JWT`
-- `MVC 패턴을 사용한 SSR 구현`
-- `MVVM 패턴을 이용한 Flutter 서버 통신`
-- `통합 테스트 (API 문서 (RestDoc))`
+![yeogilogo](https://github.com/vosw1/vosw1/assets/153582401/127a05c6-d397-427d-9a49-b7cbe31761ee)
 
-<br>
+열정있는 부산 개발자들이 모인 여어떻노입니다.
 
-# 📽️ 시연영상
+## Teammates
+| Team-Leader | Front-End | Front-End | Back-End | Back-End |
+|:--:|:--:|:--:|:---------------:|:---------------:|
+| <img src="https://ca.slack-edge.com/T06B351QHF0-U06JXGQ1DAN-c05d9be15921-512" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582240?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/78337301?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/118310514?v=4" alt="profile" width="100" height="100"> | 
+| 설동훈 | 송민경 | 박동기 | 김지훈 | 서지민
 
-- 추가 예정
+---
 
-# 📚 발표자료
+<!-- Table -->
+# Service
 
-[1조_Final_Project_PPT.pdf](https://docs.google.com/presentation/d/1dyOqbiTzfzQTIHUKZB99VtqL2FCe_kyf/edit?usp=drive_link&ouid=104872751959430579271&rtpof=true&sd=true)
+| 스플래쉬 화면 | 회원가입 -> 메인홈 |
+|:-------------:|:------------------:|
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/ba794e96-2750-47aa-8e56-588fafe07e1d" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/223892f7-2ae2-4083-958a-f39b585e0e0a" width="128" height="227"/></p> |
+| 로그인 → 메인홈 | 로그아웃 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/baf287d6-59f9-437e-be45-d51fd2e0c1c2" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e51caa27-5f99-4811-bd60-a091b59e89f0" width="128" height="227"/></p> |
+| 숙소 → 숙소 상세 정보 → 숙소의 리뷰 | 방 → 방 상세 정보 → 예약 가능날짜 확인 <br/> → 예약 정보 입력 → 결제 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/929550b6-2a5a-45f1-b535-c24cea2f1e75" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f66821a5-d7c9-41e6-9c9d-25530c90c7fb" width="128" height="227"/></p> |
+| 결제 → 결제 방법 선택 → 결제 → 예약 내역 | 검색 → 검색 조건 → 검색 결과 → 숙소 상세 정보 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f3e957cd-4189-4bb7-937b-702099e82e58" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/410a4740-dc9a-4368-88da-c70ee6764c31" width="128" height="227"/></p> |
+| 내 주변 → 내 주변 검색 → 검색 결과 → 숙소 상세 정보 | 찜 → 찜 상세보기 → 찜 취소 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4" width="128" height="227"/></p> |
+| 이벤트 → 자주 묻는 질문 → 고객 센터 연결 | 코드 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e" width="128" height="227"/></p> |[👆 백엔드 서버](https://github.com/vosw1/yeogi_server.git) <br> [👆 프론트엔드 앱](https://github.com/vosw1/yeogi_app.git) |
 
-<br>
 
-# ⏰ 프로젝트 기간
+---
 
-- 2024.04.17 ~ 2024.05.22
-
-<br>
-
-# 👨‍👩‍👧‍👧 팀원 소개
-
-### Team-Leader
-
-|                                                        설동훈(팀장)                                                        |
-|:---------------------------------------------------------------------------------------------------------------------:|
-| <img src="https://ca.slack-edge.com/T06B351QHF0-U06JXGQ1DAN-c05d9be15921-512" alt="profile" width="100" height="100"> | 
-|                                    [@donghunseol](https://github.com/donghunseol)                                     |
-
-### Front-End
-
-|                                                   송민경                                                    |                                                   박동기                                                    |
-|:--------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:| 
-| <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582240?v=4" alt="profile" width="100" height="100"> | 
-|                                    [@vosw1](https://github.com/vosw1)                                    |                              [@dongkipark1](https://github.com/dongkipark1)                              |
-
-### Back-End
-
-|                                                   김지훈                                                   |                                                   서지민                                                    |
-|:-------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:| 
-| <img src="https://avatars.githubusercontent.com/u/78337301?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/118310514?v=4" alt="profile" width="100" height="100"> | 
-|                              [@greenpig4b](https://github.com/greenpig4b)                               |                               [@minmeanmin](https://github.com/minmeanmin)                               |
-
-<br>
-
-# ⚙️ 기술 스택
+<!-- Tech stack -->
+# Tech Stack
 
 ### IDE
-
 ![IntelliJ IDEA](https://img.shields.io/badge/-IntelliJ%20IDEA-blue?logo=intellij-idea&logoColor=white)
 ![AndroidStudio](https://img.shields.io/badge/-Android%20Studio-green?logo=AndroidStudio&logoColor=white)
 
 ### FrameWork
-
 ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
 ![CSS](https://img.shields.io/badge/-CSS3-blue?logo=css3&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=flat&logo=bootstrap&logoColor=white)
@@ -88,83 +68,18 @@
 ![Flutter](https://img.shields.io/badge/-Flutter-blue?logo=flutter&logoColor=white)
 
 ### DB
-
 ![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-black?&logo=mysql&logoColor=white)
 
-### 협업 툴
+### DevOps  
+![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
+<img src="https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white"/> 
+<img src="https://img.shields.io/badge/RestDocs-005C84?style=for&logo=restdocs&logoColor=white"/>
+<img src="https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white" /> 
 
+### Tools
 ![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
 ![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)
 ![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)
 ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=000000)
-
-<br>
-
-# 🛠️ 브랜치 전략
-
-- 각 이슈 발생 시 `새로운 브랜치`를 생성
-- 작업을 완료 후 Merge 전 `코드 리뷰 진행` 및 `피드백`
-- 브랜치 명은 각 인원별 `패키지/기능/이니셜`로 컨벤션을 맞춰 진행
-
-<br>
-
-# 🔐 ERD
-
-![image](https://github.com/donghunseol/yeogi_copy/blob/master/src/main/resources/static/images/erd.png?raw=true)
-
-<br>
-
-# 🎞️ 시나리오 GIF
-
-<table style="border: 2px;">
-<tr>
-  <td align=center>스플래시 화면</td>
-  <td align=center>회원가입</td>
-</tr>
-<tr>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/ba794e96-2750-47aa-8e56-588fafe07e1d"  width="256" height="455"/></td>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/9fa098c2-8e61-4290-b81a-9bc447542a7d"  width="256" height="455"/></td>
-</tr>
-<tr>
-  <td align=center>로그인</td>
-  <td align=center>로그아웃</td>
-</tr>
-<tr>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/baf287d6-59f9-437e-be45-d51fd2e0c1c2"  width="256" height="455"/></td>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e51caa27-5f99-4811-bd60-a091b59e89f0"  width="256" height="455"/></td>
-</tr>
-<tr>
-  <td align=center>숙소 선택하기</td>
-  <td align=center>룸 선택하기</td>
-</tr>
-<tr>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/929550b6-2a5a-45f1-b535-c24cea2f1e75"  width="256" height="455"/></td>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/34328614-db6a-4cf9-853a-5429f1742b55"  width="256" height="455"/></td>
-</tr>
-<tr>
-  <td align=center>예약하기</td>
-  <td align=center>결제하기</td>
-</tr>
-<tr>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f74b1e79-a04e-44ac-87c6-b0b017873aa1"  width="256" height="455"/></td>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f3e957cd-4189-4bb7-937b-702099e82e58"  width="256" height="455"/></td>
-</tr>
-<tr>
-  <td align=center>검색하기</td>
-  <td align=center>부가기능</td>
-</tr>
-<tr>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/410a4740-dc9a-4368-88da-c70ee6764c31"  width="256" height="455"/></td>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e"  width="256" height="455"/></td>
-</tr>
-<tr>
-  <td align=center>스크랩</td>
-  <td align=center>주변 검색하기</td>
-</tr>
-<tr>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4"  width="256" height="455"/></td>
-  <td><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68"  width="256" height="455"/></td>
-</tr>
-</table>
