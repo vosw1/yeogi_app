@@ -1,7 +1,7 @@
 # I am
-| 이름 | 사진 | 역할 | 프론트엔드 |
+| 이름 | 사진 | 역할 | 프론트엔드 | 
 |:--:|:--:|:--:|:---------------:|
-| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"/> | 프론트엔드 팀장| 테이블 설계<br/>화면 디자인<br/>UI 구현<br/>단위 테스트<br/>통신(회원가입, 로그인, 예약, 결제)<br/>상태관리<br/>유효성 검사<br/>코드 리팩토링|
+| 송민경 | <img src="https://github.com/vosw1/vosw1/assets/153582401/15e5966e-8aed-4034-a6fb-393ed24ae070" width="150px"> | 프론트엔드 팀장 | 테이블 설계<br/>화면 디자인<br/>UI 구현<br/>단위 테스트<br/>통신(회원가입, 로그인, 예약, 결제)<br/>상태관리<br/>유효성 검사<br/>코드 리팩토링| 
 ---
 
 # Project
@@ -23,7 +23,7 @@
 ## Teammates
 | Team-Leader | Front-End | Front-End | Back-End | Back-End |
 |:--:|:--:|:--:|:---------------:|:---------------:|
-| <img src="https://ca.slack-edge.com/T06B351QHF0-U06JXGQ1DAN-c05d9be15921-512" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582240?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/78337301?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/118310514?v=4" alt="profile" width="100" height="100"> | 
+| <img src="https://ca.slack-edge.com/T06B351QHF0-U06JXGQ1DAN-c05d9be15921-512" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/vosw1/assets/153582401/15e5966e-8aed-4034-a6fb-393ed24ae070" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582240?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/78337301?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/118310514?v=4" alt="profile" width="100" height="100"> | 
 | 설동훈 | 송민경 | 박동기 | 김지훈 | 서지민
 
 ---
@@ -53,9 +53,9 @@
 
 ### IDE
 ![IntelliJ IDEA](https://img.shields.io/badge/-IntelliJ%20IDEA-blue?logo=intellij-idea&logoColor=white)
-![AndroidStudio](https://img.shields.io/badge/-Android%20Studio-green?logo=AndroidStudio&logoColor=white)
+![Android Studio](https://img.shields.io/badge/-Android%20Studio-green?logo=AndroidStudio&logoColor=white)
 
-### FrameWork
+### Framework
 ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
 ![CSS](https://img.shields.io/badge/-CSS3-blue?logo=css3&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=flat&logo=bootstrap&logoColor=white)
@@ -64,18 +64,17 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white)
 ![JUnit](https://img.shields.io/badge/JUnit-green?logo=junit5&logoColor=white)
-![AndroidStudio](https://img.shields.io/badge/-Android%20Studio-green?logo=AndroidStudio&logoColor=white)
 ![Flutter](https://img.shields.io/badge/-Flutter-blue?logo=flutter&logoColor=white)
 
 ### DB
 ![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-black?&logo=mysql&logoColor=white)
 
-### DevOps  
+### DevOps
 ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
-<img src="https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white"/> 
-<img src="https://img.shields.io/badge/RestDocs-005C84?style=for&logo=restdocs&logoColor=white"/>
-<img src="https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white" /> 
+![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
+![RestDocs](https://img.shields.io/badge/RestDocs-005C84?style=for&logo=restdocs&logoColor=white)
+![Amazon AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)
 
 ### Tools
 ![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
