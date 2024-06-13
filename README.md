@@ -32,38 +32,11 @@
 <!-- Tech stack -->
 # Tech Stack
 
-### IDE
-![IntelliJ IDEA](https://img.shields.io/badge/-IntelliJ%20IDEA-blue?logo=intellij-idea&logoColor=white)
-![Android Studio](https://img.shields.io/badge/-Android%20Studio-green?logo=AndroidStudio&logoColor=white)
-
-### Framework
-![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
-![CSS](https://img.shields.io/badge/-CSS3-blue?logo=css3&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=flat&logo=bootstrap&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?logo=jsonwebtokens&logoColor=white)
-![JPA](https://img.shields.io/badge/JPA-red?logo=spring&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=white)
-![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-green?logo=junit5&logoColor=white)
-![Flutter](https://img.shields.io/badge/-Flutter-blue?logo=flutter&logoColor=white)
-
-### DB
-![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-black?&logo=mysql&logoColor=white)
-
-### DevOps
-![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
-![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
-![RestDocs](https://img.shields.io/badge/RestDocs-005C84?style=for&logo=restdocs&logoColor=white)
-![Amazon AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)
-
-### Tools
-![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
-![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)
-![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)
-![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=000000)
-
+| Framework | ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![CSS](https://img.shields.io/badge/-CSS3-blue?logo=css3&logoColor=white) ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=flat&logo=bootstrap&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?logo=jsonwebtokens&logoColor=white) ![JPA](https://img.shields.io/badge/JPA-red?logo=spring&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=white) ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white) ![JUnit](https://img.shields.io/badge/JUnit-green?logo=junit5&logoColor=white) ![Flutter](https://img.shields.io/badge/-Flutter-blue?logo=flutter&logoColor=white) |
+| :-------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|    DB     | ![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-black?&logo=mysql&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|  DevOps   | ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black) ![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white) ![RestDocs](https://img.shields.io/badge/RestDocs-005C84?style=for&logo=restdocs&logoColor=white) ![Amazon AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)                                                                                                                                                   |
+|   Tools   | ![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white) ![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white) ![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                                   |
 ---
 
 ## API Document
@@ -86,5 +59,5 @@
 | 내 주변 → 내 주변 검색 → 검색 결과 → 숙소 상세 정보 | 찜 → 찜 상세보기 → 찜 취소 |
 | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4" width="128" height="227"/></p> |
 | 이벤트 → 자주 묻는 질문 → 고객 센터 연결 | 코드 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e" width="128" height="227"/></p> |[👆 백엔드 서버](https://github.com/vosw1/yeogi_server.git) <br> [👆 프론트엔드 앱](https://github.com/vosw1/yeogi_app.git) |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e" width="128" height="227"/></p> |[ 백엔드 서버 👆 ](https://github.com/vosw1/yeogi_server.git) <br> [프론트엔드 앱 👆 ](https://github.com/vosw1/yeogi_app.git) |
 
