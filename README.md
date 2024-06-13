@@ -1,7 +1,7 @@
 # I am
 | 이름 | 사진 | 역할 | 프론트엔드 | 
 |:--:|:--:|:--:|:---------------:|
-| 송민경 | <img src="https://github.com/vosw1/vosw1/assets/153582401/15e5966e-8aed-4034-a6fb-393ed24ae070" width="150px"> | 프론트엔드 팀장 | 테이블 설계<br/>화면 디자인<br/>UI 구현<br/>단위 테스트<br/>통신(회원가입, 로그인, 예약, 결제)<br/>상태관리<br/>유효성 검사<br/>코드 리팩토링| 
+| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"> | 프론트엔드 팀장 | 테이블 설계<br/>화면 디자인<br/>UI 구현<br/>단위 테스트<br/>통신(회원가입, 로그인, 예약, 결제)<br/>상태관리<br/>유효성 검사<br/>코드 리팩토링| 
 ---
 
 # Project
@@ -23,7 +23,7 @@
 ## Teammates
 | Team-Leader | Front-End | Front-End | Back-End | Back-End |
 |:--:|:--:|:--:|:---------------:|:---------------:|
-| <img src="https://ca.slack-edge.com/T06B351QHF0-U06JXGQ1DAN-c05d9be15921-512" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/vosw1/assets/153582401/15e5966e-8aed-4034-a6fb-393ed24ae070" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582240?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/78337301?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/118310514?v=4" alt="profile" width="100" height="100"> | 
+| <img src="https://ca.slack-edge.com/T06B351QHF0-U06JXGQ1DAN-c05d9be15921-512" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582240?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/78337301?v=4" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/118310514?v=4" alt="profile" width="100" height="100"> | 
 | 설동훈 | 송민경 | 박동기 | 김지훈 | 서지민
 
 ---
