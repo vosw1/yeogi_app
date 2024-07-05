@@ -40,11 +40,15 @@
 ---
 
 ## API Document
-[ 여어떻노의 API 문서 👆 ](https://sunset-knuckle-4bc.notion.site/API-49aaef9c0eed47bba84de148dbd1488c?pvs=4)
+[ 여어떻노의 API 문서 자세히 보기👆 ](https://sunset-knuckle-4bc.notion.site/API-49aaef9c0eed47bba84de148dbd1488c?pvs=4)
 
 ---
 
-<!-- Table -->
+# Table
+[Data Table 자세히 보기 👆](https://www.erdcloud.com/d/EZHiznZHtQrRadcXe)
+
+---
+
 # Service
 
 | 스플래쉬 화면 | 회원가입 -> 메인홈 |
