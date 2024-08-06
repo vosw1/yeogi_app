@@ -9,6 +9,7 @@
 ![yeogilogo-removebg-preview](https://github.com/vosw1/vosw1/assets/153582401/26ccb41b-46b4-4701-90a0-eefab74532c4)
 
 앞서 진행한 v1, v2 기반으로 서버를 구축하고, <br>플러터와 Riverpod을 이용하여 상태 관리를 하며 서버와 통신하는 앱을 개발했습니다. 
+<br>RestDoc을 이용하여 API문서를 생성하고 GIT을 이용한 UBUNTU에 AWS 배포를 진행했습니다
 <br>이 플랫폼은 사용자들이 자유롭게 숙소를 찾아 예약할 수 있는 공간입니다.
 
 기간 : 2024.04.22 ~ 2024.05.22 ( __총 31일__ )
