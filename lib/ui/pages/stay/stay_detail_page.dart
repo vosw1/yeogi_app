@@ -8,6 +8,7 @@ import 'package:yogi_project/_core/constants/size.dart';
 import 'package:yogi_project/_core/constants/style.dart';
 import 'package:yogi_project/ui/pages/stay/stay_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/amenities_widget.dart';
+import 'package:yogi_project/ui/pages/stay/widgets/copy_to_clipboard.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/review_section.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/room_info_widget.dart';
 import 'package:yogi_project/ui/pages/stay/widgets/scrap_login_widget.dart';
@@ -36,9 +37,12 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
 
     // 모델에서 데이터 가져와서 마커 설정
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final model = ref.watch(stayDetailProvider(widget.stayId).notifier).state;
+      final model = ref
+          .watch(stayDetailProvider(widget.stayId).notifier)
+          .state;
       if (model != null) {
-        _currentPosition = LatLng(model.stay.latitude ?? 0.0, model.stay.longitude ?? 0.0);
+        _currentPosition =
+            LatLng(model.stay.latitude ?? 0.0, model.stay.longitude ?? 0.0);
         markers.add(
           Marker(
             markerId: MarkerId('stay_location'),
@@ -79,23 +83,37 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
             IconButton(
                 icon: Icon(
                   Icons.bookmark,
-                  color: model.isScrap ? Colors.redAccent : Colors.black, // 스크랩 상태에 따라 색상 설정
+                  color: model.isScrap ? Colors.redAccent : Colors
+                      .black, // 스크랩 상태에 따라 색상 설정
                 ),
                 onPressed: () async {
                   if (model.isLogin) {
                     if (!model.isScrap) {
-                      await ref.read(stayDetailProvider(widget.stayId).notifier).notifyAdd(widget.stayId);
+                      await ref.read(stayDetailProvider(widget.stayId).notifier)
+                          .notifyAdd(widget.stayId);
                     } else {
-                      await ref.read(stayDetailProvider(widget.stayId).notifier).notifyRemove(widget.stayId);
+                      await ref.read(stayDetailProvider(widget.stayId).notifier)
+                          .notifyRemove(widget.stayId);
                     }
                     // 스크랩 상태가 변경된 후 버튼 색상 업데이트
                     setState(() {
-                      _scrapColor = model.isScrap ? Colors.redAccent : Colors.black;
+                      _scrapColor =
+                      model.isScrap ? Colors.redAccent : Colors.black;
                     });
                   } else {
                     showLoginAlert(context);
                   }
                 }
+            ),
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: () async {
+                final url = generatePageUrl(widget.stayId); // 페이지 URL 생성
+                copyToClipboard(url); // URL을 클립보드에 복사
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('숙소 정보 URL이 클립보드에 복사되었습니다.')),
+                );
+              },
             ),
             SizedBox(width: gap_s),
           ],
@@ -180,12 +198,14 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
                     child: GoogleMap(
                       initialCameraPosition: _currentPosition != null
                           ? CameraPosition(target: _currentPosition!, zoom: 16)
-                          : CameraPosition(target: LatLng(model.stay.latitude ?? 0.0, model.stay.longitude ?? 0.0), zoom: 12),
+                          : CameraPosition(target: LatLng(model.stay.latitude ??
+                          0.0, model.stay.longitude ?? 0.0), zoom: 12),
                       onMapCreated: (controller) async {
                         _controllerCompleter.complete(controller);
                       },
                       markers: {
-                        if (_currentPosition != null) // 현재 위치가 유효한 경우에만 마커를 추가합니다.
+                        if (_currentPosition !=
+                            null) // 현재 위치가 유효한 경우에만 마커를 추가합니다.
                           Marker(
                             markerId: MarkerId('stay_location'),
                             position: _currentPosition!,
@@ -249,5 +269,8 @@ class _StayDetailPageState extends ConsumerState<StayDetailPage> {
       );
     }
   }
-}
 
+  String generatePageUrl(int stayId) {
+    return 'http://yourserver.com/stay/$stayId'; // 실제 서버 주소로 변경
+  }
+}

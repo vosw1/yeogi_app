@@ -6,7 +6,6 @@ import 'package:yogi_project/data/dtos/user_request.dart';
 import 'package:yogi_project/data/store/session_store.dart';
 import 'package:yogi_project/ui/pages/_main_holder.dart';
 import 'package:yogi_project/ui/pages/auth/login/widgets/login_text_form_field.dart';
-import 'package:yogi_project/ui/pages/home/home_page.dart';
 import 'package:yogi_project/ui/pages/scrap/scrap_list_view_model.dart';
 import 'join_button.dart';
 

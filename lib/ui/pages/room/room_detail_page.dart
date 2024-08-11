@@ -9,7 +9,9 @@ import 'package:yogi_project/ui/pages/my/reservation/reservation_page.dart';
 import 'package:yogi_project/ui/pages/room/room_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/room/widgets/room_detail_view_model.dart';
 import 'package:yogi_project/ui/pages/room/widgets/reservation_info.dart';
-import 'package:yogi_project/ui/pages/auth/login/login_page.dart'; // Import the login page
+import 'package:yogi_project/ui/pages/auth/login/login_page.dart';
+
+import '../stay/widgets/copy_to_clipboard.dart'; // Import the login page
 
 class RoomDetailPage extends ConsumerStatefulWidget {
   final Room rooms;
@@ -46,6 +48,14 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
     });
   }
 
+  void _shareRoomDetails() {
+    final url = generateRoomPageUrl(widget.rooms.roomId);
+    copyToClipboard(url);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('방 정보 URL이 클립보드에 복사되었습니다.')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final reservedDates = ref.watch(reservedDatesProvider(widget.rooms.roomId));
@@ -62,6 +72,12 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
             '${model.roomOption.tier}',
             style: h4(),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: _shareRoomDetails,
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -184,5 +200,9 @@ class _RoomDetailPageState extends ConsumerState<RoomDetailPage> {
         );
       },
     );
+  }
+
+  String generateRoomPageUrl(int roomId) {
+    return 'http://yourserver.com/room/$roomId'; // 실제 서버 주소로 변경
   }
 }

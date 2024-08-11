@@ -20,8 +20,6 @@ class MyPageLogoutButton extends ConsumerWidget {
               padding: const EdgeInsets.only(top: gap_s, left: gap_s, right: gap_s),
               child: InkWell(
                 onTap: () async {
-                  // SessionStore의 logout 메서드 호출
-                  await ref.read(sessionProvider).logout();
 
                   // 로그 아웃 시 null이 되도록 다시 상태 초기화 (스크랩 리스트)
                   ref.read(scrapListProvider.notifier).clearScrapList();
