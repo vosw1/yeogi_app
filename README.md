@@ -3,7 +3,7 @@
 ![yeogilogo-removebg-preview](https://github.com/vosw1/vosw1/assets/153582401/26ccb41b-46b4-4701-90a0-eefab74532c4)
 기간 : 2024.04.22 ~ 2024.05.22 ( __총 31일__ )
 
-앞서 진행한 v1, v2 기반으로 Java와 SpringBoot를 이용하여 MVC 패턴으로 Web Site 구축
+앞서 진행한 v1, v2 기반으로 Java와 SpringBoot를 이용하여 MVC 패턴으로 Web Site로 서버 구축
 
 - 플러터로 UI 개발
 - MVVM 패턴으로 상태관리
