@@ -9,7 +9,7 @@
 - MVVM 패턴으로 상태관리
 - Riverpod을 이용한 통신
 - RestDoc을 이용하여 API문서를 생성
-- Git을 이용한 UBUNTU에 AWS 배포
+- AWS를 이용한 EC2 및 RDS 생성 및 UBUNTU에 배포
 <br>
  이 플랫폼은 사용자들이 자유롭게 숙소를 찾아 예약할 수 있는 공간입니다.
 
@@ -29,20 +29,40 @@
 
 ---
 
-# I am 프론트 팀장
-| 테이블 설계 | 화면 디자인 | UI 구현 | 통신 | 단위 테스트 | 코드 <br>리팩토링 |
-|------------|-------------|---------|------|--------------|---------------|
-|사용자<br/>숙박 업소<br/>질문<br/>숙소<br/>숙소 옵션<br/>숙소 이미지<br/>룸<br/>룸 정보<br/>스크랩<br/>예약<br/>결제<br/>신고<br/>리뷰<br/>자주묻는 질문 <br/>관리자<br/>이벤트| 로딩<br/>로그인<br/>회원가입<br/>메인<br/>숙소 목록<br/>숙소 상세보기<br/>룸 목록<br/>룸 상세보기<br/>예약하기<br/>결제하기<br/>예약 내역<br/>예약 상세보기<br/>검색<br/>내 주변<br/>찜<br/>마이페이지<br/>배너<br/>댓글<br/>이벤트<br/>FAQ<br/>고객센터 문의 | 로고<br/>글자 색<br/>폰트 2가지 적용<br/>메인<br/>숙소 목록<br/>숙소 상세보기<br/>룸 목록<br/>룸 상세보기<br/>공유할 URL 복사하기<br/>예약하기<br/>결제하기<br/>예약 내역<br/>예약 상세보기<br/>검색<br/>내 주변<br/>네이버 지도 API 구현<br/>찜<br/>배너<br/>댓글<br/>이벤트<br/>FAQ | 회원가입<br/>아이디 중복체크<br/>로그인<br/>예약 가능 날짜 보기<br/>예약 불가능 날짜 막아놓기<br/>예약하기<br/>아임포트 API 결제<br/>예약 목록<br/>예약 상세보기<br/>예약 취소<br/>이용 후 한 달 이내 댓글 작성 가능<br/>예약 취소 시 댓글 작성 불가 | 로그인<br/>회원가입<br/>아이디 중복체크<br/>예약 내역<br/>예약 상세보기<br/>예약 취소하기<br/>예약 가능 날짜 보기<br/>예약 불가능 날짜 막기 |  |
-
-
 <!-- Tech stack -->
 # Tech Stack
 
-| Framework | ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![JPA](https://img.shields.io/badge/JPA-7F5C5C.svg?style=flat&logo=spring&logoColor=white) ![HTML](https://img.shields.io/badge/-HTML5-E34F26.svg?style=flat&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/-CSS3-1572B6.svg?style=flat&logo=css3&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-%238511FA.svg?style=flat&logo=bootstrap&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=white) ![JUnit](https://img.shields.io/badge/JUnit-25A162.svg?style=flat&logo=junit&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-000000.svg?style=flat&logo=jsonwebtokens&logoColor=white) ![Flutter](https://img.shields.io/badge/-Flutter-02569B.svg?style=flat&logo=flutter&logoColor=white) |
+| Framework |![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)  ![Rest API](https://img.shields.io/badge/RestAPI-0A0A0A.svg?style=flat&logo=restapi&logoColor=white) ![HTML](https://img.shields.io/badge/-HTML5-E34F26.svg?style=flat&logo=html5&logoColor=white) ![Base64](https://img.shields.io/badge/base64-FFA500.svg?style=flat&logo=base64&logoColor=white) ![JSON](https://img.shields.io/badge/json-0078D4.svg?style=flat&logo=json&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-FFCD00.svg?style=flat&logo=jwt&logoColor=white)  ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=white)![JUnit Test](https://img.shields.io/badge/JUnit%20Test-25A162.svg?style=flat&logo=junit&logoColor=white)  ![JWT](https://img.shields.io/badge/JWT-000000.svg?style=flat&logo=jsonwebtokens&logoColor=white)| 
 | :-------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |    DB     | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?&logo=mysql&logoColor=white) ![H2](https://img.shields.io/badge/H2-blue?&logo=h2&logoColor=white)|
 |  DevOps   | ![Apache Tomcat](https://img.shields.io/badge/Apache%20Tomcat-F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=white) ![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white) ![RestDocs](https://img.shields.io/badge/RestDocs-0A0A0A?style=flat&logo=readthedocs&logoColor=white) ![Amazon AWS](https://img.shields.io/badge/Amazon_AWS-FF9900?style=flat&logo=amazonaws&logoColor=white) |
 |   Tools   |  ![Notion](https://img.shields.io/badge/-Notion-000000.svg?style=flat&logo=notion&logoColor=white) ![Git](https://img.shields.io/badge/-Git-F05032.svg?style=flat&logo=git&logoColor=white) ![Slack](https://img.shields.io/badge/-Slack-4A154B.svg?style=flat&logo=slack&logoColor=white)                                                                                                                                                                          |
+
+---
+
+# Service
+
+| 스플래쉬 화면 | 회원가입 -> 메인홈 |
+|:-------------:|:------------------:|
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/ba794e96-2750-47aa-8e56-588fafe07e1d" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/223892f7-2ae2-4083-958a-f39b585e0e0a" width="128" height="227"/></p> |
+| 로그인 → 메인홈 | 로그아웃 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/baf287d6-59f9-437e-be45-d51fd2e0c1c2" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e51caa27-5f99-4811-bd60-a091b59e89f0" width="128" height="227"/></p> |
+| 숙소 → 숙소 상세 정보 → 숙소의 리뷰 | 방 → 방 상세 정보 → 예약 가능날짜 확인 <br/> → 예약 정보 입력 → 결제 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/929550b6-2a5a-45f1-b535-c24cea2f1e75" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f66821a5-d7c9-41e6-9c9d-25530c90c7fb" width="128" height="227"/></p> |
+| 결제 → 결제 방법 선택 → 결제 → 예약 내역 | 검색 → 검색 조건 → 검색 결과 → 숙소 상세 정보 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f3e957cd-4189-4bb7-937b-702099e82e58" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/410a4740-dc9a-4368-88da-c70ee6764c31" width="128" height="227"/></p> |
+| 내 주변 → 내 주변 검색 → 검색 결과 → 숙소 상세 정보 | 찜 → 찜 상세보기 → 찜 취소 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4" width="128" height="227"/></p> |
+| 이벤트 → 자주 묻는 질문 → 고객 센터 연결 | 코드 |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e" width="250" height="450"/></p> |[ 백엔드 서버 👆 ](https://github.com/vosw1/yeogi_server.git) <br> [프론트엔드 앱 👆 ](https://github.com/vosw1/yeogi_app.git) |
+
+---
+
+# Features implemented by me
+| 테이블 설계 | 화면 디자인 | UI 구현 | 통신 | 단위 테스트 | 
+|------------|-------------|---------|------|--------------|
+|사용자<br/>숙박 업소<br/>질문<br/>숙소<br/>숙소 옵션<br/>숙소 이미지<br/>룸<br/>룸 정보<br/>스크랩<br/>예약<br/>결제<br/>신고<br/>리뷰<br/>자주묻는 질문 <br/>관리자<br/>이벤트| 로딩<br/>로그인<br/>회원가입<br/>메인<br/>숙소 목록<br/>숙소 상세보기<br/>룸 목록<br/>룸 상세보기<br/>예약하기<br/>결제하기<br/>예약 내역<br/>예약 상세보기<br/>검색<br/>내 주변<br/>찜<br/>마이페이지<br/>배너<br/>댓글<br/>이벤트<br/>FAQ<br/>고객센터 문의 | 로고<br/>글자 색<br/>폰트 2가지 적용<br/>메인<br/>숙소 목록<br/>숙소 상세보기<br/>룸 목록<br/>룸 상세보기<br/>공유할 URL 복사하기<br/>예약하기<br/>결제하기<br/>예약 내역<br/>예약 상세보기<br/>검색<br/>내 주변<br/>네이버 지도 API 구현<br/>찜<br/>배너<br/>댓글<br/>이벤트<br/>FAQ | 회원가입<br/>아이디 중복체크<br/>로그인<br/>예약 가능 날짜 보기<br/>예약 불가능 날짜 막아놓기<br/>예약하기<br/>아임포트 API 결제<br/>예약 목록<br/>예약 상세보기<br/>예약 취소<br/>이용 후 한 달 이내 댓글 작성 가능<br/>예약 취소 시 댓글 작성 불가 | 로그인<br/>회원가입<br/>아이디 중복체크<br/>예약 내역<br/>예약 상세보기<br/>예약 취소하기<br/>예약 가능 날짜 보기<br/>예약 불가능 날짜 막기 | 
+
 ---
 
 ## API Document
@@ -53,22 +73,3 @@
 # Table
 [Data Table 자세히 보기 👆](https://www.erdcloud.com/d/EZHiznZHtQrRadcXe)
 ![image](https://github.com/user-attachments/assets/538a85c3-31a4-4bba-aae8-7eb840cedefd)
-
----
-
-# Service
-
-| 스플래쉬 화면 | 회원가입 -> 메인홈 |
-|:-------------:|:------------------:|
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/ba794e96-2750-47aa-8e56-588fafe07e1d" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/223892f7-2ae2-4083-958a-f39b585e0e0a" width="128" height="227"/></p> |
-| 로그인 → 메인홈 | 로그아웃 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/baf287d6-59f9-437e-be45-d51fd2e0c1c2" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e51caa27-5f99-4811-bd60-a091b59e89f0" width="128" height="227"/></p> |
-| 숙소 → 숙소 상세 정보 → 숙소의 리뷰 | 방 → 방 상세 정보 → 예약 가능날짜 확인 <br/> → 예약 정보 입력 → 결제 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/929550b6-2a5a-45f1-b535-c24cea2f1e75" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f66821a5-d7c9-41e6-9c9d-25530c90c7fb" width="128" height="227"/></p> |
-| 결제 → 결제 방법 선택 → 결제 → 예약 내역 | 검색 → 검색 조건 → 검색 결과 → 숙소 상세 정보 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f3e957cd-4189-4bb7-937b-702099e82e58" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/410a4740-dc9a-4368-88da-c70ee6764c31" width="128" height="227"/></p> |
-| 내 주변 → 내 주변 검색 → 검색 결과 → 숙소 상세 정보 | 찜 → 찜 상세보기 → 찜 취소 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68" width="128" height="227"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4" width="128" height="227"/></p> |
-| 이벤트 → 자주 묻는 질문 → 고객 센터 연결 | 코드 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e" width="128" height="227"/></p> |[ 백엔드 서버 👆 ](https://github.com/vosw1/yeogi_server.git) <br> [프론트엔드 앱 👆 ](https://github.com/vosw1/yeogi_app.git) |
-
