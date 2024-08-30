@@ -44,15 +44,15 @@
 
 | 스플래쉬 화면 | 회원가입 -> 메인홈 |
 |:-------------:|:------------------:|
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/ba794e96-2750-47aa-8e56-588fafe07e1d" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/223892f7-2ae2-4083-958a-f39b585e0e0a" width="128" height="227"/></p> |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/ba794e96-2750-47aa-8e56-588fafe07e1d" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/223892f7-2ae2-4083-958a-f39b585e0e0a" width="250" height="450"/></p> |
 | 로그인 → 메인홈 | 로그아웃 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/baf287d6-59f9-437e-be45-d51fd2e0c1c2" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e51caa27-5f99-4811-bd60-a091b59e89f0" width="128" height="227"/></p> |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/baf287d6-59f9-437e-be45-d51fd2e0c1c2" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e51caa27-5f99-4811-bd60-a091b59e89f0" width="250" height="450"/></p> |
 | 숙소 → 숙소 상세 정보 → 숙소의 리뷰 | 방 → 방 상세 정보 → 예약 가능날짜 확인 <br/> → 예약 정보 입력 → 결제 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/929550b6-2a5a-45f1-b535-c24cea2f1e75" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f66821a5-d7c9-41e6-9c9d-25530c90c7fb" width="128" height="227"/></p> |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/929550b6-2a5a-45f1-b535-c24cea2f1e75" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f66821a5-d7c9-41e6-9c9d-25530c90c7fb" width="250" height="450"/></p> |
 | 결제 → 결제 방법 선택 → 결제 → 예약 내역 | 검색 → 검색 조건 → 검색 결과 → 숙소 상세 정보 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f3e957cd-4189-4bb7-937b-702099e82e58" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/410a4740-dc9a-4368-88da-c70ee6764c31" width="128" height="227"/></p> |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/f3e957cd-4189-4bb7-937b-702099e82e58" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/410a4740-dc9a-4368-88da-c70ee6764c31" width="250" height="450"/></p> |
 | 내 주변 → 내 주변 검색 → 검색 결과 → 숙소 상세 정보 | 찜 → 찜 상세보기 → 찜 취소 |
-| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4" width="128" height="227"/></p> |
+| <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/e30e586c-b80c-4765-8e39-9c46647a8d68" width="250" height="450"/></p> | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/03d45f69-8b3a-4fc7-a298-05f23fa68cf4" width="250" height="450"/></p> |
 | 이벤트 → 자주 묻는 질문 → 고객 센터 연결 | 코드 |
 | <p align="center"><img src="https://github.com/donghunseol/yeogi_copy/assets/153582315/8f096a70-d6d9-4f02-ba2e-b26e8761093e" width="250" height="450"/></p> |[ 백엔드 서버 👆 ](https://github.com/vosw1/yeogi_server.git) <br> [프론트엔드 앱 👆 ](https://github.com/vosw1/yeogi_app.git) |
 
