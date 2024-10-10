@@ -65,11 +65,6 @@
 
 ---
 
-## API Document
-[ 여어떻노의 API 문서 자세히 보기👆 ](https://sunset-knuckle-4bc.notion.site/API-49aaef9c0eed47bba84de148dbd1488c?pvs=4)
-
----
-
 # Table
 [Data Table 자세히 보기 👆](https://www.erdcloud.com/d/EZHiznZHtQrRadcXe)
 ![image](https://github.com/user-attachments/assets/538a85c3-31a4-4bba-aae8-7eb840cedefd)
